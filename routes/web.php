@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-// Route::group(['prefix' => 'admin'], function () {
-//     Route::get('/', 'AdminLoginController@index')->name('admin.loginForm');
-//     Route::post('/', 'AdminLoginController@authenticate')->name('admin.login');
+// Route::get('/', function () {
+//     return view('welcome');
 // });
 
 Route::prefix('viewpointadministration')->name('admin.')->group(function () {
@@ -30,11 +26,11 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     Route::post('/', [AdminLoginController::class, 'authenticate'])->name('login');
 
     Route::middleware('auth:admin')->group(function () {
-        
+
         Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::resource('banks', BankController::class);
-        
+
         Route::resource('settings', SettingController::class);
         Route::get('email', [SettingController::class, 'Email'])->name('email');
         Route::post('email', [SettingController::class, 'EmailUpdate'])->name('email.update');
@@ -224,3 +220,30 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::get('approve-kyc/{id}', 'AdminController@Approvekyc')->name('admin.approve.kyc');
     // Route::get('reject-kyc/{id}', 'AdminController@Rejectkyc')->name('admin.reject.kyc');
 });
+
+
+// Front routes
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/faq', [FrontendController::class, 'faq'])->name('faq');
+Route::get('/about', [FrontendController::class, 'about'])->name('about');
+Route::get('/payment_proof', [FrontendController::class, 'payment_proof'])->name('payment_proof');
+Route::get('/upload_proof', [FrontendController::class, 'upload_proof'])->name('upload.proof');
+Route::post('/do_upload_proof', [FrontendController::class, 'do_upload_proof'])->name('do_upload_proof');
+Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
+Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
+Route::get('/coupon', [FrontendController::class, 'coupon'])->name('coupon');
+Route::get('/topearners', [FrontendController::class, 'topearners'])->name('topearners');
+Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
+Route::get('/page/{id}', [FrontendController::class, 'page']);
+Route::get('/single/{id}/{slug}', [FrontendController::class, 'article']);
+Route::get('/cat/{id}/{slug}', [FrontendController::class, 'category']);
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/contact', [FrontendController::class, 'contactSubmit']);
+Route::post('/about', [FrontendController::class, 'subscribe'])->name('subscribe');
+Route::get('/verify/pin', [FrontendController::class, 'verify_pin'])->name('verify_pin');
+Route::post('/verify/pin', [FrontendController::class, 'do_verify_pin']);
+
+//User Routes
+
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::get('/login', [LoginController::class, 'login'])->name('login');

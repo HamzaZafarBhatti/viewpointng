@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Logo;
 use App\Models\Setting;
+use App\Models\Ui;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -29,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $data['set'] = Setting::first();
-        // $data['ui'] = Design::first();
+        $data['ui'] = Ui::first();
         $data['logo'] = Logo::first();
         // $data['currency'] = Currency::whereStatus(1)->first();
 
