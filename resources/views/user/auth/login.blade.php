@@ -1,4 +1,4 @@
-@extends('loginlayout')
+@extends('user.loginlayout')
 
 @section('content')
 <div class="main-content bg-dark" style="background-image:url('{{url('/')}}/asset/frontend/img/bg-2.png');">
@@ -23,7 +23,7 @@
               <div class="text-white text-center mt-2 mb-3">Login to your GoldMint Account - Start Mining</div>
             </div>
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form" action="{{route('submitlogin')}}" method="post">
+              <form role="form" action="{{route('user.do_login')}}" method="post">
                 @csrf
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
@@ -54,10 +54,10 @@
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <a href="{{route('user.password.request')}}" class="text-white"><small>Forgot password?</small></a>
+              <a href="{{route('user.password.reset')}}" class="text-white"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
-              <a href="{{route('register')}}" class="text-white"><small>Create new account</small></a>
+              <a href="{{route('user.register')}}" class="text-white"><small>Create new account</small></a>
             </div>
           </div>
         </div>

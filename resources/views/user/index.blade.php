@@ -1,10 +1,10 @@
-@extends('userlayout')
+@extends('user.userlayout')
 
 @section('content')
     <!-- Page content -->
     <div class="container-fluid mt--6">
         <div class="content-wrapper">
-            @if ($ticket_replies)
+            {{-- @if ($ticket_replies)
                 @foreach ($ticket_replies as $item)
                     @if (!$item->latest_replies->isEmpty())
                         <div class="row ticket_reply" data-id="{{ $item->ticket_id }}">
@@ -24,7 +24,7 @@
                         </div>
                     @endif
                 @endforeach
-            @endif
+            @endif --}}
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
@@ -90,10 +90,10 @@
                                                                             receiving bonuses</div>
                                                                         <div class="text-left mt-2 mb-3">Upgrade fee costs
                                                                             {{ $set->upgrade_fee }}BTC</div>
-                                                                        <div class="text-left">
+                                                                        {{-- <div class="text-left">
                                                                             <a href="{{ route('user.upgrade') }}"
                                                                                 class="btn btn-neutral">Upgrade</a>
-                                                                        </div>
+                                                                        </div> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -193,7 +193,7 @@
                                 <div class="card-body">
                                     <!-- List group -->
                                     <ul class="list-group list-group-flush list my--3">
-                                        @foreach ($profit as $k => $val)
+                                        {{-- @foreach ($profit as $k => $val)
                                             <li class="list-group-item px-0 bg-dark">
                                                 <div class="row align-items-center">
                                                     <div class="col">
@@ -212,7 +212,7 @@
                                                                 style="width: {{ ($val->profit * 100) / $val->amount > 0 }}%;">
                                                             </div>
                                             </li>
-                                        @endforeach
+                                        @endforeach --}}
                                     </ul>
                                 </div>
                             </div>
@@ -313,19 +313,6 @@
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
             <script>
                 $(document).ready(function() {
-                    $('.ticket_reply .close').click(function() {
-                        var ticket_id = $(this).parents('.ticket_reply').attr('data-id');
-                        $.ajax({
-                            url: '{{ route('user.message_seen') }}',
-                            method: 'get',
-                            data: {
-                                ticket_id: ticket_id
-                            },
-                            success: function(response) {
-
-                            }
-                        })
-                    })
                     if ("{{ $user_proof }}" == 1) {
                         swal({
                                 title: null,
