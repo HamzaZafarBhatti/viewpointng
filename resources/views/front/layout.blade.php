@@ -27,6 +27,7 @@
         .header.headroom--not-top,
         body {
             background-color: #125a00;
+            color: darkblue;
         }
     </style>
     @yield('css')
@@ -163,10 +164,10 @@
                         </li>
                         @guest
                             <li>
-                                <a href="{{ route('login') }}">Login</a>
+                                <a href="{{ route('user.login') }}">Login</a>
                             </li>
                             <li>
-                                <a href="{{ route('register') }}">Register</a>
+                                <a href="{{ route('user.register') }}">Register</a>
                             </li>
                         @endguest
                         @auth

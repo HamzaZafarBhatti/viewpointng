@@ -101,7 +101,7 @@
     <section class="pt-mobile-80">
         <div class="container">
             <div class="row medium-padding100">
-                {{-- @foreach ($plan as $val)
+                @foreach ($plans as $val)
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mb30" data-mh="pricing-item">
                         <div class="crumina-module crumina-pricing-table pricing-table--style1">
                             <div class="pricing-thumb">
@@ -135,7 +135,7 @@
                             </ul>
                         </div>
                     </div>
-                @endforeach --}}
+                @endforeach
             </div>
         </div>
     </section>

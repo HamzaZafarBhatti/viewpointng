@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class FrontendController extends Controller
         // }
         // $data['self_cashouts'] = $self_cashouts;
         $data['service'] = Service::all();
+        $data['plans'] = Plan::where('status', 1)->get();
         return view('front.index', $data);
     }
 

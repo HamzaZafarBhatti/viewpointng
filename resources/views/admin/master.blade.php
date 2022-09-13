@@ -194,6 +194,14 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.account_types.index') }}" class="nav-link">
+                                <i class="icon-home"></i>
+                                <span>
+                                    Account Types
+                                </span>
+                            </a>
+                        </li>
                         {{-- <li class="nav-item">
                             <a href="{{ route('admin.wallet_addresses.index') }}" class="nav-link">
                                 <i class="icon-home"></i>
