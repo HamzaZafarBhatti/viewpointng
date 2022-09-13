@@ -69,16 +69,16 @@
                                         <td>{{ $val->serial }}</td>
                                         <td>{{ $val->plan ? $val->plan->name : 'N/A' }}</td>
                                         <td>
-                                            @if ($val->status == 1)
-                                                <span class="badge badge-danger">Disabled</span>
-                                            @elseif($val->status == 0)
+                                            @if ($val->status)
                                                 <span class="badge badge-success">Active</span>
+                                            @else
+                                                <span class="badge badge-dFanger">Disabled</span>
                                             @endif
                                         </td>
                                         <td>{{ date('Y/m/d h:i:A', strtotime($val->created_at)) }}</td>
                                         <td>{{ date('Y/m/d h:i:A', strtotime($val->updated_at)) }}</td>
                                         <td class="text-center">
-                                            @if ($val->status == 0)
+                                            @if ($val->status == 1)
                                                 <div class="list-icons">
                                                     <div class="dropdown">
                                                         <a href="#" class="list-icons-item" data-toggle="dropdown">
@@ -94,7 +94,7 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    @if ($val->status == 0)
+                                    @if ($val->status == 1)
                                         <div id="{{ $val->id }}delete" class="modal fade" tabindex="-1">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -113,7 +113,8 @@
                                                         <a href="{{ route('admin.coupons.destroy', $val->id) }}"
                                                             onclick="event.preventDefault(); document.getElementById('logout-form{{ $val->id }}').submit();"
                                                             class="btn bg-danger">Proceed</a>
-                                                        <form id="logout-form{{ $val->id }}" action="{{ route('admin.coupons.destroy', $val->id) }}"
+                                                        <form id="logout-form{{ $val->id }}"
+                                                            action="{{ route('admin.coupons.destroy', $val->id) }}"
                                                             method="POST" style="display: none;">
                                                             @csrf
                                                             @method('DELETE')

@@ -241,22 +241,18 @@
                                 </li>
                             </ul>
                         </li>
-                        {{-- <li class="nav-item nav-item-submenu">
+                        <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-pulse2"></i>
                                 <span>Investment</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="PY scheme">
-                                <li class="nav-item"><a href="{{ route('admin.plans.create') }}"
-                                        class="nav-link"><i class="icon-quill4"></i>Create plan</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.plans.index') }}"
-                                        class="nav-link"><i class="icon-puzzle4"></i>Plans</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.py.completed') }}"
-                                        class="nav-link"><i class="icon-cup2"></i>Completed</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.py.pending') }}" class="nav-link"><i
-                                            class="icon-spinner2 spinner"></i>Pending</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.plans.create') }}" class="nav-link"><i
+                                            class="icon-quill4"></i>Create plan</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.plans.index') }}" class="nav-link"><i
+                                            class="icon-puzzle4"></i>Plans</a></li>
                                 <li class="nav-item"><a href="{{ route('admin.coupons.index') }}"
                                         class="nav-link"><i class="icon-add"></i>Generate Coupons</a></li>
                             </ul>
-                        </li> --}}
+                        </li>
                         {{-- <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-pulse2"></i>
                                 <span>Stake Plans</span></a>

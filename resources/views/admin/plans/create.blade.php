@@ -16,40 +16,14 @@
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Name:</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="name" class="form-control"
-                                        reqiured>
+                                    <input type="text" name="name" class="form-control" reqiured>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Hourly percent:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
-                                        <input type="number" step="any" name="percent"
-                                            class="form-control">
-                                        <span class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Amount:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="number" step="any" name="amount"
-                                            class="form-control">
-                                        <span class="input-group-append">
-                                            <span class="input-group-text">%</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Upgrade:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="number" step="any" name="upgrade"
-                                            class="form-control">
+                                        <input type="number" step="any" name="percent" class="form-control">
                                         <span class="input-group-append">
                                             <span class="input-group-text">%</span>
                                         </span>
@@ -79,10 +53,43 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Minimum amount:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" step="any" name="min_deposit" class="form-control">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">BTC</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Amount:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" step="any" name="amount" class="form-control">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Status:</label>
+                                <div class="col-lg-10">
+                                    <select class="form-control select" name="status">
+                                        <option value="1">Active
+                                        </option>
+                                        <option value="0">Deactive
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Referral percent:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
-                                        <input type="text" name="ref_percent" maxlength="10" placeholder="2.5"
+                                        <input type="number" name="ref_percent" maxlength="10" placeholder="2.5"
                                             class="form-control" required>
                                         <span class="input-group-append">
                                             <span class="input-group-text">%</span>
@@ -100,10 +107,21 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Viral share bonus:</label>
+                                <label class="col-form-label col-lg-2">Upgrade:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
-                                        <input type="text" name="viral_share_bonus" placeholder="400NGN"
+                                        <input type="number" step="any" name="upgrade" class="form-control">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Facebook share amount:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" name="fb_share_amount" placeholder="400NGN"
                                             class="form-control" required>
                                     </div>
                                 </div>
@@ -112,8 +130,8 @@
                                 <label class="col-form-label col-lg-2">INDIRECT REFERRAL COMMISSION:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
-                                        <input type="text" name="indirect_ref_com" placeholder="2.5" class="form-control"
-                                            required>
+                                        <input type="number" name="indirect_ref_com" placeholder="2.5"
+                                            class="form-control" required>
                                         <span class="input-group-append">
                                             <span class="input-group-text">%</span>
                                         </span>
@@ -121,110 +139,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Minimum withdrawal for Viral Share earning:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="text" name="min_viral_share_earning_wd" placeholder="200NGN"
-                                            class="form-control" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Viral Share earning Withdraw CYCLE:</label>
-                                <div class="col-lg-10">
-                                    <select class="form-control select" name="min_viral_share_earning_wd_cycle" data-fouc required>
-                                        <option value="1">Daily
-                                        </option>
-                                        <option value="7">Weekly
-                                        </option>
-                                        <option value="30">Monthly
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Minimum Extraction Balance transfer to Rubic Wallet:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="text" name="min_account_balance_wd" placeholder="200NGN"
-                                            class="form-control" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Extraction Balance transfer Cycle to Rubic Wallet:</label>
-                                <div class="col-lg-10">
-                                    <select class="form-control select" name="min_account_balance_wd_cycle" data-fouc required>
-                                        <option value="1">Daily
-                                        </option>
-                                        <option value="7">Weekly
-                                        </option>
-                                        <option value="30">Monthly
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Minimum REFERRAL EARNINGS Transfer to Rubic Wallet:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="text" name="min_ref_earn_wd" placeholder="200NGN"
-                                            class="form-control" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">REFERRAL EARNINGS Transfer Cycle to Rubic Wallet:</label>
-                                <div class="col-lg-10">
-                                    <select class="form-control select" name="min_ref_earn_wd_cycle" data-fouc required>
-                                        <option value="1">Daily
-                                        </option>
-                                        <option value="7">Weekly
-                                        </option>
-                                        <option value="30">Monthly
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Minimum Balance for Rubic Wallet Withdrawal:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="text" name="min_rubic_wallet_wd" placeholder="200NGN"
-                                            class="form-control" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Rubic Wallet Withdrawal Cycle:</label>
-                                <div class="col-lg-10">
-                                    <select class="form-control select" name="min_rubic_wallet_wd_cycle" data-fouc required>
-                                        <option value="1">Daily
-                                        </option>
-                                        <option value="7">Weekly
-                                        </option>
-                                        <option value="30">Monthly
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Status:</label>
-                                <div class="col-lg-10">
-                                    <select class="form-control select" name="status">
-                                        <option value="1">Active
-                                        </option>
-                                        <option value="0">Deactive
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Prefix:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
-                                        <input type="text" name="code_prefix"
-                                            class="form-control" required>
+                                        <input type="text" name="code_prefix" class="form-control" maxlength="4" required>
                                     </div>
                                 </div>
                             </div>
@@ -232,17 +150,7 @@
                                 <label class="col-form-label col-lg-2">Activation Code Length:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
-                                        <input type="number" name="code_length"
-                                            class="form-control" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Mine Balance Convert Rate:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="number" name="convert_rate"
-                                            class="form-control" step=".1" required>
+                                        <input type="number" name="code_length" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -250,41 +158,11 @@
                                 <label class="col-form-label col-lg-2">Plan Active Period:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
-                                        <input type="number" name="active_period"
-                                            class="form-control" step=".1" required>
-                                            <span class="input-group-append">
-                                                <span class="input-group-text">Months</span>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Extraction Time:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="number" name="extraction_plan_time"
-                                            class="form-control" step="1" required>
-                                            <span class="input-group-append">
-                                                <span class="input-group-text">Hours</span>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">EXTRACTION BALANCE Transfer Referral Limit:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="number" name="extraction_transfer_downline_limit"
-                                            class="form-control" step="1" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label col-lg-2">VIRAL SHARE Transfer Referral Limit:</label>
-                                <div class="col-lg-10">
-                                    <div class="input-group">
-                                        <input type="number" name="viral_share_transfer_downline_limit"
-                                            class="form-control" step="1" required>
+                                        <input type="number" name="active_period" class="form-control" step=".1"
+                                            required>
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">Months</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,12 +34,19 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::resource('banks', BankController::class);
 
         Route::resource('settings', SettingController::class);
+        Route::get('/coupons/download', [CouponController::class, 'coupons_download'])->name('coupons.download');
+        Route::resource('coupons', CouponController::class);
         Route::get('email', [SettingController::class, 'Email'])->name('email');
         Route::post('email', [SettingController::class, 'EmailUpdate'])->name('email.update');
         Route::get('sms', [SettingController::class, 'Sms'])->name('sms');
         Route::post('sms', [SettingController::class, 'SmsUpdate'])->name('sms.update');
         Route::get('account', [SettingController::class, 'Account'])->name('account');
         Route::post('account', [SettingController::class, 'AccountUpdate'])->name('account.update');
+        Route::resource('plans', PlanController::class);
+        
+        Route::get('py-generate-plan-coupons', 'PyschemeController@generate_coupons')->name('admin.plan.generate_coupons');
+        Route::get('py-download-plan-coupons', 'PyschemeController@download_codes')->name('admin.plan.download_codes');
+        Route::post('py-generate-plan-coupons', 'PyschemeController@do_generate_coupons')->name('admin.plan.do_generate_coupons');
     });
     // //Data Operator Controller
     // Route::get('/data_operators', 'AdminController@data_operators')->name('admin.data_operators');
@@ -170,19 +179,6 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::get('approvedeposit/{id}', 'DepositController@approve')->name('deposit.approve');
     // Route::get('declinedeposit/{id}', 'DepositController@decline')->name('deposit.decline');
 
-    // //Py scheme controller
-    // Route::get('py-completed', 'PyschemeController@Completed')->name('admin.py.completed');
-    // Route::get('py-pending', 'PyschemeController@Pending')->name('admin.py.pending');
-    // Route::get('py-plans', 'PyschemeController@Plans')->name('admin.py.plans');
-    // Route::get('py/delete/{id}', 'PyschemeController@Destroy')->name('py.delete');
-    // Route::get('py-plan/delete/{id}', 'PyschemeController@PlanDestroy')->name('py.plan.delete');
-    // Route::get('py-plan-create', 'PyschemeController@Create')->name('admin.plan.create');
-    // Route::post('py-plan-create', 'PyschemeController@Store')->name('admin.plan.store');
-    // Route::get('py-plan/{id}', 'PyschemeController@Edit')->name('admin.plan.edit');
-    // Route::post('py-plan-edit', 'PyschemeController@Update')->name('admin.plan.update');
-    // Route::get('py-generate-plan-coupons', 'PyschemeController@generate_coupons')->name('admin.plan.generate_coupons');
-    // Route::get('py-download-plan-coupons', 'PyschemeController@download_codes')->name('admin.plan.download_codes');
-    // Route::post('py-generate-plan-coupons', 'PyschemeController@do_generate_coupons')->name('admin.plan.do_generate_coupons');
 
     // //Setting controller
     // Route::get('settings', 'SettingController@Settings')->name('admin.setting');
