@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MlmCouponController;
 use App\Http\Controllers\MlmPlanController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegisterController;
@@ -39,15 +40,17 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::resource('banks', BankController::class);
 
         Route::resource('settings', SettingController::class);
-        Route::get('/coupons/download', [CouponController::class, 'coupons_download'])->name('coupons.download');
-        Route::resource('coupons', CouponController::class);
         Route::get('email', [SettingController::class, 'Email'])->name('email');
         Route::post('email', [SettingController::class, 'EmailUpdate'])->name('email.update');
         Route::get('sms', [SettingController::class, 'Sms'])->name('sms');
         Route::post('sms', [SettingController::class, 'SmsUpdate'])->name('sms.update');
         Route::get('account', [SettingController::class, 'Account'])->name('account');
         Route::post('account', [SettingController::class, 'AccountUpdate'])->name('account.update');
+        Route::get('/coupons/download', [CouponController::class, 'coupons_download'])->name('coupons.download');
+        Route::resource('coupons', CouponController::class);
         Route::resource('plans', PlanController::class);
+        Route::get('/mlm-coupons/download', [MlmCouponController::class, 'coupons_download'])->name('mlm-coupons.download');
+        Route::resource('mlm-coupons', MlmCouponController::class);
         Route::resource('mlm-plans', MlmPlanController::class);
         Route::resource('account_types', AccountTypeController::class);
         

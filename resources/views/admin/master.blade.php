@@ -257,7 +257,7 @@
                                             class="icon-quill4"></i>Create plan</a></li>
                                 <li class="nav-item"><a href="{{ route('admin.mlm-plans.index') }}" class="nav-link"><i
                                             class="icon-puzzle4"></i>Plans</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.coupons.index') }}"
+                                <li class="nav-item"><a href="{{ route('admin.mlm-coupons.index') }}"
                                         class="nav-link"><i class="icon-add"></i>Generate Coupons</a></li>
                             </ul>
                         </li>

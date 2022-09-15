@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Coupon;
-use App\Models\Plan;
+use App\Models\MlmCoupon;
+use App\Models\MlmPlan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class CouponController extends Controller
+class MlmCouponController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class CouponController extends Controller
     public function index()
     {
         //
-        $plans = Plan::whereStatus(1)->get();
-        $coupons = Coupon::with('plan')->latest()->get();
-        $title = 'Generate Coupons';
-        return view('admin.coupons.index', compact('plans', 'title', 'coupons'));
+        $plans = MlmPlan::whereStatus(1)->get();
+        $coupons = MlmCoupon::with('mlm_plan')->latest()->get();
+        $title = 'Generate MLM Coupons';
+        return view('admin.mlm-coupons.index', compact('plans', 'title', 'coupons'));
     }
 
     /**
@@ -45,7 +45,7 @@ class CouponController extends Controller
         //
         try {
             $qty = $request->quantity;
-            $plan = Plan::find($request->plan_id);
+            $plan = MlmPlan::find($request->mlm_plan_id);
             // return $plan;
 
             $chars = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -53,7 +53,7 @@ class CouponController extends Controller
             for ($i = 0; $i < $qty; $i++) {
                 $data[] = [
                     'serial' => $plan->code_prefix . substr(str_shuffle($chars), 0, $plan->code_length - 4),
-                    'plan_id' => $request->plan_id,
+                    'mlm_plan_id' => $request->mlm_plan_id,
                     'created_at' => $now,
                     'updated_at' => $now
                 ];
@@ -63,25 +63,25 @@ class CouponController extends Controller
                 array_push($codes, $val['serial']);
             }
             // return $data;
-            Coupon::insert($data);
+            MlmCoupon::insert($data);
             Session::flash('success', 'Coupon Codes successfully generated!');
             // Session::put('download_link', 'https://rubicnetwork.com/rubicnetworkadministration/coupons/download');
-            $url = route('admin.coupons.download');
+            $url = route('admin.mlm-coupons.download');
             Session::put('download_link', $url);
             Session::put('codes', json_encode($codes, JSON_PRETTY_PRINT));
         } catch (\Exception $e) {
             Session::flash('error', 'Error: ' . $e->getMessage());
         }
-        return redirect()->route('admin.coupons.index');
+        return redirect()->route('admin.mlm-coupons.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Coupon  $coupon
+     * @param  \App\Models\MlmCoupon  $mlmCoupon
      * @return \Illuminate\Http\Response
      */
-    public function show(Coupon $coupon)
+    public function show(MlmCoupon $mlmCoupon)
     {
         //
     }
@@ -89,10 +89,10 @@ class CouponController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Coupon  $coupon
+     * @param  \App\Models\MlmCoupon  $mlmCoupon
      * @return \Illuminate\Http\Response
      */
-    public function edit(Coupon $coupon)
+    public function edit(MlmCoupon $mlmCoupon)
     {
         //
     }
@@ -101,10 +101,10 @@ class CouponController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Coupon  $coupon
+     * @param  \App\Models\MlmCoupon  $mlmCoupon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coupon $coupon)
+    public function update(Request $request, MlmCoupon $mlmCoupon)
     {
         //
     }
@@ -112,13 +112,13 @@ class CouponController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Coupon  $coupon
+     * @param  \App\Models\MlmCoupon  $mlmCoupon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Coupon $coupon)
+    public function destroy(MlmCoupon $mlmCoupon)
     {
         //
-        $res =  $coupon->delete();
+        $res =  $mlmCoupon->delete();
         if ($res) {
             return back()->with('success', 'Coupon was Successfully deleted!');
         } else {
@@ -140,7 +140,7 @@ class CouponController extends Controller
             ->withHeaders([
                 'Content-Type' => 'text/plain',
                 'Cache-Control' => 'no-store, no-cache',
-                'Content-Disposition' => 'attachment; filename="latest_codes.txt',
+                'Content-Disposition' => 'attachment; filename="latest_mlm_codes.txt',
             ]);
     }
 }
