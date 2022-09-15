@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MlmPlanController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SettingController;
@@ -47,6 +48,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::get('account', [SettingController::class, 'Account'])->name('account');
         Route::post('account', [SettingController::class, 'AccountUpdate'])->name('account.update');
         Route::resource('plans', PlanController::class);
+        Route::resource('mlm-plans', MlmPlanController::class);
         Route::resource('account_types', AccountTypeController::class);
         
         Route::get('py-generate-plan-coupons', 'PyschemeController@generate_coupons')->name('admin.plan.generate_coupons');
