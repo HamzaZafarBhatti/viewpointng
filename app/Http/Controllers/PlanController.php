@@ -79,6 +79,7 @@ class PlanController extends Controller
             'code_prefix' => $request->code_prefix,
             'code_length' => $request->code_length,
             'active_period' => $request->active_period,
+            'mining_time' => $request->mining_time,
         ]);
         if ($res) {
             return redirect()->route('admin.plans.index')->with('success', 'Saved Successfully!');
@@ -157,6 +158,7 @@ class PlanController extends Controller
             'code_prefix' => $request->code_prefix,
             'code_length' => $request->code_length,
             'active_period' => $request->active_period,
+            'mining_time' => $request->mining_time,
         ]);
         if ($res) {
             return redirect()->route('admin.plans.index')->with('success', 'Saved Successfully!');

@@ -167,6 +167,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">MINING TIME:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" name="mining_time" class="form-control" required>
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">Hours</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Image:</label>
                                 <div class="col-lg-10">
                                     <input type="file" name="image" class="form-input-styled" data-fouc>
