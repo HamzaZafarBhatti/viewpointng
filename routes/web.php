@@ -251,8 +251,8 @@ Route::post('/verify/pin', [FrontendController::class, 'do_verify_pin']);
 
 //User Routes
 
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
-Route::get('/login', [LoginController::class, 'login'])->name('login');
+// Route::get('/register', [RegisterController::class, 'register'])->name('register');
+// Route::get('/login', [LoginController::class, 'login'])->name('login');
 
 Route::name('user.')->group(function () {
     Route::get('/register', [RegisterController::class, 'register'])->name('register');

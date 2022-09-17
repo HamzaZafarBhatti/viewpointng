@@ -18,7 +18,6 @@ class MlmPlan extends Model
         'indirect_ref_count_cashout',
         'code_prefix',
         'code_length',
-        'active_period',
         'image',
     ];
 }
