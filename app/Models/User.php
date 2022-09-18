@@ -69,4 +69,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function account_type()
+    {
+        return $this->belongsTo(AccountType::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
+    
+    public function mlm_plan()
+    {
+        return $this->belongsTo(MlmPlan::class);
+    }
 }

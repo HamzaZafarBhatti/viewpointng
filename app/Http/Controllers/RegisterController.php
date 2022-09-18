@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'email_time' => $email_time,
             'phone_verify' => $phone_verify,
             'phone_time' => $phone_time,
-            'balance' => $basic->balance_reg,
+            'balance' => $request->account_type_id == 1 ? $basic->balance_reg_affiliate : $basic->balance_reg_mlm,
             'ip_address' => user_ip(),
             'status' => 1,
             'coupon_id' => $coupon_code->id,

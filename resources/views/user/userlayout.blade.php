@@ -79,52 +79,26 @@
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.plans') }}">
+                        @if ($user->account_type->id == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">
                                 <i class="ni ni-button-power"></i>
                                 <span class="nav-link-text">Start MINING</span>
                             </a>
-                        </li> --}}
-                        {{-- @if (!$set->is_testing)
-                           
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.withdraw') }}">
-                                    <i class="ni ni-money-coins"></i>
-                                    <span class="nav-link-text">Bank Withdrawal</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.data_withdraw') }}">
-                                    <i class="ni ni-money-coins"></i>
-                                    <span class="nav-link-text">Mobile Data Withdrawal</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.get_coupon_code') }}">
-                                    <i class="ni ni-box-2"></i>
-                                    <span class="nav-link-text">Convert MINE to Activation Code</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.upgrade_plan') }}">
-                                    <i class="ni ni-chart-bar-32"></i>
-                                    <span class="nav-link-text">UPGRADE Plan</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.share') }}">
-                                    <i class="ni ni-send"></i>
-                                    <span class="nav-link-text">Transfer MINE</span>
-                                </a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.latest_sponsored_post') }}">
-                                    <i class="ni ni-single-copy-04"></i>
-                                    <span class="nav-link-text">Sponsored Tasks</span>
-                                </a>
-                            </li>
-                        @endif --}}
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                                <i class="ni ni-money-coins"></i>
+                                <span class="nav-link-text">Bank Withdrawal</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.latest_sponsored_post') }}">
+                                <i class="ni ni-single-copy-04"></i>
+                                <span class="nav-link-text">Sponsored Tasks</span>
+                            </a>
+                        </li>
+                        @endif
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">
