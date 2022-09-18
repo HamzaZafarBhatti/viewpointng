@@ -99,6 +99,14 @@
                             </a>
                         </li>
                         @endif
+                        @if ($user->account_type->id == 2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                                <i class="ni ni-button-power"></i>
+                                <span class="nav-link-text">Activated or Reactivate button</span>
+                            </a>
+                        </li>
+                        @endif
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">
@@ -186,8 +194,9 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Search form -->
-
-
+                    <div>
+                        <h6 class="h2 mb-0 text-dark">Account Type: {{ auth()->user()->account_type->name }}</h6>
+                    </div>
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center ml-md-auto">
                         <li class="nav-item d-xl-none">
