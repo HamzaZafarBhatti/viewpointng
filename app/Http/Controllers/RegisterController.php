@@ -50,7 +50,7 @@ class RegisterController extends Controller
         }
 
         if($request->account_type_id != $coupon_code->account_type_id) {
-            return back()->with('error', 'Your coupon code does not match your plan!');
+            return back()->with('error', 'INCORECT PLAN SELECTED with ACTIVATION CODE');
         }
 
         $basic = Setting::first();
