@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mlm_coupons', function (Blueprint $table) {
-            $table->id();
-            $table->string('serial');
-            $table->boolean('status')->default(1);
-            $table->foreignId('mlm_plan_id')->constrained()->cascadeOnDelete();
-            $table->timestamps();
+        Schema::table('mlm_plans', function (Blueprint $table) {
+            //
+            $table->foreignId('account_type_id');
         });
     }
 
@@ -29,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mlm_coupons');
+        Schema::table('mlm_plans', function (Blueprint $table) {
+            //
+            $table->dropColumn('account_type_id');
+        });
     }
 };

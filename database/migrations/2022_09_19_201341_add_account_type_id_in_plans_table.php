@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('coupons', function (Blueprint $table) {
-            $table->id();
-            $table->string('serial');
-            $table->boolean('status')->default(1);
-            $table->foreignId('plan_id')->constrained()->cascadeOnDelete();
-            $table->timestamps();
+        Schema::table('plans', function (Blueprint $table) {
+            //
+            $table->foreignId('account_type_id');
         });
     }
 
@@ -29,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('coupons');
+        Schema::table('plans', function (Blueprint $table) {
+            //
+            $table->dropColumn('account_type_id');
+        });
     }
 };

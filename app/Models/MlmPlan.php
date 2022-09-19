@@ -19,5 +19,6 @@ class MlmPlan extends Model
         'code_prefix',
         'code_length',
         'image',
+        'account_type_id',
     ];
 }

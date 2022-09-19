@@ -27,5 +27,6 @@ class Plan extends Model
         'code_length',
         'active_period',
         'mining_time',
+        'account_type_id',
     ];
 }

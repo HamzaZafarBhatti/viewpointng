@@ -294,7 +294,7 @@ class AdminController extends Controller
     {
         Auth::guard()->logout();
         session()->flash('message', 'Just Logged Out!');
-        return redirect('/rubicnetworkadministration');
+        return redirect('/viewpointadministration');
     }
 
     public function resolve_account_number(Request $request)

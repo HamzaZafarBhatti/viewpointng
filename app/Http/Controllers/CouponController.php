@@ -19,7 +19,7 @@ class CouponController extends Controller
     {
         //
         $plans = Plan::whereStatus(1)->get();
-        $coupons = Coupon::with('plan')->latest()->get();
+        $coupons = Coupon::with('plan')->where('account_type_id', 1)->latest()->get();
         $title = 'Generate Coupons';
         return view('admin.coupons.index', compact('plans', 'title', 'coupons'));
     }
@@ -54,6 +54,7 @@ class CouponController extends Controller
                 $data[] = [
                     'serial' => $plan->code_prefix . substr(str_shuffle($chars), 0, $plan->code_length - 4),
                     'plan_id' => $request->plan_id,
+                    'account_type_id' => $plan->account_type_id,
                     'created_at' => $now,
                     'updated_at' => $now
                 ];

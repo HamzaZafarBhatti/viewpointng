@@ -49,6 +49,10 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
+        if($request->account_type_id != $coupon_code->account_type_id) {
+            return back()->with('error', 'Your coupon code does not match your plan!');
+        }
+
         $basic = Setting::first();
         if ($basic->email_verification == 1) {
             $email_verify = 0;
@@ -81,7 +85,7 @@ class RegisterController extends Controller
             'status' => 1,
             'coupon_id' => $coupon_code->id,
             'account_type_id' => $request->account_type_id,
-            'plan_id' => $coupon_code->plan_id,
+            'plan_id' => 10,
             'activated_at' => date('Y-m-d'),
             'password' => bcrypt($request->password),
         ]);

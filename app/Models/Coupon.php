@@ -13,10 +13,15 @@ class Coupon extends Model
         'serial',
         'status',
         'plan_id',
+        'mlm_plan_id',
+        'account_type_id',
     ];
 
     public function plan() {
         return $this->belongsTo(Plan::class);
+    }
+    public function mlm_plan() {
+        return $this->belongsTo(MlmPlan::class);
     }
 
     public function user()

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MlmCoupon;
+use App\Models\Coupon;
 use App\Models\MlmPlan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,8 +19,8 @@ class MlmCouponController extends Controller
     {
         //
         $plans = MlmPlan::whereStatus(1)->get();
-        $coupons = MlmCoupon::with('mlm_plan')->latest()->get();
-        $title = 'Generate MLM Coupons';
+        $coupons = Coupon::with('mlm_plan')->where('account_type_id', 2)->latest()->get();
+        $title = 'Generate Coupons';
         return view('admin.mlm-coupons.index', compact('plans', 'title', 'coupons'));
     }
 
@@ -54,6 +54,7 @@ class MlmCouponController extends Controller
                 $data[] = [
                     'serial' => $plan->code_prefix . substr(str_shuffle($chars), 0, $plan->code_length - 4),
                     'mlm_plan_id' => $request->mlm_plan_id,
+                    'account_type_id' => $plan->account_type_id,
                     'created_at' => $now,
                     'updated_at' => $now
                 ];
@@ -63,7 +64,7 @@ class MlmCouponController extends Controller
                 array_push($codes, $val['serial']);
             }
             // return $data;
-            MlmCoupon::insert($data);
+            Coupon::insert($data);
             Session::flash('success', 'Coupon Codes successfully generated!');
             // Session::put('download_link', 'https://rubicnetwork.com/rubicnetworkadministration/coupons/download');
             $url = route('admin.mlm-coupons.download');
@@ -78,10 +79,10 @@ class MlmCouponController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MlmCoupon  $mlmCoupon
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MlmCoupon $mlmCoupon)
+    public function show($id)
     {
         //
     }
@@ -89,10 +90,10 @@ class MlmCouponController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MlmCoupon  $mlmCoupon
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(MlmCoupon $mlmCoupon)
+    public function edit($id)
     {
         //
     }
@@ -101,10 +102,10 @@ class MlmCouponController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\MlmCoupon  $mlmCoupon
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MlmCoupon $mlmCoupon)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -112,35 +113,11 @@ class MlmCouponController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MlmCoupon  $mlmCoupon
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MlmCoupon $mlmCoupon)
+    public function destroy($id)
     {
         //
-        $res =  $mlmCoupon->delete();
-        if ($res) {
-            return back()->with('success', 'Coupon was Successfully deleted!');
-        } else {
-            return back()->with('alert', 'Problem With Deleting Coupon');
-        }
-    }
-
-    public function coupons_download()
-    {
-        // return 'ello';
-        // return Session::get('download_link');
-        $codes = Session::get('codes');
-        // return $codes;
-        Session::forget(['codes', 'download_link']);
-        // File::delete(public_path('/upload/codes/latest_rubic_codes.txt'));
-        // File::put(public_path('/upload/codes/latest_rubic_codes.txt'),$codes);
-        // return response()->download(public_path('/upload/codes/latest_rubic_codes.txt'));
-        return response($codes)
-            ->withHeaders([
-                'Content-Type' => 'text/plain',
-                'Cache-Control' => 'no-store, no-cache',
-                'Content-Disposition' => 'attachment; filename="latest_mlm_codes.txt',
-            ]);
     }
 }

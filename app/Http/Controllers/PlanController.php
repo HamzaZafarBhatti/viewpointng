@@ -80,6 +80,7 @@ class PlanController extends Controller
             'code_length' => $request->code_length,
             'active_period' => $request->active_period,
             'mining_time' => $request->mining_time,
+            'account_type_id' => 1
         ]);
         if ($res) {
             return redirect()->route('admin.plans.index')->with('success', 'Saved Successfully!');

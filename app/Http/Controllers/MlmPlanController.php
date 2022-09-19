@@ -72,6 +72,7 @@ class MlmPlanController extends Controller
             'code_prefix' => $request->code_prefix,
             'code_length' => $request->code_length,
             'image' => $image_name,
+            'account_type_id' => 2
         ]);
         if ($res) {
             return redirect()->route('admin.mlm-plans.index')->with('success', 'Saved Successfully!');
