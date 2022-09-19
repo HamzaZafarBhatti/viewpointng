@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MineController;
 use App\Http\Controllers\MlmCouponController;
 use App\Http\Controllers\MlmPlanController;
 use App\Http\Controllers\PlanController;
@@ -270,8 +271,8 @@ Route::name('user.')->group(function () {
     Route::post('user/password/email', [HomeController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('user/password/reset/{token}', [HomeController::class, 'showResetForm'])->name('password.reset_token');
     Route::post('user/password/reset', [HomeController::class, 'reset'])->name('password.do_reset');
-
-    Route::prefix('user')->middleware(['auth:web', 'checkStatus', 'checkBlockStatus'])->group(function () {
+    // , 'checkBlockStatus'
+    Route::prefix('user')->middleware(['auth:web', 'checkStatus'])->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::get('logout', 'logout')->name('logout');
             Route::get('/dashboard', 'dashboard')->name('dashboard');
@@ -290,9 +291,9 @@ Route::name('user.')->group(function () {
         Route::resource('login_logs', LoginLogController::class);
         Route::resource('payment_proofs', PaymentProofController::class)->only('create', 'store');
         //Extraction
-        Route::controller(ExtractionController::class)->group(function () {
-            Route::get('/extractions/page', 'extractions_page')->name('extractions.page');
-            Route::get('/extractions/start', 'extractions_start')->name('extractions.start');
+        Route::controller(MineController::class)->group(function () {
+            Route::get('/mining/page', 'mining_page')->name('mining.page');
+            Route::get('/mining/start', 'mining_start')->name('mining.start');
             Route::get('/extractions/thankyou', 'extractions_thankyou')->name('extractions.thankyou');
             Route::get('/extractions/history', 'extractions_history')->name('extractions.history');
             Route::get('/extractions/convert', 'extractions_convert')->name('extractions.convert');
