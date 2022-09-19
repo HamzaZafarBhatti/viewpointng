@@ -134,6 +134,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Affliate YOUTUBE LINK:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="affiliate_yt_link"
+                                        value="{{ $set->affiliate_yt_link }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Short description:</label>
                                 <div class="col-lg-10">
                                     <textarea type="text" name="site_desc" rows="4" class="form-control">{{ $set->site_desc }}</textarea>

@@ -24,6 +24,7 @@ class SettingSeeder extends Seeder
             'mobile' => '+2347087394692',
             'address' => 'NBCC Plaza, Olubunmi Owa Street, Lekki Phase 1, Lekki, Lagos.',
             'upgrade_fee' => 0,
+            'affiliate_yt_link' => 'https://youtube.com',
         ]);
     }
 }
