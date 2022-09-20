@@ -73,6 +73,18 @@
                                     </div>
                                     <div class="form-check form-check-inline form-check-switchery">
                                         <label class="form-check-label">
+                                            @if ($set->referral == 1)
+                                                <input type="checkbox" name="referral"
+                                                    class="form-check-input-switchery" value="1" checked>
+                                            @else
+                                                <input type="checkbox" name="referral"
+                                                    class="form-check-input-switchery" value="1">
+                                            @endif
+                                            Referral
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline form-check-switchery">
+                                        <label class="form-check-label">
                                             @if ($set->sms_verification == 1)
                                                 <input type="checkbox" name="sms_verification"
                                                     class="form-check-input-switchery" value="1" checked>

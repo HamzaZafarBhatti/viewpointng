@@ -9,6 +9,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -27,7 +29,15 @@ class RegisterController extends Controller
     public function do_register(Request $request)
     {
         // return $request;
-        $validated = $request->validate([
+        // $validated = $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'username' => 'required|min:5|unique:users|regex:/^\S*$/u',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'phone' => 'required|numeric|min:8|unique:users',
+        //     'password' => 'required|string|min:4|confirmed',
+        //     'coupon' => 'required|string|regex:/^\S*$/u',
+        // ]);
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'username' => 'required|min:5|unique:users|regex:/^\S*$/u',
             'email' => 'required|string|email|max:255|unique:users',
@@ -35,6 +45,15 @@ class RegisterController extends Controller
             'password' => 'required|string|min:4|confirmed',
             'coupon' => 'required|string|regex:/^\S*$/u',
         ]);
+        // $validated = $validator->validated();
+        if ($validator->fails()) {
+            // adding an extra field 'error'...
+            // $data['title'] = 'Register';
+            $errors = $validator->errors();
+            return redirect()->route('user.register')
+                ->withErrors($errors)
+                ->withInput();
+        }
 
         $coupon_code = Coupon::where('serial', $request->coupon)->first();
         // return $coupon_code;

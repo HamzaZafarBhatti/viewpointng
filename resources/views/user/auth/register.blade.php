@@ -37,9 +37,7 @@
                                         </div>
                                     </div>
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -51,9 +49,7 @@
                                         </div>
                                     </div>
                                     @error('username')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -65,9 +61,7 @@
                                         </div>
                                     </div>
                                     @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -79,9 +73,7 @@
                                         </div>
                                     </div>
                                     @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -93,9 +85,7 @@
                                         </div>
                                     </div>
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -118,9 +108,7 @@
                                             Click here to BUY Activation code </a>
                                     </div>
                                     @error('coupon')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">

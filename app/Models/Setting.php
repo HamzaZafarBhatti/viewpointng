@@ -26,5 +26,6 @@ class Setting extends Model
         'upgrade_status',
         'upgrade_fee',
         'affiliate_yt_link',
+        'referral',
     ];
 }
