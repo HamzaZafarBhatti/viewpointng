@@ -81,7 +81,7 @@
                         </li>
                         @if ($user->account_type->id == 1)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                            <a class="nav-link" href="{{ route('user.mining.page') }}">
                                 <i class="ni ni-button-power"></i>
                                 <span class="nav-link-text">Start MINING</span>
                             </a>
