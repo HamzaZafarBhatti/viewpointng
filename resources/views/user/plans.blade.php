@@ -1,4 +1,4 @@
-@extends('user.userlayout')
+@extends('userlayout')
 
 @section('css')
     <style>
@@ -6,27 +6,25 @@
             text-align: center;
         }
 
-        .activate a {
+        .activate i {
             cursor: pointer;
         }
 
-        .activate a.disabled {
+        .activate i.disabled {
             opacity: 0.5;
             cursor: not-allowed;
             pointer-events: none;
         }
 
         .deadline {
-            display: flex;
+            display: none;
             justify-content: center;
-            align-items: center;
-        }
-
-        .deadline span {
-            font-size: 2rem;
         }
 
         .deadline-format {
+            background: var(--clr-grey-1);
+            color: var(--clr-white);
+            margin-right: 1rem;
             width: 5rem;
             height: 5rem;
             display: grid;
@@ -46,10 +44,7 @@
             margin-bottom: 0.25rem;
             letter-spacing: var(--spacing);
         }
-        #play_btn {
-            width: 15rem;
-            border-radius: 50%;
-        }
+
     </style>
 @endsection
 
@@ -62,50 +57,33 @@
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
                             <h3 class="mb-0 text-white">GoldMint Coin Mining Machine</h3>
-                            <p><span style="color: #ffcc00;"><strong>TURN ON the Mining Machine to START MINING GoldMint
-                                        Coins</strong></span></p>
-                            {{-- <p><span style="color: #ffffff;"><strong>GoldMint Coin Price (GMC):</strong> <strong><span style="background-color: #ffcc00;"><span style="color: #000000;">{{$user_plan->convert_rate}} GMC = ₦1 </span><br /></span></strong></span></p> --}}
-                            <p><span style="color: #ffffff;">Upon completion of MINING, the GoldCoins would be automatically
-                                    converted to GMC Coin and then, during requests to your Bank, it'll be exchanged and
-                                    sold back for you to get it in NAIRA equivalent from your MINE BALANCE</span></p>
+                            <p><span style="color: #ffcc00;"><strong>TURN ON the Mining Machine to START MINING GoldMint Coins</strong></span></p>
+<p><span style="color: #ffffff;"><strong>GoldMint Coin Price (GMC):</strong> <strong><span style="background-color: #ffcc00;"><span style="color: #000000;">{{$user_plan->convert_rate}} GMC = ₦1 </span><br /></span></strong></span></p>
+<p><span style="color: #ffffff;">Upon completion of MINING, the GoldCoins would be automatically converted to GMC Coin and then, during requests to your Bank, it'll be exchanged and sold back for you to get it in NAIRA equivalent from your MINE BALANCE</span></p>
                         </div>
                         <div class="card-body">
                             <div class="activate">
-                                @if ($latest_mine)
-                                    <a href="javascript:void(0)" class="extraction-link disabled" disabled>
-                                @else
-                                    <a href="{{ route('user.mining.start') }}" class="extraction-link"
-                                    onclick="event.preventDefault(); extraction_start(this);">
-                                @endif
-                                    <img src="{{ asset('asset/frontend/img/play_button.png') }}" id="play_btn">
-                                </a>
-                                @if ($latest_mine)
-                                <div class="text-center">
-                                    <h4 class="deadline-heading">Remaining Time</h4>
-                                    <div class="deadline">
-                                        <div class="deadline-format">
-                                            <div>
-                                                <h4 class="hours"></h4>
-                                                <span>hours</span>
-                                            </div>
+                                <i class="fas fa-power-off fa-10x"></i>
+                                <div class="deadline">
+                                    <div class="deadline-format">
+                                        <div>
+                                            <h4 class="hours"></h4>
+                                            <span>hours</span>
                                         </div>
-                                        <span>:</span>
-                                        <div class="deadline-format">
-                                            <div>
-                                                <h4 class="minutes"></h4>
-                                                <span>mins</span>
-                                            </div>
+                                    </div>
+                                    <div class="deadline-format">
+                                        <div>
+                                            <h4 class="minutes"></h4>
+                                            <span>mins</span>
                                         </div>
-                                        <span>:</span>
-                                        <div class="deadline-format">
-                                            <div>
-                                                <h4 class="seconds"></h4>
-                                                <span>secs</span>
-                                            </div>
+                                    </div>
+                                    <div class="deadline-format">
+                                        <div>
+                                            <h4 class="seconds"></h4>
+                                            <span>secs</span>
                                         </div>
                                     </div>
                                 </div>
-                                @endif
                             </div>
                         </div>
                     </div>
@@ -123,7 +101,9 @@
                                     <tr>
                                         <th>S/N</th>
                                         <th>Mine Hash</th>
+                                        <th>Mine Plan</th>
                                         <th>Mine Balance</th>
+                                        {{-- <th>Daily percent</th> --}}
                                         <th>Mine Profit</th>
                                         <th>Started</th>
                                         <th>Status</th>
@@ -134,7 +114,9 @@
                                         <tr>
                                             <td>{{ ++$k }}.</td>
                                             <td>{{ $val->trx }}</td>
+                                            <td>{{ $val->plan->name }}</td>
                                             <td>{{ substr($val->amount, 0, 9) }}GMC</td>
+                                            {{-- <td>{{ $val->plan->percent }}%</td> --}}
                                             <td>{{ $val->profit }}GMC</td>
                                             <td>{{ timeAgo($val->date) }}</td>
                                             <td>
@@ -155,33 +137,78 @@
         </div>
     </div>
     {{-- <input type="hidden" id="mine_status" value="{{ $latest_mine ? $latest_mine->status : null }}"> --}}
-    <input type="hidden" id="extract_end_date" value="{{ $latest_mine ? \Carbon\Carbon::parse($latest_mine->end_datetime) : null }}">
-    {{-- <input type="hidden" id="mine_end_date"
-        value="{{ $latest_mine ? \Carbon\Carbon::parse($latest_mine->end_date) : null }}"> --}}
+    <input type="hidden" id="mine_end_date"
+        value="{{ $latest_mine ? \Carbon\Carbon::parse($latest_mine->end_date) : null }}">
 @stop
 
 @section('script')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        function extraction_start(elem) {
+        $(document).ready(function() {
+            if ("{{ $user_proof }}" == 1) {
+                swal({
+                        title: null,
+                        text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
+                        icon: "success",
+                        buttons: ["Close", "Upload Payment Proof Now!"],
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            window.location.href = "{{ route('upload.proof') }}"
+                        }
+                    });
+            }
+        })
+        const activate = document.querySelector('.activate i')
+        const deadline = document.querySelector(".deadline");
+        const items = document.querySelectorAll(".deadline-format h4");
+        let countdown;
+        var futureDate;
+        var futureTime;
+        // var mineStatus = document.getElementById('mine_status').value;
+        var endDate = document.getElementById('mine_end_date').value;
+        var futureDateUTC = new Date(Date.UTC(endDate.slice(0, 4), endDate.slice(5, 7)-1, endDate.slice(8, 10), endDate.slice(11, 13), endDate.slice(14, 16), endDate.slice(17, 19)));
+        var now = new Date()
+        // console.log(mineStatus);
+        // console.log(futureDateUTC);
+        // console.log(now);
+        console.log(futureDateUTC < now);
+        if (futureDateUTC > now) {
+            $('.activate i').addClass('disabled')
+            futureDate = futureDateUTC
+            futureTime = futureDate.getTime();
+            // console.log(futureDate);
+            $('.deadline').css('display', 'flex');
+            startCountdown();
+        }
+
+
+        activate.addEventListener('click', function() {
             $.ajax({
-                url: elem.href,
+                url: '{{ route('user.startMine') }}',
                 method: 'get',
                 success: function(response) {
-                    console.log(response)
-                    if (response.status == 1) {
-                        window.open('{{ $set->affiliate_yt_link }}', '_blank');
+                    // console.log(response)
+                    // $('.deadline').css('display', 'flex');
+                    // $(this).addClass('disabled');
+                    // futureDate = new Date(Date.now() + .0025 * (60 * 60 * 1000));
+                    // futureDate = new Date(Date.now() + 1 * (60 * 60 * 1000));
+                    // futureTime = futureDate.getTime();
+                    // console.log(futureDate);
+                    // console.log(futureTime);
+                    // startCountdown();
+                    if(response.status == 1) {
                         location.reload()
                     } else {
-                        alert('EXTRACTION already in progress!')
+                        alert('MINING already in progress!')
                     }
                 }
             })
-        }
+        })
 
         function getRemainingTime() {
             const today = new Date().getTime();
-            var t = futureTime - today;
+            const t = futureTime - today;
 
             const oneDay = 24 * 60 * 60 * 1000;
             const oneHour = 60 * 60 * 1000;
@@ -206,17 +233,24 @@
             if (t < 0) {
                 // console.log('finished');
                 clearInterval(countdown);
-                $('.deadline').addClass('d-none');
-                $('.deadline-heading').addClass('d-none')
-                $('.extraction-gif').next().empty().html('Completing Extraction... WAIT!')
+                $('.deadline').css('display', 'none');
+                $('.activate i').removeClass('disabled');
                 now = new Date();
-                if (futureDateUTC < now) {
-                    setTimeout(function() {
-                        window.location.href = "{{ route('user.mining.thankyou') }}"
-                    }, 2000);
+                if(futureDateUTC < now) {
+                //     $.ajax({
+                //         url: '{{ route('user.endMine') }}',
+                //         method: 'get',
+                //         success: function(response) {
+                //             console.log(response)
+                setTimeout(function() {
+                    location.reload();
+                }, 10000);
+                //         }
+                //     })
                 }
             }
         }
+
 
         function startCountdown() {
             countdown = setInterval(function() {
@@ -224,35 +258,5 @@
             }, 1000);
             getRemainingTime();
         }
-
-        const items = document.querySelectorAll(".deadline-format h4");
-        let countdown;
-        var futureDate;
-        var futureTime;
-        var endDate = document.getElementById('extract_end_date').value;
-        var futureDateUTC = new Date(Date.UTC(endDate.slice(0, 4), endDate.slice(5, 7) - 1, endDate.slice(8, 10), endDate
-            .slice(11, 13) - 1, endDate.slice(14, 16), endDate.slice(17, 19)));
-        var now = new Date()
-        console.log(futureDateUTC < now);
-        if (futureDateUTC > now) {
-            futureDate = futureDateUTC
-            futureTime = futureDate.getTime();
-            startCountdown();
-        }
-        $(document).ready(function() {
-            // if ("{{ $user_proof }}" == 1) {
-            //     swal({
-            //             title: null,
-            //             text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
-            //             icon: "success",
-            //             buttons: ["Close", "Upload Payment Proof Now!"],
-            //         })
-            //         .then((willDelete) => {
-            //             if (willDelete) {
-            //                 window.location.href = "{{ route('upload.proof') }}"
-            //             }
-            //         });
-            // }
-        })
     </script>
 @endsection

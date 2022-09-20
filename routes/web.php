@@ -294,7 +294,7 @@ Route::name('user.')->group(function () {
         Route::controller(MineController::class)->group(function () {
             Route::get('/mining/page', 'mining_page')->name('mining.page');
             Route::get('/mining/start', 'mining_start')->name('mining.start');
-            Route::get('/mining/thankyou', 'mining_thankyou')->name('mining.thankyou');
+            Route::get('/extractions/thankyou', 'extractions_thankyou')->name('extractions.thankyou');
             Route::get('/extractions/history', 'extractions_history')->name('extractions.history');
             Route::get('/extractions/convert', 'extractions_convert')->name('extractions.convert');
             Route::post('/extractions/do_convert', 'extractions_do_convert')->name('extractions.do_convert');
