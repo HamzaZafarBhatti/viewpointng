@@ -49,6 +49,13 @@ class User extends Authenticatable
         'phone_time',
         'email_time',
         'activated_at',
+        'mlm_balance',
+        'affliate_balance',
+        'ref_balance',
+        'cycle_direct_referrals',
+        'cycle_indirect_referrals',
+        'cycle',
+        'locked_referral',
     ];
 
     /**
@@ -83,5 +90,9 @@ class User extends Authenticatable
     public function mlm_plan()
     {
         return $this->belongsTo(MlmPlan::class);
+    }
+    public function parent()
+    {
+        return $this->belongsToMany(User::class, Referral::class, 'referral_id', 'referee_id');
     }
 }

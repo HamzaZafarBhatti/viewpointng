@@ -258,8 +258,8 @@ Route::post('/verify/pin', [FrontendController::class, 'do_verify_pin']);
 Route::name('user.')->group(function () {
     Route::get('/register', [RegisterController::class, 'register'])->name('register');
     Route::post('/register', [RegisterController::class, 'do_register'])->name('do_register');
-    // Route::get('/onboarding/{username}', [RegisterController::class, 'onboarding'])->name('onboarding');
-    // Route::post('/onboarding', [RegisterController::class, 'do_onboarding'])->name('do_onboarding');
+    Route::get('/referral/{username}', [RegisterController::class, 'onboarding'])->name('onboarding');
+    Route::post('/referral', [RegisterController::class, 'do_onboarding'])->name('do_onboarding');
     Route::get('/user/verify_email', [UserController::class, 'verify_email'])->name('verify_email');
     Route::get('/user/resend_code', [UserController::class, 'resend_code'])->name('resend_code');
     Route::post('/user/verify_email', [UserController::class, 'do_verify_email'])->name('do_verify_email');

@@ -1,4 +1,4 @@
-@extends('loginlayout')
+@extends('user.loginlayout')
 
 @section('content')
     <div class="main-content bg-dark" style="background-image:url('{{ url('/') }}/asset/frontend/img/bg-2.png');">
@@ -25,7 +25,7 @@
                         @include('alert')
                         <div class="card-body px-lg-5 py-lg-5">
                             @if ($set->registration == 1)
-                                <form role="form" action="{{ route('submitreferral') }}" method="post">
+                                <form role="form" action="{{ route('user.do_onboarding') }}" method="post">
                                     @csrf
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -36,11 +36,9 @@
 
                                         </div>
                                     </div>
-                                    @if ($errors->has('name'))
-                                        <span class="error form-error-msg ">
-                                            {{ $errors->first('name') }}
-                                        </span>
-                                    @endif
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
@@ -51,11 +49,9 @@
 
                                         </div>
                                     </div>
-                                    @if ($errors->has('username'))
-                                        <span class="error form-error-msg ">
-                                            {{ $errors->first('username') }}
-                                        </span>
-                                    @endif
+                                    @error('username')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
@@ -65,11 +61,9 @@
 
                                         </div>
                                     </div>
-                                    @if ($errors->has('email'))
-                                        <span class="error form-error-msg ">
-                                            {{ $errors->first('email') }}
-                                        </span>
-                                    @endif
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
@@ -79,11 +73,9 @@
 
                                         </div>
                                     </div>
-                                    @if ($errors->has('phone'))
-                                        <span class="error form-error-msg ">
-                                            {{ $errors->first('phone') }}
-                                        </span>
-                                    @endif
+                                    @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
@@ -94,11 +86,9 @@
 
                                         </div>
                                     </div>
-                                    @if ($errors->has('password'))
-                                        <span class="error form-error-msg ">
-                                            {{ $errors->first('password') }}
-                                        </span>
-                                    @endif
+                                    @error('password')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
@@ -106,7 +96,7 @@
                                             </div>
                                             <input class="form-control" placeholder="" type="password"
                                                 name="password_confirmation">
-                                            <input value="{{ $ref }}" type="hidden" name="ref">
+                                            <input value="{{ $username }}" type="hidden" name="ref">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -121,12 +111,30 @@
                                             code?
                                             Click here to BUY Activation code </a>
                                     </div>
+                                    @error('coupon')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text text-dark">Account Type</span>
+                                            </div>
+                                            <select name="account_type_id" class="form-control" required>
+                                                <option value="">Select Account Type</option>
+                                                @if ($account_types)
+                                                    @foreach ($account_types as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text text-dark">REFERRAL</span>
                                             </div>
-                                            <input class="form-control" type="text" value="{{ $ref }}" disabled>
+                                            <input class="form-control" type="text" value="{{ $username }}" disabled>
                                         </div>
                                     </div>
                                     <div class="text-center">
@@ -142,11 +150,11 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-6">
-                            <a href="{{ route('user.password.request') }}" class="text-white"><small>Forgot
+                            <a href="{{ route('user.password.reset') }}" class="text-white"><small>Forgot
                                     password?</small></a>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="{{ route('register') }}" class="text-white"><small>Create New
+                            <a href="{{ route('user.register') }}" class="text-white"><small>Create New
                                     account</small></a>
                         </div>
                     </div>

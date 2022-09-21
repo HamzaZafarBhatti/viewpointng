@@ -14,9 +14,9 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">Video Earning Balance</h5>
+                                                <h5 class="card-title text-muted mb-0 text-white">Referral Balance</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ \App\Models\AffliateProfit::whereUser_id(auth()->user()->id)->whereStatus(2)->sum('profit') }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $user->ref_balance }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -110,6 +110,25 @@
                 </div>
             @else
                 <div class="row">
+                    <div class="col-md-none col-lg-6"></div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            @if (!$user->cycle)
+                            <div class="col-md-6 mb-2">
+                                <button class="btn btn-block btn-primary">Activated</button>
+                            </div>
+                            @else
+                            <div class="col-md-6 mb-2">
+                                <button class="btn btn-block btn-danger">Re-activate</button>
+                            </div>
+                            @endif
+                            <div class="col-md-6">
+                                <button class="btn btn-block btn-success">Cashout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
                     <div class="col-lg-4">
                         <div class="row">
                             <div class="col-md-12">
@@ -118,9 +137,9 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">All Time Cashout</h5>
+                                                <h5 class="card-title text-muted mb-0 text-white">Referral Balance</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ /* substr($user->ref_bonus, 0, strlen($user->ref_bonus)) */ 0 }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $user->ref_balance }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +150,7 @@
                                     <!-- Card body -->
                                     <div class="card-body">
                                         <p class="text-white">
-                                            Unlock your $15000 balance and accumulcate even more earnings for each cycle
+                                            Unlock your ${{ $set->balance_reg_mlm }} balance and accumulcate even more earnings for each cycle
                                             completed. Win Fantastic prizes on each completed cycles.
                                         </p>
                                     </div>
@@ -149,7 +168,7 @@
                                             <div class="col">
                                                 <h5 class="card-title text-muted mb-0 text-white">Direct Referrals</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ /* substr($user->ref_bonus, 0, strlen($user->ref_bonus)) */ 0 }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_direct_referrals }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -164,7 +183,7 @@
                                                 <h5 class="card-title text-muted mb-0 text-white">Indirect Referrals
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ /* substr($user->profit, 0, 9) */ 0 }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_indirect_referrals }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -209,7 +228,7 @@
                                             <div class="col">
                                                 <h5 class="card-title text-muted mb-0 text-white">Locked Referrals</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ /* substr($user->ref_bonus, 0, strlen($user->ref_bonus)) */ 0 }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->locked_referral }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -224,7 +243,7 @@
                                                 <h5 class="card-title text-muted mb-0 text-white">Cycles
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ /* substr($user->profit, 0, 9) */ 0 }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle }}</span>
                                             </div>
                                         </div>
                                     </div>

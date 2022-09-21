@@ -103,6 +103,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.dashboard') }}">
                                 <i class="ni ni-button-power"></i>
+                                <span class="nav-link-text">Bank Withdrawal</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                                <i class="ni ni-button-power"></i>
                                 <span class="nav-link-text">Activated or Reactivate button</span>
                             </a>
                         </li>
@@ -195,7 +201,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Search form -->
                     <div>
-                        <h6 class="h2 mb-0 text-dark">Account Type: {{ auth()->user()->account_type->name }}</h6>
+                        <h3 class="mb-0 text-dark">Account Type: {{ auth()->user()->account_type->name }}</h3>
                     </div>
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center ml-md-auto">
@@ -212,9 +218,9 @@
                         </li>
                     </ul>
                     <div class="">
-                        <h6 class="h2 mb-0 text-dark">
-                            Mine Balance: {{ substr($user->balance, 0, 9) }}GMC
-                        </h6>
+                        <h3 class="mb-0 text-dark">
+                            {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: {{ substr($user->balance, 0, 9) }}NGN
+                        </h3>
                         {{-- <small style="font-weight: bold;">({{$user_plan->convert_rate}} GMC (GOLDMINT COIN) = 1 NGN)</small> --}}
                     </div>
                     <ul class="navbar-nav align-items-center ml-auto ml-md-0">
