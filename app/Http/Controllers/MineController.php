@@ -34,7 +34,7 @@ class MineController extends Controller
         if (!$extraction) {
             $extraction = AffliateProfit::create([
                 'user_id' => $user->id,
-                'plan_id' => $user->plan_id,
+                'plan_id' => $plan->id,
                 'amount' => $user->balance,
                 'trx' => $random_string,
                 'status' => 0,

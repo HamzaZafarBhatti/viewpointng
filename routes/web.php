@@ -292,7 +292,7 @@ Route::name('user.')->group(function () {
         Route::resource('payment_proofs', PaymentProofController::class)->only('create', 'store');
         //Extraction
         Route::controller(MineController::class)->group(function () {
-            Route::get('/mining/page', 'mining_page')->name('mining.page');
+            Route::get('/watch-video/page', 'mining_page')->name('mining.page');
             Route::get('/mining/start', 'mining_start')->name('mining.start');
             Route::get('/mining/thankyou', 'mining_thankyou')->name('mining.thankyou');
             Route::get('/extractions/history', 'extractions_history')->name('extractions.history');
