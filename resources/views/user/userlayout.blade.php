@@ -221,7 +221,13 @@
                         <h3 class="mb-0 text-dark">
                             {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: {{ substr($user->balance, 0, 9) }}NGN
                         </h3>
-                        {{-- <small style="font-weight: bold;">({{$user_plan->convert_rate}} GMC (GOLDMINT COIN) = 1 NGN)</small> --}}
+                        @if ($user->account_type_id)
+                            @if (!$user->cycle)
+                                <small class="text-danger font-weight-bolder">Locked</small>
+                            @else
+                                <small class="text-success font-weight-bolder">Unlocked</small>
+                            @endif
+                        @endif
                     </div>
                     <ul class="navbar-nav align-items-center ml-auto ml-md-0">
                         <li class="nav-item dropdown">
