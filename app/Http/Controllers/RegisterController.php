@@ -72,7 +72,7 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
-        if($request->account_type_id != $coupon_code->account_type_id) {
+        if ($request->account_type_id != $coupon_code->account_type_id) {
             return back()->with('error', 'INCORECT PLAN SELECTED with ACTIVATION CODE');
         }
 
@@ -133,7 +133,7 @@ class RegisterController extends Controller
             return redirect()->route('user.dashboard');
         }
     }
-    
+
     public function onboarding($username)
     {
         // return $data;
@@ -229,13 +229,13 @@ class RegisterController extends Controller
             'activated_at' => date('Y-m-d'),
             'password' => bcrypt($request->password),
         ]);
-        $coupon_code->status = 0;
-        $coupon_code->save();
-        // $coupon_code->update(['status' => 0]);
-        // return $coupon_code;
 
         // $ref_bonus = $coupon_code->plan->upgrade * $coupon_code->plan->ref_percent / 100;
         // $ref_earning = $referee_user->ref_earning + $ref_bonus;
+
+
+        $mlm_plan = MlmPlan::first();
+
         Referral::create([
             'referral_id' => $user->id,
             'referee_id' => $referee_user->id,
@@ -244,11 +244,13 @@ class RegisterController extends Controller
             // 'referee_ref_earning' => $referee_user->ref_earning,
             // 'bonus' => $ref_bonus,
         ]);
-        $cycle_direct_referrals = $referee_user->cycle_direct_referrals + 1;
-        $referee_user->update([
-            // 'ref_earning' => $ref_earning,
-            'cycle_direct_referrals' => $cycle_direct_referrals
-        ]);
+        if ($referee_user->account_type_id == 2 && $referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
+            $cycle_direct_referrals = $referee_user->cycle_direct_referrals + 1;
+            $referee_user->update([
+                // 'ref_earning' => $ref_earning,
+                'cycle_direct_referrals' => $cycle_direct_referrals
+            ]);
+        }
         if (!$referee_user->parent->isEmpty()) {
             $parent = User::find($referee_user->parent[0]->id);
             // $indirect_ref_bonus = $coupon_code->plan->upgrade * $coupon_code->plan->indirect_ref_com / 100;
@@ -261,15 +263,15 @@ class RegisterController extends Controller
                 // 'referee_ref_earning' => $parent->indirect_ref_earning,
                 // 'bonus' => $indirect_ref_earning,
             ]);
-            $cycle_indirect_referrals = $parent->cycle_indirect_referrals + 1;
-            // $parent->update(['indirect_ref_earning' => $indirect_ref_earning]);
-            $parent->update(['cycle_indirect_referrals' => $cycle_indirect_referrals]);
+            if ($referee_user->account_type_id == 2 && $referee_user->cycle_indirect_referrals < $mlm_plan->indirect_ref_count_cashout) {
+                $cycle_indirect_referrals = $parent->cycle_indirect_referrals + 1;
+                // $parent->update(['indirect_ref_earning' => $indirect_ref_earning]);
+                $parent->update(['cycle_indirect_referrals' => $cycle_indirect_referrals]);
+            }
         }
-        $coupon_code->update(['status' => 1]);
+        $coupon_code->update(['status' => 0]);
 
-        $mlm_plan = MlmPlan::where('id', 1)->first();
-
-        if($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
+        if ($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
             $parent->update([
                 'cycle' => $user->cycle + 1,
                 'balance' => $user->balance + 10000,
