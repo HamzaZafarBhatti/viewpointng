@@ -221,7 +221,7 @@
                         <h3 class="mb-0 text-dark">
                             {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: {{ substr($user->balance, 0, 9) }}NGN
                         </h3>
-                        @if ($user->account_type_id)
+                        @if ($user->account_type_id == 1)
                             @if (!$user->cycle)
                                 <small class="text-danger font-weight-bolder">Locked</small>
                             @else
