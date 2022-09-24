@@ -123,7 +123,7 @@
                             </div>
                             @endif
                             <div class="col-md-6">
-                                <button class="btn btn-block btn-success">Cashout</button>
+                                <a type="button" href="{{ route('user.withdraw') }}" class="btn btn-block btn-success">Cashout</a>
                             </div>
                         </div>
                     </div>

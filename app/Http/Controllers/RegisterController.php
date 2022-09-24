@@ -236,40 +236,62 @@ class RegisterController extends Controller
 
         $mlm_plan = MlmPlan::first();
 
-        Referral::create([
-            'referral_id' => $user->id,
-            'referee_id' => $referee_user->id,
-            'referee_ref_earning' => 0,
-            'bonus' => 0,
-            // 'referee_ref_earning' => $referee_user->ref_earning,
-            // 'bonus' => $ref_bonus,
-        ]);
+        if($referee_user->account_type_id == 1){
+            Referral::create([
+                'referral_id' => $user->id,
+                'referee_id' => $referee_user->id,
+                'referee_ref_earning' => 0,
+                'bonus' => 0,
+                // 'referee_ref_earning' => $referee_user->ref_earning,
+                // 'bonus' => $ref_bonus,
+            ]);
+        }
         if ($referee_user->account_type_id == 2 && $referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
+            Referral::create([
+                'referral_id' => $user->id,
+                'referee_id' => $referee_user->id,
+                'referee_ref_earning' => 0,
+                'bonus' => 0,
+                // 'referee_ref_earning' => $referee_user->ref_earning,
+                // 'bonus' => $ref_bonus,
+            ]);
             $cycle_direct_referrals = $referee_user->cycle_direct_referrals + 1;
             $referee_user->update([
                 // 'ref_earning' => $ref_earning,
                 'cycle_direct_referrals' => $cycle_direct_referrals
             ]);
+        } else {
+            $user->delete();
+            return back()->with('error', 'This user`s Referrals are completed!');
         }
         if (!$referee_user->parent->isEmpty()) {
             $parent = User::find($referee_user->parent[0]->id);
             // $indirect_ref_bonus = $coupon_code->plan->upgrade * $coupon_code->plan->indirect_ref_com / 100;
             // $indirect_ref_earning = $parent->indirect_ref_earning + $indirect_ref_bonus;
-            IndirectReferral::create([
-                'referral_id' => $user->id,
-                'referee_id' => $parent->id,
-                'referee_ref_earning' => 0,
-                'bonus' => 0,
-                // 'referee_ref_earning' => $parent->indirect_ref_earning,
-                // 'bonus' => $indirect_ref_earning,
-            ]);
-            if ($referee_user->account_type_id == 2 && $referee_user->cycle_indirect_referrals < $mlm_plan->indirect_ref_count_cashout) {
+            if($parent->account_type_id == 2) {
+                IndirectReferral::create([
+                    'referral_id' => $user->id,
+                    'referee_id' => $parent->id,
+                    'referee_ref_earning' => 0,
+                    'bonus' => 0,
+                    // 'referee_ref_earning' => $parent->indirect_ref_earning,
+                    // 'bonus' => $indirect_ref_earning,
+                ]);
+            }
+            if ($parent->account_type_id == 2 && $parent->cycle_indirect_referrals < $mlm_plan->indirect_ref_count_cashout) {
+                IndirectReferral::create([
+                    'referral_id' => $user->id,
+                    'referee_id' => $parent->id,
+                    'referee_ref_earning' => 0,
+                    'bonus' => 0,
+                    // 'referee_ref_earning' => $parent->indirect_ref_earning,
+                    // 'bonus' => $indirect_ref_earning,
+                ]);
                 $cycle_indirect_referrals = $parent->cycle_indirect_referrals + 1;
                 // $parent->update(['indirect_ref_earning' => $indirect_ref_earning]);
                 $parent->update(['cycle_indirect_referrals' => $cycle_indirect_referrals]);
             }
         }
-        $coupon_code->update(['status' => 0]);
 
         if ($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
             $parent->update([
@@ -278,6 +300,7 @@ class RegisterController extends Controller
                 'ref_balance' => $user->ref_balance + 10000,
             ]);
         }
+        $coupon_code->update(['status' => 0]);
 
         // if ($basic->email_verification == 1) {
         //     $text = "Your Email Verification Code Is: $user->verification_code";
