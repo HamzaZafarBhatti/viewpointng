@@ -6,6 +6,7 @@ use App\Models\AffliateProfit;
 use App\Models\Bank;
 use App\Models\MlmPlan;
 use App\Models\Plan;
+use App\Models\Referral;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Withdraw;
@@ -24,13 +25,16 @@ class UserController extends Controller
     public function dashboard()
     {
         $title = 'Dashboard';
-        $user = auth()->user();
+        $user = User::where('id', auth()->user()->id)->first();
         $profit = AffliateProfit::with('plan')->whereUser_id($user->id)->where('status', 2)->orderBy('id', 'DESC')->limit(5)->get();
-        // return $profit;
+        // $referrals = ;
+        $referrals = $user->get_latest_referrals();
+        // return $referrals;
         return view('user.index', compact(
             'user',
             'title',
             'profit',
+            'referrals',
         ));
     }
 

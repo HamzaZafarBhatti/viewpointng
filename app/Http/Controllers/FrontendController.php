@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 use App\Models\Service;
 use App\Models\User;
+use App\Models\Withdraw;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -21,7 +22,7 @@ class FrontendController extends Controller
         //     $user->plan = $coupon ? $coupon->plan->name : 'N/A';
         // }
         // $data['registrations'] = $users;
-        // $data['withdraws'] = Withdraw::with('user')->whereStatus(1)->latest()->take(5)->get();
+        $data['withdraws'] = Withdraw::with('user')->whereStatus(1)->latest()->take(5)->get();
         // $self_cashouts = DB::table('self_cashout_history')->whereStatus(1)->latest()->take(5)->get();
         // foreach ($self_cashouts as $cashout) {
         //     $cashout->user = User::whereId($cashout->user_id)->first();

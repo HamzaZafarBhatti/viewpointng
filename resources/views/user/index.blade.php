@@ -197,18 +197,28 @@
                                             <div class="col">
                                                 <h5 class="card-title text-muted mb-0 text-white">Last 10 Referrals
                                                 </h5>
-                                                <table class="table table-bordered">
+                                                <table class="table table-bordered text-white">
                                                     <thead>
                                                         <tr>
+                                                            <th>#</th>
                                                             <th>Username</th>
                                                             <th>Email</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @if ($referrals)
+                                                            @foreach ($referrals as $item)
+                                                                <tr>
+                                                                    <td>{{ $loop->iteration }}</td>
+                                                                    <td>{{ $item->username }}</td>
+                                                                    <td>{{ $item->email }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @else
                                                         <tr>
-                                                            <td></td>
-                                                            <td></td>
+                                                            <td colspan="2">No Referrals found!</td>
                                                         </tr>
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                             </div>

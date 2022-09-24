@@ -31,6 +31,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
 Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     Route::get('/', [AdminLoginController::class, 'index'])->name('loginForm');
     Route::post('/', [AdminLoginController::class, 'authenticate'])->name('login');
