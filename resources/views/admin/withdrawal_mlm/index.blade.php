@@ -6,10 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header header-elements-inline">
-                        <h6 class="card-title font-weight-semibold">Pending Withdrawal logs</h6>
-                        <div class="header-elements">
-                            <button type="button" class="btn btn-primary approve_multi" disabled>Approve Checked</button>
-                        </div>
+                        <h6 class="card-title font-weight-semibold">Withdraw logs</h6>
                     </div>
                     <div class="">
                         <table class="table datatable-button-init-basic">
@@ -19,7 +16,8 @@
                                     <th>Account Name</th>
                                     <th>Amount</th>
                                     <th>Account Number</th>
-                                    <th>Bank name</th>
+                                    <th>Bank Name</th>
+                                    <th>Status</th>
                                     <th>Created</th>
                                     <th>Updated</th>
                                     <th class="text-center">Action</th>
@@ -28,13 +26,21 @@
                             <tbody>
                                 @foreach ($withdraw as $k => $val)
                                     <tr>
-                                        <td>{{ ++$k }}. <input type="checkbox" class="withdraw_ids"
-                                                name="withdraw_ids" value="{{ $val->id }}"></td>
+                                        <td>{{ ++$k }}.</td>
                                         <td>{{-- <a href="{{ url('admin/manage-user') }}/{{ $val->user_id }}"> --}}{{ $val->user->name }}{{-- </a> --}}
                                         </td>
                                         <td>₦{{ substr($val->amount, 0, 9) }}</td>
                                         <td>{{ $val->account_no }}</td>
                                         <td>{{ $val->bank_name }}</td>
+                                        <td>
+                                            @if ($val->status == 0)
+                                                <span class="badge badge-danger">Unpaid</span>
+                                            @elseif($val->status == 1)
+                                                <span class="badge badge-success">Paid</span>
+                                            @elseif($val->status == 2)
+                                                <span class="badge badge-info">Declined</span>
+                                            @endif
+                                        </td>
                                         <td>{{ date('Y/m/d h:i:A', strtotime($val->created_at)) }}</td>
                                         <td>{{ date('Y/m/d h:i:A', strtotime($val->updated_at)) }}</td>
                                         <td class="text-center">
@@ -46,11 +52,10 @@
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         @if ($val->status == 0)
                                                             <a class='dropdown-item' data-toggle="modal"
-                                                                data-target="#{{ $val->id }}pay"
-                                                                {{-- href="{{ route('admin.wallet.withdraw_approve', $val->id) }}" --}}><i
+                                                                data-target="#{{ $val->id }}pay"><i
                                                                     class="icon-thumbs-up3 mr-2"></i>Approve request</a>
                                                             <a class='dropdown-item'
-                                                                href="{{ route('admin.wallet.withdraw_decline', $val->id) }}"><i
+                                                                href="{{ route('admin.mlm.withdraw_decline', $val->id) }}"><i
                                                                     class="icon-thumbs-down3 mr-2"></i>Decline request</a>
                                                         @endif
                                                         <a data-toggle="modal" data-target="#{{ $val->id }}delete"
@@ -74,7 +79,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-link"
                                                         data-dismiss="modal">Close</button>
-                                                    <a href="{{ route('admin.wallet.withdraw_delete', $val->id) }}"
+                                                    <a href="{{ route('admin.mlm.withdraw_delete', $val->id) }}"
                                                         class="btn bg-danger">Proceed</a>
                                                 </div>
                                             </div>
@@ -87,7 +92,7 @@
                                                     <button type="button" class="close"
                                                         data-dismiss="modal">&times;</button>
                                                 </div>
-                                                <form action="{{ route('admin.wallet.withdraw_approve') }}" method="post">
+                                                <form action="{{ route('admin.mlm.withdraw_approve') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ $val->id }}">
                                                     <div class="modal-body">
@@ -144,33 +149,6 @@
                 } else {
                     _this.parents('.modal').find('.payment_value').addClass('d-none')
                 }
-            })
-            $(document).on('click', '.withdraw_ids', function() {
-                console.log($('.withdraw_ids:checked').length);
-                if ($('.withdraw_ids:checked').length) {
-                    $('.approve_multi').removeAttr('disabled');
-                } else {
-                    $('.approve_multi').attr('disabled', 'disabled');
-                }
-            })
-            $('.approve_multi').click(function() {
-                var approve_ids = []
-                $('.withdraw_ids:checked').map(function(index, value) {
-                    approve_ids.push(value.value);
-                })
-
-                $.ajax({
-                    url: '{{ route('admin.wallet.withdraw_approve_multi') }}',
-                    method: 'POST',
-                    data: {
-                        ids: approve_ids,
-                        '_token': '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        // console.log(response)
-                        location.reload(true);
-                    }
-                })
             })
         })
     </script>

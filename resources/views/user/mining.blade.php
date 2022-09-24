@@ -136,7 +136,7 @@
                                             <td>{{ $val->trx }}</td>
                                             <td>{{ substr($val->amount, 0, 9) }}GMC</td>
                                             <td>{{ $val->profit }}GMC</td>
-                                            <td>{{ timeAgo($val->date) }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($val->start_datetime)->diffForHumans() }}</td>
                                             <td>
                                                 @if ($val->status == 0)
                                                     <span class="badge badge-success"><img src="https://goldmintng.com/asset/global_assets/mining/Gear-0.5s-1950px.gif" alt="" width="20" height="20" /> Mining...</span>

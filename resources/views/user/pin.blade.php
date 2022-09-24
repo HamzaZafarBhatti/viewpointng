@@ -1,4 +1,4 @@
-@extends('userlayout')
+@extends('user.userlayout')
 
 @section('content')
 <!-- Page content -->
@@ -14,8 +14,8 @@
         </div>
 
         <div class="card-body">
-          <form action="{{route('change.pin')}}" method="post">
-          <p>Default pin on registration is <code>0000</code></p>
+          <form action="{{route('user.change_pin')}}" method="post">
+          <p>Default pin on registration is <code>000000</code></p>
           @csrf
               <div class="form-group row">
                 <label class="col-form-label col-lg-2">Old pin:</label>

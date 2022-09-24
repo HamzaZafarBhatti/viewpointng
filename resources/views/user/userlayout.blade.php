@@ -87,7 +87,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                            <a class="nav-link" href="{{ route('user.withdraw') }}">
                                 <i class="ni ni-money-coins"></i>
                                 <span class="nav-link-text">Bank Withdrawal</span>
                             </a>
@@ -101,7 +101,7 @@
                         @endif
                         @if ($user->account_type->id == 2)
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                            <a class="nav-link" href="{{ route('user.withdraw_mlm') }}">
                                 <i class="ni ni-button-power"></i>
                                 <span class="nav-link-text">Bank Withdrawal</span>
                             </a>
@@ -228,7 +228,7 @@
                             <a class="nav-link pr-0" href="javascript:void;" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
-                                    <a href="https://goldmintng.com/user/profile"><span
+                                    <a href="{{ route('user.profile_edit') }}"><span
                                             class="avatar avatar-sm rounded-circle">
                                             <img alt="Image placeholder"
                                                 src="{{ $user->image ? url('/') . '/asset/profile/' . $user->image : 'https://ui-avatars.com/api/?name=' . $user->username }}"></a>

@@ -19,8 +19,7 @@
                                     <th>Account Name</th>
                                     <th>Amount</th>
                                     <th>Account Number</th>
-                                    <th>Withdrawn to</th>
-                                    <th>Bank Name / Tether Network</th>
+                                    <th>Bank name</th>
                                     <th>Created</th>
                                     <th>Updated</th>
                                     <th class="text-center">Action</th>
@@ -29,14 +28,11 @@
                             <tbody>
                                 @foreach ($withdraw as $k => $val)
                                     <tr>
-                                        <td>{{ ++$k }}. <input type="checkbox" class="withdraw_ids"
-                                                name="withdraw_ids" value="{{ $val->id }}"></td>
-                                        <td>{{-- <a href="{{ url('admin/manage-user') }}/{{ $val->user_id }}"> --}}{{ $val->user->name }}{{-- </a> --}}
-                                        </td>
-                                        <td>{{ $val->withdraw_to == 'bank' ? '₦' : '$' }}{{ substr($val->amount, 0, 9) }}</td>
+                                        <td>{{ ++$k }}. <input type="checkbox" class="withdraw_ids" name="withdraw_ids" value="{{ $val->id }}"></td>
+                                        <td>{{ $val->user->name }}</td>
+                                        <td>₦{{ substr($val->amount, 0, 9) }}</td>
                                         <td>{{ $val->account_no }}</td>
-                                        <td>{{ $val->withdraw_to == 'bank' ? 'Bank' : 'Tether USDT' }}</td>
-                                        <td>{{ $val->withdraw_to == 'bank' ? $val->bank_name : $val->user->tether_network_label }}</td>
+                                        <td>{{ $val->bank_name }}</td>
                                         <td>{{ date('Y/m/d h:i:A', strtotime($val->created_at)) }}</td>
                                         <td>{{ date('Y/m/d h:i:A', strtotime($val->updated_at)) }}</td>
                                         <td class="text-center">
@@ -47,11 +43,11 @@
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         @if ($val->status == 0)
-                                                            <a class='dropdown-item'
-                                                                href="{{ route('admin.stake_wallet.withdraw_approve', $val->id) }}"><i
+                                                            <a class='dropdown-item' data-toggle="modal"
+                                                                data-target="#{{ $val->id }}pay"><i
                                                                     class="icon-thumbs-up3 mr-2"></i>Approve request</a>
                                                             <a class='dropdown-item'
-                                                                href="{{ route('admin.stake_wallet.withdraw_decline', $val->id) }}"><i
+                                                                href="{{ route('admin.affliate.withdraw_decline', $val->id) }}"><i
                                                                     class="icon-thumbs-down3 mr-2"></i>Decline request</a>
                                                         @endif
                                                         <a data-toggle="modal" data-target="#{{ $val->id }}delete"
@@ -75,9 +71,53 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-link"
                                                         data-dismiss="modal">Close</button>
-                                                    <a href="{{ route('admin.stake_wallet.withdraw_delete', $val->id) }}"
+                                                    <a href="{{ route('admin.affliate.withdraw_delete', $val->id) }}"
                                                         class="btn bg-danger">Proceed</a>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="{{ $val->id }}pay" class="modal fade" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <form action="{{ route('admin.affliate.withdraw_approve') }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $val->id }}">
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label class="d-block font-weight-semibold">Select
+                                                                Payment</label>
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input type="radio" class="form-check-input"
+                                                                        name="payment" value="0">
+                                                                    Full Payment
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <label class="form-check-label">
+                                                                    <input type="radio" class="form-check-input"
+                                                                        name="payment" value="1">
+                                                                    Custom Payment
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group payment_value d-none">
+                                                            <input type="text" name="payment_value" class="form-control"
+                                                                placeholder="₦5000">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-link"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn bg-success">Approve</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -94,6 +134,15 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            $('.form-check-input').click(function() {
+                var _this = $(this)
+                var value = _this.val();
+                if (value == 1) {
+                    _this.parents('.modal').find('.payment_value').removeClass('d-none')
+                } else {
+                    _this.parents('.modal').find('.payment_value').addClass('d-none')
+                }
+            })
             $(document).on('click', '.withdraw_ids', function() {
                 console.log($('.withdraw_ids:checked').length);
                 if ($('.withdraw_ids:checked').length) {
@@ -109,7 +158,7 @@
                 })
 
                 $.ajax({
-                    url: '{{ route('admin.stake_wallet.withdraw_approve_multi') }}',
+                    url: '{{ route('admin.affliate.withdraw_approve_multi') }}',
                     method: 'POST',
                     data: {
                         ids: approve_ids,

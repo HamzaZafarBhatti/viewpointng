@@ -14,7 +14,7 @@
                         </div>
 
                         <div class="card-body">
-                            <form action="{{ route('user.withdraw_submit') }}" method="post" id="setting_form">
+                            <form action="{{ route('user.withdraw_mlm_submit') }}" method="post" id="setting_form">
                                 @csrf
                                 {{-- <div class="form-group row">
                                     <label class="col-form-label col-lg-2 text-white">Withdraw type</label>

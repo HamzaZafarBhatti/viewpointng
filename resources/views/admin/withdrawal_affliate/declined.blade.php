@@ -15,7 +15,7 @@
                                     <th>S/N</th>
                                     <th>Name</th>
                                     <th>Amount</th>                                                                       
-                                    <th>Account number</th>
+                                    <th>Account Number</th>
                                     <th>Bank name</th>
                                     <th>Created</th>
                                     <th>Updated</th>
@@ -29,7 +29,7 @@
                                     <td>{{-- <a href="{{url('admin/manage-user')}}/{{$val->user_id}}"> --}}{{$val->user->name}}{{-- </a> --}}</td>
                                     <td>{{substr($val->amount,0,9)}}BTC</td>
                                     <td>{{$val->account_no}}</td> 
-                                    <td>{{$val->bank_name}}</td> 
+                                    <td>{{$val->bank_name}}</td>
                                     <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
                                     <td>{{date("Y/m/d h:i:A", strtotime($val->updated_at))}}</td>
                                     <td class="text-center">
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                                                <a  href="{{ route('admin.wallet.withdraw_delete', $val->id) }}" class="btn bg-danger">Proceed</a>
+                                                <a  href="{{ route('admin.affliate.withdraw_delete', $val->id) }}" class="btn bg-danger">Proceed</a>
                                             </div>
                                         </div>
                                     </div>

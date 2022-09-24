@@ -314,43 +314,43 @@
                                 </li>
                             </ul>
                         </li> --}}
-                        {{-- <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Rubic Wallet Withdraw
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Affiliate Balance Withdraw
                                     system</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="Withdraw">
-                                <li class="nav-item"><a href="{{ route('admin.wallet.withdraw_log') }}"
+                                <li class="nav-item"><a href="{{ route('admin.affliate.withdraw_log') }}"
                                         class="nav-link"><i class="icon-list-unordered"></i>Withdraw log</a>
                                 </li>
-                                <li class="nav-item"><a href="{{ route('admin.wallet.withdraw_unpaid') }}"
+                                <li class="nav-item"><a href="{{ route('admin.affliate.withdraw_unpaid') }}"
                                         class="nav-link"><i class="icon-spinner2 spinner"></i>Unpaid
                                         withdrawal</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.wallet.withdraw_approved') }}"
+                                <li class="nav-item"><a href="{{ route('admin.affliate.withdraw_approved') }}"
                                         class="nav-link"><i class="icon-thumbs-up2"></i>Approved withdrawal</a>
                                 </li>
-                                <li class="nav-item"><a href="{{ route('admin.wallet.withdraw_declined') }}"
+                                <li class="nav-item"><a href="{{ route('admin.affliate.withdraw_declined') }}"
                                         class="nav-link"><i class="icon-accessibility"></i>Declined
                                         withdrawal</a></li>
                             </ul>
-                        </li> --}}
-                        {{-- <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Rubic Stake Wallet
+                        </li>
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>MLM Balance Wallet
                                     Withdraw
                                     system</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="Withdraw">
-                                <li class="nav-item"><a href="{{ route('admin.stake_wallet.withdraw_log') }}"
+                                <li class="nav-item"><a href="{{ route('admin.mlm.withdraw_log') }}"
                                         class="nav-link"><i class="icon-list-unordered"></i>Withdraw log</a>
                                 </li>
-                                <li class="nav-item"><a href="{{ route('admin.stake_wallet.withdraw_unpaid') }}"
+                                <li class="nav-item"><a href="{{ route('admin.mlm.withdraw_unpaid') }}"
                                         class="nav-link"><i class="icon-spinner2 spinner"></i>Unpaid
                                         withdrawal</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.stake_wallet.withdraw_approved') }}"
+                                <li class="nav-item"><a href="{{ route('admin.mlm.withdraw_approved') }}"
                                         class="nav-link"><i class="icon-thumbs-up2"></i>Approved withdrawal</a>
                                 </li>
-                                <li class="nav-item"><a href="{{ route('admin.stake_wallet.withdraw_declined') }}"
+                                <li class="nav-item"><a href="{{ route('admin.mlm.withdraw_declined') }}"
                                         class="nav-link"><i class="icon-accessibility"></i>Declined
                                         withdrawal</a></li>
                             </ul>
-                        </li> --}}
+                        </li>
                         {{-- <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-share2"></i><span>Paymentproof
                                     system</span></a>

@@ -16,8 +16,7 @@
                                     <th>Name</th>
                                     <th>Amount</th>                                                                       
                                     <th>Account number</th>
-                                    <th>Withdrawn to</th>
-                                    <th>Bank Name / Tether Network</th>
+                                    <th>Bank name</th>
                                     <th>Created</th>
                                     <th>Updated</th>
                                     <th class="text-center">Action</th>    
@@ -28,11 +27,9 @@
                                 <tr>
                                     <td>{{++$k}}.</td>
                                     <td>{{-- <a href="{{url('admin/manage-user')}}/{{$val->user_id}}"> --}}{{$val->user->name}}{{-- </a> --}}</td>
-                                    <td>{{ $val->withdraw_to == 'bank' ? '₦' : '$' }}{{substr($val->amount,0,9)}}</td>
+                                    <td>{{substr($val->amount,0,9)}}BTC</td>
                                     <td>{{$val->account_no}}</td> 
-                                    <td>{{ $val->withdraw_to == 'bank' ? 'Bank' : 'Tether USDT' }}</td>
-                                    <td>{{ $val->withdraw_to == 'bank' ? $val->bank_name : $val->user->tether_network_label }}
-                                    </td>
+                                    <td>{{$val->bank_name}}</td> 
                                     <td>{{date("Y/m/d h:i:A", strtotime($val->created_at))}}</td>
                                     <td>{{date("Y/m/d h:i:A", strtotime($val->updated_at))}}</td>
                                     <td class="text-center">
@@ -59,7 +56,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                                                <a  href="{{ route('admin.stake_wallet.withdraw_delete', $val->id) }}" class="btn bg-danger">Proceed</a>
+                                                <a  href="{{ route('admin.affliate.withdraw_delete', $val->id) }}" class="btn bg-danger">Proceed</a>
                                             </div>
                                         </div>
                                     </div>

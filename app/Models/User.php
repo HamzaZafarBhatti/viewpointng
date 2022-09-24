@@ -42,8 +42,9 @@ class User extends Authenticatable
         'plan_id',
         'account_type_id',
         'bank_id',
-        'account_no',
-        'account_type',
+        'bank_account_no',
+        'bank_account_type',
+        'bank_account_name',
         'show_popup',
         'is_blocked',
         'phone_time',
@@ -94,5 +95,9 @@ class User extends Authenticatable
     public function parent()
     {
         return $this->belongsToMany(User::class, Referral::class, 'referral_id', 'referee_id');
+    }
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
     }
 }

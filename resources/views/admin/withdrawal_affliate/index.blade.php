@@ -52,11 +52,10 @@
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         @if ($val->status == 0)
                                                             <a class='dropdown-item' data-toggle="modal"
-                                                                data-target="#{{ $val->id }}pay"
-                                                                {{-- href="{{ route('admin.wallet.withdraw_approve', $val->id) }}" --}}><i
+                                                                data-target="#{{ $val->id }}pay"><i
                                                                     class="icon-thumbs-up3 mr-2"></i>Approve request</a>
                                                             <a class='dropdown-item'
-                                                                href="{{ route('admin.wallet.withdraw_decline', $val->id) }}"><i
+                                                                href="{{ route('admin.affliate.withdraw_decline', $val->id) }}"><i
                                                                     class="icon-thumbs-down3 mr-2"></i>Decline request</a>
                                                         @endif
                                                         <a data-toggle="modal" data-target="#{{ $val->id }}delete"
@@ -80,7 +79,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-link"
                                                         data-dismiss="modal">Close</button>
-                                                    <a href="{{ route('admin.wallet.withdraw_delete', $val->id) }}"
+                                                    <a href="{{ route('admin.affliate.withdraw_delete', $val->id) }}"
                                                         class="btn bg-danger">Proceed</a>
                                                 </div>
                                             </div>
@@ -93,7 +92,7 @@
                                                     <button type="button" class="close"
                                                         data-dismiss="modal">&times;</button>
                                                 </div>
-                                                <form action="{{ route('admin.wallet.withdraw_approve') }}" method="post">
+                                                <form action="{{ route('admin.affliate.withdraw_approve') }}" method="post">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ $val->id }}">
                                                     <div class="modal-body">

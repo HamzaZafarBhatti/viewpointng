@@ -13,6 +13,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,23 +48,46 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::post('sms', [SettingController::class, 'SmsUpdate'])->name('sms.update');
         Route::get('account', [SettingController::class, 'Account'])->name('account');
         Route::post('account', [SettingController::class, 'AccountUpdate'])->name('account.update');
+
         Route::get('/coupons/download', [CouponController::class, 'coupons_download'])->name('coupons.download');
         Route::resource('coupons', CouponController::class);
         Route::resource('plans', PlanController::class);
+
         Route::get('/mlm-coupons/download', [MlmCouponController::class, 'coupons_download'])->name('mlm-coupons.download');
         Route::resource('mlm-coupons', MlmCouponController::class);
         Route::resource('mlm-plans', MlmPlanController::class);
+
         Route::resource('account_types', AccountTypeController::class);
         
-        Route::get('py-generate-plan-coupons', 'PyschemeController@generate_coupons')->name('admin.plan.generate_coupons');
-        Route::get('py-download-plan-coupons', 'PyschemeController@download_codes')->name('admin.plan.download_codes');
-        Route::post('py-generate-plan-coupons', 'PyschemeController@do_generate_coupons')->name('admin.plan.do_generate_coupons');
+        Route::controller(WithdrawController::class)->group(function () {
+            //Affliate Withdraw
+            Route::prefix('affliate')->name('affliate.')->group(function() {
+                Route::get('withdraw_log', 'affliate_withdraw_log')->name('withdraw_log');
+                Route::get('withdraw_unpaid', 'affliate_withdraw_unpaid')->name('withdraw_unpaid');
+                Route::get('withdraw_approved', 'affliate_withdraw_approved')->name('withdraw_approved');
+                Route::get('withdraw_declined', 'affliate_withdraw_declined')->name('withdraw_declined');
+                Route::get('withdraw_delete/{id}', 'affliate_withdraw_delete')->name('withdraw_delete');
+                Route::post('withdraw_approve', 'affliate_withdraw_approve')->name('withdraw_approve');
+                Route::post('withdraw_approve_multi', 'affliate_withdraw_approve_multi')->name('withdraw_approve_multi');
+                Route::get('withdraw_decline/{id}', 'affliate_withdraw_decline')->name('withdraw_decline');
+            });
+            //MLM Withdraw
+            Route::prefix('mlm')->name('mlm.')->group(function() {
+                Route::get('withdraw_log', 'mlm_withdraw_log')->name('withdraw_log');
+                Route::get('withdraw_approved', 'mlm_withdraw_approved')->name('withdraw_approved');
+                Route::get('withdraw_declined', 'mlm_withdraw_declined')->name('withdraw_declined');
+                Route::get('withdraw_unpaid', 'mlm_withdraw_unpaid')->name('withdraw_unpaid');
+                Route::get('withdraw_delete/{id}', 'mlm_withdraw_delete')->name('withdraw_delete');
+                Route::post('withdraw_approve', 'mlm_withdraw_approve')->name('withdraw_approve');
+                Route::post('withdraw_approve_multi', 'mlm_withdraw_approve_multi')->name('withdraw_approve_multi');
+                Route::get('withdraw_decline/{id}', 'mlm_withdraw_decline')->name('withdraw_decline');
+            });
+        });
+        
+        // Route::get('py-generate-plan-coupons', 'PyschemeController@generate_coupons')->name('admin.plan.generate_coupons');
+        // Route::get('py-download-plan-coupons', 'PyschemeController@download_codes')->name('admin.plan.download_codes');
+        // Route::post('py-generate-plan-coupons', 'PyschemeController@do_generate_coupons')->name('admin.plan.do_generate_coupons');
     });
-    // //Data Operator Controller
-    // Route::get('/data_operators', 'AdminController@data_operators')->name('admin.data_operators');
-    // Route::post('/data_operator_store', 'AdminController@data_operator_store')->name('admin.data_operator.store');
-    // Route::get('data_operator/{id}', 'AdminController@data_operator_edit')->name('admin.data_operator.edit');
-    // Route::post('data_operator', 'AdminController@data_operator_update')->name('admin.data_operator.update');
     // //Blog controller
     // Route::post('/createcategory', 'PostController@CreateCategory');
     // Route::post('/updatecategory', 'PostController@UpdateCategory');
@@ -106,11 +130,6 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::post('coupons/update', 'WebController@UpdateCoupons')->name('coupons.update');
 
 
-    // Route::post('/createservice', 'WebController@CreateService');
-    // Route::post('service/update', 'WebController@UpdateService')->name('service.update');
-    // Route::get('service/delete/{id}', 'WebController@DestroyService')->name('service.delete');
-    // Route::get('service', 'WebController@services')->name('admin.service');
-
     // Route::post('/createpage', 'WebController@CreatePage');
     // Route::post('page/update', 'WebController@UpdatePage')->name('page.update');
     // Route::get('page/delete/{id}', 'WebController@DestroyPage')->name('page.delete');
@@ -139,27 +158,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::post('section2/update', 'WebController@section2');
     // Route::post('section3/update', 'WebController@section3');
     // Route::post('section4/update', 'WebController@section4');
-
-    // //Withdrawal controller
-    // Route::get('withdraw-log', 'WithdrawController@withdrawlog')->name('admin.withdraw.log');
-    // Route::get('withdraw-approved', 'WithdrawController@withdrawapproved')->name('admin.withdraw.approved');
-    // Route::get('withdraw-declined', 'WithdrawController@withdrawdeclined')->name('admin.withdraw.declined');
-    // Route::get('withdraw-unpaid', 'WithdrawController@withdrawunpaid')->name('admin.withdraw.unpaid');
-    // Route::get('withdraw/delete/{id}', 'WithdrawController@DestroyWithdrawal')->name('withdraw.delete');
-    // Route::get('approvewithdraw/{id}', 'WithdrawController@approve')->name('withdraw.approve');
-    // Route::post('withdraw-approve-multi', 'WithdrawController@approve_multi')->name('admin.withdraw.approve_multi');
-    // Route::post('approvewithdrawmine', 'WithdrawController@approvemine')->name('withdraw.approvemine');
-    // Route::get('declinewithdraw/{id}', 'WithdrawController@decline')->name('withdraw.declined');
-    // //Data Withdrawal controller
-    // Route::get('data_withdraw-log', 'WithdrawController@data_withdrawlog')->name('admin.data_withdraw.log');
-    // Route::get('data_withdraw-approved', 'WithdrawController@data_withdrawapproved')->name('admin.data_withdraw.approved');
-    // Route::get('data_withdraw-declined', 'WithdrawController@data_withdrawdeclined')->name('admin.data_withdraw.declined');
-    // Route::get('data_withdraw-unpaid', 'WithdrawController@data_withdrawunpaid')->name('admin.data_withdraw.unpaid');
-    // Route::get('data_withdraw/delete/{id}', 'WithdrawController@DestroyDataWithdrawal')->name('data_withdraw.delete');
-    // Route::get('approvedata_withdraw/{id}', 'WithdrawController@dataapprove')->name('data_withdraw.approve');
-    // Route::post('data_withdraw-approve-multi', 'WithdrawController@dataapprove_multi')->name('admin.data_withdraw.approve_multi');
-    // Route::post('approvedata_withdrawmine', 'WithdrawController@dataapprovemine')->name('data_withdraw.approvemine');
-    // Route::get('declinedata_withdraw/{id}', 'WithdrawController@datadecline')->name('data_withdraw.declined');
+    
     // //Selfcashout controller
     // Route::get('selfcashout-log', 'SelfcashoutController@selfcashoutlog')->name('admin.selfcashout.log');
     // Route::get('selfcashout-approved', 'SelfcashoutController@selfcashoutapproved')->name('admin.selfcashout.approved');
@@ -178,17 +177,6 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::get('approvepaymentproof/{id}', 'PaymentProofController@approve')->name('paymentproof.approve');
     // Route::post('paymentproof-approve-multi', 'PaymentProofController@approve_multi')->name('admin.paymentproof.approve_multi');
     // Route::get('declinepaymentproof/{id}', 'PaymentProofController@decline')->name('paymentproof.declined');
-
-    // //Deposit controller
-    // Route::get('deposit-log', 'DepositController@depositlog')->name('admin.deposit.log');
-    // Route::get('deposit-method', 'DepositController@depositmethod')->name('admin.deposit.method');
-    // Route::post('storegateway', 'DepositController@store');
-    // Route::get('deposit-approved', 'DepositController@depositapproved')->name('admin.deposit.approved');
-    // Route::get('deposit-pending', 'DepositController@depositpending')->name('admin.deposit.pending');
-    // Route::get('deposit-declined', 'DepositController@depositdeclined')->name('admin.deposit.declined');
-    // Route::get('deposit/delete/{id}', 'DepositController@DestroyDeposit')->name('deposit.delete');
-    // Route::get('approvedeposit/{id}', 'DepositController@approve')->name('deposit.approve');
-    // Route::get('declinedeposit/{id}', 'DepositController@decline')->name('deposit.decline');
 
 
     // //Setting controller
@@ -276,17 +264,22 @@ Route::name('user.')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::get('logout', 'logout')->name('logout');
             Route::get('/dashboard', 'dashboard')->name('dashboard');
-            // Route::get('profile/edit', 'profile_edit')->name('profile_edit');
-            // Route::post('profile/update_basic', 'profile_update_basic')->name('profile.update_basic');
+            Route::get('profile/edit', 'profile_edit')->name('profile_edit');
+            Route::post('profile/update_basic', 'profile_update_basic')->name('profile.update_basic');
             // Route::post('profile/update_avatar', 'profile_update_avatar')->name('profile.update_avatar');
-            // Route::post('profile/update_bank', 'profile_update_bank')->name('profile.update_bank');
-            // Route::get('profile/set_pin', 'profile_set_pin')->name('profile.set_pin');
-            // Route::post('profile/update_pin', 'profile_update_pin')->name('profile.update_pin');
-            // Route::get('profile/change_pin/{pin}', 'profile_change_pin')->name('profile.change_pin');
-            // Route::post('profile/update_tether_address', 'profile_update_tether_address')->name('profile.update_tether_address');
+            Route::post('profile/update_bank', 'update_bank_details')->name('profile.update_bank');
             // Route::get('plan/upgrade', 'upgrade_plan')->name('plan.upgrade');
             // Route::post('plan/upgrade', 'do_upgrade_plan')->name('plan.do_upgrade');
             Route::get('latest_sponsored_task', 'latest_sponsored_post')->name('latest_sponsored_post');
+            //Withdraw
+            Route::get('withdraws', 'withdraw')->name('withdraw');
+            Route::post('withdraws', 'withdraw_submit')->name('withdraw_submit');
+            //MLM Withdraw
+            Route::get('withdraws_mlm', 'withdraw_mlm')->name('withdraw_mlm');
+            Route::post('withdraws_mlm', 'withdraw_mlm_submit')->name('withdraw_mlm_submit');
+            //change pin
+            Route::get('pin', 'changePin')->name('pin');
+            Route::post('pin', 'submitPin')->name('change_pin');
         });
         Route::resource('login_logs', LoginLogController::class);
         Route::resource('payment_proofs', PaymentProofController::class)->only('create', 'store');
@@ -295,16 +288,13 @@ Route::name('user.')->group(function () {
             Route::get('/watch-video/page', 'mining_page')->name('mining.page');
             Route::get('/mining/start', 'mining_start')->name('mining.start');
             Route::get('/mining/thankyou', 'mining_thankyou')->name('mining.thankyou');
-            Route::get('/extractions/history', 'extractions_history')->name('extractions.history');
-            Route::get('/extractions/convert', 'extractions_convert')->name('extractions.convert');
-            Route::post('/extractions/do_convert', 'extractions_do_convert')->name('extractions.do_convert');
         });
         //Referral
-        Route::controller(ReferralController::class)->group(function () {
-            Route::get('/referrals', 'index')->name('referrals.index');
-            Route::get('/referrals/earning/history', 'earning_history')->name('referrals.earning_history');
-            Route::get('/referrals/convert', 'convert')->name('referrals.convert');
-            Route::post('/referrals/do_convert', 'do_convert')->name('referrals.do_convert');
-        });
+        // Route::controller(ReferralController::class)->group(function () {
+        //     Route::get('/referrals', 'index')->name('referrals.index');
+        //     Route::get('/referrals/earning/history', 'earning_history')->name('referrals.earning_history');
+        //     Route::get('/referrals/convert', 'convert')->name('referrals.convert');
+        //     Route::post('/referrals/do_convert', 'do_convert')->name('referrals.do_convert');
+        // });
     });
 });

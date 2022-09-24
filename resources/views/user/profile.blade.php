@@ -1,4 +1,4 @@
-@extends('userlayout')
+@extends('user.userlayout')
 
 @section('content')
     <!-- Page content -->
@@ -16,8 +16,8 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Name:</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="name" class="form-control" value="{{ $user->name }}"
-                                            readonly>
+                                        <input type="text" name="name" class="form-control"
+                                            value="{{ $user->name }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -30,15 +30,15 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">E-Mail:</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="email" class="form-control" value="{{ $user->email }}"
-                                            readonly>
+                                        <input type="text" name="email" class="form-control"
+                                            value="{{ $user->email }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Mobile:</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="phone" class="form-control" value="{{ $user->phone }}"
-                                            readonly>
+                                        <input type="text" name="phone" class="form-control"
+                                            value="{{ $user->phone }}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -51,7 +51,8 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">City:</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="city" class="form-control" value="{{ $user->city }}">
+                                        <input type="text" name="city" class="form-control"
+                                            value="{{ $user->city }}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -91,7 +92,7 @@
                                                 style="color: #0000ff;">GoldMint Support</span></a></span> for assistance
                                     with regards to changing your Bank details.</span></strong></p>
                         <div class="card-body">
-                            <form action="{{ url('user/update_bank_details') }}" method="post">
+                            <form action="{{ route('user.profile.update_bank') }}" method="post">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Bank Name:</label>
@@ -112,14 +113,14 @@
                                     <label class="col-form-label col-lg-2">Account Name:</label>
                                     <div class="col-lg-10">
                                         <input type="text" name="account_name" class="form-control"
-                                            value="{{ $user->account_name }}" required>
+                                            value="{{ $user->bank_account_name }}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Account Number:</label>
                                     <div class="col-lg-10">
                                         <input type="text" name="account_no" class="form-control" id="account_no"
-                                            value="{{ $user->account_no }}" required>
+                                            value="{{ $user->bank_account_no }}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -128,19 +129,19 @@
                                         <select name="account_type" id="account_type" class="form-control" required>
                                             <option value="">Select Account Type</option>
                                             <option value="savings"
-                                                {{ $user->account_type == 'savings' ? 'selected' : '' }}>Savings</option>
+                                                {{ $user->bank_account_type == 'savings' ? 'selected' : '' }}>Savings</option>
                                             <option value="current"
-                                                {{ $user->account_type == 'current' ? 'selected' : '' }}>Current</option>
+                                                {{ $user->bank_account_type == 'current' ? 'selected' : '' }}>Current</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Pin</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="pin" class="form-control"
-                                            placeholder="0000" required="">
+                                        <input type="text" name="pin" class="form-control" placeholder="000000"
+                                            required="">
                                         @if ($user->pin == '0000')
-                                            <a href="{{ route('user.password') }}">Click Here to Set Pin</a>
+                                            <a href="{{ route('user.pin') }}">Click Here to Set Pin</a>
                                         @endif
                                     </div>
                                 </div>
@@ -151,15 +152,15 @@
                                     </div>
                                 </div> --}}
                                 {{-- @if ($user->account_name === '' || $user->account_name === null) --}}
-                                    <div class="text-right">
-                                        <button type="submit" class="btn btn-neutral">Update Bank Account<i
-                                                class="icon-paperplane ml-2"></i></button>
-                                    </div>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-neutral">Update Bank Account<i
+                                            class="icon-paperplane ml-2"></i></button>
+                                </div>
                                 {{-- @endif --}}
                             </form>
                         </div>
                     </div>
-                    <div class="card" id="data_details">
+                    {{-- <div class="card" id="data_details">
                         <div class="card-header header-elements-inline">
                             <h3 class="mb-0">Update Data Operator details</h3>
                         </div>
@@ -195,45 +196,9 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-md-4">
-                    @if ($set->kyc)
-                        <div class="card" id="kyc">
-                            <div class="card-body">
-                                <h3 class="card-title mb-3">Kyc verification</h3>
-                                <p class="card-text mb-4">Upload an identity document, for example, driver licence, voters
-                                    card, international passport, national ID.</p>
-                                <span class="badge badge-pill badge-primary">
-                                    @if ($user->kyc_status == 0)
-                                        Unverified
-                                    @else
-                                        Verified
-                                    @endif
-                                </span>
-                                <br><br>
-                                @if (empty($user->kyc_link))
-                                    <form method="post" action="{{ url('user/kyc') }}" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-lg-8">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFileLang1"
-                                                        name="image" lang="en">
-                                                    <label class="custom-file-label" for="customFileLang1">Select
-                                                        document</label>
-                                                </div>
-                                                <span class="form-text text-white">Accepted formats: png, jpg.</span>
-                                            </div>
-                                            <div class="col-lg-2">
-                                                <input type="submit" class="btn btn-neutral" value="Upload">
-                                            </div>
-                                        </div>
-                                    </form>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
                     <div class="card">
                         <div class="card-header header-elements-inline">
                             <h3 class="mb-0">Change account photo</h3>
@@ -244,8 +209,8 @@
                                 @csrf
                                 <div class="form-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFileLang" name="image"
-                                            accept="image/*">
+                                        <input type="file" class="custom-file-input" id="customFileLang"
+                                            name="image" accept="image/*">
                                         <label class="custom-file-label" for="customFileLang">Select photo</label>
                                     </div>
                                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
@@ -265,28 +230,28 @@
     @stop
 
     @section('script')
-        
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            if ("{{ $user_proof }}" == 1) {
-                swal({
-                        title: null,
-                        text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
-                        icon: "success",
-                        buttons: ["Close", "Upload Payment Proof Now!"],
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            window.location.href = "{{ route('upload.proof') }}"
-                        }
-                    });
-            }
-            $('#account_no').on('input', function (event) {
-                setTimeout(function () {
-                    $.ajax({})
-                }, 1000)
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                if ("{{ $user_proof }}" == 1) {
+                    swal({
+                            title: null,
+                            text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
+                            icon: "success",
+                            buttons: ["Close", "Upload Payment Proof Now!"],
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.location.href = "{{ route('upload.proof') }}"
+                            }
+                        });
+                }
+                $('#account_no').on('input', function(event) {
+                    setTimeout(function() {
+                        $.ajax({})
+                    }, 1000)
+                })
             })
-        })
         </script>
     @endsection
