@@ -733,6 +733,14 @@
         });
     </script>
 @endif
+@if (session('html_alert'))
+    <script>
+        "use strict";
+        $(document).ready(function() {
+            swal("Sorry!", "{!! session('html_alert') !!}", "error");
+        });
+    </script>
+@endif
 <script>
     @if (Session::has('message'))
         "use strict";

@@ -119,11 +119,38 @@
                             </div>
                             @else
                             <div class="col-md-6 mb-2">
-                                <button class="btn btn-block btn-danger">Re-activate</button>
+                                <button class="btn btn-block btn-danger" data-toggle="modal" data-target="#reactivate_modal">Re-activate</button>
+                            </div>
+                            <div id="reactivate_modal" class="modal fade" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">   
+                                            <h3>Reactivate your Plan</h3>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <form action="{{ route('user.reactivate_plan') }}" method="post">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label class="col-form-label">Activation Code</label>
+                                                    <div class="">
+                                                        <div class="input-group input-group-merge">
+                                                            <input type="text" name="pin" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn bg-success">Re-activate</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             @endif
                             <div class="col-md-6">
-                                <a type="button" href="{{ route('user.withdraw') }}" class="btn btn-block btn-success">Cashout</a>
+                                <a type="button" href="{{ route('user.withdraw_mlm') }}" class="btn btn-block btn-success">Cashout</a>
                             </div>
                         </div>
                     </div>

@@ -285,18 +285,13 @@ Route::name('user.')->group(function () {
         });
         Route::resource('login_logs', LoginLogController::class);
         Route::resource('payment_proofs', PaymentProofController::class)->only('create', 'store');
-        //Extraction
+        //Mining
         Route::controller(MineController::class)->group(function () {
             Route::get('/watch-video/page', 'mining_page')->name('mining.page');
             Route::get('/mining/start', 'mining_start')->name('mining.start');
             Route::get('/mining/thankyou', 'mining_thankyou')->name('mining.thankyou');
         });
-        //Referral
-        // Route::controller(ReferralController::class)->group(function () {
-        //     Route::get('/referrals', 'index')->name('referrals.index');
-        //     Route::get('/referrals/earning/history', 'earning_history')->name('referrals.earning_history');
-        //     Route::get('/referrals/convert', 'convert')->name('referrals.convert');
-        //     Route::post('/referrals/do_convert', 'do_convert')->name('referrals.do_convert');
-        // });
+
+        Route::post('reactivate_plan', [UserController::class, 'reactivate_plan'])->name('reactivate_plan');
     });
 });

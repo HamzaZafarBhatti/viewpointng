@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AffliateProfit;
 use App\Models\Bank;
+use App\Models\Coupon;
 use App\Models\MlmPlan;
 use App\Models\Plan;
 use App\Models\Referral;
@@ -12,6 +13,7 @@ use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -138,7 +140,8 @@ class UserController extends Controller
     public function withdraw_mlm_submit(Request $request)
     {
         // return $request;
-        // return date('Y-m-d');
+        // return date('Y-m-d')
+
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
             'details' => 'required',
@@ -162,6 +165,9 @@ class UserController extends Controller
         }
         $set = $data['set'] = Setting::first();
         $user = $data['user'] = User::find(auth()->user()->id);
+        if($user->cycle == 0) {
+            return back()->with('alert', 'You cannot withdrawal option. Your balance is locked.');
+        }
         if ($request->pin !== $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
@@ -273,5 +279,44 @@ class UserController extends Controller
         } catch (\PDOException $e) {
             return redirect()->route('user.password')->with('alert', $e->getMessage());
         }
+    }
+
+    public function reactivate_plan(Request $request)
+    {
+        // return $request;
+        $validator = Validator::make($request->all(), [
+            'pin' => 'required|string|regex:/^\S*$/u',
+        ]);
+        if ($validator->fails()) {
+            // adding an extra field 'error'...
+            // $data['title'] = 'Register';
+            $errors = $validator->errors();
+            $html = '';
+            foreach ($errors->all() as $error) {
+                $html .= $error;
+            }
+            return redirect()->route('user.dashboard')->with('alert', $html);
+        }
+
+        $coupon_code = Coupon::where('serial', $request->pin)->first();
+        // return $coupon_code;
+        if (!$coupon_code) {
+            return redirect()->route('user.dashboard')->with('alert', 'ACTIVATION PIN CODE INVALID');
+        }
+        if ($coupon_code->status == 0) {
+            return redirect()->route('user.dashboard')->with('alert', 'ACTIVATION PIN CODE used');
+        }
+        if ($coupon_code->account_type_id == 1) {
+            return redirect()->route('user.dashboard')->with('alert', 'ACTIVATION PIN CODE IS NOT MLM PLAN CODE');
+        }
+        $user = User::find(auth()->user()->id);
+
+        $user->update([
+            'cycle_direct_referrals' => 0,
+            'cycle_indirect_referrals' => 0,
+            'cycle' => 0,
+        ]);
+        $coupon_code->update(['status' => 0]);
+        return redirect()->route('user.dashboard')->with('success', 'PLAN IS RE-ACTIVATED');
     }
 }
