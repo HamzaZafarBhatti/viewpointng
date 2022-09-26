@@ -192,7 +192,7 @@
     </div>
     <footer id="site-footer" class="footer ">
 
-        <canvas id="can"></canvas>
+        {{-- <canvas id="can"></canvas> --}}
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-0 col-xs-12">
