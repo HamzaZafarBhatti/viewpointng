@@ -126,9 +126,9 @@
                         {{-- <li>
                             <a href="https://goldmintng.com/page/9">How It Works</a>
                         </li> --}}
-                        {{-- <li class="menu-item-has-children">
-                            <a href="https://goldmintng.com/coupon">PIN Code Dispatchers</a>
-                        </li> --}}
+                        <li class="menu-item-has-children">
+                            <a href="{{ route('code_dispatcher') }}">PIN Code Dispatchers</a>
+                        </li>
                         <li>
                             <a href="{{ route('verify_pin') }}">Verify PIN</a>
                         </li>

@@ -228,4 +228,39 @@ class WebController extends Controller
         $data['vendors'] = Vendor::latest()->get();
         return view('admin.web-control.vendors', $data);
     }
+    public function CreateVendors(Request $request)
+    {
+        $data['name'] = $request->name;
+        $data['whatsapp'] = $request->whatsapp;
+        $data['status'] = $request->status;
+        $res = Vendor::create($data);
+        if ($res) {
+            return back()->with('success', 'Saved Successfully!');
+        } else {
+            return back()->with('alert', 'Problem With Creating New Vendors');
+        }
+    }
+    public function UpdateVendors(Request $request)
+    {
+        $mac = Vendor::findOrFail($request->id);
+        $mac['name'] = $request->name;
+        $mac['whatsapp'] = $request->whatsapp;
+        $mac['status'] = $request->status;
+        $res = $mac->save();
+        if ($res) {
+            return back()->with('success', ' Updated Successfully!');
+        } else {
+            return back()->with('alert', 'Problem With Updating Vendors');
+        }
+    }
+    public function DestroyVendors($id)
+    {
+        $data = Vendor::findOrFail($id);
+        $res =  $data->delete();
+        if ($res) {
+            return back()->with('success', 'Vendor was Successfully deleted!');
+        } else {
+            return back()->with('alert', 'Problem With Deleting Vendor');
+        }
+    }
 }

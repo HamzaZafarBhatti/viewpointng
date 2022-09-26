@@ -150,11 +150,11 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::get('social-links', 'sociallinks')->name('social-links');
 
 
-                Route::post('/createvendors', 'CreateVendors');
+                Route::post('/createvendors', 'CreateVendors')->name('vendors.store');
                 Route::post('/vendors', 'Vendors')->name('vendors.index'); 
                 // Route::get('coupons', 'coupons')->name('admin.coupons');
-                Route::post('vendors/update', 'UpdateVendors')->name('vendors.update');
-                Route::post('vendors/delete/{id}', 'DestroyVendors')->name('vendors.delete');
+                Route::put('vendors/update/{id}', 'UpdateVendors')->name('vendors.update');
+                Route::delete('vendors/delete/{id}', 'DestroyVendors')->name('vendors.destroy');
                 Route::get('vendors', 'vendors')->name('admin.vendors');
                 // Route::post('/createcoupons', 'WebController@CreateCoupons');
                 // Route::get('coupons/delete/{id}', 'WebController@DestroyCoupons')->name('coupons.delete');
@@ -244,7 +244,7 @@ Route::get('/upload_proof', [FrontendController::class, 'upload_proof'])->name('
 Route::post('/do_upload_proof', [FrontendController::class, 'do_upload_proof'])->name('do_upload_proof');
 Route::get('/blog', [FrontendController::class, 'blog'])->name('blog');
 Route::get('/terms', [FrontendController::class, 'terms'])->name('terms');
-Route::get('/coupon', [FrontendController::class, 'coupon'])->name('coupon');
+Route::get('/coupon', [FrontendController::class, 'coupon'])->name('code_dispatcher');
 Route::get('/topearners', [FrontendController::class, 'topearners'])->name('topearners');
 Route::get('/privacy', [FrontendController::class, 'privacy'])->name('privacy');
 Route::get('/page/{id}', [FrontendController::class, 'page']);

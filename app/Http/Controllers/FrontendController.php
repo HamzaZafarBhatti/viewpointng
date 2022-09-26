@@ -13,6 +13,7 @@ use App\Models\Review;
 use App\Models\Service;
 use App\Models\Social;
 use App\Models\User;
+use App\Models\Vendor;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -84,6 +85,7 @@ class FrontendController extends Controller
     public function coupon()
     {
         $data['title'] = "Activation PIN Code Dispatchers";
+        $data['vendors'] = Vendor::where('status', 1)->get();
         return view('front.coupon', $data);
     }
 
