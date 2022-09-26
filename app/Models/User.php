@@ -87,14 +87,19 @@ class User extends Authenticatable
         return $this->belongsTo(AccountType::class);
     }
 
-    public function plan()
+    public function get_plan()
     {
-        return $this->belongsTo(Plan::class);
+        return Plan::first();
     }
 
-    public function mlm_plan()
+    public function coupon()
     {
-        return $this->belongsTo(MlmPlan::class);
+        return $this->belongsTo(Coupon::class);
+    }
+
+    public function get_mlm_plan()
+    {
+        return MlmPlan::first();
     }
     public function parent()
     {

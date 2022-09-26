@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\GeneralEmail;
+use App\Models\AffliateProfit;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Settings;
@@ -68,7 +69,16 @@ class AdminController extends Controller
     public function users()
     {
         $data['title'] = 'Clients';
-        $data['users'] = User::with('plan', 'coupon')->latest()->get();
+        $users = User::with('coupon')->latest()->get();
+        foreach ($users as $key => $user) {
+            if($user->account_type_id == 1) {
+                $user->plan = $user->get_plan();
+            } else {
+                $user->plan = $user->get_mlm_plan();
+            }
+        }
+        $data['users'] = $users;
+
         return view('admin.user.index', $data);
     }
 
@@ -157,16 +167,15 @@ class AdminController extends Controller
             return back()->with('alert', 'Problem With Deleting Request');
         }
     }
-
-    public function manage_user($id)
+    public function Manageuser($id)
     {
-        $data['client'] = $user = User::find($id);
+        $data['client'] = $user = User::with('account_type')->find($id);
         $data['title'] = $user->name;
         $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
-        $data['stake_withdraw'] = StakeWithdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['profit'] = AffliateProfit::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        // $data['earning'] = Earning::whereReferral($user->id)->orderBy('id', 'DESC')->get();
         $data['referral'] = Referral::where('referee_id', $user->id)->orderBy('id', 'DESC')->get();
         $data['indirect_referral'] = IndirectReferral::where('referee_id', $user->id)->orderBy('id', 'DESC')->get();
-        $data['stake_referral'] = StakeReferral::where('referee_id', $user->id)->orderBy('id', 'DESC')->get();
         $data['banks'] = Bank::all();
         return view('admin.user.edit', $data);
     }
@@ -223,6 +232,7 @@ class AdminController extends Controller
 
     public function profile_update(Request $request)
     {
+        // return $request;
         $data = User::findOrFail($request->id);
         $data->username = $request->username;
         $data->email = $request->email;
@@ -232,12 +242,10 @@ class AdminController extends Controller
         $data->city = $request->city;
         $data->zip_code = $request->zip_code;
         $data->address = $request->address;
-        $data->extraction_balance = $request->extraction_balance;
-        $data->ref_earning = $request->ref_earning;
-        $data->indirect_ref_earning = $request->indirect_ref_earning;
-        $data->viral_share_earning = $request->viral_share_earning;
-        $data->stake_profit = $request->stake_profit;
-        $data->stake_ref_earning = $request->stake_ref_earning;
+        $data->balance = $request->balance;
+        if($request->has('affliate_ref_balance')) {
+            $data->affliate_ref_balance = $request->affliate_ref_balance;
+        }
         if (empty($request->email_verify)) {
             $data->email_verify = 0;
         } else {
@@ -278,9 +286,9 @@ class AdminController extends Controller
         // return $request;
         $data = User::findOrFail($request->id);
         $data->bank_id = $request->bank_id;
-        $data->account_name = $request->account_name;
-        $data->account_no = $request->account_no;
-        $data->account_type = $request->account_type;
+        $data->bank_account_name = $request->account_name;
+        $data->bank_account_no = $request->account_no;
+        $data->bank_account_type = $request->account_type;
         $res = $data->save();
         if ($res) {
             return back()->with('success', 'Update was Successful!');

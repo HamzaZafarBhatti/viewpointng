@@ -308,7 +308,7 @@ class RegisterController extends Controller
                 ];
                 if($parent->cycle > 1) {
                     $data['balance'] = $user->balance + 10000;
-                    $data['ref_balance'] = $user->ref_balance + 10000;
+                    // $data['ref_balance'] = $user->ref_balance + 10000;
                 }
                 $parent->update($data);
             }

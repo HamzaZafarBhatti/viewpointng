@@ -63,9 +63,9 @@
                                                                 href="{{ route('admin.users.unblock', $val->id) }}"><i
                                                                     class="icon-eye mr-2"></i>Unblock</a>
                                                         @endif
-                                                        <a class='dropdown-item'
+                                                        {{-- <a class='dropdown-item'
                                                             href="{{ route('admin.users.email', [$val->email, $val->name]) }}"><i
-                                                                class="icon-envelope mr-2"></i>Send email</a>
+                                                                class="icon-envelope mr-2"></i>Send email</a> --}}
                                                         <a data-toggle="modal" data-target="#{{ $val->id }}delete"
                                                             class="dropdown-item"><i class="icon-bin2 mr-2"></i>Delete
                                                             account</a>

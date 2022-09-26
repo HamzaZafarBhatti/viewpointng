@@ -219,21 +219,21 @@
                                             class="icon-city"></i>Referral earnings</a></li>
                             </ul>
                         </li> --}}
-                        {{-- <li class="nav-item nav-item-submenu">
+                        <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-user-plus"></i> <span>User
                                     Manangement</span></a>
 
                             <ul class="nav nav-group-sub" data-submenu-title="User Manangement">
                                 <li class="nav-item"><a href="{{ route('admin.users') }}" class="nav-link"><i
                                             class="icon-user"></i> Client accounts</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.ticket') }}"
-                                        class="nav-link"><i class="icon-bubbles5"></i>Support ticket</a></li>
+                                {{-- <li class="nav-item"><a href="{{ route('admin.ticket') }}" class="nav-link"><i
+                                            class="icon-bubbles5"></i>Support ticket</a></li>
                                 <li class="nav-item"><a href="{{ route('user.promo') }}" class="nav-link"><i
                                             class="icon-envelope"></i>Promotional Emails</a></li>
                                 <li class="nav-item"><a href="{{ route('admin.message') }}" class="nav-link"><i
-                                            class="icon-bubbles5"></i>Messages</a></li>
+                                            class="icon-bubbles5"></i>Messages</a></li> --}}
                             </ul>
-                        </li> --}}
+                        </li>
                         <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-cogs spinner"></i> <span>System
                                     configuration</span></a>
@@ -253,10 +253,10 @@
                             <a href="#" class="nav-link"><i class="icon-pulse2"></i>
                                 <span>MLM Plans</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="PY scheme">
-                                <li class="nav-item"><a href="{{ route('admin.mlm-plans.create') }}" class="nav-link"><i
-                                            class="icon-quill4"></i>Create plan</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.mlm-plans.index') }}" class="nav-link"><i
-                                            class="icon-puzzle4"></i>Plans</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.mlm-plans.create') }}"
+                                        class="nav-link"><i class="icon-quill4"></i>Create plan</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.mlm-plans.index') }}"
+                                        class="nav-link"><i class="icon-puzzle4"></i>Plans</a></li>
                                 <li class="nav-item"><a href="{{ route('admin.mlm-coupons.index') }}"
                                         class="nav-link"><i class="icon-add"></i>Generate Coupons</a></li>
                             </ul>
@@ -315,7 +315,8 @@
                             </ul>
                         </li> --}}
                         <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Affiliate Balance Withdraw
+                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Affiliate Balance
+                                    Withdraw
                                     system</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="Withdraw">
                                 <li class="nav-item"><a href="{{ route('admin.affliate.withdraw_log') }}"
@@ -352,7 +353,8 @@
                             </ul>
                         </li>
                         <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Referral Balance Wallet
+                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Referral Balance
+                                    Wallet
                                     Withdraw
                                     system</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="Withdraw">
@@ -392,10 +394,10 @@
                             <a href="#" class="nav-link"><i class="icon-magazine"></i> <span>News
                                     Section</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="News Section">
-                                <li class="nav-item"><a href="{{ route('admin.blog.create') }}"
-                                        class="nav-link"><i class="icon-quill4"></i>New Post</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.blog.index') }}"
-                                        class="nav-link"><i class="icon-newspaper"></i>Articles</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.blog.create') }}" class="nav-link"><i
+                                            class="icon-quill4"></i>New Post</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.blog.index') }}" class="nav-link"><i
+                                            class="icon-newspaper"></i>Articles</a></li>
                                 {{-- <li class="nav-item"><a href="{{ route('admin.blog_categories.index') }}"
                                         class="nav-link"><i class="icon-clipboard6"></i>Category</a></li> --}}
                             </ul>
@@ -421,8 +423,8 @@
                                             class="icon-stack"></i>Webpages</a></li> --}}
                                 {{-- <li class="nav-item"><a href="{{ route('admin.currency') }}" class="nav-link"><i
                                             class="icon-coin-euro"></i>Currency</a></li> --}}
-                                <li class="nav-item"><a href="{{ route('admin.faq') }}"
-                                        class="nav-link"><i class="icon-question4"></i>FAQs</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.faq') }}" class="nav-link"><i
+                                            class="icon-question4"></i>FAQs</a></li>
                                 <li class="nav-item"><a href="{{ route('admin.terms') }}" class="nav-link"><i
                                             class="icon-file-check"></i>Terms & Condition</a>
                                 </li>
@@ -434,10 +436,10 @@
                                         class="nav-link"><i class="icon-file-check"></i>Earning Disclaimer</a></li> --}}
                                 {{-- <li class="nav-item"><a href="{{ route('admin.notice') }}"
                                         class="nav-link"><i class="icon-file-check"></i>Notice Board</a></li> --}}
-                                <li class="nav-item"><a href="{{ route('admin.about_us') }}"
-                                        class="nav-link"><i class="icon-file-check"></i>About us</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.social-links') }}" class="nav-link"><i
-                                            class="icon-share2"></i>Social Links</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.about_us') }}" class="nav-link"><i
+                                            class="icon-file-check"></i>About us</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.social-links') }}"
+                                        class="nav-link"><i class="icon-share2"></i>Social Links</a></li>
                             </ul>
                         </li>
                     </ul>

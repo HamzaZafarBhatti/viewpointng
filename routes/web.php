@@ -65,6 +65,15 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
 
         Route::resource('account_types', AccountTypeController::class);
 
+        Route::get('users', [AdminController::class, 'Users'])->name('users');
+        Route::get('unblock-user/{id}', [AdminController::class, 'Unblockuser'])->name('users.unblock');
+        Route::get('block-user/{id}', [AdminController::class, 'Blockuser'])->name('users.block');
+        Route::get('manage-user/{id}', [AdminController::class, 'Manageuser'])->name('users.manage');
+        Route::get('user/delete/{id}', [AdminController::class, 'Destroyuser'])->name('users.delete');
+        Route::post('profile-update', [AdminController::class, 'profile_update'])->name('users.profile-update');
+        Route::post('profile-update-pin', [AdminController::class, 'Profileupdatepin'])->name('users.profile-update-pin');
+        Route::post('update_bank_details', [AdminController::class, 'UpdateBankDetails'])->name('users.update_bank_details');
+
         Route::controller(WithdrawController::class)->group(function () {
             //Affliate Withdraw
             Route::prefix('affliate')->name('affliate.')->group(function () {
@@ -99,90 +108,90 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::post('withdraw_approve_multi', 'ref_withdraw_approve_multi')->name('withdraw_approve_multi');
                 Route::get('withdraw_decline/{id}', 'ref_withdraw_decline')->name('withdraw_decline');
             });
-            // //Payment Proof controller
-            Route::controller(PaymentProofController::class)->group(function () {
-                Route::get('paymentproof-log', 'paymentprooflog')->name('paymentproof.log');
-                Route::get('paymentproof-approved', 'paymentproofapproved')->name('paymentproof.approved');
-                Route::get('paymentproof-declined', 'paymentproofdeclined')->name('paymentproof.declined');
-                Route::get('paymentproof-pending', 'paymentproofpending')->name('paymentproof.pending');
-                Route::get('paymentproof/delete/{id}', 'DestroyPaymentProof')->name('paymentproof.delete');
-                Route::get('approvepaymentproof/{id}', 'approve')->name('paymentproof.approve');
-                Route::post('paymentproof-approve-multi', 'approve_multi')->name('paymentproof.approve_multi');
-                Route::get('declinepaymentproof/{id}', 'decline')->name('paymentproof.decline');
-            });
-            //Blog controller
-            Route::controller(BlogController::class)->group(function () {
-                Route::get('blog', 'index')->name('blog.index');
-                Route::get('blog/create', 'create')->name('blog.create');
-                Route::post('blog/create', 'store')->name('blog.store');
-                Route::get('/unblog/{id}', 'unblog')->name('blog.unpublish');
-                Route::get('/pblog/{id}', 'pblog')->name('blog.publish');
-                Route::delete('blog/delete/{id}', 'destroy')->name('blog.destroy');
-                Route::get('category/delete/{id}', 'delcategory')->name('blog.delcategory');
-                Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
-                Route::patch('blog-update/{id}', 'updatePost')->name('blog.update');
-            });
-            // Web controller
-            Route::controller(WebController::class)->group(function () {
-                //Review
-                Route::get('review', 'review')->name('review');
-                Route::post('/createreview', 'CreateReview')->name('createreview');
-                Route::post('review/update', 'UpdateReview')->name('review.update');
-                Route::get('review/edit/{id}', 'EditReview')->name('review.edit');
-                Route::get('review/delete/{id}', 'DestroyReview')->name('review.delete');
-                Route::get('/unreview/{id}', 'unreview')->name('review.unpublish');
-                Route::get('/preview/{id}', 'preview')->name('review.publish');
-                // Terms
-                Route::get('terms', 'terms')->name('terms');
-                Route::post('terms/update', 'UpdateTerms')->name('update_terms');
-                // Privacy Policy
-                Route::get('privacy_policy', 'privacypolicy')->name('privacy_policy');
-                Route::post('update_privacy_policy', 'UpdatePrivacy')->name('update_privacy_policy');
-                // About us
-                Route::get('about_us', 'aboutus')->name('about_us');
-                Route::post('update_about_us', 'UpdateAbout')->name('update_about_us');
-                //FAQ
-                Route::get('faq', 'faq')->name('faq');
-                Route::post('/createfaq', 'CreateFaq')->name('faq_store');
-                Route::put('faq/update', 'UpdateFaq')->name('faq_update');
-                Route::delete('faq/delete/{id}', 'DestroyFaq')->name('faq_delete');
-                //Social
-                Route::post('social-links/update', 'UpdateSocial')->name('social-links.update');
-                Route::get('social-links', 'sociallinks')->name('social-links');
+        });
+        // //Payment Proof controller
+        Route::controller(PaymentProofController::class)->group(function () {
+            Route::get('paymentproof-log', 'paymentprooflog')->name('paymentproof.log');
+            Route::get('paymentproof-approved', 'paymentproofapproved')->name('paymentproof.approved');
+            Route::get('paymentproof-declined', 'paymentproofdeclined')->name('paymentproof.declined');
+            Route::get('paymentproof-pending', 'paymentproofpending')->name('paymentproof.pending');
+            Route::get('paymentproof/delete/{id}', 'DestroyPaymentProof')->name('paymentproof.delete');
+            Route::get('approvepaymentproof/{id}', 'approve')->name('paymentproof.approve');
+            Route::post('paymentproof-approve-multi', 'approve_multi')->name('paymentproof.approve_multi');
+            Route::get('declinepaymentproof/{id}', 'decline')->name('paymentproof.decline');
+        });
+        //Blog controller
+        Route::controller(BlogController::class)->group(function () {
+            Route::get('blog', 'index')->name('blog.index');
+            Route::get('blog/create', 'create')->name('blog.create');
+            Route::post('blog/create', 'store')->name('blog.store');
+            Route::get('/unblog/{id}', 'unblog')->name('blog.unpublish');
+            Route::get('/pblog/{id}', 'pblog')->name('blog.publish');
+            Route::delete('blog/delete/{id}', 'destroy')->name('blog.destroy');
+            Route::get('category/delete/{id}', 'delcategory')->name('blog.delcategory');
+            Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
+            Route::patch('blog-update/{id}', 'updatePost')->name('blog.update');
+        });
+        // Web controller
+        Route::controller(WebController::class)->group(function () {
+            //Review
+            Route::get('review', 'review')->name('review');
+            Route::post('/createreview', 'CreateReview')->name('createreview');
+            Route::post('review/update', 'UpdateReview')->name('review.update');
+            Route::get('review/edit/{id}', 'EditReview')->name('review.edit');
+            Route::get('review/delete/{id}', 'DestroyReview')->name('review.delete');
+            Route::get('/unreview/{id}', 'unreview')->name('review.unpublish');
+            Route::get('/preview/{id}', 'preview')->name('review.publish');
+            // Terms
+            Route::get('terms', 'terms')->name('terms');
+            Route::post('terms/update', 'UpdateTerms')->name('update_terms');
+            // Privacy Policy
+            Route::get('privacy_policy', 'privacypolicy')->name('privacy_policy');
+            Route::post('update_privacy_policy', 'UpdatePrivacy')->name('update_privacy_policy');
+            // About us
+            Route::get('about_us', 'aboutus')->name('about_us');
+            Route::post('update_about_us', 'UpdateAbout')->name('update_about_us');
+            //FAQ
+            Route::get('faq', 'faq')->name('faq');
+            Route::post('/createfaq', 'CreateFaq')->name('faq_store');
+            Route::put('faq/update', 'UpdateFaq')->name('faq_update');
+            Route::delete('faq/delete/{id}', 'DestroyFaq')->name('faq_delete');
+            //Social
+            Route::post('social-links/update', 'UpdateSocial')->name('social-links.update');
+            Route::get('social-links', 'sociallinks')->name('social-links');
 
 
-                Route::post('/createvendors', 'CreateVendors')->name('vendors.store');
-                Route::post('/vendors', 'Vendors')->name('vendors.index'); 
-                // Route::get('coupons', 'coupons')->name('admin.coupons');
-                Route::put('vendors/update/{id}', 'UpdateVendors')->name('vendors.update');
-                Route::delete('vendors/delete/{id}', 'DestroyVendors')->name('vendors.destroy');
-                Route::get('vendors', 'vendors')->name('admin.vendors');
-                // Route::post('/createcoupons', 'WebController@CreateCoupons');
-                // Route::get('coupons/delete/{id}', 'WebController@DestroyCoupons')->name('coupons.delete');
-                // Route::post('coupons/update', 'WebController@UpdateCoupons')->name('coupons.update');
+            Route::post('/createvendors', 'CreateVendors')->name('vendors.store');
+            Route::post('/vendors', 'Vendors')->name('vendors.index');
+            // Route::get('coupons', 'coupons')->name('admin.coupons');
+            Route::put('vendors/update/{id}', 'UpdateVendors')->name('vendors.update');
+            Route::delete('vendors/delete/{id}', 'DestroyVendors')->name('vendors.destroy');
+            Route::get('vendors', 'vendors')->name('admin.vendors');
+            // Route::post('/createcoupons', 'WebController@CreateCoupons');
+            // Route::get('coupons/delete/{id}', 'WebController@DestroyCoupons')->name('coupons.delete');
+            // Route::post('coupons/update', 'WebController@UpdateCoupons')->name('coupons.update');
 
 
-                // Route::post('/createpage', 'WebController@CreatePage');
-                // Route::post('page/update', 'WebController@UpdatePage')->name('page.update');
-                // Route::get('page/delete/{id}', 'WebController@DestroyPage')->name('page.delete');
-                // Route::get('page', 'WebController@page')->name('admin.page');
-                // Route::get('/unpage/{id}', 'WebController@unpage')->name('page.unpublish');
-                // Route::get('/ppage/{id}', 'WebController@ppage')->name('page.publish');
+            // Route::post('/createpage', 'WebController@CreatePage');
+            // Route::post('page/update', 'WebController@UpdatePage')->name('page.update');
+            // Route::get('page/delete/{id}', 'WebController@DestroyPage')->name('page.delete');
+            // Route::get('page', 'WebController@page')->name('admin.page');
+            // Route::get('/unpage/{id}', 'WebController@unpage')->name('page.unpublish');
+            // Route::get('/ppage/{id}', 'WebController@ppage')->name('page.publish');
 
-                // Route::get('currency', 'WebController@currency')->name('admin.currency');
-                // Route::get('pcurrency/{id}', 'WebController@pcurrency')->name('blog.publish');
+            // Route::get('currency', 'WebController@currency')->name('admin.currency');
+            // Route::get('pcurrency/{id}', 'WebController@pcurrency')->name('blog.publish');
 
-                // Route::get('logo', 'WebController@logo')->name('admin.logo');
-                // Route::post('updatelogo', 'WebController@UpdateLogo');
-                // Route::post('updatefavicon', 'WebController@UpdateFavicon');
+            // Route::get('logo', 'WebController@logo')->name('admin.logo');
+            // Route::post('updatelogo', 'WebController@UpdateLogo');
+            // Route::post('updatefavicon', 'WebController@UpdateFavicon');
 
-                // Route::get('home-page', 'WebController@homepage')->name('homepage');
-                // Route::post('home-page/update', 'WebController@Updatehomepage')->name('homepage.update');
-                // Route::post('section1/update', 'WebController@section1');
-                // Route::post('section2/update', 'WebController@section2');
-                // Route::post('section3/update', 'WebController@section3');
-                // Route::post('section4/update', 'WebController@section4');
-            });
+            // Route::get('home-page', 'WebController@homepage')->name('homepage');
+            // Route::post('home-page/update', 'WebController@Updatehomepage')->name('homepage.update');
+            // Route::post('section1/update', 'WebController@section1');
+            // Route::post('section2/update', 'WebController@section2');
+            // Route::post('section3/update', 'WebController@section3');
+            // Route::post('section4/update', 'WebController@section4');
         });
     });
 
@@ -212,14 +221,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::get('referrals', 'TransferController@Referrals')->name('admin.referrals');
 
     // //User controller
-    // Route::get('users', 'AdminController@Users')->name('admin.users');
     // Route::get('messages', 'AdminController@Messages')->name('admin.message');
-    // Route::get('unblock-user/{id}', 'AdminController@Unblockuser')->name('user.unblock');
-    // Route::get('block-user/{id}', 'AdminController@Blockuser')->name('user.block');
-    // Route::get('manage-user/{id}', 'AdminController@Manageuser')->name('user.manage');
-    // Route::get('user/delete/{id}', 'AdminController@Destroyuser')->name('user.delete');
-    // Route::get('email/{id}/{name}', 'AdminController@Email')->name('user.email');
-    // Route::post('email_send', 'AdminController@Sendemail')->name('user.email.send');
     // Route::get('promo', 'AdminController@Promo')->name('user.promo');
     // Route::post('promo', 'AdminController@Sendpromo')->name('user.promo.send');
     // Route::get('message/delete/{id}', 'AdminController@Destroymessage')->name('message.delete');
@@ -228,8 +230,6 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::get('close-ticket/delete/{id}', 'AdminController@Closeticket')->name('ticket.close');
     // Route::get('manage-ticket/{id}', 'AdminController@Manageticket')->name('ticket.manage');
     // Route::post('reply-ticket', 'AdminController@Replyticket')->name('ticket.reply');
-    // Route::post('profile-update', 'AdminController@Profileupdate');
-    // Route::post('profile-update-pin', 'AdminController@Profileupdatepin');
     // Route::post('update_bank_details', 'AdminController@UpdateBankDetails');
     // Route::get('approve-kyc/{id}', 'AdminController@Approvekyc')->name('admin.approve.kyc');
     // Route::get('reject-kyc/{id}', 'AdminController@Rejectkyc')->name('admin.reject.kyc');
