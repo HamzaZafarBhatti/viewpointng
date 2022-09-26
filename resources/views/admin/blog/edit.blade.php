@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <p class="text-danger"></p>
-                        <form action="{{ route('admin.blogs.update', $post->id) }}" method="post"
+                        <form action="{{ route('admin.blog.update', $post->id) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
                             @method('patch')
@@ -24,7 +24,7 @@
                                     <div class="error">{{ $errors->first('title') }}</div>
                                 @endif
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Category:</label>
                                 <div class="col-lg-10">
                                     <select class="form-control select" name="category_post_id"
@@ -39,7 +39,7 @@
                                         <div class="error">{{ $errors->first('category_post_id') }}</div>
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Post Date:</label>
                                 <div class="col-lg-10">

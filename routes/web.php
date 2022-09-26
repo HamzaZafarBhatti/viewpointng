@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountTypeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LoginController;
@@ -108,6 +109,18 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::post('paymentproof-approve-multi', 'approve_multi')->name('paymentproof.approve_multi');
                 Route::get('declinepaymentproof/{id}', 'decline')->name('paymentproof.decline');
             });
+            //Blog controller
+            Route::controller(BlogController::class)->group(function () {
+                Route::get('blog', 'index')->name('blog.index');
+                Route::get('blog/create', 'create')->name('blog.create');
+                Route::post('blog/create', 'store')->name('blog.store');
+                Route::get('/unblog/{id}', 'unblog')->name('blog.unpublish');
+                Route::get('/pblog/{id}', 'pblog')->name('blog.publish');
+                Route::delete('blog/delete/{id}', 'destroy')->name('blog.destroy');
+                Route::get('category/delete/{id}', 'delcategory')->name('blog.delcategory');
+                Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
+                Route::post('blog-update', 'updatePost')->name('blog.update');
+            });
             // Web controller
             Route::controller(WebController::class)->group(function () {
                 //Review
@@ -171,19 +184,6 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
             });
         });
     });
-    // //Blog controller
-    // Route::post('/createcategory', 'PostController@CreateCategory');
-    // Route::post('/updatecategory', 'PostController@UpdateCategory');
-    // Route::get('/post-category', 'PostController@category')->name('admin.cat');
-    // Route::get('/unblog/{id}', 'PostController@unblog')->name('blog.unpublish');
-    // Route::get('/pblog/{id}', 'PostController@pblog')->name('blog.publish');
-    // Route::get('blog', 'PostController@index')->name('admin.blog');
-    // Route::get('blog/create', 'PostController@create')->name('blog.create');
-    // Route::post('blog/create', 'PostController@store')->name('blog.store');
-    // Route::get('blog/delete/{id}', 'PostController@destroy')->name('blog.delete');
-    // Route::get('category/delete/{id}', 'PostController@delcategory')->name('blog.delcategory');
-    // Route::get('blog/edit/{id}', 'PostController@edit')->name('blog.edit');
-    // Route::post('blog-update', 'PostController@updatePost')->name('blog.update');
 
 
     // //Selfcashout controller
@@ -279,6 +279,7 @@ Route::name('user.')->group(function () {
     Route::post('user/password/reset', [HomeController::class, 'reset'])->name('password.do_reset');
     // , 'checkBlockStatus'
     Route::prefix('user')->middleware(['auth:web', 'checkStatus'])->group(function () {
+        Route::post('blog/earn', [BlogController::class, 'earn'])->name('blog.earn');
         Route::controller(UserController::class)->group(function () {
             Route::get('logout', 'logout')->name('logout');
             Route::get('/dashboard', 'dashboard')->name('dashboard');
@@ -303,6 +304,8 @@ Route::name('user.')->group(function () {
             //change pin
             Route::get('pin', 'changePin')->name('pin');
             Route::post('pin', 'submitPin')->name('change_pin');
+            //Credit Referral
+            Route::post('creditReferralAmount', 'creditReferralAmount')->name('creditReferralAmount');
         });
         Route::resource('login_logs', LoginLogController::class);
         //Mining

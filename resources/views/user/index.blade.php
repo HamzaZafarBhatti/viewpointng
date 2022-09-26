@@ -31,7 +31,7 @@
                                                 <h5 class="card-title text-muted mb-0 text-white">Sponsored Share Amount
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ /* substr($user->profit, 0, 9) */ 0 }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $sponsor_bal }}</span>
                                             </div>
                                         </div>
                                     </div>

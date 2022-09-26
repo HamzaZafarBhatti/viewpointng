@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Blog;
 use App\Models\Coupon;
 use App\Models\Faq;
 use App\Models\MlmPlan;
@@ -130,7 +131,7 @@ class FrontendController extends Controller
     public function article($id)
     {
         $post = $data['post'] = Blog::find($id);
-        $xcat = $data['xcat'] = Category::find($post->cat_id);
+        // $xcat = $data['xcat'] = Category::find($post->cat_id);
         $post->views += 1;
         $post->save();
         $data['title'] = $data['post']->title;

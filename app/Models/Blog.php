@@ -17,4 +17,9 @@ class Blog extends Model
         'status',
         'post_date',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, BlogUser::class);
+    }
 }

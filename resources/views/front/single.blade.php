@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('css')
     <style>
         .shareable-btn {
@@ -38,7 +38,7 @@
             <div class="row align-center">
                 <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
                     <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
-                        <div class="heading-sup-title">{{ $xcat->categories }}</div>
+                        {{-- <div class="heading-sup-title">{{ $xcat->categories }}</div> --}}
                         <h2 class="heading-title heading--half-colored">{{ $post->title }}</h2>
                     </header>
 
@@ -104,7 +104,7 @@
                         console.log(resp)
                         $('.share-title').empty().html(resp.html_text)
                         window.open(
-                            "https://www.facebook.com/sharer.php?u={{ url('/') }}/single/{{ $post->id }}/{{ str_slug($post->title) }}",
+                            "https://www.facebook.com/sharer.php?u={{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}",
                             '_blank' // <- This is what makes it open in a new window.
                         );
 
@@ -112,7 +112,7 @@
                 })
             } else if (platform == 'wa') {
                 window.open(
-                    "https://wa.me/?text={{ url('/') }}/single/{{ $post->id }}/{{ str_slug($post->title) }}",
+                    "https://wa.me/?text={{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}",
                     '_blank' // <- This is what makes it open in a new window.
                 );
             }

@@ -388,18 +388,18 @@
                                         paymentproof</a></li>
                             </ul>
                         </li>
-                        {{-- <li class="nav-item nav-item-submenu">
+                        <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-magazine"></i> <span>News
                                     Section</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="News Section">
-                                <li class="nav-item"><a href="{{ route('admin.blogs.create') }}"
+                                <li class="nav-item"><a href="{{ route('admin.blog.create') }}"
                                         class="nav-link"><i class="icon-quill4"></i>New Post</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.blogs.index') }}"
+                                <li class="nav-item"><a href="{{ route('admin.blog.index') }}"
                                         class="nav-link"><i class="icon-newspaper"></i>Articles</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.blog_categories.index') }}"
-                                        class="nav-link"><i class="icon-clipboard6"></i>Category</a></li>
+                                {{-- <li class="nav-item"><a href="{{ route('admin.blog_categories.index') }}"
+                                        class="nav-link"><i class="icon-clipboard6"></i>Category</a></li> --}}
                             </ul>
-                        </li> --}}
+                        </li>
                         <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-home4"></i> <span>Web
                                     control</span></a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AffliateProfit;
 use App\Models\Bank;
 use App\Models\Blog;
+use App\Models\BlogUser;
 use App\Models\Coupon;
 use App\Models\MlmPlan;
 use App\Models\Plan;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -34,12 +36,15 @@ class UserController extends Controller
         $profit = AffliateProfit::with('plan')->whereUser_id($user->id)->where('status', 2)->orderBy('id', 'DESC')->limit(5)->get();
         // $referrals = ;
         $referrals = $user->get_latest_referrals();
+        $shared_posts = BlogUser::where('user_id', auth()->user()->id)->count();
+        $sponsor_bal = $shared_posts * Plan::first()->fb_share_amount;
         // return $referrals;
         return view('user.index', compact(
             'user',
             'title',
             'profit',
             'referrals',
+            'sponsor_bal',
         ));
     }
 
@@ -234,7 +239,7 @@ class UserController extends Controller
         }
         $set = $data['set'] = Setting::first();
         $user = $data['user'] = User::find(auth()->user()->id);
-        if($user->cycle == 0) {
+        if ($user->cycle == 0) {
             return back()->with('alert', 'You cannot withdrawal option. Your balance is locked.');
         }
         if ($request->pin !== $user->pin) {
@@ -388,7 +393,7 @@ class UserController extends Controller
         $coupon_code->update(['status' => 0]);
         return redirect()->route('user.dashboard')->with('success', 'PLAN IS RE-ACTIVATED');
     }
-    
+
     public function changePassword()
     {
         $data['title'] = "Security";
@@ -438,8 +443,39 @@ class UserController extends Controller
     public function latest_sponsored_post()
     {
         $data['title'] = 'Sponsored Task';
-        $data['post'] = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
+        $post = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
+        $post->title_slug = Str::slug($post->title);
+        $post->title_slug = Str::slug($post->title);
+        $data['post'] = $post;
         // return $data['post'];
         return view('user.latest_sponsored_post', $data);
+    }
+
+    public function creditReferralAmount(Request $request)
+    {
+        // return $request;
+        $user = auth()->user();
+        $trending_id = $request->post_id;
+        $plan = Plan::first();
+        $user = User::find($user->id);
+        $user->update(
+            [
+                'balance' => $user->balance + $plan->fb_share_amount
+            ]
+        );
+        BlogUser::create([
+            'user_id' => $user->id,
+            'blog_id' => $trending_id,
+        ]);
+        $data['is_shared'] = false;
+        if (auth()->user()) {
+            $user_shared_post = Blog::whereHas('users', function ($q) {
+                $q->where('users.id', auth()->user()->id);
+            })->where('id', $trending_id)->first();
+            $data['is_shared'] = $user_shared_post !== null ? true : false;
+        }
+        $data['post'] = Blog::find($trending_id);
+        $html = view('front.partial-single', $data)->render();
+        return json_encode(array('status' => '1', 'html_text' => $html));
     }
 }

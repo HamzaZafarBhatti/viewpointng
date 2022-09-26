@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\AffliateProfit;
+use App\Models\Blog;
 use App\Models\Logo;
 use App\Models\Setting;
 use App\Models\Ui;
@@ -63,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
         $data['set'] = Setting::first();
         $data['ui'] = Ui::first();
         $data['logo'] = Logo::first();
+        $data['trending'] = Blog::whereStatus(1)->orderBy('views', 'DESC')->limit(5)->get();
         // $data['currency'] = Currency::whereStatus(1)->first();
 
         View::share($data);

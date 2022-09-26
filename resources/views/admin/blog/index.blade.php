@@ -14,7 +14,6 @@
                                 <th>S/N</th>
                                 <th>Image</th>
                                 <th>Title</th>
-                                <th>Category</th>
                                 <th>Views</th>
                                 <th>Status</th>
                                 <th>Created</th>
@@ -29,7 +28,6 @@
                                     <td><img src="{{ url('/') }}/asset/thumbnails/{{ $val->image }}"
                                             style="height: auto; max-width: 30%;"></td>
                                     <td>{{ $val->title }}</td>
-                                    <td>{{ $val->category->name }}</td>
                                     <td>{{ $val->views }}</td>
                                     <td>
                                         @if ($val->status == 1)
@@ -49,15 +47,15 @@
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     @if ($val->status == 1)
                                                         <a class='dropdown-item'
-                                                            href="{{ route('admin.blogs.unpublish', $val->id) }}"><i
+                                                            href="{{ route('admin.blog.unpublish', $val->id) }}"><i
                                                                 class="icon-eye-blocked2 mr-2"></i>Unpublish</a>
                                                     @else
                                                         <a class='dropdown-item'
-                                                            href="{{ route('admin.blogs.publish', $val->id) }}"><i
+                                                            href="{{ route('admin.blog.publish', $val->id) }}"><i
                                                                 class="icon-eye mr-2"></i>Publish</a>
                                                     @endif
                                                     <a class='dropdown-item'
-                                                        href="{{ route('admin.blogs.edit', $val->id) }}"><i
+                                                        href="{{ route('admin.blog.edit', $val->id) }}"><i
                                                             class='icon-pencil7 mr-2'></i>Edit</a>
                                                     <a data-toggle="modal" data-target="#{{ $val->id }}delete"
                                                         class="dropdown-item"><i class="icon-bin2 mr-2"></i>Delete</a>
@@ -80,7 +78,7 @@
                                                 <button type="button" class="btn btn-link"
                                                     data-dismiss="modal">Close</button>
                                                     
-                                                    <form action="{{ route('admin.blogs.destroy', $val->id) }}" id="{{ $val->id }}delete-form" method="post">
+                                                    <form action="{{ route('admin.blog.destroy', $val->id) }}" id="{{ $val->id }}delete-form" method="post">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
