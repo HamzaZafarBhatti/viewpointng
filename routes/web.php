@@ -119,7 +119,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::delete('blog/delete/{id}', 'destroy')->name('blog.destroy');
                 Route::get('category/delete/{id}', 'delcategory')->name('blog.delcategory');
                 Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
-                Route::post('blog-update', 'updatePost')->name('blog.update');
+                Route::patch('blog-update/{id}', 'updatePost')->name('blog.update');
             });
             // Web controller
             Route::controller(WebController::class)->group(function () {
@@ -150,12 +150,12 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::get('social-links', 'sociallinks')->name('social-links');
 
 
-                // Route::post('/createvendors', 'WebController@CreateVendors');
-                // //Route::post('/vendors', 'WebController@Vendors');   
-                // Route::get('coupons', 'WebController@coupons')->name('admin.coupons');
-                // Route::post('vendors/update', 'WebController@UpdateVendors')->name('vendors.update');
-                // Route::post('vendors/delete/{id}', 'WebController@DestroyVendors')->name('vendors.delete');
-                // Route::get('vendors', 'WebController@vendors')->name('admin.vendors');
+                Route::post('/createvendors', 'CreateVendors');
+                Route::post('/vendors', 'Vendors');   
+                // Route::get('coupons', 'coupons')->name('admin.coupons');
+                Route::post('vendors/update', 'UpdateVendors')->name('vendors.update');
+                Route::post('vendors/delete/{id}', 'DestroyVendors')->name('vendors.delete');
+                Route::get('vendors', 'vendors')->name('admin.vendors');
                 // Route::post('/createcoupons', 'WebController@CreateCoupons');
                 // Route::get('coupons/delete/{id}', 'WebController@DestroyCoupons')->name('coupons.delete');
                 // Route::post('coupons/update', 'WebController@UpdateCoupons')->name('coupons.update');

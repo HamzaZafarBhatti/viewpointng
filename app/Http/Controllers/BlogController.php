@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\BlogUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Image;
 
 class BlogController extends Controller
@@ -137,26 +138,24 @@ class BlogController extends Controller
         }
     }
 
-    public function updatePost(Request $request)
+    public function updatePost(Request $request, $id)
     {
-
-        $data = Blog::find($request->id);
+        $data = Blog::find($id);
+        // return $data;
         $request->validate(
             [
                 'title' => 'required',
-                'cat_id' => 'required',
                 'details' => 'required',
                 'image' => 'nullable | mimes:jpeg,jpg,png | max:1000'
             ],
             [
                 'title.required' => 'Post Title Must not be empty',
-                'cat_id.required' => 'Category Must be selected',
                 'details.required' => 'Post Details  must not be empty',
             ]
         );
 
 
-        $in = Input::except('_token');
+        $in = $request->except('_token', );
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = 'post_' . time() . '.jpg';

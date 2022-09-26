@@ -44,13 +44,13 @@
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Email sent from:</label>
                             <div class="col-lg-10">
-                                <input type="text" name="sender" maxlength="200" value="{{$val->esender}}" class="form-control">
+                                <input type="text" name="sender" maxlength="200" value="{{$val ? $val->esender : ''}}" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-lg-2">Email message:</label>
                             <div class="col-lg-10">
-                                <textarea type="text" name="message" rows="4" class="form-control tinymce">{{$val->emessage}}</textarea>
+                                <textarea type="text" name="message" rows="4" class="form-control tinymce">{{$val ? $val->emessage : ''}}</textarea>
                             </div>
                         </div>          
                     <div class="text-right">
