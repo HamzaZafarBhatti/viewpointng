@@ -413,8 +413,8 @@
                                             class="icon-clipboard6"></i>Platform Review</a></li>
                                 {{-- <li class="nav-item"><a href="{{ route('admin.service') }}" class="nav-link"><i
                                             class="icon-portfolio"></i>Services</a></li> --}}
-                                {{-- <li class="nav-item"><a href="{{ route('admin.vendors.index') }}"
-                                        class="nav-link"><i class="icon-accessibility"></i>Vendors</a></li> --}}
+                                <li class="nav-item"><a href="{{ route('admin.vendors.index') }}"
+                                        class="nav-link"><i class="icon-accessibility"></i>Vendors</a></li>
                                 {{-- <li class="nav-item"><a href="{{ route('admin.coupons') }}" class="nav-link"><i
                                             class="icon-cogs"></i>Coupons</a></li> --}}
                                 {{-- <li class="nav-item"><a href="{{ route('admin.page') }}" class="nav-link"><i

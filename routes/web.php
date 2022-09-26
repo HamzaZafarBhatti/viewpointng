@@ -151,7 +151,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
 
 
                 Route::post('/createvendors', 'CreateVendors');
-                Route::post('/vendors', 'Vendors');   
+                Route::post('/vendors', 'Vendors')->name('vendors.index'); 
                 // Route::get('coupons', 'coupons')->name('admin.coupons');
                 Route::post('vendors/update', 'UpdateVendors')->name('vendors.update');
                 Route::post('vendors/delete/{id}', 'DestroyVendors')->name('vendors.delete');

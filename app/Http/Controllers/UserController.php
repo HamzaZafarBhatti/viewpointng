@@ -444,8 +444,10 @@ class UserController extends Controller
     {
         $data['title'] = 'Sponsored Task';
         $post = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
-        $post->title_slug = Str::slug($post->title);
-        $post->title_slug = Str::slug($post->title);
+        if($post) {
+            $post->title_slug = Str::slug($post->title);
+            $post->title_slug = Str::slug($post->title);
+        }
         $data['post'] = $post;
         // return $data['post'];
         return view('user.latest_sponsored_post', $data);

@@ -6,6 +6,7 @@ use App\Models\About;
 use App\Models\Faq;
 use App\Models\Review;
 use App\Models\Social;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Image;
 use Illuminate\Support\Facades\File;
@@ -15,19 +16,19 @@ class WebController extends Controller
     //
     public function review()
     {
-        $data['title']='Reviews';
+        $data['title'] = 'Reviews';
         $data['review'] = Review::latest()->get();
         return view('admin.web-control.review', $data);
     }
-    
+
     public function CreateReview(Request $request)
     {
         $data['name'] = $request->name;
         $data['occupation'] = $request->occupation;
         $data['review'] = $request->review;
-        if($request->hasFile('image5')){
+        if ($request->hasFile('image5')) {
             $image = $request->file('image');
-            $filename = 'review_'.time().'.jpg';
+            $filename = 'review_' . time() . '.jpg';
             $location = 'asset/review/' . $filename;
             Image::make($image)->save($location);
             $data['image_link'] = $filename;
@@ -39,27 +40,27 @@ class WebController extends Controller
         } else {
             return back()->with('alert', 'Problem With Creating Review');
         }
-    } 
-    
+    }
+
     public function EditReview($id)
     {
-        $data['title']='Reviews';
+        $data['title'] = 'Reviews';
         $data['val'] = Review::find($id);
         return view('admin.web-control.review-edit', $data);
-    }   
-    
+    }
+
     public function UpdateReview(Request $request)
     {
         $data = Review::find($request->id);
         $data['name'] = $request->name;
         $data['occupation'] = $request->occupation;
         $data['review'] = $request->review;
-        if($request->hasFile('update')){
+        if ($request->hasFile('update')) {
             $image = $request->file('update');
-            $filename = 'update_'.time().'.jpg';
+            $filename = 'update_' . time() . '.jpg';
             $location = 'asset/review/' . $filename;
             $path = './asset/review/';
-            File::delete($path.$data->image_link);
+            File::delete($path . $data->image_link);
             Image::make($image)->save($location);
             $data['image_link'] = $filename;
         }
@@ -73,15 +74,15 @@ class WebController extends Controller
 
     public function unreview($id)
     {
-        $page=Review::find($id);
-        $page->status=0;
+        $page = Review::find($id);
+        $page->status = 0;
         $page->save();
         return back()->with('success', 'Review has been unpublished.');
-    } 
+    }
     public function preview($id)
     {
-        $page=Review::find($id);
-        $page->status=1;
+        $page = Review::find($id);
+        $page->status = 1;
         $page->save();
         return back()->with('success', 'Review was successfully published.');
     }
@@ -94,19 +95,19 @@ class WebController extends Controller
         } else {
             return back()->with('alert', 'Problem With Deleting Review');
         }
-    } 
+    }
 
     public function terms()
     {
-        $data['title']='Terms & Conditions';
+        $data['title'] = 'Terms & Conditions';
         $data['value'] = About::first();
         return view('admin.web-control.terms', $data);
     }
-    
+
     public function UpdateTerms(Request $request)
     {
         $mac = About::find(1);
-        if($mac) {
+        if ($mac) {
             $mac['terms'] = $request->details;
             $res = $mac->save();
         } else {
@@ -118,17 +119,17 @@ class WebController extends Controller
             return back()->with('alert', 'Problem With Updating link');
         }
     }
-    
+
     public function privacypolicy()
     {
-        $data['title']='Privacy policy';
+        $data['title'] = 'Privacy policy';
         $data['value'] = About::first();
         return view('admin.web-control.privacy-policy', $data);
     }
     public function UpdatePrivacy(Request $request)
     {
         $mac = About::find(1);
-        if($mac) {
+        if ($mac) {
             $mac['privacy_policy'] = $request->details;
             $res = $mac->save();
         } else {
@@ -142,15 +143,15 @@ class WebController extends Controller
     }
     public function aboutus()
     {
-        $data['title']='About us';
+        $data['title'] = 'About us';
         $data['value'] = About::first();
         return view('admin.web-control.about-us', $data);
-    } 
-    
+    }
+
     public function UpdateAbout(Request $request)
     {
         $mac = About::find(1);
-        if($mac) {
+        if ($mac) {
             $mac['about'] = $request->details;
             $res = $mac->save();
         } else {
@@ -161,13 +162,13 @@ class WebController extends Controller
         } else {
             return back()->with('alert', 'Problem With Updating link');
         }
-    } 
+    }
     public function faq()
     {
-        $data['title']='Frequently asked questions';
+        $data['title'] = 'Frequently asked questions';
         $data['faq'] = Faq::latest()->get();
         return view('admin.web-control.faq', $data);
-    } 
+    }
 
     public function CreateFaq(Request $request)
     {
@@ -179,7 +180,7 @@ class WebController extends Controller
         } else {
             return back()->with('alert', 'Problem With Creating New Faq');
         }
-    }   
+    }
 
     public function DestroyFaq($id)
     {
@@ -190,7 +191,7 @@ class WebController extends Controller
         } else {
             return back()->with('alert', 'Problem With Deleting Faq');
         }
-    } 
+    }
 
     public function UpdateFaq(Request $request)
     {
@@ -203,13 +204,13 @@ class WebController extends Controller
         } else {
             return back()->with('alert', 'Problem With Updating Faq');
         }
-    } 
+    }
     public function sociallinks()
     {
-        $data['title']='Social links';
+        $data['title'] = 'Social links';
         $data['links'] = Social::latest()->get();
         return view('admin.web-control.social-links', $data);
-    } 
+    }
     public function UpdateSocial(Request $request)
     {
         $mac = Social::find($request->id);
@@ -220,5 +221,11 @@ class WebController extends Controller
         } else {
             return back()->with('alert', 'Problem With Updating link');
         }
-    } 
+    }
+    public function vendors()
+    {
+        $data['title'] = 'Manage Vendors';
+        $data['vendors'] = Vendor::latest()->get();
+        return view('admin.web-control.vendors', $data);
+    }
 }
