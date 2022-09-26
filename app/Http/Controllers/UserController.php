@@ -457,6 +457,11 @@ class UserController extends Controller
     {
         // return $request;
         $user = auth()->user();
+        $record = BlogUser::where('user_id', $user->id)->where('blog_id', $request->post_id)->first();
+        if ($record) {
+            return json_encode(array('status' => '0'));
+            return redirect()->route('user.viral_shares.history')->with('error', "You have already earned from today's VIRAL SHARE. You can now go back to your dashboard to continue to earn from other social activities which RubicNetwork offers.");
+        }
         $trending_id = $request->post_id;
         $plan = Plan::first();
         $user = User::find($user->id);

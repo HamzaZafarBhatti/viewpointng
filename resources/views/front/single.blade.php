@@ -102,11 +102,15 @@
                     dataType: 'json',
                     success: function(resp) {
                         console.log(resp)
-                        $('.share-title').empty().html(resp.html_text)
-                        window.open(
-                            "https://www.facebook.com/sharer.php?u={{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}",
-                            '_blank' // <- This is what makes it open in a new window.
-                        );
+                        if(resp.status == 0) {
+                            swal("Sorry!", "You have already earned from today's SPONSORED POST.", "error");
+                        } else {
+                            $('.share-title').empty().html(resp.html_text)
+                            window.open(
+                                "https://www.facebook.com/sharer.php?u={{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}",
+                                '_blank' // <- This is what makes it open in a new window.
+                            );
+                        }
 
                     }
                 })

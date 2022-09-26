@@ -107,7 +107,7 @@
                                             <input class="form-control" placeholder="" type="text" name="coupon"
                                                 required>
                                         </div>
-                                        <a href="{{ route('coupon') }}" style="text-decoration: none;color:white">No
+                                        <a href="{{ route('code_dispatcher') }}" style="text-decoration: none;color:white">No
                                             code?
                                             Click here to BUY Activation code </a>
                                     </div>
