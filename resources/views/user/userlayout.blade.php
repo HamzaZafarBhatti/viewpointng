@@ -233,10 +233,10 @@
                             {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: {{ substr($user->balance, 0, 9) }}NGN
                         </h3>
                         @if ($user->account_type_id == 2)
-                            @if (!$user->cycle)
-                                <small class="text-danger font-weight-bolder">Locked</small>
+                            @if ($user->is_locked)
+                            <small class="text-success font-weight-bolder">Unlocked</small>
                             @else
-                                <small class="text-success font-weight-bolder">Unlocked</small>
+                            <small class="text-danger font-weight-bolder">Locked</small>
                             @endif
                         @endif
                     </div>

@@ -113,7 +113,7 @@
                     <div class="col-md-none col-lg-6"></div>
                     <div class="col-lg-6">
                         <div class="row">
-                            @if (!$user->cycle)
+                            @if (!$user->is_locked)
                             <div class="col-md-6 mb-2">
                                 <button class="btn btn-block btn-primary">Activated</button>
                             </div>

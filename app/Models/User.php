@@ -60,6 +60,7 @@ class User extends Authenticatable
         'cycle_indirect_referrals',
         'cycle',
         'locked_referral',
+        'is_locked',
     ];
 
     /**
