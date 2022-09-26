@@ -35,8 +35,9 @@ class FrontendController extends Controller
             }
         }
         $data['registrations'] = $users;
-        $data['withdraws'] = Withdraw::with('user')->where('status', '1')->latest()->take(5)->get();
-        // return $data['withdraws'];
+        $data['withdraws'] = Withdraw::with('user')->where('status', '1')->whereIn('type', [1, 3])->latest()->take(5)->get();
+        $data['mlm_withdraws'] = Withdraw::with('user')->where('status', '1')->where('type', 2)->latest()->take(5)->get();
+        // return $data['mlm_withdraws'];
         // $self_cashouts = DB::table('self_cashout_history')->whereStatus(1)->latest()->take(5)->get();
         // foreach ($self_cashouts as $cashout) {
         //     $cashout->user = User::whereId($cashout->user_id)->first();

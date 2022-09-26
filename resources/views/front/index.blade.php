@@ -349,7 +349,7 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb30">
                     <div class="crumina-module crumina-testimonial-item testimonial-item--with-bg">
-                        <h5 style="text-align: right;">Latest Withdraws</h5>
+                        <h5 style="text-align: right;">Affiliate Earning Referral & Video Earning Balance Withdraws</h5>
                         <table>
                             <thead>
                                 <tr>
@@ -368,7 +368,8 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="2">No data found!</td>
+                                        <td>No data found!</td>
+                                        <td></td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -377,7 +378,7 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb30">
                     <div class="crumina-module crumina-testimonial-item testimonial-item--with-bg">
-                        <h5 style="text-align: right;">Latest Self Cashouts</h5>
+                        <h5 style="text-align: right;">MLM Earning Withdraws</h5>
                         <table>
                             <thead>
                                 <tr>
@@ -386,8 +387,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if (count($self_cashouts) > 0)
-                                    @foreach ($self_cashouts as $item)
+                                @if (count($mlm_withdraws) > 0)
+                                    @foreach ($mlm_withdraws as $item)
                                         <tr>
                                             <td><img src="{{ $item->user->image? url('/') . '/asset/profile/' . $item->user->image: url('/') . '/asset/profile/react.jpg' }}"
                                                     alt="{{ $item->user->username }}">{{ $item->user->name }}</td>
@@ -396,9 +397,10 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="2">No data found!</td>
+                                        <td>No data found!</td>
+                                        <td></td>
                                     </tr>
-                                @endif --}}
+                                @endif
                             </tbody>
                         </table>
                     </div>

@@ -30,6 +30,11 @@
         href="{{ url('/') }}/asset/dashboard/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ url('/') }}/asset/dashboard/css/argon.css?v=1.1.0" type="text/css">
     <link rel="stylesheet" href="{{ url('/') }}/asset/frontend/css/sweetalert.css" type="text/css">
+    <style>
+        .bg-dark {
+            background-color: darkgreen !important;
+        }
+    </style>
     @yield('css')
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-224108539-1"></script>
