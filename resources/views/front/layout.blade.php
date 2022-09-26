@@ -27,7 +27,7 @@
         .header.headroom--not-top,
         body {
             background-color: #125a00;
-            color: darkblue;
+            /* color: darkblue; */
         }
     </style>
     @yield('css')
