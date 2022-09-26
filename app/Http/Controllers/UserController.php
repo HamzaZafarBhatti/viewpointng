@@ -388,7 +388,7 @@ class UserController extends Controller
         $user->update([
             'cycle_direct_referrals' => 0,
             'cycle_indirect_referrals' => 0,
-            'cycle' => 0,
+            'is_locked' => 0,
         ]);
         $coupon_code->update(['status' => 0]);
         return redirect()->route('user.dashboard')->with('success', 'PLAN IS RE-ACTIVATED');
