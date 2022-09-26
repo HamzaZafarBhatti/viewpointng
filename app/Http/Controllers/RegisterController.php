@@ -227,6 +227,7 @@ class RegisterController extends Controller
             'coupon_id' => $coupon_code->id,
             'account_type_id' => $request->account_type_id,
             'plan_id' => 10,
+            'affliate_ref_balance' => 0,
             'activated_at' => date('Y-m-d'),
             'password' => bcrypt($request->password),
         ]);
