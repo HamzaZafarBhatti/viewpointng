@@ -251,23 +251,25 @@ class RegisterController extends Controller
                 'affliate_ref_balance' => $ref_earning,
             ]);
         }
-        if ($referee_user->account_type_id == 2 && $referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
-            Referral::create([
-                'referral_id' => $user->id,
-                'referee_id' => $referee_user->id,
-                'referee_ref_earning' => 0,
-                'bonus' => 0,
-                // 'referee_ref_earning' => $referee_user->ref_earning,
-                // 'bonus' => $ref_bonus,
-            ]);
-            $cycle_direct_referrals = $referee_user->cycle_direct_referrals + 1;
-            $referee_user->update([
-                // 'ref_earning' => $ref_earning,
-                'cycle_direct_referrals' => $cycle_direct_referrals
-            ]);
-        } else {
-            $user->delete();
-            return back()->with('error', 'This user`s Referrals are completed!');
+        if ($referee_user->account_type_id == 2) {
+            if($referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout){
+                Referral::create([
+                    'referral_id' => $user->id,
+                    'referee_id' => $referee_user->id,
+                    'referee_ref_earning' => 0,
+                    'bonus' => 0,
+                    // 'referee_ref_earning' => $referee_user->ref_earning,
+                    // 'bonus' => $ref_bonus,
+                ]);
+                $cycle_direct_referrals = $referee_user->cycle_direct_referrals + 1;
+                $referee_user->update([
+                    // 'ref_earning' => $ref_earning,
+                    'cycle_direct_referrals' => $cycle_direct_referrals
+                ]);
+            } else {
+                $user->delete();
+                return back()->with('error', 'This user`s Referrals are completed!');
+            }
         }
         if (!$referee_user->parent->isEmpty()) {
             $parent = User::find($referee_user->parent[0]->id);
