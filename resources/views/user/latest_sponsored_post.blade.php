@@ -1,4 +1,4 @@
-@extends('userlayout')
+@extends('user.userlayout')
 
 @section('content')
     <!-- Page content -->

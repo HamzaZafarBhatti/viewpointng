@@ -62,10 +62,10 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::resource('mlm-plans', MlmPlanController::class);
 
         Route::resource('account_types', AccountTypeController::class);
-        
+
         Route::controller(WithdrawController::class)->group(function () {
             //Affliate Withdraw
-            Route::prefix('affliate')->name('affliate.')->group(function() {
+            Route::prefix('affliate')->name('affliate.')->group(function () {
                 Route::get('withdraw_log', 'affliate_withdraw_log')->name('withdraw_log');
                 Route::get('withdraw_unpaid', 'affliate_withdraw_unpaid')->name('withdraw_unpaid');
                 Route::get('withdraw_approved', 'affliate_withdraw_approved')->name('withdraw_approved');
@@ -76,7 +76,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::get('withdraw_decline/{id}', 'affliate_withdraw_decline')->name('withdraw_decline');
             });
             //MLM Withdraw
-            Route::prefix('mlm')->name('mlm.')->group(function() {
+            Route::prefix('mlm')->name('mlm.')->group(function () {
                 Route::get('withdraw_log', 'mlm_withdraw_log')->name('withdraw_log');
                 Route::get('withdraw_approved', 'mlm_withdraw_approved')->name('withdraw_approved');
                 Route::get('withdraw_declined', 'mlm_withdraw_declined')->name('withdraw_declined');
@@ -87,7 +87,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::get('withdraw_decline/{id}', 'mlm_withdraw_decline')->name('withdraw_decline');
             });
             //Referral Withdraw
-            Route::prefix('referral')->name('ref.')->group(function() {
+            Route::prefix('referral')->name('ref.')->group(function () {
                 Route::get('withdraw_log', 'ref_withdraw_log')->name('withdraw_log');
                 Route::get('withdraw_approved', 'ref_withdraw_approved')->name('withdraw_approved');
                 Route::get('withdraw_declined', 'ref_withdraw_declined')->name('withdraw_declined');
@@ -98,7 +98,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::get('withdraw_decline/{id}', 'ref_withdraw_decline')->name('withdraw_decline');
             });
             // //Payment Proof controller
-            Route::controller(PaymentProofController::class)->group(function() {
+            Route::controller(PaymentProofController::class)->group(function () {
                 Route::get('paymentproof-log', 'paymentprooflog')->name('paymentproof.log');
                 Route::get('paymentproof-approved', 'paymentproofapproved')->name('paymentproof.approved');
                 Route::get('paymentproof-declined', 'paymentproofdeclined')->name('paymentproof.declined');
@@ -109,7 +109,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::get('declinepaymentproof/{id}', 'decline')->name('paymentproof.decline');
             });
             // Web controller
-            Route::controller(WebController::class)->group(function() {
+            Route::controller(WebController::class)->group(function () {
                 //Review
                 Route::get('review', 'review')->name('review');
                 Route::post('/createreview', 'CreateReview')->name('createreview');
@@ -135,8 +135,8 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 //Social
                 Route::post('social-links/update', 'UpdateSocial')->name('social-links.update');
                 Route::get('social-links', 'sociallinks')->name('social-links');
-            
-            
+
+
                 // Route::post('/createvendors', 'WebController@CreateVendors');
                 // //Route::post('/vendors', 'WebController@Vendors');   
                 // Route::get('coupons', 'WebController@coupons')->name('admin.coupons');
@@ -146,22 +146,22 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 // Route::post('/createcoupons', 'WebController@CreateCoupons');
                 // Route::get('coupons/delete/{id}', 'WebController@DestroyCoupons')->name('coupons.delete');
                 // Route::post('coupons/update', 'WebController@UpdateCoupons')->name('coupons.update');
-            
-            
+
+
                 // Route::post('/createpage', 'WebController@CreatePage');
                 // Route::post('page/update', 'WebController@UpdatePage')->name('page.update');
                 // Route::get('page/delete/{id}', 'WebController@DestroyPage')->name('page.delete');
                 // Route::get('page', 'WebController@page')->name('admin.page');
                 // Route::get('/unpage/{id}', 'WebController@unpage')->name('page.unpublish');
                 // Route::get('/ppage/{id}', 'WebController@ppage')->name('page.publish');
-            
+
                 // Route::get('currency', 'WebController@currency')->name('admin.currency');
                 // Route::get('pcurrency/{id}', 'WebController@pcurrency')->name('blog.publish');
-            
+
                 // Route::get('logo', 'WebController@logo')->name('admin.logo');
                 // Route::post('updatelogo', 'WebController@UpdateLogo');
                 // Route::post('updatefavicon', 'WebController@UpdateFavicon');
-            
+
                 // Route::get('home-page', 'WebController@homepage')->name('homepage');
                 // Route::post('home-page/update', 'WebController@Updatehomepage')->name('homepage.update');
                 // Route::post('section1/update', 'WebController@section1');
@@ -185,7 +185,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::get('blog/edit/{id}', 'PostController@edit')->name('blog.edit');
     // Route::post('blog-update', 'PostController@updatePost')->name('blog.update');
 
-    
+
     // //Selfcashout controller
     // Route::get('selfcashout-log', 'SelfcashoutController@selfcashoutlog')->name('admin.selfcashout.log');
     // Route::get('selfcashout-approved', 'SelfcashoutController@selfcashoutapproved')->name('admin.selfcashout.approved');
@@ -288,8 +288,8 @@ Route::name('user.')->group(function () {
             Route::post('profile/update_bank', 'update_bank_details')->name('profile.update_bank');
             // Route::get('plan/upgrade', 'upgrade_plan')->name('plan.upgrade');
             // Route::post('plan/upgrade', 'do_upgrade_plan')->name('plan.do_upgrade');
-                Route::get('password', 'changePassword')->name('password');
-                Route::post('password', 'submitPassword')->name('change_password');
+            Route::get('password', 'changePassword')->name('password');
+            Route::post('password', 'submitPassword')->name('change_password');
             Route::get('latest_sponsored_task', 'latest_sponsored_post')->name('latest_sponsored_post');
             //Withdraw
             Route::get('withdraws', 'withdraw')->name('withdraw');

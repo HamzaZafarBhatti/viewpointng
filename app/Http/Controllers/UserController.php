@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AffliateProfit;
 use App\Models\Bank;
+use App\Models\Blog;
 use App\Models\Coupon;
 use App\Models\MlmPlan;
 use App\Models\Plan;
@@ -11,6 +12,7 @@ use App\Models\Referral;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Withdraw;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -432,5 +434,12 @@ class UserController extends Controller
         } catch (\PDOException $e) {
             return back()->with('alert', $e->getMessage());
         }
+    }
+    public function latest_sponsored_post()
+    {
+        $data['title'] = 'Sponsored Task';
+        $data['post'] = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
+        // return $data['post'];
+        return view('user.latest_sponsored_post', $data);
     }
 }

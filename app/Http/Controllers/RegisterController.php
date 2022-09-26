@@ -282,7 +282,7 @@ class RegisterController extends Controller
                 IndirectReferral::create([
                     'referral_id' => $user->id,
                     'referee_id' => $parent->id,
-                    'referee_ref_earning' => $parent->indirect_ref_earning,
+                    'referee_ref_earning' => $parent->affliate_ref_balance,
                     'bonus' => $indirect_ref_earning,
                 ]);
                 $parent->update(['affliate_ref_balance' => $indirect_ref_earning]);
