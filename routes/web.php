@@ -196,17 +196,6 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     });
 
 
-    // //Selfcashout controller
-    // Route::get('selfcashout-log', 'SelfcashoutController@selfcashoutlog')->name('admin.selfcashout.log');
-    // Route::get('selfcashout-approved', 'SelfcashoutController@selfcashoutapproved')->name('admin.selfcashout.approved');
-    // Route::get('selfcashout-declined', 'SelfcashoutController@selfcashoutdeclined')->name('admin.selfcashout.declined');
-    // Route::get('selfcashout-unpaid', 'SelfcashoutController@selfcashoutunpaid')->name('admin.selfcashout.unpaid');
-    // Route::get('selfcashout/delete/{id}', 'SelfcashoutController@DestroySelfcashout')->name('selfcashout.delete');
-    // Route::get('approveselfcashout/{id}', 'SelfcashoutController@approve')->name('selfcashout.approve');
-    // Route::post('selfcashout-approve-multi', 'SelfcashoutController@approve_multi')->name('admin.selfcashout.approve_multi');
-    // Route::get('declineselfcashout/{id}', 'SelfcashoutController@decline')->name('selfcashout.declined');
-
-
     // //Setting controller
     // Route::get('settings', 'SettingController@Settings')->name('admin.setting');
     // Route::post('settings', 'SettingController@SettingsUpdate')->name('admin.settings.update');
@@ -215,10 +204,6 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
     // Route::get('sms', 'SettingController@Sms')->name('admin.sms');
     // Route::post('sms', 'SettingController@SmsUpdate')->name('admin.sms.update');
     // Route::post('account', 'SettingController@AccountUpdate')->name('admin.account.update');
-
-    // //Transfer controller
-    // Route::get('transfers', 'TransferController@Transfers')->name('admin.transfers');
-    // Route::get('referrals', 'TransferController@Referrals')->name('admin.referrals');
 
     // //User controller
     // Route::get('messages', 'AdminController@Messages')->name('admin.message');
@@ -307,6 +292,8 @@ Route::name('user.')->group(function () {
             Route::post('pin', 'submitPin')->name('change_pin');
             //Credit Referral
             Route::post('creditReferralAmount', 'creditReferralAmount')->name('creditReferralAmount');
+            //Direct Referrals
+            Route::get('/referrals', 'referrals')->name('referral');
         });
         Route::resource('login_logs', LoginLogController::class);
         //Mining
@@ -317,5 +304,19 @@ Route::name('user.')->group(function () {
         });
 
         Route::post('reactivate_plan', [UserController::class, 'reactivate_plan'])->name('reactivate_plan');
+
+        //Referral
+        Route::controller(ReferralController::class)->group(function () {
+            // Route::get('/referrals/earning/history', 'earning_history')->name('referrals.earning_history');
+            // Route::get('/referrals/convert', 'convert')->name('referrals.convert');
+            // Route::post('/referrals/do_convert', 'do_convert')->name('referrals.do_convert');
+        });
+        //Indirect Referral
+        Route::controller(IndirectReferralController::class)->group(function () {
+            Route::get('/indirect_referrals', 'index')->name('indirect_referrals.index');
+            // Route::get('/indirect_referrals/earning/history', 'earning_history')->name('indirect_referrals.earning_history');
+            // Route::get('/indirect_referrals/convert', 'convert')->name('indirect_referrals.convert');
+            // Route::post('/indirect_referrals/do_convert', 'do_convert')->name('indirect_referrals.do_convert');
+        });
     });
 });

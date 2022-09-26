@@ -124,6 +124,12 @@
                             </a>
                         </li>
                         @endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.referral') }}">
+                                <i class="ni ni-satisfied"></i>
+                                <span class="nav-link-text">Referral</span>
+                            </a>
+                        </li>
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">
@@ -186,14 +192,6 @@
                                 <span class="nav-link-text">Payment Proof</span>
                             </a>
                         </li>
-                        {{-- @if ($set->referral == 1)
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.referral') }}">
-                                    <i class="ni ni-satisfied"></i>
-                                    <span class="nav-link-text">Referral</span>
-                                </a>
-                            </li>
-                        @endif --}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.logout') }}">
                                 <i class="ni ni-button-power"></i>

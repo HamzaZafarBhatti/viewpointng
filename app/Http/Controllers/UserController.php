@@ -7,6 +7,7 @@ use App\Models\Bank;
 use App\Models\Blog;
 use App\Models\BlogUser;
 use App\Models\Coupon;
+use App\Models\IndirectReferral;
 use App\Models\MlmPlan;
 use App\Models\Plan;
 use App\Models\Referral;
@@ -484,5 +485,13 @@ class UserController extends Controller
         $data['post'] = Blog::find($trending_id);
         $html = view('front.partial-single', $data)->render();
         return json_encode(array('status' => '1', 'html_text' => $html));
+    }
+
+    public function referrals()
+    {
+        $title = 'Referrals';
+        $referrals = Referral::with('referral')->whereRefereeId(auth()->user()->id)->get();
+        $indirect_referrals = IndirectReferral::with('referral')->whereRefereeId(auth()->user()->id)->get();
+        return view('user.referral', compact('referrals', 'indirect_referrals', 'title'));
     }
 }
