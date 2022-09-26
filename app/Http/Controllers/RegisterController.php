@@ -303,11 +303,11 @@ class RegisterController extends Controller
 
             if ($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
                 $data = [
-                    'cycle' => $user->cycle + 1,
+                    'cycle' => $parent->cycle + 1,
                     'is_locked' => 1,
                 ];
                 if($parent->cycle > 1) {
-                    $data['balance'] = $user->balance + 10000;
+                    $data['balance'] = $parent->balance + 10000;
                     // $data['ref_balance'] = $user->ref_balance + 10000;
                 }
                 $parent->update($data);
