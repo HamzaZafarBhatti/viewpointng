@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
+use App\Models\Coupon;
+use App\Models\Faq;
+use App\Models\MlmPlan;
+use App\Models\PaymentProof;
 use App\Models\Plan;
+use App\Models\Review;
 use App\Models\Service;
+use App\Models\Social;
 use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Image;
 
 class FrontendController extends Controller
 {
@@ -17,19 +27,27 @@ class FrontendController extends Controller
     {
         $data['title'] = "Home";
         $users = User::latest()->take(5)->get();
-        // foreach ($users as $user) {
-        //     $coupon = Coupons::with('plan')->where('serial', $user->coupon)->first();
-        //     $user->plan = $coupon ? $coupon->plan->name : 'N/A';
-        // }
-        // $data['registrations'] = $users;
-        $data['withdraws'] = Withdraw::with('user')->whereStatus(1)->latest()->take(5)->get();
+        foreach ($users as $user) {
+            if ($user->account_type_id == 1) {
+                $user->plan = Plan::first()->name;
+            } else {
+                $user->plan = MlmPlan::first()->name;
+            }
+        }
+        $data['registrations'] = $users;
+        $data['withdraws'] = Withdraw::with('user')->where('status', '1')->latest()->take(5)->get();
+        // return $data['withdraws'];
         // $self_cashouts = DB::table('self_cashout_history')->whereStatus(1)->latest()->take(5)->get();
         // foreach ($self_cashouts as $cashout) {
         //     $cashout->user = User::whereId($cashout->user_id)->first();
         // }
         // $data['self_cashouts'] = $self_cashouts;
         $data['service'] = Service::all();
-        $data['plans'] = Plan::where('status', 1)->get();
+        $plans = collect();
+        $plans->push(Plan::where('status', 1)->first());
+        $plans->push(MlmPlan::where('status', 1)->first());
+        // return $plans;
+        $data['plans'] = $plans;
         return view('front.index', $data);
     }
 
@@ -38,6 +56,7 @@ class FrontendController extends Controller
     {
         $data['title'] = "About Us";
         $data['review'] = Review::whereStatus(1)->get();
+        $data['about'] = About::first();
         return view('front.about', $data);
     }
     public function topearners()
@@ -50,12 +69,14 @@ class FrontendController extends Controller
     public function faq()
     {
         $data['title'] = "Faq";
+        $data['faq'] = Faq::all();
         return view('front.faq', $data);
     }
 
     public function terms()
     {
         $data['title'] = "Terms & conditions";
+        $data['about'] = About::first();
         return view('front.terms', $data);
     }
     public function coupon()
@@ -67,6 +88,7 @@ class FrontendController extends Controller
     public function privacy()
     {
         $data['title'] = "Privacy policy";
+        $data['about'] = About::first();
         return view('front.privacy', $data);
     }
 
@@ -74,6 +96,7 @@ class FrontendController extends Controller
     public function contact()
     {
         $data['title'] = "Contact Us";
+        $data['social'] = Social::all();
         return view('front.contact', $data);
     }
 
@@ -163,21 +186,25 @@ class FrontendController extends Controller
         $validator = Validator::make($request->all(), [
             'coupon' => 'required',
         ]);
+        // return $request;
         if ($validator->fails()) {
             // adding an extra field 'error'...
             Session::flash('error', 'Please enter the ACTIVATION PIN CODE');
             return redirect()->route('verify_pin');
         }
-        $coupon = Coupons::with('plan')->where('serial', $request->coupon)->first();
+        $coupon = Coupon::where('serial', $request->coupon)->first();
         if (!$coupon) {
             Session::flash('error', 'ACTIVATION PIN CODE INVALID');
             return redirect()->route('verify_pin');
         }
-        if ($coupon->status == 'inactive') {
+        if ($coupon->status == 0) {
+            if ($coupon->account_type_id == 1) {
+                $coupon->plan = $coupon->getAffliatePlan();
+            } else {
+                $coupon->plan = $coupon->getMlmPlan();
+            }
             // adding an extra field 'error'...
-            $user = User::with(['parent_reference' => function ($query) {
-                $query->where('is_direct', '1');
-            }])->where('coupon', $request->coupon)->first();
+            $user = User::with('parent')->where('coupon_id', $coupon->id)->first();
             // return $user;
             if ($user) {
                 $user->coupon = $coupon;
@@ -237,6 +264,7 @@ class FrontendController extends Controller
             $data['image'] = $filename;
         }
         $data['user_id'] = auth()->user()->id;
+        $data['status'] = 0;
         // return $data;
         $res = PaymentProof::create($data);
         if ($res) {

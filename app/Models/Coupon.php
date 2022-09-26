@@ -28,4 +28,13 @@ class Coupon extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function getAffliatePlan()
+    {
+        return Plan::first();
+    }
+    public function getMlmPlan()
+    {
+        return MlmPlan::first();
+    }
 }

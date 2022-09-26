@@ -370,24 +370,24 @@
                                         withdrawal</a></li>
                             </ul>
                         </li>
-                        {{-- <li class="nav-item nav-item-submenu">
+                        <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-share2"></i><span>Paymentproof
                                     system</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="Paymentproof">
-                                <li class="nav-item"><a href="{{ route('admin.payment_proofs.index') }}"
+                                <li class="nav-item"><a href="{{ route('admin.paymentproof.log') }}"
                                         class="nav-link"><i class="icon-list-unordered"></i>Paymentproof log</a>
                                 </li>
-                                <li class="nav-item"><a href="{{ route('admin.payment_proofs.pending') }}"
+                                <li class="nav-item"><a href="{{ route('admin.paymentproof.pending') }}"
                                         class="nav-link"><i class="icon-spinner2 spinner"></i>Pending
                                         paymentproof</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.payment_proofs.approved') }}"
+                                <li class="nav-item"><a href="{{ route('admin.paymentproof.approved') }}"
                                         class="nav-link"><i class="icon-thumbs-up2"></i>Approved
                                         paymentproof</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.payment_proofs.declined') }}"
+                                <li class="nav-item"><a href="{{ route('admin.paymentproof.declined') }}"
                                         class="nav-link"><i class="icon-accessibility"></i>Declined
                                         paymentproof</a></li>
                             </ul>
-                        </li> --}}
+                        </li>
                         {{-- <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-magazine"></i> <span>News
                                     Section</span></a>
@@ -400,50 +400,46 @@
                                         class="nav-link"><i class="icon-clipboard6"></i>Category</a></li>
                             </ul>
                         </li> --}}
-                        {{-- <li class="nav-item nav-item-submenu">
+                        <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-home4"></i> <span>Web
                                     control</span></a>
 
                             <ul class="nav nav-group-sub" data-submenu-title="News Section">
-                                <li class="nav-item"><a href="{{ route('homepage') }}" class="nav-link"><i
-                                            class="icon-home4"></i>Homepage</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.web.rubic_network') }}"
-                                        class="nav-link"><i class="icon-file-check"></i>RUBIC NETWORK</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.web.rubic_staking') }}"
-                                        class="nav-link"><i class="icon-file-check"></i>RUBIC STAKING</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.logo') }}" class="nav-link"><i
-                                            class="icon-image2"></i>Logo & Favicon</a></li>
+                                {{-- <li class="nav-item"><a href="{{ route('homepage') }}" class="nav-link"><i
+                                            class="icon-home4"></i>Homepage</a></li> --}}
+                                {{-- <li class="nav-item"><a href="{{ route('admin.logo') }}" class="nav-link"><i
+                                            class="icon-image2"></i>Logo & Favicon</a></li> --}}
                                 <li class="nav-item"><a href="{{ route('admin.review') }}" class="nav-link"><i
                                             class="icon-clipboard6"></i>Platform Review</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.service') }}" class="nav-link"><i
-                                            class="icon-portfolio"></i>Services</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.vendors.index') }}"
-                                        class="nav-link"><i class="icon-accessibility"></i>Vendors</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.coupons') }}" class="nav-link"><i
-                                            class="icon-cogs"></i>Coupons</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.page') }}" class="nav-link"><i
-                                            class="icon-stack"></i>Webpages</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.currency') }}" class="nav-link"><i
-                                            class="icon-coin-euro"></i>Currency</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.faqs.index') }}"
+                                {{-- <li class="nav-item"><a href="{{ route('admin.service') }}" class="nav-link"><i
+                                            class="icon-portfolio"></i>Services</a></li> --}}
+                                {{-- <li class="nav-item"><a href="{{ route('admin.vendors.index') }}"
+                                        class="nav-link"><i class="icon-accessibility"></i>Vendors</a></li> --}}
+                                {{-- <li class="nav-item"><a href="{{ route('admin.coupons') }}" class="nav-link"><i
+                                            class="icon-cogs"></i>Coupons</a></li> --}}
+                                {{-- <li class="nav-item"><a href="{{ route('admin.page') }}" class="nav-link"><i
+                                            class="icon-stack"></i>Webpages</a></li> --}}
+                                {{-- <li class="nav-item"><a href="{{ route('admin.currency') }}" class="nav-link"><i
+                                            class="icon-coin-euro"></i>Currency</a></li> --}}
+                                <li class="nav-item"><a href="{{ route('admin.faq') }}"
                                         class="nav-link"><i class="icon-question4"></i>FAQs</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.web.terms') }}" class="nav-link"><i
+                                <li class="nav-item"><a href="{{ route('admin.terms') }}" class="nav-link"><i
                                             class="icon-file-check"></i>Terms & Condition</a>
                                 </li>
-                                <li class="nav-item"><a href="{{ route('admin.web.privacy_policy') }}"
+                                <li class="nav-item"><a href="{{ route('admin.privacy_policy') }}"
                                         class="nav-link"><i class="icon-file-check"></i>Privacy policy</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.web.cookie_policy') }}"
-                                        class="nav-link"><i class="icon-file-check"></i>Cookie policy</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.web.disclaimer') }}"
-                                        class="nav-link"><i class="icon-file-check"></i>Earning Disclaimer</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.web.notice') }}"
-                                        class="nav-link"><i class="icon-file-check"></i>Notice Board</a></li>
-                                <li class="nav-item"><a href="{{ route('admin.web.about_us') }}"
+                                {{-- <li class="nav-item"><a href="{{ route('admin.cookie_policy') }}"
+                                        class="nav-link"><i class="icon-file-check"></i>Cookie policy</a></li> --}}
+                                {{-- <li class="nav-item"><a href="{{ route('admin.disclaimer') }}"
+                                        class="nav-link"><i class="icon-file-check"></i>Earning Disclaimer</a></li> --}}
+                                {{-- <li class="nav-item"><a href="{{ route('admin.notice') }}"
+                                        class="nav-link"><i class="icon-file-check"></i>Notice Board</a></li> --}}
+                                <li class="nav-item"><a href="{{ route('admin.about_us') }}"
                                         class="nav-link"><i class="icon-file-check"></i>About us</a></li>
-                                <li class="nav-item"><a href="{{ route('social-links') }}" class="nav-link"><i
+                                <li class="nav-item"><a href="{{ route('admin.social-links') }}" class="nav-link"><i
                                             class="icon-share2"></i>Social Links</a></li>
                             </ul>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
                 <!-- /main navigation -->

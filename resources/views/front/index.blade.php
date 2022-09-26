@@ -330,7 +330,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if (count($registrations) > 0)
+                                @if (count($registrations) > 0)
                                     @foreach ($registrations as $item)
                                         <tr>
                                             <td><img src="{{ $item->image ? url('/') . '/asset/profile/' . $item->image : url('/') . '/asset/profile/react.jpg' }}"
@@ -342,7 +342,7 @@
                                     <tr>
                                         <td colspan="2">No data found!</td>
                                     </tr>
-                                @endif --}}
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -358,7 +358,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if (count($withdraws) > 0)
+                                @if (count($withdraws) > 0)
                                     @foreach ($withdraws as $item)
                                         <tr>
                                             <td><img src="{{ $item->user->image? url('/') . '/asset/profile/' . $item->user->image: url('/') . '/asset/profile/react.jpg' }}"
@@ -370,7 +370,7 @@
                                     <tr>
                                         <td colspan="2">No data found!</td>
                                     </tr>
-                                @endif --}}
+                                @endif
                             </tbody>
                         </table>
                     </div>

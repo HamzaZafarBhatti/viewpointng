@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('css')
     <style>
         .text_end {
@@ -27,7 +27,7 @@
                         <h3><span style="color: #ffffff;"><strong>Write A Very Good TESTIMONY CAPTION</strong></span></h3>
                         <form action="{{ route('do_upload_proof') }}" method="post" class="contact-form" enctype="multipart/form-data">
                             @csrf
-                            @include('alert-front-end')
+                            @include('front.alert-front-end')
                             <div class="row">
                                 <div class="col-md-12">
                                     <textarea name="caption" id="caption" cols="30" rows="10" class="form-control input--squared input--dark" required></textarea>

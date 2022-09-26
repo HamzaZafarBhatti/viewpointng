@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <p class="text-danger"></p>
-                        <form action="{{route('review.update')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('admin.review.update')}}" method="post" enctype="multipart/form-data">
                         @csrf
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Name:</label>

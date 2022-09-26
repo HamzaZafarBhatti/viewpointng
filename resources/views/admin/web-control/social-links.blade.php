@@ -40,7 +40,7 @@
                                 <div class="modal-header">   
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form action="{{route('social-links.update')}}" method="post">
+                                <form action="{{route('admin.social-links.update')}}" method="post">
                                 @csrf
                                     <div class="modal-body">
                                         <div class="form-group row">

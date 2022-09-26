@@ -62,10 +62,10 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-link"
                                                         data-dismiss="modal">Close</button>
-                                                    <a href="{{ route('admin.faqs.destroy', $val->id) }}"
+                                                    <a href="{{ route('admin.faq_delete', $val->id) }}"
                                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                                         class="btn bg-danger">Proceed</a>
-                                                    <form id="logout-form" action="{{ route('admin.faqs.destroy', $val->id) }}" method="POST"
+                                                    <form id="logout-form" action="{{ route('admin.faq_delete', $val->id) }}" method="POST"
                                                         style="display: none;">
                                                         @csrf
                                                         @method('delete')
@@ -81,7 +81,7 @@
                                                     <button type="button" class="close"
                                                         data-dismiss="modal">&times;</button>
                                                 </div>
-                                                <form action="{{ route('admin.faqs.update', $val->id) }}" method="post">
+                                                <form action="{{ route('admin.faq_update', $val->id) }}" method="post">
                                                     @csrf
                                                     @method('put')
                                                     <div class="modal-body">
@@ -125,7 +125,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="{{ route('admin.faqs.store') }}" method="post">
+                <form action="{{ route('admin.faq_store') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group row">

@@ -117,7 +117,6 @@
                             <a href="javascript:void;">GOLDMINT</a>
                             <ul class="sub-menu">
                                 <li><a href="{{ route('about') }}">About us</a></li>
-                                <li><a href="https://goldmintng.com/page/9">How It Works</a></li>
                                 <li><a href="{{ route('payment_proof') }}">Payment Proof</a></li>
                             </ul>
                         </li>
@@ -127,9 +126,9 @@
                         {{-- <li>
                             <a href="https://goldmintng.com/page/9">How It Works</a>
                         </li> --}}
-                        <li class="menu-item-has-children">
+                        {{-- <li class="menu-item-has-children">
                             <a href="https://goldmintng.com/coupon">PIN Code Dispatchers</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('verify_pin') }}">Verify PIN</a>
                         </li>
@@ -137,31 +136,31 @@
                             <a href="javascript:void;">Help</a>
                             <ul class="sub-menu">
                                 <li><a href="{{ route('faq') }}">FAQs</a></li>
-                                <li class="menu-item-has-children">
+                                {{-- <li class="menu-item-has-children">
                                     <a href="javascript:void;">Blog</a>
                                     <ul class="sub-menu">
-                                        {{-- @foreach ($cat as $vcat)
+                                        @foreach ($cat as $vcat)
                                             <li>
                                                 <a href="{{ url('/') }}/cat/{{ $vcat->id }}/1">
                                                     {{ $vcat->categories }}
                                                 </a>
                                             </li>
-                                        @endforeach --}}
+                                        @endforeach
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
                                 <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
-                                <li><a href="https://goldmintng.com/page/7">Cookies Policy</a></li>
-                                <li><a href="https://goldmintng.com/page/8">Disclaimer Policy</a></li>
+                                {{-- <li><a href="https://goldmintng.com/page/7">Cookies Policy</a></li> --}}
+                                {{-- <li><a href="https://goldmintng.com/page/8">Disclaimer Policy</a></li> --}}
                                 <li><a href="{{ route('contact') }}">Contact us</a></li>
                                 <li><a href="https://web.facebook.com/groups/5288834967817951">Payment PROOFS</a></li>
                                 <li><a href="https://web.facebook.com/groups/5288834967817951">Facebook Group</a></li>
-                                <li><a href="{{ route('coupon') }}">PIN Code Dispatchers</a></li>
+                                {{-- <li><a href="{{ route('coupon') }}">PIN Code Dispatchers</a></li> --}}
                             </ul>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('topearners') }}">Top Earners</a>
-                        </li>
+                        </li> --}}
                         @guest
                             <li>
                                 <a href="{{ route('user.login') }}">Login</a>

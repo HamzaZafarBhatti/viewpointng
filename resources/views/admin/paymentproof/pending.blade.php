@@ -49,10 +49,10 @@
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class='dropdown-item'
-                                                            href="{{ route('admin.payment_proofs.approve', $val->id) }}"><i
+                                                            href="{{ route('admin.paymentproof.approve', $val->id) }}"><i
                                                                 class="icon-thumbs-up3 mr-2"></i>Approve request</a>
                                                         <a class='dropdown-item'
-                                                            href="{{ route('admin.payment_proofs.decline', $val->id) }}"><i
+                                                            href="{{ route('admin.paymentproof.decline', $val->id) }}"><i
                                                                 class="icon-thumbs-down3 mr-2"></i>Decline request</a>
                                                         <a data-toggle="modal" data-target="#{{ $val->id }}delete"
                                                             class="dropdown-item"><i class="icon-bin2 mr-2"></i>Delete</a>
@@ -75,7 +75,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-link"
                                                         data-dismiss="modal">Close</button>
-                                                    <a href="{{ route('admin.payment_proofs.delete', $val->id) }}"
+                                                    <a href="{{ route('admin.paymentproof.delete', $val->id) }}"
                                                         class="btn bg-danger">Proceed</a>
                                                 </div>
                                             </div>
@@ -108,7 +108,7 @@
                 })
                 // console.log(approve_ids);
                 $.ajax({
-                    url: '{{ route('admin.payment_proofs.approve_multi') }}',
+                    url: '{{ route('admin.paymentproof.approve_multi') }}',
                     method: 'POST',
                     data: {
                         ids: approve_ids,

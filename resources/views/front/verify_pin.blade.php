@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('css')
 
 @stop
@@ -24,7 +24,7 @@
                         <form action="{{ route('do_verify_pin') }}" method="post" class="contact-form"
                             data-saasone="contact-froms">
                             @csrf
-                            @include('alert-front-end')
+                            @include('front.alert-front-end')
                             @if (isset($verify_pin_user) && $verify_pin_user)
                                 <table>
                                     <thead>
@@ -42,7 +42,7 @@
                                             <td>{{ $verify_pin_user->username }}</td>
                                             <td>{{ \Carbon\Carbon::parse($verify_pin_user->coupon->updated_at)->toDateString() }}</td>
                                             <td>{{ $verify_pin_user->coupon->plan->name }}</td>
-                                            <td>{{ !$verify_pin_user->parent_reference->isEmpty() ? $verify_pin_user->parent_reference[0]->username : 'N/A' }}</td>
+                                            <td>{{ !$verify_pin_user->parent->isEmpty() ? $verify_pin_user->parent[0]->username : 'N/A' }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
