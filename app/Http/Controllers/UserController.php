@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -113,6 +114,72 @@ class UserController extends Controller
             $sav['account_no'] = $request->details;
             Withdraw::create($sav);
             $user->balance = $user->balance - $amount;
+            $user->save();
+            // if ($set->email_notify == 1) {
+            //     $temp = Etemplate::first();
+            //     Mail::to($user->email)->send(new GeneralEmail($temp->esender, $user->username, 'We are currently reviewing your withdrawal request of ₦' . $request->amount . '. Thanks for working with us.', 'Withdraw Request currently being Processed'));
+            // }
+            return back()->with('success', 'Withdrawal request has been submitted, you will be updated shortly.');
+        } else {
+            return back()->with('alert', 'Insufficent balance.');
+        }
+    }
+
+    public function withdraw_ref()
+    {
+        $user = User::with('bank')->whereId(auth()->user()->id)->first();
+        $data['title'] = 'Withdraw Referral Balance';
+        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
+        $data['account'] = [
+            'account_no' => $user->bank_account_no,
+            'account' => $user->bank_account_name . ' - ' . $user->bank_account_no . ' - ' . $bank_name
+        ];
+        return view('user.withdraw_ref', $data);
+    }
+
+    public function withdraw_ref_submit(Request $request)
+    {
+        // return $request;
+        // return date('Y-m-d')
+
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required',
+            'details' => 'required',
+            'pin' => 'required',
+        ]);
+        if ($validator->fails()) {
+            // adding an extra field 'error'...
+            $user = User::with('bank')->whereId(auth()->user()->id)->first();
+            $data['title'] = 'Withdraw Referral Balance';
+            $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+            $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
+            $data['account'] = [
+                'account_no' => $user->bank_account_no,
+                'account' => $user->bank_account_name . ' - ' . $user->bank_account_no . ' - ' . $bank_name
+            ];
+            $data['errors'] = $validator->errors();
+            return view('user.withdraw_ref', $data);
+        }
+        if ($request->pin === '000000') {
+            return back()->with('alert', 'You cannot use the default PIN 0000 to perform transactions, please go to the Account Security Page to have your PIN RESET.');
+        }
+        $set = $data['set'] = Setting::first();
+        $user = $data['user'] = User::find(auth()->user()->id);
+        if ($request->pin != $user->pin) {
+            return back()->with('alert', 'Pin is not same.');
+        }
+        // $plan = MlmPlan::first();
+        // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
+        $amount = $request->amount;
+        if ($user->affliate_ref_balance > $amount || $user->affliate_ref_balance == $amount) {
+            $sav['user_id'] = Auth::user()->id;
+            $sav['amount'] = $amount;
+            $sav['status'] = '0';
+            $sav['type'] = 3;
+            $sav['account_no'] = $request->details;
+            Withdraw::create($sav);
+            $user->affliate_ref_balance = $user->affliate_ref_balance - $amount;
             $user->save();
             // if ($set->email_notify == 1) {
             //     $temp = Etemplate::first();
@@ -318,5 +385,52 @@ class UserController extends Controller
         ]);
         $coupon_code->update(['status' => 0]);
         return redirect()->route('user.dashboard')->with('success', 'PLAN IS RE-ACTIVATED');
+    }
+    
+    public function changePassword()
+    {
+        $data['title'] = "Security";
+        // $g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
+        // $set = Setting::first();
+        // $user = User::find(Auth::user()->id);
+        // if ($user->fa_status) {
+        //     $secret = $user->googlefa_secret;
+        // } else {
+        //     $secret = $g->generateSecret();
+        // }
+        // return $secret;
+        // $site = $set->site_name;
+        // $data['secret'] = $secret;
+        // $data['image'] = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($user->email, $secret, $site);
+        return view('user.password', $data);
+    }
+
+    public function submitPassword(Request $request)
+    {
+        $this->validate($request, [
+            'current_password' => 'required',
+            'password' => 'required|min:5|confirmed'
+        ]);
+        try {
+
+            $c_password = Auth::user()->password;
+            $c_id = Auth::user()->id;
+            $user = User::findOrFail($c_id);
+            // return json_encode(Hash::check($request->current_password, $c_password));
+            if (Hash::check($request->current_password, $c_password)) {
+                if ($request->password == $request->password_confirmation) {
+                    $password = bcrypt($request->password);
+                    $user->password = $password;
+                    $user->save();
+                    return back()->with('success', 'Password Changed Successfully.');
+                } else {
+                    return back()->with('alert', 'New Password Does Not Match.');
+                }
+            } else {
+                return back()->with('alert', 'Current Password Not Match.');
+            }
+        } catch (\PDOException $e) {
+            return back()->with('alert', $e->getMessage());
+        }
     }
 }

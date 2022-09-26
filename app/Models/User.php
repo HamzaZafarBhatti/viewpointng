@@ -55,6 +55,7 @@ class User extends Authenticatable
         'mlm_balance',
         'affliate_balance',
         'ref_balance',
+        'affliate_ref_balance',
         'cycle_direct_referrals',
         'cycle_indirect_referrals',
         'cycle',

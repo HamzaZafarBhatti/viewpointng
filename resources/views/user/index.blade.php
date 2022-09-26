@@ -16,7 +16,7 @@
                                             <div class="col">
                                                 <h5 class="card-title text-muted mb-0 text-white">Referral Balance</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $user->ref_balance }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $user->affliate_ref_balance }}</span>
                                             </div>
                                         </div>
                                     </div>

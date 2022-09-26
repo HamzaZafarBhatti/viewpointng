@@ -351,6 +351,25 @@
                                         withdrawal</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"><i class="icon-share2"></i><span>Referral Balance Wallet
+                                    Withdraw
+                                    system</span></a>
+                            <ul class="nav nav-group-sub" data-submenu-title="Withdraw">
+                                <li class="nav-item"><a href="{{ route('admin.ref.withdraw_log') }}"
+                                        class="nav-link"><i class="icon-list-unordered"></i>Withdraw log</a>
+                                </li>
+                                <li class="nav-item"><a href="{{ route('admin.ref.withdraw_unpaid') }}"
+                                        class="nav-link"><i class="icon-spinner2 spinner"></i>Unpaid
+                                        withdrawal</a></li>
+                                <li class="nav-item"><a href="{{ route('admin.ref.withdraw_approved') }}"
+                                        class="nav-link"><i class="icon-thumbs-up2"></i>Approved withdrawal</a>
+                                </li>
+                                <li class="nav-item"><a href="{{ route('admin.ref.withdraw_declined') }}"
+                                        class="nav-link"><i class="icon-accessibility"></i>Declined
+                                        withdrawal</a></li>
+                            </ul>
+                        </li>
                         {{-- <li class="nav-item nav-item-submenu">
                             <a href="#" class="nav-link"><i class="icon-share2"></i><span>Paymentproof
                                     system</span></a>

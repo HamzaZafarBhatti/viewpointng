@@ -6,6 +6,7 @@ use App\Models\AccountType;
 use App\Models\Coupon;
 use App\Models\IndirectReferral;
 use App\Models\MlmPlan;
+use App\Models\Plan;
 use App\Models\Referral;
 use App\Models\Setting;
 use App\Models\User;
@@ -235,15 +236,19 @@ class RegisterController extends Controller
 
 
         $mlm_plan = MlmPlan::first();
+        $plan = Plan::first();
 
         if($referee_user->account_type_id == 1){
+            $ref_bonus = $plan->upgrade * $plan->ref_percent / 100;
+            $ref_earning = $referee_user->affliate_ref_balance + $ref_bonus;
             Referral::create([
                 'referral_id' => $user->id,
                 'referee_id' => $referee_user->id,
-                'referee_ref_earning' => 0,
-                'bonus' => 0,
-                // 'referee_ref_earning' => $referee_user->ref_earning,
-                // 'bonus' => $ref_bonus,
+                'referee_ref_earning' => $referee_user->affliate_ref_balance,
+                'bonus' => $ref_bonus,
+            ]);
+            $referee_user->update([
+                'affliate_ref_balance' => $ref_earning,
             ]);
         }
         if ($referee_user->account_type_id == 2 && $referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
@@ -268,15 +273,16 @@ class RegisterController extends Controller
             $parent = User::find($referee_user->parent[0]->id);
             // $indirect_ref_bonus = $coupon_code->plan->upgrade * $coupon_code->plan->indirect_ref_com / 100;
             // $indirect_ref_earning = $parent->indirect_ref_earning + $indirect_ref_bonus;
-            if($parent->account_type_id == 2) {
+            if($parent->account_type_id == 1) {
+                $indirect_ref_bonus = $plan->upgrade * $plan->indirect_ref_com / 100;
+                $indirect_ref_earning = $parent->affliate_ref_balance + $indirect_ref_bonus;
                 IndirectReferral::create([
                     'referral_id' => $user->id,
                     'referee_id' => $parent->id,
-                    'referee_ref_earning' => 0,
-                    'bonus' => 0,
-                    // 'referee_ref_earning' => $parent->indirect_ref_earning,
-                    // 'bonus' => $indirect_ref_earning,
+                    'referee_ref_earning' => $parent->indirect_ref_earning,
+                    'bonus' => $indirect_ref_earning,
                 ]);
+                $parent->update(['affliate_ref_balance' => $indirect_ref_earning]);
             }
             if ($parent->account_type_id == 2 && $parent->cycle_indirect_referrals < $mlm_plan->indirect_ref_count_cashout) {
                 IndirectReferral::create([

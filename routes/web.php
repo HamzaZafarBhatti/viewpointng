@@ -84,11 +84,18 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
                 Route::post('withdraw_approve_multi', 'mlm_withdraw_approve_multi')->name('withdraw_approve_multi');
                 Route::get('withdraw_decline/{id}', 'mlm_withdraw_decline')->name('withdraw_decline');
             });
+            //Referral Withdraw
+            Route::prefix('referral')->name('ref.')->group(function() {
+                Route::get('withdraw_log', 'ref_withdraw_log')->name('withdraw_log');
+                Route::get('withdraw_approved', 'ref_withdraw_approved')->name('withdraw_approved');
+                Route::get('withdraw_declined', 'ref_withdraw_declined')->name('withdraw_declined');
+                Route::get('withdraw_unpaid', 'ref_withdraw_unpaid')->name('withdraw_unpaid');
+                Route::get('withdraw_delete/{id}', 'ref_withdraw_delete')->name('withdraw_delete');
+                Route::post('withdraw_approve', 'ref_withdraw_approve')->name('withdraw_approve');
+                Route::post('withdraw_approve_multi', 'ref_withdraw_approve_multi')->name('withdraw_approve_multi');
+                Route::get('withdraw_decline/{id}', 'ref_withdraw_decline')->name('withdraw_decline');
+            });
         });
-        
-        // Route::get('py-generate-plan-coupons', 'PyschemeController@generate_coupons')->name('admin.plan.generate_coupons');
-        // Route::get('py-download-plan-coupons', 'PyschemeController@download_codes')->name('admin.plan.download_codes');
-        // Route::post('py-generate-plan-coupons', 'PyschemeController@do_generate_coupons')->name('admin.plan.do_generate_coupons');
     });
     // //Blog controller
     // Route::post('/createcategory', 'PostController@CreateCategory');
@@ -272,10 +279,15 @@ Route::name('user.')->group(function () {
             Route::post('profile/update_bank', 'update_bank_details')->name('profile.update_bank');
             // Route::get('plan/upgrade', 'upgrade_plan')->name('plan.upgrade');
             // Route::post('plan/upgrade', 'do_upgrade_plan')->name('plan.do_upgrade');
+                Route::get('password', 'changePassword')->name('password');
+                Route::post('password', 'submitPassword')->name('change_password');
             Route::get('latest_sponsored_task', 'latest_sponsored_post')->name('latest_sponsored_post');
             //Withdraw
             Route::get('withdraws', 'withdraw')->name('withdraw');
             Route::post('withdraws', 'withdraw_submit')->name('withdraw_submit');
+            //MLM Withdraw
+            Route::get('withdraws_ref', 'withdraw_ref')->name('withdraw_ref');
+            Route::post('withdraws_ref', 'withdraw_ref_submit')->name('withdraw_ref_submit');
             //MLM Withdraw
             Route::get('withdraws_mlm', 'withdraw_mlm')->name('withdraw_mlm');
             Route::post('withdraws_mlm', 'withdraw_mlm_submit')->name('withdraw_mlm_submit');

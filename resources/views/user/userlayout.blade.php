@@ -93,6 +93,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.withdraw_ref') }}">
+                                <i class="ni ni-money-coins"></i>
+                                <span class="nav-link-text">Referral Balance Withdrawal</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.latest_sponsored_post') }}">
                                 <i class="ni ni-single-copy-04"></i>
                                 <span class="nav-link-text">Sponsored Tasks</span>
@@ -157,18 +163,18 @@
                                 <span class="nav-link-text">Support</span>
                             </a>
                         </li> --}}
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.profile') }}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.profile_edit') }}">
                                 <i class="ni ni-single-02"></i>
                                 <span class="nav-link-text">Account</span>
                             </a>
-                        </li> --}}
-                        {{-- <li class="nav-item">
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.password') }}">
                                 <i class="ni ni-key-25"></i>
                                 <span class="nav-link-text">Security</span>
                             </a>
-                        </li> --}}
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="https://web.facebook.com/groups/5288834967817951">
                                 <i class="ni ni-satisfied"></i>
