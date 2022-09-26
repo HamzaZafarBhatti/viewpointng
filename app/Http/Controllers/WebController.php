@@ -87,7 +87,7 @@ class WebController extends Controller
     }
     public function DestroyReview($id)
     {
-        $data = Review::findOrFail($id);
+        $data = Review::find($id);
         $res =  $data->delete();
         if ($res) {
             return back()->with('success', 'Review was Successfully deleted!');
@@ -127,7 +127,7 @@ class WebController extends Controller
     }
     public function UpdatePrivacy(Request $request)
     {
-        $mac = About::findOrFail(1);
+        $mac = About::find(1);
         if($mac) {
             $mac['privacy_policy'] = $request->details;
             $res = $mac->save();
@@ -149,7 +149,7 @@ class WebController extends Controller
     
     public function UpdateAbout(Request $request)
     {
-        $mac = About::findOrFail(1);
+        $mac = About::find(1);
         if($mac) {
             $mac['about'] = $request->details;
             $res = $mac->save();
@@ -183,7 +183,7 @@ class WebController extends Controller
 
     public function DestroyFaq($id)
     {
-        $data = Faq::findOrFail($id);
+        $data = Faq::find($id);
         $res =  $data->delete();
         if ($res) {
             return back()->with('success', 'Faq was Successfully deleted!');
@@ -194,7 +194,7 @@ class WebController extends Controller
 
     public function UpdateFaq(Request $request)
     {
-        $mac = Faq::findOrFail($request->id);
+        $mac = Faq::find($request->id);
         $mac['question'] = $request->question;
         $mac['answer'] = $request->answer;
         $res = $mac->save();
@@ -212,7 +212,7 @@ class WebController extends Controller
     } 
     public function UpdateSocial(Request $request)
     {
-        $mac = Social::findOrFail($request->id);
+        $mac = Social::find($request->id);
         $mac['value'] = $request->link;
         $res = $mac->save();
         if ($res) {
