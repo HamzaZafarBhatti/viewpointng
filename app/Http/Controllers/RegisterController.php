@@ -297,14 +297,14 @@ class RegisterController extends Controller
                 // $parent->update(['indirect_ref_earning' => $indirect_ref_earning]);
                 $parent->update(['cycle_indirect_referrals' => $cycle_indirect_referrals]);
             }
-        }
 
-        if ($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
-            $parent->update([
-                'cycle' => $user->cycle + 1,
-                'balance' => $user->balance + 10000,
-                'ref_balance' => $user->ref_balance + 10000,
-            ]);
+            if ($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
+                $parent->update([
+                    'cycle' => $user->cycle + 1,
+                    'balance' => $user->balance + 10000,
+                    'ref_balance' => $user->ref_balance + 10000,
+                ]);
+            }
         }
         $coupon_code->update(['status' => 0]);
 
