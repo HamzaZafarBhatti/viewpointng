@@ -75,10 +75,10 @@ class LoginController extends Controller
                 return redirect()->intended('user/dashboard');
             }
         } else {
-            return back()
-                ->withErrors(['email' => 'Oops! You have entered invalid credentials'])
-                ->withInput();
-            // return back()->with('alert', 'Oops! You have entered invalid credentials');
+            // return back()
+            //     ->withErrors(['email' => 'Oops! You have entered invalid credentials'])
+            //     ->withInput();
+            return back()->with('alert', 'Oops! You have entered invalid credentials');
         }
     }
 }
