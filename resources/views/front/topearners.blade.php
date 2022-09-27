@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('css')
 
 @stop
@@ -33,7 +33,7 @@
                         @foreach ($topearners as $object)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $object->name }}</td>
+                                <td>{{ $object->user->name }}</td>
                                 <td>₦{{ $object->amount }}</td>
                                 <td><strong><span style="background-color: #008000; color: #ffffff;">&nbsp;
                                             Active&nbsp;&nbsp; <br /></span></strong></td>

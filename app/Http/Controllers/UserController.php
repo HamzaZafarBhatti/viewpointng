@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         $user = User::with('bank')->whereId(auth()->user()->id)->first();
         $data['title'] = 'Withdraw Affliate Balance';
-        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
         $data['account'] = [
             'account_no' => $user->bank_account_no,
@@ -139,7 +139,7 @@ class UserController extends Controller
     {
         $user = User::with('bank')->whereId(auth()->user()->id)->first();
         $data['title'] = 'Withdraw Referral Balance';
-        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(3)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
         $data['account'] = [
             'account_no' => $user->bank_account_no,

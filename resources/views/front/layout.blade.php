@@ -158,9 +158,9 @@
                                 {{-- <li><a href="{{ route('coupon') }}">PIN Code Dispatchers</a></li> --}}
                             </ul>
                         </li>
-                        {{-- <li>
+                        <li>
                             <a href="{{ route('topearners') }}">Top Earners</a>
-                        </li> --}}
+                        </li>
                         @guest
                             <li>
                                 <a href="{{ route('user.login') }}">Login</a>

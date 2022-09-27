@@ -12,6 +12,7 @@ use App\Models\Plan;
 use App\Models\Review;
 use App\Models\Service;
 use App\Models\Social;
+use App\Models\TopEarner;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Withdraw;
@@ -65,7 +66,7 @@ class FrontendController extends Controller
     public function topearners()
     {
         $data['title'] = "Top Earners";
-        $data['topearners'] = Earners::orderBy('amount', 'DESC')->take(50)->get();
+        $data['topearners'] = TopEarner::with('user')->orderBy('amount', 'DESC')->take(50)->get();
         return view('front.topearners', $data);
     }
 
