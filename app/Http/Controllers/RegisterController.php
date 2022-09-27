@@ -306,7 +306,7 @@ class RegisterController extends Controller
                     'cycle' => $parent->cycle + 1,
                     'is_locked' => 1,
                 ];
-                if($parent->cycle > 1) {
+                if($parent->cycle >= 1) {
                     $data['balance'] = $parent->balance + 10000;
                     // $data['ref_balance'] = $user->ref_balance + 10000;
                 }

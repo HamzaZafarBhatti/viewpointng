@@ -39,6 +39,7 @@ class UserController extends Controller
         $referrals = $user->get_latest_referrals();
         $shared_posts = BlogUser::where('user_id', auth()->user()->id)->count();
         $sponsor_bal = $shared_posts * Plan::first()->fb_share_amount;
+        $total_withdraws_amount = Withdraw::whereUser_id($user->id)->where('status', '1')->sum('amount');
         // return $referrals;
         return view('user.index', compact(
             'user',
@@ -46,6 +47,7 @@ class UserController extends Controller
             'profit',
             'referrals',
             'sponsor_bal',
+            'total_withdraws_amount',
         ));
     }
 
@@ -240,7 +242,7 @@ class UserController extends Controller
         }
         $set = $data['set'] = Setting::first();
         $user = $data['user'] = User::find(auth()->user()->id);
-        if ($user->cycle == 0) {
+        if ($user->is_locked == 0) {
             return back()->with('alert', 'You cannot withdrawal option. Your balance is locked.');
         }
         if ($request->pin !== $user->pin) {

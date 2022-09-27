@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card bg-dark border-0">
@@ -164,9 +164,9 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">Referral Balance</h5>
+                                                <h5 class="card-title text-muted mb-0 text-white">Total Account Balance Withdrawal</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $user->ref_balance }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $total_withdraws_amount }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card bg-dark border-0">
@@ -255,7 +255,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card bg-dark border-0">
