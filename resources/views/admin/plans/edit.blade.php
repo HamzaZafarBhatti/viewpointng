@@ -56,11 +56,22 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-2">Minimum amount:</label>
+                                <label class="col-form-label col-lg-2">Minimum Video Earning Balance amount:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
                                         <input type="number" step="any" name="min_deposit"
                                             value="{{ $plan->min_deposit }}" class="form-control">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">BTC</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Minimum Referral Earning Withdrawal:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" step="any" name="min_ref_wd" value="{{ $plan->min_ref_wd }}" class="form-control">
                                         <span class="input-group-append">
                                             <span class="input-group-text">BTC</span>
                                         </span>

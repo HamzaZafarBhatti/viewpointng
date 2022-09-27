@@ -101,12 +101,12 @@ class UserController extends Controller
         if ($request->pin !== $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
-        // $plan = Plan::first();
+        $plan = Plan::first();
         // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
         $amount = $request->amount;
-        // if ($plan->min_ref_earn_wd > $request->amount) {
-        //     return back()->with('alert', 'You have requested less than your plan defined payment.');
-        // }
+        if ($plan->min_deposit > $request->amount) {
+            return back()->with('alert', 'You have requested less than your plan defined payment.');
+        }
         // $last_wd = Withdraw::whereUser_id($user->id)->latest()->first();
         // if ($last_wd) {
         //     $end = Carbon::parse($last_wd->created_at);
@@ -179,8 +179,12 @@ class UserController extends Controller
         if ($request->pin != $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
-        // $plan = MlmPlan::first();
+        $plan = Plan::first();
         // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
+        $amount = $request->amount;
+        if ($plan->min_ref_wd > $request->amount) {
+            return back()->with('alert', 'You have requested less than your plan defined payment.');
+        }
         $amount = $request->amount;
         if ($user->affliate_ref_balance > $amount || $user->affliate_ref_balance == $amount) {
             $sav['user_id'] = Auth::user()->id;
@@ -248,12 +252,12 @@ class UserController extends Controller
         if ($request->pin !== $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
-        // $plan = MlmPlan::first();
+        $plan = MlmPlan::first();
         // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
         $amount = $request->amount;
-        // if ($plan->min_ref_earn_wd > $request->amount) {
-        //     return back()->with('alert', 'You have requested less than your plan defined payment.');
-        // }
+        if ($plan->min_withdraw_balance > $request->amount) {
+            return back()->with('alert', 'You have requested less than your plan defined payment.');
+        }
         // $last_wd = Withdraw::whereUser_id($user->id)->latest()->first();
         // if ($last_wd) {
         //     $end = Carbon::parse($last_wd->created_at);

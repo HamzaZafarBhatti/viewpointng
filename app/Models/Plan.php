@@ -15,6 +15,7 @@ class Plan extends Model
         'duration',
         'period',
         'min_deposit',
+        'min_ref_wd',
         'amount',
         'status',
         'ref_percent',
