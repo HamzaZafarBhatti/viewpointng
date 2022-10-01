@@ -1,8 +1,8 @@
 
-@extends('loginlayout')
+@extends('user.loginlayout')
 
 @section('content')
-<div class="main-content bg-dark" style="background-image:url('{{url('/')}}/asset/frontend/img/bg-2.png');">
+<div class="main-content" style="background-image:url('{{url('/')}}/asset/images/viewpointng/wave-softwfa8.png');">
     <!-- Header -->
     <div class="header py-7 py-lg-8 pt-lg-9">
       <div class="container">
@@ -42,10 +42,10 @@
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <a href="{{route('login')}}" class="text-white"><small>Sign in</small></a>
+              <a href="{{route('user.login')}}" class="text-white"><small>Sign in</small></a>
             </div>
             <div class="col-6 text-right">
-              <a href="{{route('register')}}" class="text-white"><small>Create new account</small></a>
+              <a href="{{route('user.onboarding', ['username' => 'viewpoint'])}}" class="text-white"><small>Create new account</small></a>
             </div>
           </div>
         </div>

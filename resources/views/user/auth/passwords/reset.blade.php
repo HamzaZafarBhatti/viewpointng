@@ -1,4 +1,4 @@
-@extends('loginlayout')
+@extends('user.loginlayout')
 
 @section('content')
 <div class="main-content bg-dark" style="background-image:url('{{url('/')}}/asset/frontend/img/bg-2.png');">
@@ -47,7 +47,7 @@
                         </div>
                     @endif
                     <br>
-              <form role="form" action="{{ route('user.password.request') }}" method="post">
+              <form role="form" action="{{ route('user.password.do_reset') }}" method="post">
               @csrf
               <input type="hidden" name="token" value="{{ $token }}">
                 <div class="form-group mb-3">
@@ -82,10 +82,10 @@
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <a href="{{route('user.password.request')}}" class="text-white"><small>Forgot password?</small></a>
+              <a href="{{route('user.password.reset')}}" class="text-white"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
-              <a href="{{route('register')}}" class="text-white"><small>Create new account</small></a>
+              <a href="{{route('user.onboarding', ['username', 'viewpoint'])}}" class="text-white"><small>Create new account</small></a>
             </div>
           </div>
         </div>
