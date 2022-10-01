@@ -22,7 +22,7 @@ class GeneralEmail extends Mailable
     public $subject;
     public $is_msg_html;
 
-    public function __construct($from, $name, $message, $subject, $is_html = 0)
+    public function __construct($name, $message, $subject, $is_html = 0)
     {
         //
         // $this->from = $from;

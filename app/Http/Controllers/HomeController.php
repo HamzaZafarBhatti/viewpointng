@@ -46,8 +46,8 @@ class HomeController extends Controller
             ['email' => $to, 'token' => $code,  'created_at' => date("Y-m-d h:i:s")]
         );
         // send_email($to,  $name, $subject,$message);
-        $temp = Etemplate::first();
-        Mail::to($to)->send(new GeneralEmail($temp->esender, $name, $message, $subject, $is_html));
+        // $temp = Etemplate::first();
+        Mail::to($to)->send(new GeneralEmail($name, $message, $subject, $is_html));
         return back()->with('success', 'Password Reset Link Sent To Your E-mail');
     }
 
