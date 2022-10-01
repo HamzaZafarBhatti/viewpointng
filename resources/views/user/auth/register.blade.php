@@ -138,7 +138,7 @@
                                     password?</small></a>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="https://viewpointng.com/referral/viewpoint" class="text-white"><small>Create New
+                            <a href="{{ route('user.onboarding', ['username' => 'viewpoint']) }}" class="text-white"><small>Create New
                                     Account</small></a>
                         </div>
                     </div>

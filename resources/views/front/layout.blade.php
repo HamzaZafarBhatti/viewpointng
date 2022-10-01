@@ -125,7 +125,7 @@
                                 <a href="{{ route('user.login') }}">Login</a>
                             </li>
                             <li>
-                                <a href="{{ route('user.register') }}">Register</a>
+                                <a href="{{ route('user.onboarding', ['username' => 'viewpoint']) }}">Register</a>
                             </li>
                         @endguest
                         @auth

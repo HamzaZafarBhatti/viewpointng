@@ -94,7 +94,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('user.register') }}" class="nav-link text-white">
+              <a href="{{ route('user.onboarding', ['username' => 'viewpoint']) }}" class="nav-link text-white">
                 <span class="nav-link-inner--text">REGISTER</span>
               </a>
             </li>
