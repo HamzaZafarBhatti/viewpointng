@@ -52,6 +52,7 @@ class FrontendController extends Controller
         $plans->push(MlmPlan::where('status', 1)->first());
         // return $plans;
         $data['plans'] = $plans;
+        $data['faq'] = Faq::all();
         return view('front.index', $data);
     }
 

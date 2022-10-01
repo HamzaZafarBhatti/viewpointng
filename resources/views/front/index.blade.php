@@ -152,7 +152,7 @@
 
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt30">
                     <ul class="crumina-module crumina-accordion accordion--style3" id="accordion4">
-                        {{-- @foreach ($faq as $vfaq)
+                        @foreach ($faq as $vfaq)
                             <li class="accordion-panel">
                                 <div class="panel-heading">
                                     <a href="#{{ $vfaq->id }}" class="accordion-heading collapsed"
@@ -180,7 +180,7 @@
                                     </div>
                                 </div>
                             </li>
-                        @endforeach --}}
+                        @endforeach
                     </ul>
                 </div>
             </div>
