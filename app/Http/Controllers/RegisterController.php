@@ -21,7 +21,7 @@ class RegisterController extends Controller
     //
     public function register()
     {
-        $data['title'] = 'GoldMint Mining Account Registration';
+        $data['title'] = 'ViewPoint Account Registration';
         $data['account_types'] = AccountType::whereStatus(1)->get();
         if (Auth::user()) {
             return redirect()->intended('user/dashboard');
@@ -64,12 +64,12 @@ class RegisterController extends Controller
         // return $coupon_code;
         if (!$coupon_code) {
             return redirect()->route('user.register')
-                ->withErrors(['coupon' => 'ACTIVATION PIN CODE INVALID'])
+                ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
                 ->withInput();
         }
         if ($coupon_code->status == 0) {
             return redirect()->route('user.register')
-                ->withErrors(['coupon' => 'ACTIVATION PIN CODE used'])
+                ->withErrors(['coupon' => 'ACTIVATION CODE used'])
                 ->withInput();
         }
 
@@ -139,7 +139,7 @@ class RegisterController extends Controller
     {
         // return $data;
         $data['username'] = $username;
-        $data['title'] = 'GoldMint Mining Account Registration';
+        $data['title'] = 'ViewPoint Account Registration';
         $data['account_types'] = AccountType::whereStatus(1)->get();
         if (Auth::user()) {
             return redirect()->intended('user/dashboard');
@@ -184,12 +184,12 @@ class RegisterController extends Controller
         // return $coupon_code;
         if (!$coupon_code) {
             return redirect()->route('user.onboarding', $request->ref)
-                ->withErrors(['coupon' => 'ACTIVATION PIN CODE INVALID'])
+                ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
                 ->withInput();
         }
         if ($coupon_code->status == 0) {
             return redirect()->route('user.onboarding', $request->ref)
-                ->withErrors(['coupon' => 'ACTIVATION PIN CODE used'])
+                ->withErrors(['coupon' => 'ACTIVATION CODE used'])
                 ->withInput();
         }
 
@@ -269,7 +269,7 @@ class RegisterController extends Controller
                 ]);
             } else {
                 $user->delete();
-                return back()->with('error', 'This user`s Referrals are completed!');
+                return back()->with('error', 'This User`s DIRECT REFERRALS is Completed.');
             }
         }
         if (!$referee_user->parent->isEmpty()) {

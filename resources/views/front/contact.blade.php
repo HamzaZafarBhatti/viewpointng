@@ -18,17 +18,10 @@
         <div class="section-title text-center">
 
         </div>
-        <h3><span style="color: #ffffff;"><strong>How To Contact GoldMint Support directly from your account using our
-                    automated Ticketing system very fast.</strong></span></h3>
-        <p><span style="color: #ffffff;">1. <strong><a style="color: #ffffff;" href="https://goldmintng.com/login">Login</a>
-                </strong>to your GoldMint Account</span></p>
-        <p><span style="color: #ffffff;">2. Click on <strong><a style="color: #ffffff;"
-                        href="https://goldmintng.com/user/ticket">Support</a> </strong>by the 'side menu'</span></p>
-        <p><span style="color: #ffffff;">3. Click on Create Request</span></p>
-        <p><span style="color: #ffffff;">4. Type your Support Message subject, Message information, and SUBMIT
-                MESSAGE</span></p>
+        <h3><span style="color: #ffffff;"><strong>Contact ViewPoint Support directly very fast using any of our contact channels.</strong></span></h3>
+ 
         <p>&nbsp;</p>
-        <h4><span style="color: #ffffff;">E-mail: Support@goldmintng.com</span><br /><span
+        <h4><span style="color: #ffffff;">E-MAIL: support@viewpointng.com</span><br /><span
                 style="color: #ffffff;">PHONE/SMS: +2347087394692</span></h4>
         <h4><span style="color: #ffffff;"> <img src="https://goldmintng.com/asset/images/580b57fcd9996e24bc43c543.png"
                     width="31" height="31" />WhatsApp Support: +2347087394692</span></h4>

@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $title = 'Dashboard';
+        $title = 'Account Dashboard';
         $user = User::where('id', auth()->user()->id)->first();
         $profit = AffliateProfit::with('plan')->whereUser_id($user->id)->where('status', 2)->orderBy('id', 'DESC')->limit(5)->get();
         // $referrals = ;
@@ -61,7 +61,7 @@ class UserController extends Controller
     public function withdraw()
     {
         $user = User::with('bank')->whereId(auth()->user()->id)->first();
-        $data['title'] = 'Withdraw Affliate Balance';
+        $data['title'] = 'Withdraw VIDEO EARNINGS to Bank Account';
         $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
         $data['account'] = [
@@ -449,7 +449,7 @@ class UserController extends Controller
     }
     public function latest_sponsored_post()
     {
-        $data['title'] = 'Sponsored Task';
+        $data['title'] = 'VIDEO VIRAL SHARE';
         $post = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
         if($post) {
             $post->title_slug = Str::slug($post->title);

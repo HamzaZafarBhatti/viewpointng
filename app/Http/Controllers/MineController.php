@@ -12,7 +12,7 @@ class MineController extends Controller
     //
     public function mining_page()
     {
-        $data['title'] = 'Affliate Earning';
+        $data['title'] = 'ViewPoint Video Earning';
         $data['profit'] = AffliateProfit::whereUser_id(auth()->user()->id)->orderBy('id', 'DESC')->get();
         $data['latest_mine'] = AffliateProfit::whereUser_id(auth()->user()->id)->where('status', 0)->latest('id')->first();
         $user = auth()->user();

@@ -14,8 +14,7 @@
             </div>
         </div>
     </section>
-    <p><strong><span style="color: #ffffff;">Got A GoldMint Activation PIN CODE and you wish to confirm if the CODE is genuine?
-                Verify it below now.</span></strong></p>
+    <p><strong><span style="color: #ffffff;">Do you have an ACTIVATION CODE and you wish to VERIFY if the CODE is genuine or valid? You can definitely CONFIRM the validity of the CODE below on ViewPoint. Kindly paste and enter the ACTIVATION CODE below.</span></strong></p>
     <section id="contact" class="wow soneFadeUp" data-wow-delay="0.3s">
         <div class="container">
             <div class="row">
@@ -50,11 +49,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <input type="text" name="coupon" class="form-control input--squared input--dark"
-                                        placeholder="Verify pin" requried>
+                                        placeholder="Enter or Paste ACTIVATION CODE Here to Verify" requried>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn--large btn--primary">Verify</button>
+                            <button type="submit" class="btn btn--large btn--primary">VERIFY ACTIVATION CODE</button>
 
                         </form>
                     </div>

@@ -103,7 +103,7 @@
                     success: function(resp) {
                         console.log(resp)
                         if(resp.status == 0) {
-                            swal("Sorry!", "You have already earned from today's SPONSORED POST.", "error");
+                            swal("Sorry!", "You have already earned from today's VIRAL SHARE POST.", "error");
                         } else {
                             $('.share-title').empty().html(resp.html_text)
                             window.open(

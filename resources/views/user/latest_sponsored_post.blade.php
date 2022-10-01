@@ -6,8 +6,14 @@
         <div class="content-wrapper">
             <div class="row">
                 <div class="col-md-6">
-                    <h3><span style="background-color: #ffcc00;"><strong>GOLDMINT SPONSORED TASKS FOR TODAY IS
-                                BELOW</strong></span></h3>
+                    <h3><span style="background-color: #ffff99; color: #008000;"><strong>VIDEO VIRAL SHARE - VIEWPOINT</strong></span></h3>
+                    <p><strong><span style="text-decoration: underline; color: #ff0000; background-color: #ffff99;">What is Expected Of You When Participating In the VIDEO VIRAL SHARE Task</span><br /></strong></p>
+<ol>
+<li>The VIDEO VIRAL SHARE Daily task is compulsory and as such, you are to Share the TASK on Facebook as instructed in the VIRAL SHARE POST.</li>
+<li>Make sure your FACEBOOK PROFILE Link is updated on your<strong> VIEWPOINT Account Profile</strong> to ensure we check your profile before your VIRAL SHARE Payments are disbursed to you.</li>
+<li><span style="text-decoration: underline;"><strong>VIRAL SHARE TASKS are very important.</strong></span></li>
+</ol>
+<p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <!-- Basic layout-->
                     @if ($post)
@@ -31,39 +37,20 @@
                                     </div>
                                 </div>
 
-                                <p>{!! substr(strip_tags($post->details), 0, 150) !!}... <a
+                                <h4><strong>{!! substr(strip_tags($post->details), 0, 150) !!}... <a
                                         href="{{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}"
-                                        class="text-muted">Read more.</a></p>
+                                        class="text-muted">CLICK HERE TO GO TO THE VIRAL SHARE POST.</a></strong></h4>
                             </div>
 
                             <div
                                 class="card-footer bg-transparent d-sm-flex justify-content-sm-between align-items-sm-center border-top-0 pt-0 pb-3">
                                 <ul class="list-inline list-inline-dotted text-muted mb-3 mb-sm-0">
-                                    <li class="list-inline-item">{{ date('M d, Y', strtotime($post->post_date)) }}</li>
+                                    <li class="list-inline-item">Video Viral Share Posted today: {{ date('M d, Y', strtotime($post->post_date)) }}</li>
                                 </ul>
                                 <a href="{{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}"
                                     class="text-muted">Views: {{ $post->views }}</a>
                             </div>
                         </div>
-                        <p><strong><span style="background-color: #ffff99;">THINGS TO KNOW ABOUT GOLDMINTNG SPONSORED TASKS
-                                    automatically converted to GOLDMINT Mobile Data (Monthly)</span></strong></p>
-                        <ol>
-                            <li>You will earn points based on your <span style="text-decoration: underline;">GOLDMINT Mining
-                                    Hashrate Pla</span>n which would be automatically converted to <strong>GOLDMINT Mobile
-                                    Data</strong> for you.</li>
-                            <li>The <strong>GOLDMINT Mobile Data</strong> is a result of the SPONSORED Tasks you get to
-                                involve yourself by sharing <span
-                                    style="text-decoration: underline; color: #ff0000;"><strong>GOLDMINT Sponsored
-                                        Posts</strong> </span>to your Facebook Profile, WhatsApp Status, and WhatsApp Group.
-                            </li>
-                            <li>Make sure your FACEBOOK PROFILE Link is updated on your<strong> GOLDMINT Profile</strong> to
-                                ensure we check your profile before your Mobile Data would be disbursed to you.</li>
-                            <li>GOLDMINT Mobile Data would disburse your Mobile Data every Month to the Mobile Number you
-                                set on your account.</li>
-                            <li><span style="text-decoration: underline;"><strong>SPONSORED TASKS are very
-                                        important.</strong></span></li>
-                        </ol>
-                        <p>&nbsp;</p>
                     @endif
                     <!-- /basic layout -->
                 </div>

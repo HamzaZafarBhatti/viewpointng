@@ -10,7 +10,9 @@
                     <!-- Basic layout-->
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
-                            <h3 class="mb-0 text-yellow">Referral Balance Withdraw to Bank</h3>
+                            <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>EARNING BALANCE WITHDRAWAL TO BANK</strong></span></h3>
+<p><span style="color: #ffffff;"><strong>Minimum EARNINGS WITHDRAWAL: ₦3000</strong></span></p>
+                            <h3 class="mb-0 text-yellow">Earning Balance Withdraw to Bank</h3>
                         </div>
 
                         <div class="card-body">
@@ -21,10 +23,10 @@
                                     <div class="col-lg-10">
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend bg-secondary">
-                                                <span class="input-group-text text-white bg-dark currency">NGN</span>
+                                                <span class="input-group-text text-white bg-dark currency">₦</span>
                                             </div>
                                             <input type="number" step="any" name="amount" maxlength="10"
-                                                class="form-control bg-dark text-white" placeholder="10000" required="">
+                                                class="form-control bg-dark text-white" placeholder="3000" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +79,7 @@
                 <div class="col-md-12">
                     <div class="card bg-dark" id="logs">
                         <div class="card-header header-elements-inline bg-transparent">
-                            <h3 class="mb-0 text-white">Withdrawal to BANK History</h3>
+                            <h3 class="mb-0 text-white">Earning Balance Withdrawal to BANK History</h3>
                         </div>
                         <div class="table-responsive py-4">
                             <table class="table table-flush table-dark" id="datatable-buttons">

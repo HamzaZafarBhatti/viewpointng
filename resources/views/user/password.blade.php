@@ -8,13 +8,14 @@
                 <div class="col-md-6">
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline">
-                            <h3 class="mb-0 text-white">Change Password</h3>
+                            <h3><span style="color: #ffffff;"><strong>Change your ViewPoint Account password</strong></span></h3>
+<p><span style="color: #ffffff;"><strong>Kindly change your password to a more secure password or preferred one.</strong></span></p>
                         </div>
                         <div class="card-body">
                             <form action="{{ route('user.change_password') }}" method="post">
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-3 text-white">Old</label>
+                                    <label class="col-form-label col-lg-3 text-white">Current Account Password</label>
                                     <div class="col-lg-9">
                                         <input type="password" name="current_password"
                                             class="form-control bg-dark text-white" required>
@@ -26,7 +27,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-3 text-white">New</label>
+                                    <label class="col-form-label col-lg-3 text-white">New Account Password</label>
                                     <div class="col-lg-9">
                                         <input type="password" name="password" class="form-control bg-dark text-white"
                                             required>
@@ -38,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-3 text-white">Confirm</label>
+                                    <label class="col-form-label col-lg-3 text-white">Confirm Account Password</label>
                                     <div class="col-lg-9">
                                         <input type="password" name="password_confirmation"
                                             class="form-control bg-dark text-white" required>
@@ -50,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-neutral">Submit</button>
+                                    <button type="submit" class="btn btn-neutral">CHANGE PASSWORD</button>
                                 </div>
                             </form>
                         </div>

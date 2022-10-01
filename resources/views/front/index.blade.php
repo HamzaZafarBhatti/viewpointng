@@ -28,20 +28,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                    <img class="responsive-width-50" src="{{ url('/') }}/asset/images/{{ $ui->s2_image }}"
+                    <img class="responsive-width-50" src="https://viewpointng.com/asset/images/viewpointng/viewpoint-icon-min.png"
                         alt="image">
                 </div>
                 <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
                     <header class="crumina-module crumina-heading heading--h1 heading--with-decoration">
                         <h3 class="heading-title f-size-90 weight-normal no-margin">
-                            {{ $ui->header_title }}
+                            Get Entertained To Watch Videos, Get Paid For It
                         </h3>
-                        <h2 class="c-primary">{{ $ui->header_body }}</h2>
+                        <h2 class="c-primary">Stay Motivated Getting Paid Daily Watching Short Videos On ViewPoint</h2>
                     </header>
-                    <a data-scroll href="https://goldmintng.com/referral/goldmint"
-                        class="btn btn--large btn--transparent btn--secondary">Start Mining GoldMint</a> <a data-scroll
-                        href="https://goldmintng.com/login" class="btn btn--large btn--transparent btn--secondary">Login to
-                        GoldMint</a>
+                    <a data-scroll href="https://viewpointng.com/referral/viewpoint"
+                        class="btn btn--large btn--transparent btn--secondary">Watch Video & Earn</a> <a data-scroll
+                        href="https://viewpointng.com/login" class="btn btn--large btn--transparent btn--secondary">Login</a>
                 </div>
             </div>
         </div>
@@ -51,13 +50,12 @@
             <div class="row medium-padding80">
                 <div class="align-center">
                     <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
-                        <h4 class="heading-title weight-normal">GoldMint is a robotized Mining platform machine used for
-                            mining, minting & cashing out the GoldMint Coin as revenue</h4>
-                        <div class="heading-text">Mine GoldMint Coin with your most preferred time, hashrate and machine -
-                            as well as for the earning of GoldMint Coins everyday.</div>
+                        <h4 class="heading-title weight-normal">VIEWPOINT is a Video Earning Platform. Stay Motivated Getting Paid Daily Watching Short Videos On ViewPoint. Watch Videos, Get Paid, Enjoy Your Life!
+</h4>
+                        <div class="heading-text">ViewPoint - Video Earning Platform - We're one of the most popular sites that pay you to watch our videos daily to your Bank. If you want to watch videos and earn money, we're one of the best choices for you.</div>
                     </header>
                 </div><br>
-                <h3 style="text-align: center;"><span style="color: #ffffff;">How GoldMint Works</span><span
+                <h3 style="text-align: center;"><span style="color: #ffffff;">How ViewPoint Works</span><span
                         style="color: #ffcc00;">.</span></h3>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     @foreach ($service as $services)
@@ -82,21 +80,23 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
-                        <div class="heading-sup-title">Start Mining GoldMint Coins</div>
-                        <h2 class="heading-title weight-normal">{{ $ui->s6_title }}</h2>
+                        <div class="heading-sup-title">Watch Entertaining Videos and Earn Easy CASH on ViewPoint!</div>
+                        <h2 class="heading-title weight-normal">Get Entertained Watching Videos! Unlimited Videos with Unlimited Earning!</h2>
                     </header>
 
-                    <p>{{ $ui->s6_body }}</p>
+                    <p><strong>ViewPoint</strong> - Video Earning Platform - <span style="text-decoration: underline;">We're one of the most popular sites that pay you to watch our videos daily to your Bank.</span> If you want to watch videos and earn money, we're one of the best choices for you.</p>
+<p>Watch Entertaining Videos and Earn Easy CASH on ViewPoint! <br />ViewPoint allows you to earn great cash online for each video that you watch. Our video inventory refreshes daily.</p>
+<p>Get paid how you want, when you want. Earn with ViewPoint - We're a video platform with various kinds of entertaining content, providing easy ways to allow you earn good cash with us.</p>
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt30">
-                    <img class="responsive-width-50" src="{{ url('/') }}/asset/images/{{ $ui->s7_image }}"
+                    <img class="responsive-width-50" src="https://viewpointng.com/asset/frontend/img/360_F_359417854_UBOidAN8PDL5GqGPiwa1lA4WtzbisEuC.jpg"
                         alt="phone">
                 </div>
             </div>
         </div>
     </section>
-    <h2 style="text-align: center;"><span style="color: #ffffff;">Choose your Mining Hashrate Plan</span><span
+    <h2 style="text-align: center;"><span style="color: #ffffff;">Get Started with ViewPoint. <br>Choose your Video Earning Plan</span><span
             style="color: #ffcc00;">.</span></h2>
     <section class="pt-mobile-80">
         <div class="container">
@@ -111,25 +111,19 @@
                             <h5 class="pricing-title">{{ $val->name }}</h5>
                             <div class="price">
                                 <div class="price-sup-title">Price:</div>
-                                <div class="price-value">₦{{ $val->min_deposit }}</div>
+                                <div class="price-value">₦2500</div>
                             </div>
                             <ul class="pricing-tables-position">
                                 <li class="position-item">
                                     <div class="currency-details-item">
                                         <h6 class="title">Duration:</h6>
-                                        <h6 class="value">For {{ $val->duration . $val->period }}(s)</h6>
+                                        <h6 class="value">For 12months</h6>
                                     </div>
                                 </li>
                                 <li class="position-item">
                                     <div class="currency-details-item">
-                                        <h6 class="title">Referral:</h6>
-                                        <h6 class="value">{{ $val->ref_percent }}%</h6>
-                                    </div>
-                                </li>
-                                <li class="position-item">
-                                    <div class="currency-details-item">
-                                        <h6 class="title">Mining Power/ Hashrate:</h6>
-                                        <h6 class="value">{{ $val->hashrate }}</h6>
+                                        <h6 class="title">Cashout to BANK Speed</h6>
+                                        <h6 class="value">Automatic Instant</h6>
                                     </div>
                                 </li>
                             </ul>
@@ -139,12 +133,10 @@
             </div>
         </div>
     </section>
-    <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Get Started by Mining GoldMint
-                Coin!</span></strong></h3>
-    <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Unlimited Earning with the most powerful
-                Hashrate!</span></strong><br><a data-scroll href="https://goldmintng.com/referral/goldmint"
-            class="btn btn--large btn--transparent btn--secondary">Register to Start Mining!</a> <a data-scroll
-            href="https://goldmintng.com/login" class="btn btn--large btn--transparent btn--secondary">Login to GoldMint</a>
+    <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Enjoy Life Earning while Watching Videos!</span></strong></h3>
+    <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Stay Motivated Getting Paid Daily Watching Short Videos On ViewPoint!</span></strong><br><a data-scroll href="https://viewpointng.com/referral/viewpoint"
+            class="btn btn--large btn--transparent btn--secondary">Register to Start Watching Videos!</a> <a data-scroll
+            href="https://viewpointng.com/login" class="btn btn--large btn--transparent btn--secondary">Login to ViewPoint</a>
     </h3>
 
     <section class="medium-padding120 responsive-align-center">
@@ -152,10 +144,10 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
-                        <div class="heading-sup-title">Frequent questions</div>
+                        <div class="heading-sup-title">Frequently Asked Questions on ViewPoint</div>
                         <h2 class="heading-title weight-normal">{{ $ui->s5_title }}</h2>
                     </header>
-                    <p>{{ $ui->s5_body }}</p>
+                    <p>Here you can find our top frequently asked questions. Please let us know if you have any queries regarding our ViewPoint - Video Earning Platform such as inquiries, support, payments, and other stuff. We'll be glad to assist you swiftly.</p>
                 </div>
 
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt30">
@@ -199,43 +191,11 @@
             <div class="row medium-padding120">
                 <div class="align-center">
                     <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
-                        <h2 class="heading-title weight-normal">{{ $ui->s8_title }}</h2>
-                        <div class="heading-text">{{ $ui->s8_body }}</div>
+                        <h2 class="heading-title weight-normal">Watch Entertaining Videos and Earn Easy CASH on ViewPoint </h2>
+                        <div class="heading-text">Watch Entertaining Videos on ViewPoint. Bring along your friends and family to earn even faster. Get paid how you want, when you want. Earn with ViewPoint</div>
                     </header>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="counters">
-                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <div class="crumina-module crumina-counter-item">
-                                <div class="counter-numbers counter">
-                                    {{ $ui->total_assets }}
-                                </div>
-                                <h4 class="counter-title">Asset To Mine</h4>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <div class="crumina-module crumina-counter-item">
-                                <div class="counter-numbers counter">
-                                    {{ $ui->experience }}
-                                </div>
-                                <h4 class="counter-title">Mining Hashrate</h4>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <div class="crumina-module crumina-counter-item">
-                                <div class="counter-numbers counter">
-                                    {{ $ui->traders }}
-                                </div>
-                                <h4 class="counter-title">Backers</h4>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-                            <div class="crumina-module crumina-counter-item">
-                                <div class="counter-numbers counter">
-                                    {{ $ui->countries }}
-                                </div>
-                                <h4 class="counter-title">Countries supported</h4>
-                            </div>
+               
                         </div>
                     </div>
                 </div>
@@ -349,7 +309,7 @@
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb30">
                     <div class="crumina-module crumina-testimonial-item testimonial-item--with-bg">
-                        <h5 style="text-align: right;">Affiliate Earning Referral & Video Earning Balance Withdraws</h5>
+                        <h5 style="text-align: right;">Video Earning Withdraws</h5>
                         <table>
                             <thead>
                                 <tr>

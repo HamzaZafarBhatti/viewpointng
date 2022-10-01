@@ -19,10 +19,10 @@
         <div class="row">
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                 <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
-                    <div class="heading-sup-title">Frequent questions</div>
+                    <div class="heading-sup-title">Frequent Asked Questions on ViewPoint</div>
                     <h2 class="heading-title weight-normal">{{$ui->s5_title}}</h2>
                 </header>
-                <p>{{$ui->s5_body}}</p>
+                <p>Here you can find our top frequently asked questions. Please let us know if you have any queries regarding our ViewPoint - Video Earning Platform such as inquiries, support, payments, and other stuff. We'll be glad to assist you swiftly.</p>
             </div>
 
             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 mt30">

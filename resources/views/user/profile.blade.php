@@ -8,7 +8,7 @@
                 <div class="col-md-8">
                     <div class="card" id="edit">
                         <div class="card-header header-elements-inline">
-                            <h3 class="mb-0">Update your GoldMint Account Information</h3>
+                            <h3 class="mb-0">ViewPoint Account Information</h3>
                         </div>
                         <div class="card-body">
                             <form action="{{ url('user/account') }}" method="post">
@@ -61,9 +61,7 @@
                                         <input type="text" name="zip_code" class="form-control"
                                             value="{{ $user->zip_code }}">
                                     </div>
-                                    <p>Update your <strong>FACEBOOK Profile Link</strong> for verification for withdrawal of
-                                        your <span style="background-color: #ffff99;">(GoldMint Profit + Sponsor Post
-                                            Share)</span> Monthly.</p>
+                                    <p>Update your <strong>FACEBOOK Profile Link</strong> for verification for withdrawal of your VIDEO VIRAL SHARE Payout.</p>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Address:</label>
@@ -81,16 +79,9 @@
                     </div>
                     <div class="card" id="bank_details">
                         <div class="card-header header-elements-inline">
-                            <h3 class="mb-0">Update Bank details</h3>
+                            <h3 class="mb-0">Update Bank Account Information</h3>
                         </div>
-                        <p style="padding-left: 40px;"><span style="color: #333333;">Kindly ensure your BANK Account details
-                                is correct before updating it to your profile, as you'll not be able to edit it once you
-                                update it to your profile.</span></p>
-                        <p style="padding-left: 40px;"><strong><span style="color: #333333;">You'll need to contact <span
-                                        style="color: #ff0000;"><a style="color: #ff0000;"
-                                            href="https://goldmintng.com/contact" target="_blank"><span
-                                                style="color: #0000ff;">GoldMint Support</span></a></span> for assistance
-                                    with regards to changing your Bank details.</span></strong></p>
+                        
                         <div class="card-body">
                             <form action="{{ route('user.profile.update_bank') }}" method="post">
                                 @csrf
@@ -201,7 +192,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header header-elements-inline">
-                            <h3 class="mb-0">Change account photo</h3>
+                            <h3 class="mb-0">Change Profile Photo</h3>
                         </div>
 
                         <div class="card-body">

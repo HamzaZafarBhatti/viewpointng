@@ -72,7 +72,7 @@ class FrontendController extends Controller
 
     public function faq()
     {
-        $data['title'] = "Faq";
+        $data['title'] = "Frequently Asked Questions & Answers";
         $data['faq'] = Faq::all();
         return view('front.faq', $data);
     }
@@ -85,7 +85,7 @@ class FrontendController extends Controller
     }
     public function coupon()
     {
-        $data['title'] = "Activation PIN Code Dispatchers";
+        $data['title'] = "ACTIVATION CODE VENDORS";
         $data['vendors'] = Vendor::where('status', 1)->get();
         return view('front.coupon', $data);
     }
@@ -182,7 +182,7 @@ class FrontendController extends Controller
 
     public function verify_pin()
     {
-        $data['title'] = "Verify pin";
+        $data['title'] = "VERIFY ACTIVATION CODE";
         return view('front.verify_pin', $data);
     }
 
@@ -199,7 +199,7 @@ class FrontendController extends Controller
         }
         $coupon = Coupon::where('serial', $request->coupon)->first();
         if (!$coupon) {
-            Session::flash('error', 'ACTIVATION PIN CODE INVALID');
+            Session::flash('error', 'ACTIVATION CODE INVALID');
             return redirect()->route('verify_pin');
         }
         if ($coupon->status == 0) {
@@ -214,14 +214,14 @@ class FrontendController extends Controller
             if ($user) {
                 $user->coupon = $coupon;
             }
-            // Session::flash('warning', 'ACTIVATION PIN code is already used by user "' . $user->username . '"');
+            // Session::flash('warning', 'ACTIVATION CODE is already used by user "' . $user->username . '"');
             $data['title'] = "Verify pin";
             $data['verify_pin_user'] = $user;
             // return $user;
             return view('front.verify_pin', $data);
             // return redirect()->route('verify_pin');
         } else {
-            Session::flash('success', 'ACTIVATION PIN code is valid and can be used');
+            Session::flash('success', 'ACTIVATION CODE is valid and can be used');
             return redirect()->route('verify_pin');
         }
     }

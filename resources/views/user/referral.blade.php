@@ -12,20 +12,10 @@
                         @if ($set->referral == 1)
                             <div class="card bg-dark">
                                 <div class="card-header bg-transparent header-elements-inline">
-                                    <h3 class="mb-0 text-white">Referral link</h3>
+                                    <h3 class="mb-0 text-white">Dedicated Referral link</h3>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-white">Automatically Earn to your Referral Earnings Balance by sharing
-                                        your referral
-                                        link to your friends, family and associate. Also, Share your Referral Link to your
-                                        WhatsApp Groups, Facebook Groups. Earn a percentage of whatever Mining Plan your
-                                        referred user purchase to.</p><br>
-                                    <p><span style="color: #ffffff;">You Also Earn from <strong>INDIRECT Referral
-                                                Earning</strong> which is also recorded to your Referral Earning
-                                            Balance.</span></p>
-                                    <p><span style="background-color: #ffcc00; color: #000000;"><strong>Indirect Referral
-                                                Earnin</strong>g is the earnings you earn from referrals under those whom
-                                            you referred. </span></p>
+                                   
                                     <form action="javascript:void;" method="post">
                                         <div class="form-group row">
                                             <div class="col-lg-12">
@@ -34,6 +24,8 @@
                                             </div>
                                         </div>
                                     </form>
+                                <p><span style="color: #ffffff;"><strong>Automatically Earn to your Earnings Balance of Commission by sharing your referral link with your friends, family, and associate.</strong></span></p>
+<p><span style="color: #ffffff;">Share your Referral Link to your WhatsApp Groups, and Facebook Groups. Keep Earning even if your downlines decide to join ViewPoint to our <span style="color: #ff0000;"><strong><span style="background-color: #ffff99;">VIDEO EARNING PLAN</span></strong></span> or our <span style="color: #ff0000;"><strong><span style="background-color: #ffff99;">MLM EARNING PLAN</span></strong></span>.</span></p>
                                 </div>
                             </div>
                         @endif

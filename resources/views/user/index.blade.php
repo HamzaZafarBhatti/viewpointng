@@ -5,6 +5,16 @@
     <div class="container-fluid mt--6">
         <div class="content-wrapper">
             @if (auth()->user()->account_type->id == 1)
+                <h3 class="mb-0 text-black">My Referral Link</h3>
+                                </div>
+                                    <form action="javascript:void;" method="post">
+                                        <div class="form-group row">
+                                            <div class="col-lg-12">
+                                                <input type="url" readonly class="form-control bg-dark text-yellow"
+                                                    value="{{ url('/') }}/referral/{{ $user->username }}">
+                                            </div>
+                                        </div>
+                                    </form>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="row">
@@ -14,7 +24,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">Referral Balance</h5>
+                                                <h5 class="card-title text-muted mb-0 text-white">Earning Balance</h5>
                                                 <span
                                                     class="h2 font-weight-bold mb-0 text-yellow">₦{{ $user->affliate_ref_balance }}</span>
                                             </div>
@@ -28,10 +38,11 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">Sponsored Share Amount
+                                                <h5 class="card-title text-muted mb-0 text-white">Viral Video Share
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $sponsor_bal }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $sponsor_bal }}<p><span style="font-size:11px;"><span style="color:#FFFFFF;"><strong>Viral Video Share Earnings are also automatically added to your Video Earning Balance as above.</strong></span></span></p>
+</span>
                                             </div>
                                         </div>
                                     </div>
@@ -46,9 +57,9 @@
                                 <div class="row align-items-center">
                                     <div class="col-8">
                                         <!-- Surtitle -->
-                                        <h6 class="surtitle text-yellow">Last 5 mining operations</h6>
+                                        <h6 class="surtitle text-yellow">5 MOST RECENT VIDEOS WATCH HISTORY</h6>
                                         <!-- Title -->
-                                        <h5 class="h3 mb-0 text-white">Progress track</h5>
+                                        <h5 class="h3 mb-0 text-white">Video Earning History</h5>
                                     </div>
                                 </div>
                             </div>
@@ -60,9 +71,8 @@
                                         <li class="list-group-item px-0 bg-dark">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <h5 class="text-white">Hash: {{ $val->trx }} <span
-                                                            class="text-yellow">@
-                                                            {{ $val->plan->hashrate }}</span>
+                                                    <h5 class="text-white">Video Session: VIEWPOINT{{ $val->trx }} <span
+                                                            class="text-yellow">on Youtube</span>
                                                     </h5>
                                                     @php
                                                         if ($val->amount < 1) {
@@ -87,19 +97,20 @@
                         @if ($set->referral == 1)
                             <div class="card bg-dark">
                                 <div class="card-header bg-transparent header-elements-inline">
-                                    <h3 class="mb-0 text-white">Referral link</h3>
+                                    <h3 class="mb-0 text-white">My Referral link</h3>
+                                    <p><span style="color:#ffffff"><strong><span style="font-size:11px">Copy your ViewPoint Referral Link below to earn 58% Referral Commission. </span></strong></span></p>
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-white">Automatically Earn to your Referral Earnings Balance by sharing
-                                        your referral
-                                        link to your friends, family and associate. Also, Share your Referral Link to your
-                                        WhatsApp Groups, Facebook Groups. Earn a percentage of whatever Mining Plan your
-                                        referred user purchase to. You also earn from Indirect Referral Earnings.</p><br>
+                                   
                                     <form action="javascript:void;" method="post">
                                         <div class="form-group row">
                                             <div class="col-lg-12">
                                                 <input type="url" readonly class="form-control bg-dark text-yellow"
                                                     value="{{ url('/') }}/referral/{{ $user->username }}">
+                                                     <br><p class="text-white">Automatically Earn to your Earnings Balance of 58% Commission by sharing
+                                        your referral
+                                        link to your friends, family and associate. Also, Share your Referral Link to your
+                                        WhatsApp Groups, Facebook Groups. Keep Earning 58% even if your downlines decides to join ViewPoint to either our VIDEO EARNING PLAN or our MLM EARNING PLAN.</p><br>
                                             </div>
                                         </div>
                                     </form>
@@ -115,34 +126,34 @@
                         <div class="row">
                             @if (!$user->is_locked)
                             <div class="col-md-6 mb-2">
-                                <button class="btn btn-block btn-primary">Activated</button>
+                                <button class="btn btn-block btn-primary">Account Activated</button>
                             </div>
                             @else
                             <div class="col-md-6 mb-2">
-                                <button class="btn btn-block btn-danger" data-toggle="modal" data-target="#reactivate_modal">Re-activate</button>
+                                <button class="btn btn-block btn-danger" data-toggle="modal" data-target="#reactivate_modal">Re-Activate Account</button>
                             </div>
                             <div id="reactivate_modal" class="modal fade" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">   
-                                            <h3>Reactivate your Plan</h3>
+                                            <h3>Re-Activate your MLM PLAN To CYCLE {{ $user->cycle }}</h3>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <form action="{{ route('user.reactivate_plan') }}" method="post">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label class="col-form-label">Activation Code</label>
+                                                    <label class="col-form-label">ACTIVATION CODE</label>
                                                     <div class="">
                                                         <div class="input-group input-group-merge">
                                                             <input type="text" name="pin" class="form-control" required>
-                                                        </div>
+                                                        </div><p style="text-align: right;"><span style="color: #0000ff;"><a style="color: #0000ff;" href="https://viewpointng.com/coupon" target="_blank"><strong>Get ACTIVATION CODE</strong></a></span></p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn bg-success">Re-activate</button>
+                                                <button type="submit" class="btn bg-success">Re-Activate</button>
                                             </div>
                                         </form>
                                     </div>
@@ -150,11 +161,21 @@
                             </div>
                             @endif
                             <div class="col-md-6">
-                                <a type="button" href="{{ route('user.withdraw_mlm') }}" class="btn btn-block btn-success">Cashout</a>
+                                <a type="button" href="{{ route('user.withdraw_mlm') }}" class="btn btn-block btn-success">Withdraw to Bank</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                                    <h3 class="mb-0 text-black">My Referral Link</h3>
+                                </div>
+                                    <form action="javascript:void;" method="post">
+                                        <div class="form-group row">
+                                            <div class="col-lg-12">
+                                                <input type="url" readonly class="form-control bg-dark text-yellow"
+                                                    value="{{ url('/') }}/referral/{{ $user->username }}">
+                                            </div>
+                                        </div>
+                                    </form>
                 <div class="row mt-3">
                     <div class="col-lg-3">
                         <div class="row">
@@ -176,10 +197,9 @@
                                 <div class="card bg-dark border-0">
                                     <!-- Card body -->
                                     <div class="card-body">
-                                        <p class="text-white">
-                                            Unlock your ${{ $set->balance_reg_mlm }} balance and accumulcate even more earnings for each cycle
-                                            completed. Win Fantastic prizes on each completed cycles.
-                                        </p>
+                                        <p><span style="color: #ffffff;"><strong>Unlock your ₦10,000</strong> for each completed</span> <span style="color: #008000;"><strong><span style="background-color: #ffff99;">CYCLE</span></strong></span> <span style="color: #ffffff;"><strong>(2 Direct Referrals &amp; 4 Indirect Referrals)</strong> - Get Paid Daily Instantly.</span></p>
+<p><span style="color: #ffffff;">WIN Fantantic Prizes by climbing the ladder of your CYCLES.</span> <span style="color: #0000ff;"><strong><a style="color: #0000ff;" href="https://viewpointng.com/about" target="_blank">See more details here</a></strong></span></p>
+<p><span style="color: #ffffff;">Once each</span> <span style="color: #008000;"><strong><span style="background-color: #ffff99;">CYCLE</span></strong></span> <span style="color: #ffffff;">is completed. <strong>RE-ACTIVATE</strong> your MLM Account to move to the next </span><span style="color: #008000;"><strong><span style="background-color: #ffff99;">CYCLE</span></strong></span>.</p>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +215,8 @@
                                             <div class="col">
                                                 <h5 class="card-title text-muted mb-0 text-white">Direct Referrals</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_direct_referrals }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_direct_referrals }}<br><p><span style="color:#ffffff"><span style="font-size:11px">You need <strong>2 REFERRAL DOWNLINES</strong> to get your ₦10,000 Unlocked in your Account Balance</span></span></p>
+</span>
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +231,8 @@
                                                 <h5 class="card-title text-muted mb-0 text-white">Indirect Referrals
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_indirect_referrals }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_indirect_referrals }}<br><p><span style="color:#ffffff"><span style="font-size:11px">You need <strong>4 INDIRECT REFERRAL DOWNLINES</strong> to get your ₦10,000 Unlocked in your Account Balance</span></span></p>
+</span>
                                             </div>
                                         </div>
                                     </div>
@@ -224,12 +246,13 @@
                                             <div class="col">
                                                 <h5 class="card-title text-muted mb-0 text-white">Last 10 Referrals
                                                 </h5>
+                                                <p><span style="font-size:11px"><span style="color:#ffffff">The last 10 Referrals include your <strong>Direct and Indirect Referrals</strong> together. If you wish to see a separate view of your Referrals, please go to </span><strong><a href="https://viewpointng.com/user/referrals" style="color: #0000ff;" target="_blank"><span style="color:#0000cc"><span style="background-color:#ffffcc">My Referrals</span></span></a></strong><span style="color:#ffffff"><span style="background-color:#ffffcc"> </span>for a detailed analysis.</span></span></p>
+
                                                 <table class="table table-bordered text-white">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Username</th>
-                                                            <th>Email</th>
+                                                            <th>Account Username</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -238,7 +261,6 @@
                                                                 <tr>
                                                                     <td>{{ $loop->iteration }}</td>
                                                                     <td>{{ $item->username }}</td>
-                                                                    <td>{{ $item->email }}</td>
                                                                 </tr>
                                                             @endforeach
                                                         @else
@@ -258,17 +280,6 @@
                     <div class="col-lg-3">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card bg-dark border-0">
-                                    <!-- Card body -->
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">Locked Referrals</h5>
-                                                <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->locked_referral }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -277,10 +288,11 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">Cycles
+                                                <h5 class="card-title text-muted mb-0 text-white">CYCLES
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle }}</span>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle }}</span><br><p><span style="color:#ffffff"><span style="font-size:11px">Number of CYCLES completed</span></span></p>
+
                                             </div>
                                         </div>
                                     </div>
@@ -291,13 +303,10 @@
                                     <div class="card bg-dark">
                                         <div class="card-header bg-transparent header-elements-inline">
                                             <h3 class="mb-0 text-white">Referral link</h3>
+                                            <p><span style="color:#ffffff"><strong><span style="font-size:11px">Copy your ViewPoint Referral Link below to Unlock ₦10,000 for each Completed CYCLE as Earning. </span></strong></span></p>
                                         </div>
                                         <div class="card-body">
-                                            <p class="text-white">Automatically Earn to your Referral Earnings Balance by sharing
-                                                your referral
-                                                link to your friends, family and associate. Also, Share your Referral Link to your
-                                                WhatsApp Groups, Facebook Groups. Earn a percentage of whatever Mining Plan your
-                                                referred user purchase to. You also earn from Indirect Referral Earnings.</p><br>
+                                            
                                             <form action="javascript:void;" method="post">
                                                 <div class="form-group row">
                                                     <div class="col-lg-12">
@@ -306,6 +315,8 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            <br><p class="text-white">Automatically Earn by climbing the ladder of your CYCLES in bulding your network structure of REFERRALS. You Earn ₦10,000 Flat for each completed CYCLE upon referring to ViewPoint. Refer your friends, family and associate. Also, Share your Referral Link to your
+                                        WhatsApp Groups, Facebook Groups. Keep Earning and climbing your CYCLES when you refer your downlines to join ViewPoint to either our VIDEO EARNING PLAN or our MLM EARNING PLAN.</p><br>
                                         </div>
                                     </div>
                                 @endif

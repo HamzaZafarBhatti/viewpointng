@@ -27,6 +27,7 @@
             </div>
         </div>
     </section>
+    <h4><span style="color: #ffffff;"><em><strong>Proofs of Payments to our esteemed VIDEO EARNERS and MLM EARNERS on ViewPoint</strong></em></span></h4>
     <section class="medium-padding120 responsive-align-center">
         <div class="container">
             <div class="row">

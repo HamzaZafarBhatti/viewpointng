@@ -61,13 +61,16 @@
                 <div class="col-md-12">
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
-                            <h3 class="mb-0 text-white">GoldMint Coin Mining Machine</h3>
+                            <h3 class="mb-0 text-white">Welcome to your ViewPoint Video Earning Arena</h3>
                             <p><span style="color: #ffcc00;"><strong>TURN ON the Mining Machine to START MINING GoldMint
                                         Coins</strong></span></p>
                             {{-- <p><span style="color: #ffffff;"><strong>GoldMint Coin Price (GMC):</strong> <strong><span style="background-color: #ffcc00;"><span style="color: #000000;">{{$user_plan->convert_rate}} GMC = ₦1 </span><br /></span></strong></span></p> --}}
-                            <p><span style="color: #ffffff;">Upon completion of MINING, the GoldCoins would be automatically
-                                    converted to GMC Coin and then, during requests to your Bank, it'll be exchanged and
-                                    sold back for you to get it in NAIRA equivalent from your MINE BALANCE</span></p>
+                           <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>How to Earn from WATCHING VIDEO</strong></span></h3>
+<p><span style="color: #ffffff;">Click on the "<strong>PLAY BUTTON</strong>" Below to Watch the VIDEO For Today.</span></p>
+<p><span style="color: #ffffff;">You'll be automatically redirected to the Youtube Video to WATCH The Video.</span></p>
+<p><span style="color: #ffffff;"><span style="text-decoration: underline;"><strong>ViewPoint</strong> would automatically synchronize your session of watching the Video with our robust API to verify if you really watch the Video for you to get credited to your <strong>VIDEO EARNING BALANCE</strong></span> on that day. You are to ensure you stay on the VIDEO to WATCH it completely. All VIDEOS would always be short.</span></p>
+<p><span style="color: #ffffff;">Withdraw your <strong>VIDEO EARNING BALANC</strong>E alongside your Earning Balance together on 28th of every Month.</span></p>
+<p>&nbsp;</p>
                         </div>
                         <div class="card-body">
                             <div class="activate">
@@ -81,26 +84,18 @@
                                 </a>
                                 @if ($latest_mine)
                                 <div class="text-center">
-                                    <h4 class="deadline-heading">Remaining Time</h4>
+                                    <h4 class="deadline-heading">Verifying Video Session. This may take up to few hours. Please Wait...</h4><br><br><h3 style="text-align: center;"><span style="color: #ffcc00;"><strong>VIEWPOINT is currently Verifying your VIDEO SESSION. This would take a few hours...</strong></span></h3><br><p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://viewpointng.com/asset/frontend/img/Pulse-0.7s-254px.gif" width="125" height="125" /></p>
                                     <div class="deadline">
                                         <div class="deadline-format">
                                             <div>
-                                                <h4 class="hours"></h4>
-                                                <span>hours</span>
                                             </div>
                                         </div>
-                                        <span>:</span>
                                         <div class="deadline-format">
                                             <div>
-                                                <h4 class="minutes"></h4>
-                                                <span>mins</span>
                                             </div>
                                         </div>
-                                        <span>:</span>
                                         <div class="deadline-format">
                                             <div>
-                                                <h4 class="seconds"></h4>
-                                                <span>secs</span>
                                             </div>
                                         </div>
                                     </div>
@@ -115,33 +110,31 @@
                 <div class="col-md-12">
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
-                            <h3 class="mb-0 text-white">Mining History</h3>
+                            <h3 class="mb-0 text-white">ViewPoint Video Watch History</h3>
                         </div>
                         <div class="table-responsive py-4">
                             <table class="table table-flush table-dark" id="datatable-basic">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>S/N</th>
-                                        <th>Mine Hash</th>
-                                        <th>Mine Balance</th>
-                                        <th>Mine Profit</th>
-                                        <th>Started</th>
-                                        <th>Status</th>
+                                        <th>VIDEO SESSION</th>
+                                        <th>VIDEO EARNING</th>
+                                        <th>BEGIN TIME</th>
+                                        <th>CONFIRMATION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($profit as $k => $val)
                                         <tr>
                                             <td>{{ ++$k }}.</td>
-                                            <td>{{ $val->trx }}</td>
-                                            <td>{{ substr($val->amount, 0, 9) }}GMC</td>
-                                            <td>{{ $val->profit }}GMC</td>
+                                            <td>VIEWPOINT{{ $val->trx }}</td>
+                                            <td>₦{{ $val->profit }}</td>
                                             <td>{{ \Carbon\Carbon::parse($val->start_datetime)->diffForHumans() }}</td>
                                             <td>
                                                 @if ($val->status == 0)
-                                                    <span class="badge badge-success"><img src="https://goldmintng.com/asset/global_assets/mining/Gear-0.5s-1950px.gif" alt="" width="20" height="20" /> Mining...</span>
+                                                    <span class="badge badge-success"><img src="https://viewpointng.com/asset/frontend/img/Pulse-0.7s-254px.gif" alt="" width="40" height="30" /> Verifying Video Session...</span>
                                                 @else
-                                                    <span class="badge badge-primary">Mine Completed</span>
+                                                    <span class="badge badge-primary">VIDEO WATCHED</span>
                                                 @endif
                                             </td>
                                         </tr>
@@ -173,7 +166,7 @@
                         window.open('{{ $set->affiliate_yt_link }}', '_blank');
                         location.reload()
                     } else {
-                        alert('EXTRACTION already in progress!')
+                        alert('VIDEO SESSION ACTIVE. Please finish WATCHING the current VIDEO playing.')
                     }
                 }
             })

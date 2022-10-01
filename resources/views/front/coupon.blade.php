@@ -8,7 +8,7 @@
             <div class="row align-center">
                 <div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
                     <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
-                        <h2 class="heading-title heading--half-colored">PIN Code Dispatchers</h2>
+                        <h2 class="heading-title heading--half-colored">ACTIVATION CODE VENDORS</h2>
                     </header>
                 </div>
             </div>
@@ -21,11 +21,10 @@
                     <header class="crumina-module crumina-heading heading--h2 heading--with-decoration">
                         <div class="heading-sup-title">{{ $set->site_name }}</div>
                     </header>
-                    <p style="text-align: center;"><span style="color: #ffffff;">Get your <strong>GoldMint Activation PIN
-                                Code</strong> from our <span style="text-decoration: underline;">Trusted and Verified
-                                Dispatchers</span> nationwide below.</span></p>
+                    <p style="text-align: center;"><span style="color: #ffffff;">Get your <strong>VIDEO EARNING PLAN or MLM PLAN ACTIVATION CODE</strong> from our <span style="text-decoration: underline;">Trusted and Verified
+                                VENDORS</span> Nationwide below.</span></p>
                     <p style="text-align: center;"><span style="color: #ffffff;">You can CALL, SMS, WhatsApp Chat with any
-                            one of them and they'll promptly respond to you you.</span></p>
+                            one of them and they'll promptly respond to you swiftly. <br>DO NOT CHAT OR PURCHASE ACTIVATION CODES from anyone whose details is not on this list.</span></p>
                     <table>
                         <tr>
                             <thead>
@@ -42,8 +41,8 @@
                                             Active&nbsp;&nbsp; <br /></span></strong></td>
 
                                 <td><a
-                                        href="https://api.whatsapp.com/send?phone={!! $object->whatsapp !!}&text=Hello, I want to purchase {{ $set->site_name }} Activation PIN Code immediately. Hope You're online and available?"><img
-                                            src="https://goldmintng.com/asset/images/580b57fcd9996e24bc43c543.png"
+                                        href="https://api.whatsapp.com/send?phone={!! $object->whatsapp !!}&text=Hello, I want to purchase {{ $set->site_name }} ACTIVATION CODE immediately. Hope You're online and available?"><img
+                                            src="https://viewpointng.com/asset/images/580b57fcd9996e24bc43c543.png"
                                             alt="" width="22" height="22" /> Chat</a> </td>
                         </tr>
                         @endforeach

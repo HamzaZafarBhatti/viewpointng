@@ -1,17 +1,17 @@
 @extends('user.loginlayout')
 
 @section('content')
-    <div class="main-content bg-dark" style="background-image:url('{{ url('/') }}/asset/frontend/img/bg-2.png');">
+    <div class="main-content bg-dark" style="background-image:url('{{ url('/') }}/asset/images/viewpointng/wave-softwfa8.png');">
         <!-- Header -->
         <div class="header py-7 py-lg-8 pt-lg-9">
             <div class="container">
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">{{ __('GoldMint Account Registration') }}</h1>
-                            <p class="text-lead text-white">{{ $ui['header_body'] }}</p>
-                        </div>
-                    </div>
+                            <img style="display: block; margin-left: auto; margin-right: auto;" src="https://viewpointng.com/asset/images/viewpointng/viewpoint-icon-min.png" width="125" height="134" />
+                            <h1 class="text-white">{{ __('ViewPoint Account Registration') }}</h1>
+                            <p class="text-lead text-white">Register your ViewPoint Account with your best details - Stay Motivated Getting Paid Daily Watching Short Videos!</p>
+
                 </div>
             </div>
         </div>
@@ -19,9 +19,6 @@
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
                     <div class="border-0 mb-0">
-                        <div class="card-header bg-transparent pb-5">
-                            <div class="text-white text-center mt-2 mb-3">Register your GoldMint Account with your primary details - Easy way to MINE GoldMint Coin.</div>
-                        </div>
                         @include('alert')
                         <div class="card-body px-lg-5 py-lg-5">
                             @if ($set->registration == 1)
@@ -102,14 +99,14 @@
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text text-dark">Activation PIN CODE</span>
+                                                <span class="input-group-text text-dark">ACTIVATION CODE</span>
                                             </div>
                                             <input class="form-control" placeholder="" type="text" name="coupon"
                                                 required>
                                         </div>
                                         <a href="{{ route('code_dispatcher') }}" style="text-decoration: none;color:white">No
                                             code?
-                                            Click here to BUY Activation code </a>
+                                            Click here to Purchase ACTIVATION CODE</a>
                                     </div>
                                     @error('coupon')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -117,7 +114,7 @@
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text text-dark">Account Type</span>
+                                                <span class="input-group-text text-dark">ACCOUNT TYPE</span>
                                             </div>
                                             <select name="account_type_id" class="form-control" required>
                                                 <option value="">Select Account Type</option>
@@ -140,7 +137,7 @@
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default my-4">REGISTER ACCOUNT!</button>
                                     </div>
-                                    <p><span style="color: #ffffff;">By registering your account on GoldMint, you agree to our <span style="color: #ff9900;"><a style="color: #ff9900;" href="https://goldmintng.com/privacy" target="_blank">Privacy Policy</a></span>, <a href="https://goldmintng.com/terms" target="_blank"><span style="color: #ff9900;">Terms of Service</span></a>, <span style="color: #ff9900;"><a style="color: #ff9900;" href="https://goldmintng.com/page/7" target="_blank">Cookies Policy</a></span> &amp; <a href="https://goldmintng.com/page/8" target="_blank"><span style="color: #ff9900;">Disclaimer Policy</span></a></span></p>
+                                   <p><span style="color: #ffffff;">By registering your account on ViewPoint, you agree to our <span style="color: #ff9900;"><a style="color: #ff9900;" href="https://viewpointng.com/privacy" target="_blank"><span style="color: #0000ff;">Privacy Policy</span></a></span><span style="color: #0000ff;">,</span> <a href="https://viewpointng.com/terms" target="_blank"><span style="color: #ff9900;"><span style="color: #0000ff;">Terms of Service</span></span></a></span></p>
                                 </form>
                             @else
                                 <div class="text-dark text-center mt-2 mb-3"><strong>We are not currenctly accepting new
@@ -154,8 +151,8 @@
                                     password?</small></a>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="{{ route('user.register') }}" class="text-white"><small>Create New
-                                    account</small></a>
+                            <a href="https://viewpointng.com/referral/viewpoint" class="text-white"><small>Create New
+                                    Account</small></a>
                         </div>
                     </div>
                 </div>

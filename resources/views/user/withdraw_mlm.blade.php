@@ -10,7 +10,11 @@
                     <!-- Basic layout-->
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
-                            <h3 class="mb-0 text-yellow">Withdraw to Bank</h3>
+                            <h3><span style="color: #ffffff;"><strong>Account Balance Withdrawal To BANK ACCOUNT</strong></span></h3>
+<p><span style="color: #ffffff;"><strong>Withdraw your ACCOUNT BALANCE anytime, anyday. Get Paid Instantly!</strong></span></p>
+<p><span style="color: #ffffff;"><strong>It's that simple!</strong></span></p>
+<p><span style="background-color: #ffff99; color: #008000;"><strong>Minimum Withdrawal: ₦10,000</strong></span></p>
+                            <h3 class="mb-0 text-yellow">Withdraw to BANK ACCOUNT</h3>
                         </div>
 
                         <div class="card-body">
@@ -36,7 +40,7 @@
                                     <div class="col-lg-10">
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend bg-secondary">
-                                                <span class="input-group-text text-white bg-dark currency">NGN</span>
+                                                <span class="input-group-text text-white bg-dark currency">₦</span>
                                             </div>
                                             <input type="number" step="any" name="amount" maxlength="10"
                                                 class="form-control bg-dark text-white" placeholder="10000" required="">
@@ -92,7 +96,7 @@
                 <div class="col-md-12">
                     <div class="card bg-dark" id="logs">
                         <div class="card-header header-elements-inline bg-transparent">
-                            <h3 class="mb-0 text-white">Withdrawal to BANK History</h3>
+                            <h3 class="mb-0 text-white">Account Balance Withdrawal to BANK History</h3>
                         </div>
                         <div class="table-responsive py-4">
                             <table class="table table-flush table-dark" id="datatable-buttons">

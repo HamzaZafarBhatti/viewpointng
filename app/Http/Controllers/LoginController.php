@@ -15,7 +15,7 @@ class LoginController extends Controller
 
     public function login()
     {
-        $data['title'] = 'Login';
+        $data['title'] = 'Login To ViewPoint';
         if (Auth::user()) {
             return redirect()->intended('user/dashboard');
         } else {
