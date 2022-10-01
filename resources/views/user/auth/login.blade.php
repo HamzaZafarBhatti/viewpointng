@@ -1,7 +1,7 @@
 @extends('user.loginlayout')
 
 @section('content')
-    <div class="main-content bg-dark" style="background-image:url('{{ url('/') }}/asset/images/viewpointng/wave-soft0wa8.png');">
+    <div class="main-content" style="background-image:url('{{ url('/') }}/asset/images/viewpointng/wave-soft0wa8.png');">
         <!-- Header -->
         <div class="header py-7 py-lg-8 pt-lg-9">
             <div class="container">
