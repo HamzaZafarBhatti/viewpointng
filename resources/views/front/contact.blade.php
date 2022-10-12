@@ -22,9 +22,9 @@
  
         <p>&nbsp;</p>
         <h4><span style="color: #ffffff;">E-MAIL: support@viewpointng.com</span><br /><span
-                style="color: #ffffff;">PHONE/SMS: +2347087394692</span></h4>
-        <h4><span style="color: #ffffff;"> <img src="https://goldmintng.com/asset/images/580b57fcd9996e24bc43c543.png"
-                    width="31" height="31" />WhatsApp Support: +2347087394692</span></h4>
+                style="color: #ffffff;">PHONE/SMS: +2348147944875, 2349011391738</span></h4>
+        <h4><span style="color: #ffffff;"> <img src="https://viewpointng.com/asset/images/580b57fcd9996e24bc43c543.png"
+                    width="31" height="31" />WhatsApp Support: +2348147944875, +2349011391738</span></h4>
         <p>&nbsp;</p>
         <h4><span style="background-color: #ff9900; color: #000000;">You'll be instantly responded to swiftly.</span></h4>
         <section class="services address-contact">

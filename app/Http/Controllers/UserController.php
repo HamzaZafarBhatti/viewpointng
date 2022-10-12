@@ -459,6 +459,19 @@ class UserController extends Controller
         // return $data['post'];
         return view('user.latest_sponsored_post', $data);
     }
+    public function digitalskillscourses()
+    {
+        $data['title'] = 'Digital Skills & Courses';
+        $post = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
+        if($post) {
+            $post->title_slug = Str::slug($post->title);
+            $post->title_slug = Str::slug($post->title);
+        }
+        $data['post'] = $post;
+        // return $data['post'];
+        return view('user.digitalskillscourses', $data);
+    }
+
 
     public function creditReferralAmount(Request $request)
     {

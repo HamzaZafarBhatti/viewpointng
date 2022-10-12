@@ -39,8 +39,7 @@
                         <h2 class="c-primary">Stay Motivated Getting Paid Daily Watching Short Videos On ViewPoint</h2>
                     </header>
                     <a data-scroll href="https://viewpointng.com/referral/viewpoint"
-                        class="btn btn--large btn--transparent btn--secondary">Watch Video & Earn</a> <a data-scroll
-                        href="https://viewpointng.com/login" class="btn btn--large btn--transparent btn--secondary">Login</a>
+                        class="btn btn--large btn--transparent btn--secondary">Watch Video & Earn</a>
                 </div>
             </div>
         </div>

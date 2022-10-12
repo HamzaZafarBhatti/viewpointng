@@ -107,7 +107,7 @@
                         } else {
                             $('.share-title').empty().html(resp.html_text)
                             window.open(
-                                "https://www.facebook.com/sharer.php?u={{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}",
+                                "https://www.facebook.com/sharer.php?u={{ url('/') }}/single//{{ $post->id }}/{{ $post->title_slug }}",
                                 '_blank' // <- This is what makes it open in a new window.
                             );
                         }
@@ -116,7 +116,7 @@
                 })
             } else if (platform == 'wa') {
                 window.open(
-                    "https://wa.me/?text={{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}",
+                    "https://wa.me/?text={{ url('/') }}/single//{{ $post->id }}/{{ $post->title_slug }}",
                     '_blank' // <- This is what makes it open in a new window.
                 );
             }

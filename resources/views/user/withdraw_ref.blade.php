@@ -10,9 +10,9 @@
                     <!-- Basic layout-->
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
-                            <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>EARNING BALANCE WITHDRAWAL TO BANK</strong></span></h3>
-<p><span style="color: #ffffff;"><strong>Minimum EARNINGS WITHDRAWAL: ₦3000</strong></span></p>
-                            <h3 class="mb-0 text-yellow">Earning Balance Withdraw to Bank</h3>
+                            <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>REF BALANCE WITHDRAWAL TO BANK</strong></span></h3>
+<p><span style="color: #ffffff;"><strong>Minimum REF WITHDRAWAL: ₦3000</strong></span></p>
+                            <h3 class="mb-0 text-yellow">REF EARNING Balance: ₦{{ $user->affliate_ref_balance }}</h3>
                         </div>
 
                         <div class="card-body">
@@ -67,7 +67,7 @@
                                     </span>
                                 @endif
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-secondary withdraw">Withdraw to BANK</button>
+                                    <button type="submit" class="btn btn-secondary withdraw">Cashout REF Earnings to BANK</button>
                                 </div>
                             </form>
                         </div>
@@ -128,7 +128,7 @@
                 if ("{{ $user_proof }}" == 1) {
                     swal({
                             title: null,
-                            text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
+                            text: "✨CONGRATULATIONS ON YOUR LATEST CASHOUT. ✨ Upload Your Payment PROOF!",
                             icon: "success",
                             buttons: ["Close", "Upload Payment Proof Now!"],
                         })

@@ -84,7 +84,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="https://web.facebook.com/groups/5288834967817951" class="nav-link text-white">
+              <a href="https://viewpointng.com/payment_proof" class="nav-link text-white">
                 <span class="nav-link-inner--text">CASHOUTS</span>
               </a>
             </li>

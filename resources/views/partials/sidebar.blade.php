@@ -2,7 +2,7 @@
 <div class="col-lg-4 right-blog-d">
     <div class="sidebar">
         <aside class="widget w-latest-news">
-            <h5 class="widget-title">Latest Posts</h5>
+            <h5 class="widget-title">Latest Viral Share Posts</h5>
             <ul class="latest-news-list">
             @foreach($trending as $vtrending)
                 @php $vslug=$vtrending->title_slug; @endphp

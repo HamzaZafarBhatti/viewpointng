@@ -87,13 +87,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.withdraw_ref') }}">
                                 <i class="ni ni-money-coins"></i>
-                                <span class="nav-link-text">Earning Balance Withdrawal</span>
+                                <span class="nav-link-text">Ref Balance Withdrawal</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.latest_sponsored_post') }}">
                                 <i class="ni ni-single-copy-04"></i>
                                 <span class="nav-link-text">Viral Video Tasks</span>
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.digitalskillscourses') }}">
+                                <i class="ni ni-single-copy-04"></i>
+                                <span class="nav-link-text">Digital Skills & Courses</span>
                             </a>
                         </li>
                         @endif
@@ -121,38 +127,45 @@
                     <!-- Divider -->
                     <hr class="my-3">
                     <!-- Heading -->
-                    <h6 class="navbar-heading p-0 text-muted">SOCIAL</h6>
+                    <h6 class="navbar-heading p-0 text-muted">ENGAGE US</h6>
                     <!-- Navigation -->
                     <ul class="navbar-nav mb-md-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="https://facebook.com/goldmintng/">
-                                <i class="ni ni-bold-right"></i>
+                            <a class="nav-link" href="https://facebook.com/viewpointngofficial/">
+                                <i class="ni ni-curved-next"></i>
                                 <span class="nav-link-text">Facebook</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://facebook.com/groups/goldmintng">
-                                <i class="ni ni-bold-right"></i>
+                            <a class="nav-link" href="https://facebook.com/groups/viewpointng">
+                                <i class="ni ni-curved-next"></i>
                                 <span class="nav-link-text">Facebook Group</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://t.me/goldmintng">
-                                <i class="ni ni-bold-right"></i>
+                            <a class="nav-link" href="https://www.youtube.com/channel/UCmL1RHK-c26F0jtJcT1RxNQ	
+">
+                                <i class="ni ni-curved-next"></i>
+                                <span class="nav-link-text">Youtube</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://t.me/viewpointng">
+                                <i class="ni ni-curved-next"></i>
                                 <span class="nav-link-text">Telegram Channel</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://api.whatsapp.com/send?phone=2347087394692">
-                                <i class="ni ni-bold-right"></i>
-                                <span class="nav-link-text">WhatsApp Support</span>
+                            <a class="nav-link" href="https://api.whatsapp.com/send?phone=2348147944875">
+                                <i class="ni ni-curved-next"></i>
+                                <span class="nav-link-text">WhatsApp Chat</span>
                             </a>
                         </li>
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">
                     <!-- Heading -->
-                    <h6 class="navbar-heading p-0 text-muted">More</h6>
+                    <h6 class="navbar-heading p-0 text-muted">ACCOUNT SETTINGS</h6>
                     <!-- Navigation -->
                     <ul class="navbar-nav mb-md-3">
                         <li class="nav-item">
@@ -197,14 +210,15 @@
         </div>
     </nav>
     <div class="main-content" id="panel">
+         <!-- Search form -->
+                    <div>
+                        <div style="padding-left: 48px;"><h3 class="mb-0 text-dark">Account Type: {{ auth()->user()->account_type->name }}</h3></div>
+                    </div>
         <!-- Topnav -->
         <nav class="navbar navbar-top navbar-expand navbar-light">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Search form -->
-                    <div>
-                        <h3 class="mb-0 text-dark">Account Type: {{ auth()->user()->account_type->name }}</h3>
-                    </div>
+                   
                     <!-- Navbar links -->
                     <ul class="navbar-nav align-items-center ml-md-auto">
                         <li class="nav-item d-xl-none">

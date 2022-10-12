@@ -5,6 +5,11 @@
     <div class="container-fluid mt--6">
         <div class="content-wrapper">
             @if (auth()->user()->account_type->id == 1)
+           
+                            <h2 class="mb-0 text-black">Hi {{ $user->name }}!</h3><br>
+                             <div class="col-md-6">
+                                <a type="button" href="https://viewpointng.com/user/withdraws_ref" class="btn btn-block btn-success">Cashout ₦{{ $user->affliate_ref_balance }} Ref Balance</a>
+                            </div><br>
                 <h3 class="mb-0 text-black">My Referral Link</h3>
                                 </div>
                                     <form action="javascript:void;" method="post">
@@ -24,7 +29,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-muted mb-0 text-white">Earning Balance</h5>
+                                                <h5 class="card-title text-muted mb-0 text-white">Ref Balance</h5>
                                                 <span
                                                     class="h2 font-weight-bold mb-0 text-yellow">₦{{ $user->affliate_ref_balance }}</span>
                                             </div>
@@ -41,7 +46,7 @@
                                                 <h5 class="card-title text-muted mb-0 text-white">Viral Video Share
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $sponsor_bal }}<p><span style="font-size:11px;"><span style="color:#FFFFFF;"><strong>Viral Video Share Earnings are also automatically added to your Video Earning Balance as above.</strong></span></span></p>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $sponsor_bal }}<p><span style="font-size:11px;"><span style="color:#FFFFFF;"><strong>Viral Video Share Earnings are also automatically added to your Video Earning Points as above.</strong></span></span></p>
 </span>
                                             </div>
                                         </div>
@@ -136,7 +141,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">   
-                                            <h3>Re-Activate your MLM PLAN To CYCLE {{ $user->cycle }}</h3>
+                                            <h3>Re-Activate your MLM PLAN To Next CYCLE</h3>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <form action="{{ route('user.reactivate_plan') }}" method="post">
@@ -165,7 +170,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><h2 class="mb-0 text-black">Hi {{ $user->name }}!</h3><br>
                                     <h3 class="mb-0 text-black">My Referral Link</h3>
                                 </div>
                                     <form action="javascript:void;" method="post">
@@ -336,7 +341,7 @@
             if ("{{ $user_proof }}" == 1) {
                 swal({
                         title: null,
-                        text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
+                        text: "✨CONGRATULATIONS ON YOUR LATEST CASHOUT. ✨ Upload Your Payment PROOF!",
                         icon: "success",
                         buttons: ["Close", "Upload Payment Proof Now!"],
                     })

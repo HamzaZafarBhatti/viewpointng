@@ -1,7 +1,7 @@
  @php $slug  = $post->title_slug; @endphp
 <div class="widget w-contacts">
         <ul class="socials socials--white">
-            <li  class="social-item"><a class="facebook " href="https://www.facebook.com/sharer.php?u={{url('/')}}/single/{{$post->id}}/{{$slug}}" target="_blank"><i class="fab fa-facebook"></i></a></li>
+            <li  class="social-item"><a class="facebook " href="https://www.facebook.com/sharer.php?u={{url('/')}}/single/{{ $post->id }}/{{ $post->title_slug }}" target="_blank"><i class="fab fa-facebook"></i></a></li>
             {{-- <li  class="social-item"><a class="facebook " onclick="window.open('https://www.facebook.com/sharer.php?u={{url("/")}}/single/{{$post->id}}/{{$slug}}','sharer','width=500,height=700'); return false;" href="https://www.facebook.com/sharer.php?u={{url('/')}}/single/{{$post->id}}/{{$slug}}" target="_blank"><i class="fab fa-facebook"></i></a></li> --}}
             <li  class="social-item"><a class="twitter " href="https://twitter.com/intent/tweet?url={{url('/')}}/single/{{$post->id}}/{{$slug}}&text={{$post->title}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
             {{-- <li  class="social-item"><a class="twitter " onclick="window.open('https://twitter.com/intent/tweet?url={{url("/")}}/single/{{$post->id}}/{{$slug}}&text={{$post->title}}','sharer','width=500,height=700'); return false;" href="https://twitter.com/intent/tweet?url={{url('/')}}/single/{{$post->id}}/{{$slug}}&text={{$post->title}}" target="_blank"><i class="fab fa-twitter"></i></a></li> --}}

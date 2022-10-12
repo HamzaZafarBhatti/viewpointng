@@ -38,10 +38,10 @@
                                 <td>{!! $object->name !!}</td>
                                 <td>{!! $object->whatsapp !!}</td>
                                 <td><strong><span style="background-color: #008000; color: #ffffff;">&nbsp;
-                                            Active&nbsp;&nbsp; <br /></span></strong></td>
+                                            AVAILABLE&nbsp;&nbsp; <br /></span></strong></td>
 
                                 <td><a
-                                        href="https://api.whatsapp.com/send?phone={!! $object->whatsapp !!}&text=Hello, I want to purchase {{ $set->site_name }} ACTIVATION CODE immediately. Hope You're online and available?"><img
+                                        href="https://api.whatsapp.com/send?phone={!! $object->whatsapp !!}&text=Hello, I want to purchase VIEWPOINT ACTIVATION CODE immediately and Get Registered. Please send me your Bank details."><img
                                             src="https://viewpointng.com/asset/images/580b57fcd9996e24bc43c543.png"
                                             alt="" width="22" height="22" /> Chat</a> </td>
                         </tr>

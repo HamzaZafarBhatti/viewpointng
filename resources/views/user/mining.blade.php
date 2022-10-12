@@ -62,8 +62,7 @@
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
                             <h3 class="mb-0 text-white">Welcome to your ViewPoint Video Earning Arena</h3>
-                            <p><span style="color: #ffcc00;"><strong>TURN ON the Mining Machine to START MINING GoldMint
-                                        Coins</strong></span></p>
+                            <p><span style="color: #ffcc00;"><strong>Click on the PLAY BUTTON to be automatically redirected to the VIDEO To WATCH & Earn</strong></span></p>
                             {{-- <p><span style="color: #ffffff;"><strong>GoldMint Coin Price (GMC):</strong> <strong><span style="background-color: #ffcc00;"><span style="color: #000000;">{{$user_plan->convert_rate}} GMC = ₦1 </span><br /></span></strong></span></p> --}}
                            <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>How to Earn from WATCHING VIDEO</strong></span></h3>
 <p><span style="color: #ffffff;">Click on the "<strong>PLAY BUTTON</strong>" Below to Watch the VIDEO For Today.</span></p>
@@ -84,18 +83,25 @@
                                 </a>
                                 @if ($latest_mine)
                                 <div class="text-center">
-                                    <h4 class="deadline-heading">Verifying Video Session. This may take up to few hours. Please Wait...</h4><br><br><h3 style="text-align: center;"><span style="color: #ffcc00;"><strong>VIEWPOINT is currently Verifying your VIDEO SESSION. This would take a few hours...</strong></span></h3><br><p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://viewpointng.com/asset/frontend/img/Pulse-0.7s-254px.gif" width="125" height="125" /></p>
+                                    <h4 class="deadline-heading">Verifying Video Session. This may take up to few hours. Please Wait...</h4><br><br><h3 style="text-align: center;"><span style="color: #ffcc00;"><strong>VIEWPOINT is currently Verifying your VIDEO SESSION. This would take a few hours...</strong></span></h3><br><p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://viewpointng.com/asset/frontend/img/Pulse-0.7s-254px.gif" width="160" height="160" /></p>
                                     <div class="deadline">
-                                        <div class="deadline-format">
-                                            <div>
-                                            </div>
+                                    <div class="deadline-format">
+                                        <div>
+                                            <h4 class="hours"></h4>
+                                            <span>HOURS</span>
                                         </div>
-                                        <div class="deadline-format">
-                                            <div>
-                                            </div>
+                                    </div>
+                                    <div class="deadline-format">
+                                        <div>
+                                            <h4 class="minutes"></h4>
+                                            <span>MINUTES</span>
                                         </div>
-                                        <div class="deadline-format">
-                                            <div>
+                                    </div>
+                                    <div class="deadline-format">
+                                        <div>
+                                            <h4 class="seconds"></h4>
+                                            <span>SECONDS</span>
+                                        </div>
                                             </div>
                                         </div>
                                     </div>

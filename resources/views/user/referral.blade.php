@@ -12,7 +12,7 @@
                         @if ($set->referral == 1)
                             <div class="card bg-dark">
                                 <div class="card-header bg-transparent header-elements-inline">
-                                    <h3 class="mb-0 text-white">Dedicated Referral link</h3>
+                                    <h3 class="mb-0 text-white">My Dedicated Referral link</h3>
                                 </div>
                                 <div class="card-body">
                                    
@@ -31,7 +31,7 @@
                         @endif
                         <div class="card bg-dark">
                             <div class="card-header bg-transparent header-elements-inline">
-                                <h3 class="mb-0 text-white">Direct Referrals</h3>
+                                <h3 class="mb-0 text-white">My Direct Referrals (Downlines)</h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive py-4">
@@ -41,8 +41,7 @@
                                                 <th>S/N</th>
                                                 <th>Name</th>
                                                 <th>Username</th>
-                                                <th>Created</th>
-                                                <th>Updated</th>
+                                                <th>My Downline's Referral Link</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -51,8 +50,7 @@
                                                     <td>{{ ++$k }}.</td>
                                                     <td>{{ $val->referral->name ?? 'N/A' }}</td>
                                                     <td>{{ $val->referral->username ?? 'N/A' }}</td>
-                                                    <td>{{ date('Y/m/d h:i:A', strtotime($val->created_at)) }}</td>
-                                                    <td>{{ date('Y/m/d h:i:A', strtotime($val->updated_at)) }}</td>
+                                                    <td><span style="color: #ffffff;"><strong>viewpointng.com/referral/{{ $val->referral->username ?? 'N/A' }}</strong></span></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -137,7 +135,7 @@
                     if ("{{ $user_proof }}" == 1) {
                         swal({
                                 title: null,
-                                text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
+                                text: "✨CONGRATULATIONS ON YOUR LATEST CASHOUT. ✨ Upload Your Payment PROOF!",
                                 icon: "success",
                                 buttons: ["Close", "Upload Payment Proof Now!"],
                             })

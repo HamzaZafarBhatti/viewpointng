@@ -278,6 +278,7 @@ Route::name('user.')->group(function () {
             // Route::post('plan/upgrade', 'do_upgrade_plan')->name('plan.do_upgrade');
             Route::get('password', 'changePassword')->name('password');
             Route::post('password', 'submitPassword')->name('change_password');
+            Route::get('digitalskillscourses', 'digitalskillscourses')->name('digitalskillscourses');
             Route::get('latest_sponsored_task', 'latest_sponsored_post')->name('latest_sponsored_post');
             //Withdraw
             Route::get('withdraws', 'withdraw')->name('withdraw');

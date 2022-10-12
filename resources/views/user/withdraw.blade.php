@@ -11,8 +11,8 @@
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
                             <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>VIDEO EARNING WITHDRAWAL TO BANK</strong></span></h3>
-<p><span style="color: #ffffff;"><strong>Minimum VIDEO EARNINGS Request: ₦15000 Points</strong></span></p>
-                            <h3 class="mb-0 text-yellow">Withdraw VIDEO EARNINGS to Bank Account</h3>
+<p><span style="color: #ffffff;"><strong>Minimum VIDEO EARNINGS Request: N15,000 Points = ₦5000 Cash </strong></span></p>
+                            <h3 class="mb-0 text-yellow">Withdraw {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: N{{ substr($user->balance, 0, 9) }}</h3>
                         </div>
 
                         <div class="card-body">
@@ -38,7 +38,7 @@
                                     <div class="col-lg-10">
                                         <div class="input-group input-group-merge">
                                             <div class="input-group-prepend bg-secondary">
-                                                <span class="input-group-text text-white bg-dark currency">₦</span>
+                                                <span class="input-group-text text-white bg-dark currency">N</span>
                                             </div>
                                             <input type="number" step="any" name="amount" maxlength="10"
                                                 class="form-control bg-dark text-white" placeholder="15000" required="">
@@ -112,7 +112,7 @@
                                     @foreach ($withdraw as $k => $val)
                                         <tr>
                                             <td>{{ ++$k }}.</td>
-                                            <td>₦{{ substr($val->amount, 0, 9) }}</td>
+                                            <td>N{{ substr($val->amount, 0, 9) }}</td>
                                             <td>{{ $val->account_no }}</td>
                                             <td>
                                                 @if ($val->status == 1)
@@ -143,7 +143,7 @@
             if ("{{ $user_proof }}" == 1) {
                 swal({
                         title: null,
-                        text: "Congrats on your most RECENT PAYMENT on GOLDMINT",
+                        text: "✨CONGRATULATIONS ON YOUR LATEST CASHOUT. ✨ Upload Your Payment PROOF!",
                         icon: "success",
                         buttons: ["Close", "Upload Payment Proof Now!"],
                     })

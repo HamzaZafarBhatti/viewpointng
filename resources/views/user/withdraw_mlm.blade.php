@@ -14,7 +14,14 @@
 <p><span style="color: #ffffff;"><strong>Withdraw your ACCOUNT BALANCE anytime, anyday. Get Paid Instantly!</strong></span></p>
 <p><span style="color: #ffffff;"><strong>It's that simple!</strong></span></p>
 <p><span style="background-color: #ffff99; color: #008000;"><strong>Minimum Withdrawal: ₦10,000</strong></span></p>
-                            <h3 class="mb-0 text-yellow">Withdraw to BANK ACCOUNT</h3>
+                            <h3 class="mb-0 text-yellow">{{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance To Withdraw: ₦{{ substr($user->balance, 0, 9) }}</h3>
+                             @if ($user->account_type_id == 2)
+                            @if ($user->is_locked)
+                            <small class="text-success font-weight-bolder">Unlocked</small>
+                            @else
+                            <small class="text-danger font-weight-bolder">Locked</small>
+                            @endif
+                        @endif
                         </div>
 
                         <div class="card-body">

@@ -112,8 +112,8 @@
                                 {{-- <li><a href="https://goldmintng.com/page/7">Cookies Policy</a></li> --}}
                                 {{-- <li><a href="https://goldmintng.com/page/8">Disclaimer Policy</a></li> --}}
                                 <li><a href="{{ route('contact') }}">Contact us</a></li>
-                                <li><a href="https://web.facebook.com/groups/5288834967817951">Payment PROOFS</a></li>
-                                <li><a href="https://web.facebook.com/groups/5288834967817951">Facebook Group</a></li>
+                                <li><a href="https://viewpointng.com/payment_proof">Payment PROOFS</a></li>
+                                <li><a href="https://web.facebook.com/groups/viewpointng">Facebook Group</a></li>
                                 {{-- <li><a href="{{ route('coupon') }}">PIN Code Dispatchers</a></li> --}}
                             </ul>
                         </li>
