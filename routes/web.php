@@ -265,7 +265,7 @@ Route::name('user.')->group(function () {
     Route::get('user/password/reset/{token}', [HomeController::class, 'showResetForm'])->name('password.reset_token');
     Route::post('user/password/reset', [HomeController::class, 'reset'])->name('password.do_reset');
     // , 'checkBlockStatus'
-    Route::prefix('user')->middleware(['auth:web', 'checkStatus'])->group(function () {
+    Route::prefix('user')->middleware(['auth:web', 'checkStatus', 'checkBlockStatus'])->group(function () {
         Route::post('blog/earn', [BlogController::class, 'earn'])->name('blog.earn');
         Route::controller(UserController::class)->group(function () {
             Route::get('logout', 'logout')->name('logout');

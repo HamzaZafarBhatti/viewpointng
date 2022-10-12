@@ -513,4 +513,11 @@ class UserController extends Controller
         $indirect_referrals = IndirectReferral::with('referral')->whereRefereeId(auth()->user()->id)->get();
         return view('user.referral', compact('referrals', 'indirect_referrals', 'title'));
     }
+    
+    public function account_suspended()
+    {
+        Auth::guard()->logout();
+        $title = 'Account Suspended';
+        return view('errors.account_suspended', compact('title'));
+    }
 }
