@@ -136,11 +136,11 @@
 @stop
 @section('script')
     <script>
-        console.log('{{ Session::get('download_link') }}')
-        if ('{{ Session::get('download_link') }}') {
+        console.log('{{ Session::get('mlm_download_link') }}')
+        if ('{{ Session::get('mlm_download_link') }}') {
             // location.reload(true);
             $('#download_link').removeClass('disabled').attr('href',
-                    '{{ url(Session::get('download_link') ?? 'https://rubicnetwork.com/rubicnetworkadministration') }}')
+                    '{{ url(Session::get('mlm_download_link') ?? 'https://rubicnetwork.com/rubicnetworkadministration') }}')
                 .trigger('click');
         } else {
             $('#download_link').addClass('disabled')

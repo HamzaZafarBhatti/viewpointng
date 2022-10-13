@@ -68,8 +68,8 @@ class MlmCouponController extends Controller
             Session::flash('success', 'Coupon Codes successfully generated!');
             // Session::put('download_link', 'https://rubicnetwork.com/rubicnetworkadministration/coupons/download');
             $url = route('admin.mlm-coupons.download');
-            Session::put('download_link', $url);
-            Session::put('codes', json_encode($codes, JSON_PRETTY_PRINT));
+            Session::put('mlm_download_lmlm_ink', $url);
+            Session::put('mlm_codes', json_encode($codes, JSON_PRETTY_PRINT));
         } catch (\Exception $e) {
             Session::flash('error', 'Error: ' . $e->getMessage());
         }
@@ -119,5 +119,23 @@ class MlmCouponController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function coupons_download()
+    {
+        // return 'ello';
+        // return Session::get('download_link');
+        $codes = Session::get('mlm_codes');
+        // return $codes;
+        Session::forget(['mlm_codes', 'mlm_download_link']);
+        // File::delete(public_path('/upload/codes/latest_rubic_codes.txt'));
+        // File::put(public_path('/upload/codes/latest_rubic_codes.txt'),$codes);
+        // return response()->download(public_path('/upload/codes/latest_rubic_codes.txt'));
+        return response($codes)
+            ->withHeaders([
+                'Content-Type' => 'text/plain',
+                'Cache-Control' => 'no-store, no-cache',
+                'Content-Disposition' => 'attachment; filename="latest_mlm_codes.txt',
+            ]);
     }
 }
