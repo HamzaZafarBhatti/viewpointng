@@ -6,7 +6,14 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header header-elements-inline">
-                        <h6 class="card-title font-weight-semibold">Update account information : {{ $client->account_type->name }}</h6>
+                        <h6 class="card-title font-weight-semibold">
+                            Update account information : {{ $client->account_type->name }}
+                        </h6>
+                        @if ($client->account_type_id == 2)
+                        <h6>
+                            Cycle: {{ $client->cycle }}
+                        </h6>
+                        @endif
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.users.profile-update') }}" method="post">
