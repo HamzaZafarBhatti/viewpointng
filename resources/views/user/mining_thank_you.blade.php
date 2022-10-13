@@ -21,12 +21,11 @@
                 <div class="col-md-12">
                     <div class="card bg-dark">
                         <div class="card-body text-center">
-                            <h3 class="mt-5"><span>Well Done!</span></h3>
-                            <h4 class="text-uppercase mt-5">Affliate Earning has been added to your Affliate Balance</h4>
-                            <p class="mx-auto text-muted w-50 mt-4">You can now START Affliate Earning again!</p>
+                            <h3 class="mt-5"><span>VIDEO SESSION SUCCESSFULLY VERIFIED!</span></h3>
+                            <h4 class="text-uppercase mt-5">ViewPoint Have Successfully Verified You WATCHED The Video.</h4>
+                            <p class="mx-auto text-muted w-50 mt-4">You can now WATCH The Next VIDEO For Today!</p>
                             <div class="mt-5 text-center">
-                                <a class="btn btn-primary" href="{{ route('user.mining.page') }}">Back to
-                                    Affliate Earning Machine</a>
+                                <a class="btn btn-primary" href="{{ route('user.mining.page') }}"><i class="ni ni-tv-2"></i> WATCH VIDEO</a>
                             </div>
                         </div>
                     </div>

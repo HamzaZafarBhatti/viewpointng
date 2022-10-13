@@ -68,7 +68,7 @@ class MlmCouponController extends Controller
             Session::flash('success', 'Coupon Codes successfully generated!');
             // Session::put('download_link', 'https://rubicnetwork.com/rubicnetworkadministration/coupons/download');
             $url = route('admin.mlm-coupons.download');
-            Session::put('mlm_download_lmlm_ink', $url);
+            Session::put('mlm_download_link', $url);
             Session::put('mlm_codes', json_encode($codes, JSON_PRETTY_PRINT));
         } catch (\Exception $e) {
             Session::flash('error', 'Error: ' . $e->getMessage());
