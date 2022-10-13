@@ -75,6 +75,12 @@ class UserController extends Controller
     {
         // return $request;
         // return date('Y-m-d');
+        $today = Carbon::now();
+        $transaction_date = Carbon::create($today->year, $today->month, 28);
+        // return json_encode($today < $transaction_date);
+        if($today < $transaction_date) {
+            return back()->with('alert', 'You can cashout your Video Earning Points every 28th of the Month.');
+        }
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
             'details' => 'required',
@@ -152,6 +158,11 @@ class UserController extends Controller
     {
         // return $request;
         // return date('Y-m-d')
+        $today = Carbon::now();
+        $day_of_week = $today->format('l');
+        if($day_of_week != 'Sunday' || $day_of_week != 'Wednesday') {
+            return back()->with('alert', 'You can request for your Ref Earning Balance Payout every Sundays and Wednesdays to your BANK Account only.');
+        }
 
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
@@ -222,6 +233,23 @@ class UserController extends Controller
     {
         // return $request;
         // return date('Y-m-d')
+        // $today = Carbon::now();
+        // $transaction_date = Carbon::create($today->year, $today->month, 28);
+        // // return json_encode($today < $transaction_date);
+        // if($today < $transaction_date) {
+        //     return back()->with('alert', 'You can cashout your Video Earning Points every 28th of the Month.');
+        // }
+        $last_wd = Withdraw::whereUser_id(auth()->user()->id)->whereType(2)->latest()->first();
+        // return $last_wd;
+        if ($last_wd) {
+            $end = Carbon::parse($last_wd->created_at);
+            $now = Carbon::now();
+            $length = $end->diffInDays($now);
+            // return $length;
+            if ($length < 1) {
+                return back()->with('alert', 'You have already requested this payment.');
+            }
+        }
 
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
@@ -258,15 +286,6 @@ class UserController extends Controller
         if ($plan->min_withdraw_balance > $request->amount) {
             return back()->with('alert', 'You have requested less than your plan defined payment.');
         }
-        // $last_wd = Withdraw::whereUser_id($user->id)->latest()->first();
-        // if ($last_wd) {
-        //     $end = Carbon::parse($last_wd->created_at);
-        //     $now = Carbon::now();
-        //     $length = $end->diffInDays($now);
-        //     if ($length < $plan->min_ref_earn_wd_cycle) {
-        //         return back()->with('alert', 'You have already requested this payment.');
-        //     }
-        // }
         if ($user->balance > $amount || $user->balance == $amount) {
             $sav['user_id'] = Auth::user()->id;
             $sav['amount'] = $amount;
