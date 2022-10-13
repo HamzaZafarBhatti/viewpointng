@@ -86,6 +86,9 @@
 @stop
 
 @section('script')
+@php
+    $slug = \Illuminate\Support\Str::slug($post->title);
+@endphp
     <script>
         $(document).on('click', '.shareable-btn', function(e) {
             e.preventDefault();
@@ -107,7 +110,7 @@
                         } else {
                             $('.share-title').empty().html(resp.html_text)
                             window.open(
-                                "https://www.facebook.com/sharer.php?u={{ url('/') }}/single//{{ $post->id }}/{{str_slug($post->title)}}",
+                                "https://www.facebook.com/sharer.php?u={{ url('/') }}/single//{{ $post->id }}/{{ $slug }}",
                                 '_blank' // <- This is what makes it open in a new window.
                             );
                         }
@@ -116,7 +119,7 @@
                 })
             } else if (platform == 'wa') {
                 window.open(
-                    "https://wa.me/?text={{ url('/') }}/single//{{ $post->id }}/{{str_slug($post->title)}}",
+                    "https://wa.me/?text={{ url('/') }}/single//{{ $post->id }}/{{ $slug }}",
                     '_blank' // <- This is what makes it open in a new window.
                 );
             }
