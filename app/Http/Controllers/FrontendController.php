@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Image;
+use Illuminate\Support\Str;
 
 class FrontendController extends Controller
 {
@@ -128,7 +129,12 @@ class FrontendController extends Controller
     public function blog()
     {
         $data['title'] = "Blog Feed";
-        $data['posts'] = Blog::latest()->paginate(3);
+        $posts= Blog::latest()->paginate(3);
+        foreach ($posts as $post) {
+            $post->title_slug = Str::slug($post->title);
+            $post->content_limit = Str::limit($post->content, 60);
+        }
+        $data['posts'] = $posts;
         return view('front.blog', $data);
     }
 

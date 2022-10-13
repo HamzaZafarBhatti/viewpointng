@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('front.layout')
 @section('css')
 
 @stop
@@ -38,12 +38,12 @@
 							<div class="col-lg-6">
 								<div class="post__content">
 
-									<a href="{{url('/')}}/single/{{$vblog->id}}/{{str_slug($vblog->title)}}" class="h3 post__title entry-title">{{$vblog->title}}</a>
+									<a href="{{url('/')}}/single/{{$vblog->id}}/{{ $vblog->title_slug }}" class="h3 post__title entry-title">{{$vblog->title}}</a>
 
-									<p class="post__text">{!!  str_limit($vblog->content, 60);!!}..</p>
+									<p class="post__text">{!! $vblog->content_limit !!}..</p>
 
 									<div class="post-additional-info">
-										<a href="{{url('/')}}/single/{{$vblog->id}}/{{str_slug($vblog->title)}}" class="btn btn--large btn--secondary btn--transparent btn--with-icon btn--icon-right">
+										<a href="{{url('/')}}/single/{{$vblog->id}}/{{ $vblog->title_slug }}" class="btn btn--large btn--secondary btn--transparent btn--with-icon btn--icon-right">
 											Read More
 										</a>
 									</div>
