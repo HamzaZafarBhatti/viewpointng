@@ -20,7 +20,7 @@
                         <div class="card blog-horizontal">
                             <div class="card-header">
                                 <h2 class="card-title font-weight-semibold">
-                                    <a href="{{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}"
+                                    <a href="{{ url('/') }}/single/{{ $post->id }}/{{ str_slug($post->title) }}"
                                         class="text-default">{{ $post->title }}</a>
                                 </h2>
                             </div>
@@ -30,7 +30,7 @@
                                     <img class="card-img img-fluid"
                                         src="{{ url('/') }}/asset/thumbnails/{{ $post->image }}" alt="">
                                     <div class="card-img-actions-overlay card-img">
-                                        <a href="{{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}"
+                                        <a href="{{ url('/') }}/single/{{ $post->id }}/{{ str_slug($post->title) }}"
                                             class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
                                             <i class="icon-link"></i>
                                         </a>
@@ -38,7 +38,7 @@
                                 </div>
 
                                 <h4><strong>{!! substr(strip_tags($post->details), 0, 150) !!}... <a
-                                        href="{{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}"
+                                        href="{{ url('/') }}/single/{{ $post->id }}/{{ str_slug($post->title) }}"
                                         class="text-muted">CLICK HERE TO GO TO THE VIRAL SHARE POST.</a></strong></h4>
                             </div>
 
@@ -47,7 +47,7 @@
                                 <ul class="list-inline list-inline-dotted text-muted mb-3 mb-sm-0">
                                     <li class="list-inline-item">Video Viral Share Posted today: {{ date('M d, Y', strtotime($post->post_date)) }}</li>
                                 </ul>
-                                <a href="{{ url('/') }}/single/{{ $post->id }}/{{ $post->title_slug }}"
+                                <a href="{{ url('/') }}/single/{{ $post->id }}/{{ str_slug($post->title) }}"
                                     class="text-muted">Views: {{ $post->views }}</a>
                             </div>
                         </div>
