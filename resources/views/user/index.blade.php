@@ -141,7 +141,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">   
-                                            <h3>Re-Activate your MLM PLAN To Next CYCLE</h3>
+                                            <h3>Re-Activate your MLM PLAN For CYCLE {{ $user->cycle }}</h3>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <form action="{{ route('user.reactivate_plan') }}" method="post">

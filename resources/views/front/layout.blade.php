@@ -85,6 +85,7 @@
                             <a href="javascript:void;">MENU</a>
                             <ul class="sub-menu">
                                 <li><a href="{{ route('about') }}">About us</a></li>
+                                <li><a href="{{ route('blog') }}">BLOG</a></li>
                                 <li><a href="{{ route('payment_proof') }}">Payment Proof</a></li>
                             </ul>
                         </li>
@@ -171,15 +172,36 @@
 
                     <div class="widget w-contacts">
                         <ul class="socials socials--white">
-                            {{-- @foreach ($social as $socials)
-                                @if (!empty($socials->value))
-                                    <li class="social-item">
-                                        <a href="{{ $socials->value }}">
-                                            <i class="fab fa-{{ $socials->type }} woox-icon"></i>
+                            <li class="social-item">
+                                        <a href="https://facebook.com/viewpointngofficial/">
+                                            <i class="fab fa-facebook woox-icon"></i>
                                         </a>
                                     </li>
-                                @endif
-                            @endforeach --}}
+                                     <li class="social-item">
+                                        <a href="https://www.youtube.com/channel/UCmL1RHK-c26F0jtJcT1RxNQ">
+                                            <i class="fab fa-youtube woox-icon"></i>
+                                        </a>
+                                    </li>
+                                     <li class="social-item">
+                                        <a href="https://facebook.com/groups/viewpointng/">
+                                            <i class="fab fa-facebook woox-icon"></i>
+                                        </a>
+                                    </li>
+                                     <li class="social-item">
+                                        <a href="https://t.me/viewpointng">
+                                            <i class="fab fa-telegram woox-icon"></i>
+                                        </a>
+                                    </li>
+                                     <li class="social-item">
+                                        <a href="https://t.me/viewpointchat">
+                                            <i class="fab fa-telegram woox-icon"></i>
+                                        </a>
+                                    </li>
+                                     <li class="social-item">
+                                        <a href="https://wa.me/2348147944875">
+                                            <i class="fab fa-whatsapp woox-icon"></i>
+                                        </a>
+                                    </li>
                         </ul>
                     </div>
 

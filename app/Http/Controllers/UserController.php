@@ -100,7 +100,7 @@ class UserController extends Controller
             return view('user.withdraw', $data);
         }
         if ($request->pin === '000000') {
-            return back()->with('alert', 'You cannot use the default PIN 0000 to perform transactions, please go to the Account Security Page to have your PIN RESET.');
+            return back()->with('alert', 'You cannot use the default PIN 000000 to perform transactions, please go to the Account Security Page to have your PIN RESET.');
         }
         $set = $data['set'] = Setting::first();
         $user = $data['user'] = User::find(auth()->user()->id);
@@ -160,7 +160,7 @@ class UserController extends Controller
         // return date('Y-m-d')
         $today = Carbon::now();
         $day_of_week = $today->format('l');
-        if($day_of_week != 'Sunday' || $day_of_week != 'Wednesday') {
+        if($day_of_week != 'Sunday' && $day_of_week != 'Wednesday') {
             return back()->with('alert', 'You can request for your Ref Earning Balance Payout every Sundays and Wednesdays to your BANK Account only.');
         }
 
@@ -183,7 +183,7 @@ class UserController extends Controller
             return view('user.withdraw_ref', $data);
         }
         if ($request->pin === '000000') {
-            return back()->with('alert', 'You cannot use the default PIN 0000 to perform transactions, please go to the Account Security Page to have your PIN RESET.');
+            return back()->with('alert', 'You cannot use the default PIN 000000 to perform transactions, please go to the Account Security Page to have your PIN RESET.');
         }
         $set = $data['set'] = Setting::first();
         $user = $data['user'] = User::find(auth()->user()->id);

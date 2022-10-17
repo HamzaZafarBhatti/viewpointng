@@ -21,6 +21,13 @@
         <h3><span style="color: #ffffff;"><strong>Contact ViewPoint Support directly very fast using any of our contact channels.</strong></span></h3>
  
         <p>&nbsp;</p>
+        <h4><span style="text-decoration: underline; color: #000000; background-color: #ffff99;"><strong>BELOW ARE VIEWPOINT SOCIAL MEDIA HANDLES</strong></span></h4>
+<p><strong><span style="color: #ffffff;">FACEBOOK:</span> <a href="https://facebook.com/viewpointngofficial/"><span style="color: #0000ff;">https://facebook.com/viewpointngofficial/</span></a> </strong></p>
+<p><strong><span style="color: #ffffff;">FACEBOOK GROUP:</span> <a href="https://facebook.com/groups/viewpointng/"><span style="color: #0000ff;">https://facebook.com/groups/viewpointng/</span></a> </strong></p>
+<p><strong><span style="color: #ffffff;">YOUTUBE CHANNEL:</span> <a href="https://www.youtube.com/channel/UCmL1RHK-c26F0jtJcT1RxNQ"><span style="color: #0000ff;">https://www.youtube.com/channel/UCmL1RHK-c26F0jtJcT1RxNQ</span></a> </strong></p>
+<p><strong><span style="color: #ffffff;">TELEGRAM:</span> <a href="https://t.me/viewpointng"><span style="color: #0000ff;">https://t.me/viewpointng</span></a></strong></p>
+<p><strong><span style="color: #ffffff;">TELEGRAM GROUP:</span> <a href="https://t.me/viewpointchat"><span style="color: #0000ff;">https://t.me/viewpointchat</span></a> </strong></p>
+<p><strong><span style="color: #ffffff;">WHATSAPP SUPPORT:</span> 2348147944875</strong></p>
         <h4><span style="color: #ffffff;">E-MAIL: support@viewpointng.com</span><br /><span
                 style="color: #ffffff;">PHONE/SMS: +2348147944875, 2349011391738</span></h4>
         <h4><span style="color: #ffffff;"> <img src="https://viewpointng.com/asset/images/580b57fcd9996e24bc43c543.png"
