@@ -522,4 +522,19 @@ class WithdrawController extends Controller
         $data['withdraw'] = Withdraw::with('user')->whereType(3)->whereStatus('2')->latest('id')->get();
         return view('admin.withdrawal_ref.declined', $data);
     }
+    public function withdraw_delete($id)
+    {
+        $data = Withdraw::findOrFail($id);
+        // return json_encode($data->status == '0');
+        if ($data->status == '0') {
+            return back()->with('alert', 'You cannot delete an unpaid withdraw request');
+        } else {
+            $res =  $data->delete();
+            if ($res) {
+                return back()->with('success', 'Request was Successfully deleted!');
+            } else {
+                return back()->with('alert', 'Problem With Deleting Request');
+            }
+        }
+    }
 }

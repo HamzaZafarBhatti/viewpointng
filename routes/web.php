@@ -76,6 +76,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::post('update_bank_details', [AdminController::class, 'UpdateBankDetails'])->name('users.update_bank_details');
 
         Route::controller(WithdrawController::class)->group(function () {
+            Route::get('withdraw_delete/{id}', 'withdraw_delete')->name('withdraw_delete');
             //Affliate Withdraw
             Route::prefix('affliate')->name('affliate.')->group(function () {
                 Route::get('withdraw_log', 'affliate_withdraw_log')->name('withdraw_log');

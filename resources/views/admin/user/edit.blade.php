@@ -328,7 +328,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-link"
                                                         data-dismiss="modal">Close</button>
-                                                        <a href="{{ route('admin.wallet.withdraw_delete', $val->id) }}"
+                                                        <a href="{{ route('admin.withdraw_delete', $val->id) }}"
                                                             class="btn bg-danger">Proceed</a>
                                                 </div>
                                             </div>
