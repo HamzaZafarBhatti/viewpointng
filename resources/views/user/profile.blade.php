@@ -11,7 +11,7 @@
                             <h3 class="mb-0">ViewPoint Account Information</h3>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('user/account') }}" method="post">
+                            <form action="{{ route('user.profile.update_basic') }}" method="post">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Name:</label>

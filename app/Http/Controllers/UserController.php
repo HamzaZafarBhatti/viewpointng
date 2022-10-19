@@ -312,6 +312,16 @@ class UserController extends Controller
         // $data['data_operators'] = DataOperator::whereStatus(1)->get();
         return view('user.profile', $data);
     }
+    public function profile_update_basic(Request $request)
+    {
+        $user = User::findOrFail(auth()->user()->id);
+        $res = $user->update($request->except('_token'));
+        if ($res) {
+            return back()->with('success', 'Profile Updated Successfully.');
+        } else {
+            return back()->with('error', 'Error Updating Profile.');
+        }
+    }
 
     public function update_bank_details(Request $request)
     {
