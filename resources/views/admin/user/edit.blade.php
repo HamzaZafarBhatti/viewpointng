@@ -269,6 +269,7 @@
                                     <th>S/N</th>
                                     <th>Amount</th>
                                     <th>Details</th>
+                                    <th>Type</th>
                                     <th>Status</th>
                                     <th>Created</th>
                                     <th>Updated</th>
@@ -281,6 +282,15 @@
                                         <td>{{ ++$k }}.</td>
                                         <td>{{ substr($val->amount, 0, 9) }}</td>
                                         <td>{{ $val->account_no }}</td>
+                                        <td><span class="badge badge-success">
+                                            @if ($val->type == 1)
+                                                VIDEO EARNINGS
+                                            @elseif($val->type == 2)
+                                                MLM Balance
+                                            @elseif($val->type == 3)
+                                                Referral Balance
+                                            @endif
+                                        </span></td>
                                         <td>
                                             @if ($val->status == 0)
                                                 <span class="badge badge-danger">Unpaid</span>
