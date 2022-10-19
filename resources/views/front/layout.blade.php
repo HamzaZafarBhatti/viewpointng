@@ -198,7 +198,7 @@
                                         </a>
                                     </li>
                                      <li class="social-item">
-                                        <a href="https://wa.me/2348147944875">
+                                        <a href="https://chat.whatsapp.com/LN16rlwOn00HQDk3FoAto4">
                                             <i class="fab fa-whatsapp woox-icon"></i>
                                         </a>
                                     </li>
