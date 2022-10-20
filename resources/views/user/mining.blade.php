@@ -134,7 +134,7 @@
                                         <tr>
                                             <td>{{ ++$k }}.</td>
                                             <td>VIEWPOINT{{ $val->trx }}</td>
-                                            <td>₦{{ $val->profit }}</td>
+                                            <td>#{{ $val->profit }}</td>
                                             <td>{{ \Carbon\Carbon::parse($val->start_datetime)->diffForHumans() }}</td>
                                             <td>
                                                 @if ($val->status == 0)

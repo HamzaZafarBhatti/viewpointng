@@ -46,7 +46,7 @@
                                                 <h5 class="card-title text-muted mb-0 text-white">Viral Video Share
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">₦{{ $sponsor_bal }}<p><span style="font-size:11px;"><span style="color:#FFFFFF;"><strong>Viral Video Share Earnings are also automatically added to your Video Earning Points as above.</strong></span></span></p>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">#{{ $sponsor_bal }}<p><span style="font-size:11px;"><span style="color:#FFFFFF;"><strong>Viral Video Share Earnings are also automatically added to your Video Earning Points as above.</strong></span></span></p>
 </span>
                                             </div>
                                         </div>
@@ -202,7 +202,7 @@
                                 <div class="card bg-dark border-0">
                                     <!-- Card body -->
                                     <div class="card-body">
-                                        <p><span style="color: #ffffff;"><strong>Unlock your ₦10,000</strong> for each completed</span> <span style="color: #008000;"><strong><span style="background-color: #ffff99;">CYCLE</span></strong></span> <span style="color: #ffffff;"><strong>(2 Direct Referrals &amp; 4 Indirect Referrals)</strong> - Get Paid Daily Instantly.</span></p>
+                                        <p><span style="color: #ffffff;"><strong>Unlock your ₦10,000</strong> for each completed</span> <span style="color: #008000;"><strong><span style="background-color: #ffff99;">CYCLE</span></strong></span> <span style="color: #ffffff;"><strong>(4 Direct Referrals &amp; 2 Indirect Referrals)</strong> - Get Paid Daily Instantly.</span></p>
 <p><span style="color: #ffffff;">WIN Fantantic Prizes by climbing the ladder of your CYCLES.</span> <span style="color: #0000ff;"><strong><a style="color: #0000ff;" href="https://viewpointng.com/about" target="_blank">See more details here</a></strong></span></p>
 <p><span style="color: #ffffff;">Once each</span> <span style="color: #008000;"><strong><span style="background-color: #ffff99;">CYCLE</span></strong></span> <span style="color: #ffffff;">is completed. <strong>RE-ACTIVATE</strong> your MLM Account to move to the next </span><span style="color: #008000;"><strong><span style="background-color: #ffff99;">CYCLE</span></strong></span>.</p>
                                     </div>
@@ -220,7 +220,7 @@
                                             <div class="col">
                                                 <h5 class="card-title text-muted mb-0 text-white">Direct Referrals</h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_direct_referrals }}<br><p><span style="color:#ffffff"><span style="font-size:11px">You need <strong>2 REFERRAL DOWNLINES</strong> to get your ₦10,000 Unlocked in your Account Balance</span></span></p>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_direct_referrals }}<br><p><span style="color:#ffffff"><span style="font-size:11px">You need <strong>4 REFERRAL DOWNLINES</strong> to get your ₦10,000 Unlocked in your Account Balance</span></span></p>
 </span>
                                             </div>
                                         </div>
@@ -236,7 +236,7 @@
                                                 <h5 class="card-title text-muted mb-0 text-white">Indirect Referrals
                                                 </h5>
                                                 <span
-                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_indirect_referrals }}<br><p><span style="color:#ffffff"><span style="font-size:11px">You need <strong>4 INDIRECT REFERRAL DOWNLINES</strong> to get your ₦10,000 Unlocked in your Account Balance</span></span></p>
+                                                    class="h2 font-weight-bold mb-0 text-yellow">{{ $user->cycle_indirect_referrals }}<br><p><span style="color:#ffffff"><span style="font-size:11px">You need <strong>2 INDIRECT REFERRAL DOWNLINES</strong> to get your ₦10,000 Unlocked in your Account Balance</span></span></p>
 </span>
                                             </div>
                                         </div>

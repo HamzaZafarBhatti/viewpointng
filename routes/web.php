@@ -77,6 +77,8 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
 
         Route::controller(WithdrawController::class)->group(function () {
             Route::get('withdraw_delete/{id}', 'withdraw_delete')->name('withdraw_delete');
+            Route::get('withdraw_approve/{id}', 'withdraw_approve')->name('withdraw_approve');
+            Route::get('withdraw_decline/{id}', 'withdraw_decline')->name('withdraw_decline');
             //Affliate Withdraw
             Route::prefix('affliate')->name('affliate.')->group(function () {
                 Route::get('withdraw_log', 'affliate_withdraw_log')->name('withdraw_log');
