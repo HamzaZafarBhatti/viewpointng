@@ -267,6 +267,7 @@
                             <thead>
                                 <tr>
                                     <th>S/N</th>
+                                    <th>Facebook Profile Link</th>
                                     <th>Amount</th>
                                     <th>Details</th>
                                     <th>Type</th>
@@ -280,6 +281,7 @@
                                 @foreach ($withdraw as $k => $val)
                                     <tr>
                                         <td>{{ ++$k }}.</td>
+                                        <td>{{ $val->user->fb_url }}</td>
                                         <td>{{ substr($val->amount, 0, 9) }}</td>
                                         <td>{{ $val->account_no }}</td>
                                         <td><span class="badge badge-success">

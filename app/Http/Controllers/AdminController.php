@@ -171,7 +171,7 @@ class AdminController extends Controller
     {
         $data['client'] = $user = User::with('account_type')->find($id);
         $data['title'] = $user->name;
-        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
+        $data['withdraw'] = Withdraw::with('user')->whereUser_id($user->id)->orderBy('id', 'DESC')->get();
         $data['profit'] = AffliateProfit::whereUser_id($user->id)->orderBy('id', 'DESC')->get();
         // $data['earning'] = Earning::whereReferral($user->id)->orderBy('id', 'DESC')->get();
         $data['referral'] = Referral::where('referee_id', $user->id)->orderBy('id', 'DESC')->get();

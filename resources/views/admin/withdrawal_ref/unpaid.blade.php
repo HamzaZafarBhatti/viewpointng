@@ -17,6 +17,7 @@
                                 <tr>
                                     <th>S/N</th>
                                     <th>Account Name</th>
+                                    <th>Facebook Profile Link</th>
                                     <th>Amount</th>
                                     <th>Account Number</th>
                                     <th>Bank name</th>
@@ -30,6 +31,7 @@
                                     <tr>
                                         <td>{{ ++$k }}. <input type="checkbox" class="withdraw_ids" name="withdraw_ids" value="{{ $val->id }}"></td>
                                         <td>{{ $val->user->name }}</td>
+                                        <td>{{ $val->user->fb_url ?? 'N/A' }}</td>
                                         <td>₦{{ substr($val->amount, 0, 9) }}</td>
                                         <td>{{ $val->account_no }}</td>
                                         <td>{{ $val->bank_name }}</td>

@@ -56,10 +56,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-lg-2">Facebook Profile Link:</label>
+                                    <label class="col-form-label col-lg-2">Zip Code:</label>
                                     <div class="col-lg-10">
                                         <input type="text" name="zip_code" class="form-control"
                                             value="{{ $user->zip_code }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-lg-2">FACEBOOK Profile Link:</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" name="fb_url" class="form-control"
+                                            value="{{ $user->fb_url }}">
                                     </div>
                                     <p>Update your <strong>FACEBOOK Profile Link</strong> for verification for withdrawal of your VIDEO VIRAL SHARE Payout.</p>
                                 </div>

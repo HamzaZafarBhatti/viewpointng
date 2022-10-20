@@ -61,6 +61,7 @@ class User extends Authenticatable
         'cycle',
         'locked_referral',
         'is_locked',
+        'fb_url',
     ];
 
     /**

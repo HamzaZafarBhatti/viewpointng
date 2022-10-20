@@ -14,6 +14,7 @@
                                 <tr>
                                     <th>S/N</th>
                                     <th>Name</th>
+                                    <th>Facebook Profile Link</th>
                                     <th>Amount</th>                                                                       
                                     <th>Account number</th>
                                     <th>Bank name</th>
@@ -27,6 +28,7 @@
                                 <tr>
                                     <td>{{++$k}}.</td>
                                     <td>{{-- <a href="{{url('admin/manage-user')}}/{{$val->user_id}}"> --}}{{$val->user->name}}{{-- </a> --}}</td>
+                                    <td>{{ $val->user->fb_url ?? 'N/A' }}</td>
                                     <td>{{substr($val->amount,0,9)}}BTC</td>
                                     <td>{{$val->account_no}}</td> 
                                     <td>{{$val->bank_name}}</td> 

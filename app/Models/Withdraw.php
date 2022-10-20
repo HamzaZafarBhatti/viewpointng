@@ -20,7 +20,7 @@ class Withdraw extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->select('id', 'name', 'username');
+        return $this->belongsTo(User::class)->select('id', 'name', 'username', 'fb_url');
     }
 
     protected function bankName(): Attribute
