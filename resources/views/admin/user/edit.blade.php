@@ -309,14 +309,14 @@
                                                         <i class="icon-menu9"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        @if ($val->status == 0)
-                                                            <a class='dropdown-item'
-                                                                href="{{ route('admin.wallet.withdraw_approve', $val->id) }}"><i
-                                                                    class="icon-thumbs-up3 mr-2"></i>Approve request</a>
-                                                            <a class='dropdown-item'
-                                                                href="{{ route('admin.wallet.withdraw_decline', $val->id) }}"><i
-                                                                    class="icon-thumbs-down3 mr-2"></i>Decline request</a>
-                                                        @endif
+                                                        <!--@if ($val->status == 0)-->
+                                                        <!--    <a class='dropdown-item'-->
+                                                        <!--        href="{{ route('admin.withdraw_approve', $val->id) }}"><i-->
+                                                        <!--            class="icon-thumbs-up3 mr-2"></i>Approve request</a>-->
+                                                        <!--    <a class='dropdown-item'-->
+                                                        <!--        href="{{ route('admin.withdraw_decline', $val->id) }}"><i-->
+                                                        <!--            class="icon-thumbs-down3 mr-2"></i>Decline request</a>-->
+                                                        <!--@endif-->
                                                         <a data-toggle="modal" data-target="#{{ $val->id }}delete"
                                                             class="dropdown-item"><i class="icon-bin2 mr-2"></i>Delete</a>
                                                     </div>

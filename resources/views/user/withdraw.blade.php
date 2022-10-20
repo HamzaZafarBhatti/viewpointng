@@ -11,8 +11,8 @@
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
                             <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>VIDEO EARNING WITHDRAWAL TO BANK</strong></span></h3>
-<p><span style="color: #ffffff;"><strong>Minimum VIDEO EARNINGS Request: N15,000 Points = ₦5000 Cash </strong></span></p>
-                            <h3 class="mb-0 text-yellow">Withdraw {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: N{{ substr($user->balance, 0, 9) }}</h3>
+<p><span style="color: #ffffff;"><strong>Minimum VIDEO EARNINGS Request: #15,000 Points = ₦5000 Cash </strong></span></p>
+                            <h3 class="mb-0 text-yellow">Withdraw {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: #{{ substr($user->balance, 0, 9) }}</h3>
                         </div>
 
                         <div class="card-body">
@@ -112,7 +112,7 @@
                                     @foreach ($withdraw as $k => $val)
                                         <tr>
                                             <td>{{ ++$k }}.</td>
-                                            <td>N{{ substr($val->amount, 0, 9) }}</td>
+                                            <td>#{{ substr($val->amount, 0, 9) }}</td>
                                             <td>{{ $val->account_no }}</td>
                                             <td>
                                                 @if ($val->status == 1)
