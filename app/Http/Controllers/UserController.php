@@ -78,7 +78,7 @@ class UserController extends Controller
         $today = Carbon::now();
         $transaction_date = Carbon::create($today->year, $today->month, 28);
         // return json_encode($today < $transaction_date);
-        if($today < $transaction_date) {
+        if($today < $transaction_date && ($today->hour >= 7 && $today->hour <= 9)) {
             return back()->with('alert', 'You can cashout your Video Earning Points every 28th of the Month.');
         }
         $validator = Validator::make($request->all(), [
