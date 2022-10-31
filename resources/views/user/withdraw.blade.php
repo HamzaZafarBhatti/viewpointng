@@ -11,7 +11,8 @@
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
                             <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>VIDEO EARNING WITHDRAWAL TO BANK</strong></span></h3>
-<p><span style="color: #ffffff;"><strong>Minimum VIDEO EARNINGS Request: #15,000 Points = ₦5000 Cash </strong></span></p>
+<p><span style="color: #ffffff;"><strong>Minimum VIDEO EARNINGS Request: #15,000 Points = ₦5000 Cash </strong></span></p><br>
+<p><span style="color: #ffffff;">VIDEO EARNING Withdrawal is</span> <span style="background-color: #ffcc99;"><strong>every 28th of the Month for VIDEO EARNERS from (7AM to 9AM)</strong></span> <span style="color: #ffffff;">(No Referrals)</span></p>
                             <h3 class="mb-0 text-yellow">Withdraw {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: #{{ substr($user->balance, 0, 9) }}</h3>
                         </div>
 

@@ -245,7 +245,7 @@
                     </ul>
                     <div class="">
                         <h3 class="mb-0 text-dark">
-                            {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: ₦{{ substr($user->balance, 0, 9) }}
+                            {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: #{{ substr($user->balance, 0, 9) }}
                         </h3>
                         @if ($user->account_type_id == 2)
                             @if ($user->is_locked)
