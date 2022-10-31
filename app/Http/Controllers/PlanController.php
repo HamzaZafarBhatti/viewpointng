@@ -81,6 +81,7 @@ class PlanController extends Controller
             'code_length' => $request->code_length,
             'active_period' => $request->active_period,
             'mining_time' => $request->mining_time,
+            'referral_withdraw_fee' => $request->referral_withdraw_fee,
             'account_type_id' => 1
         ]);
         if ($res) {
@@ -162,6 +163,7 @@ class PlanController extends Controller
             'code_length' => $request->code_length,
             'active_period' => $request->active_period,
             'mining_time' => $request->mining_time,
+            'referral_withdraw_fee' => $request->referral_withdraw_fee,
         ]);
         if ($res) {
             return redirect()->route('admin.plans.index')->with('success', 'Saved Successfully!');

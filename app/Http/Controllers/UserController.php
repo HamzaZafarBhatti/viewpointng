@@ -192,19 +192,19 @@ class UserController extends Controller
         }
         $plan = Plan::first();
         // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
-        $amount = $request->amount;
+        $amount = $request->amount - $plan->referral_withdraw_fee;
+        // $amount = $request->amount;
         if ($plan->min_ref_wd > $request->amount) {
             return back()->with('alert', 'You have requested less than your plan defined payment.');
         }
-        $amount = $request->amount;
-        if ($user->affliate_ref_balance > $amount || $user->affliate_ref_balance == $amount) {
+        if ($user->affliate_ref_balance > $request->amount || $user->affliate_ref_balance == $request->amount) {
             $sav['user_id'] = Auth::user()->id;
             $sav['amount'] = $amount;
             $sav['status'] = '0';
             $sav['type'] = 3;
             $sav['account_no'] = $request->details;
             Withdraw::create($sav);
-            $user->affliate_ref_balance = $user->affliate_ref_balance - $amount;
+            $user->affliate_ref_balance = $user->affliate_ref_balance - $request->amount;
             $user->save();
             // if ($set->email_notify == 1) {
             //     $temp = Etemplate::first();

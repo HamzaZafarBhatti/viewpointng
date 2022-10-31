@@ -286,7 +286,7 @@ Route::name('user.')->group(function () {
             //Withdraw
             Route::get('withdraws', 'withdraw')->name('withdraw');
             Route::post('withdraws', 'withdraw_submit')->name('withdraw_submit');
-            //MLM Withdraw
+            //Referral Withdraw
             Route::get('withdraws_ref', 'withdraw_ref')->name('withdraw_ref');
             Route::post('withdraws_ref', 'withdraw_ref_submit')->name('withdraw_ref_submit');
             //MLM Withdraw

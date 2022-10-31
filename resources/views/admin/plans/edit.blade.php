@@ -79,6 +79,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">WITHDRAWAL FEE FOR REFERRAL EARNING:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" step="any" name="referral_withdraw_fee" value="{{ $plan->referral_withdraw_fee }}" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Amount:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">

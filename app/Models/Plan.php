@@ -29,5 +29,6 @@ class Plan extends Model
         'active_period',
         'mining_time',
         'account_type_id',
+        'referral_withdraw_fee',
     ];
 }
