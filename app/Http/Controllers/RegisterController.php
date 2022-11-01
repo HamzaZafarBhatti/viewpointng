@@ -13,6 +13,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -47,21 +48,21 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|numeric|min:8|unique:users',
             'password' => 'required|string|min:4|confirmed',
-            'coupon' => 'required|string|regex:/^\S*$/u',
+            'coupon' => 'string|regex:/^\S*$/u',
         ]);
         // $validated = $validator->validated();
         if ($validator->fails()) {
             // adding an extra field 'error'...
             // $data['title'] = 'Register';
             $errors = $validator->errors();
-            // return $errors;
+            Log::info($errors);
             return redirect()->route('user.register')
                 ->withErrors($errors)
                 ->withInput();
         }
 
         $coupon_code = Coupon::where('serial', $request->coupon)->first();
-        // return $coupon_code;
+        return $coupon_code;
         if (!$coupon_code) {
             return redirect()->route('user.register')
                 ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
@@ -157,7 +158,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|numeric|min:8|unique:users',
             'password' => 'required|string|min:4|confirmed',
-            'coupon' => 'required|string|regex:/^\S*$/u',
+            'coupon' => 'string|regex:/^\S*$/u',
             'ref' => 'required|string',
         ]);
         if ($validator->fails()) {
@@ -173,6 +174,7 @@ class RegisterController extends Controller
 
 
         $referee_user = User::with('parent')->whereUsername($request->ref)->first();
+        // return $referee_user;
         // return json_encode(!$referee_user->parent->isEmpty());
         if (!$referee_user) {
             return redirect()->route('user.onboarding', $request->ref)

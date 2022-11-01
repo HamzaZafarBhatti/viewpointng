@@ -8,10 +8,15 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <img style="display: block; margin-left: auto; margin-right: auto;" src="https://viewpointng.com/asset/images/viewpointng/viewpoint-icon-min.png" width="125" height="134" />
+                            <img style="display: block; margin-left: auto; margin-right: auto;"
+                                src="https://viewpointng.com/asset/images/viewpointng/viewpoint-icon-min.png" width="125"
+                                height="134" />
                             <h1 class="text-white">{{ __('ViewPoint Account Registration') }}</h1>
-                            <p class="text-lead text-white">Register your ViewPoint Account with your best details - Stay Motivated Getting Paid Daily Watching Short Videos!</p>
+                            <p class="text-lead text-white">Register your ViewPoint Account with your best details - Stay
+                                Motivated Getting Paid Daily Watching Short Videos!</p>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,17 +100,31 @@
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text text-dark">ACTIVATION CODE</span>
+                                                <span class="input-group-text text-dark">Payment TYPE</span>
                                             </div>
-                                            <input class="form-control" placeholder="" type="text" name="coupon"
-                                                required>
+                                            <select name="payment_type" id="payment_type" class="form-control" required>
+                                                <option value="">Select Payment Type</option>
+                                                <option value="paystack">PAYSTACK</option>
+                                                <option value="activation_code">ACTIVATION CODE</option>
+                                            </select>
                                         </div>
-                                        <a href="{{ route('code_dispatcher') }}" style="text-decoration: none;color:white">No code?
-                                            Click here to Purchase ACTIVATION CODE</a>
                                     </div>
-                                    @error('coupon')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    <div class="activation_code" style="display: none">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-merge input-group-alternative">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text text-dark">ACTIVATION CODE</span>
+                                                </div>
+                                                <input class="form-control" placeholder="" type="text" name="coupon">
+                                            </div>
+                                            <a href="{{ route('code_dispatcher') }}"
+                                                style="text-decoration: none;color:white">No code?
+                                                Click here to Purchase ACTIVATION CODE</a>
+                                        </div>
+                                        @error('coupon')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
                                         <div class="input-group input-group-merge input-group-alternative">
                                             <div class="input-group-prepend">
@@ -124,7 +143,14 @@
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default my-4">REGISTER ACCOUNT!</button>
                                     </div>
-                                  <p><span style="color: #ffffff;">By registering your account on ViewPoint, you agree to our <span style="color: #ff9900;"><a style="color: #ff9900;" href="https://viewpointng.com/privacy" target="_blank"><span style="color: #0000ff;">Privacy Policy</span></a></span><span style="color: #0000ff;">,</span> <a href="https://viewpointng.com/terms" target="_blank"><span style="color: #ff9900;"><span style="color: #0000ff;">Terms of Service</span></span></a></span></p>
+                                    <p><span style="color: #ffffff;">By registering your account on ViewPoint, you agree to
+                                            our <span style="color: #ff9900;"><a style="color: #ff9900;"
+                                                    href="https://viewpointng.com/privacy" target="_blank"><span
+                                                        style="color: #0000ff;">Privacy Policy</span></a></span><span
+                                                style="color: #0000ff;">,</span> <a href="https://viewpointng.com/terms"
+                                                target="_blank"><span style="color: #ff9900;"><span
+                                                        style="color: #0000ff;">Terms of Service</span></span></a></span>
+                                    </p>
                                 </form>
                             @else
                                 <div class="text-dark text-center mt-2 mb-3"><strong>We are not currenctly accepting new
@@ -138,11 +164,27 @@
                                     password?</small></a>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="{{ route('user.onboarding', ['username' => 'viewpoint']) }}" class="text-white"><small>Create New
+                            <a href="{{ route('user.onboarding', ['username' => 'viewpoint']) }}"
+                                class="text-white"><small>Create New
                                     Account</small></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    @stop
+    </div>
+@stop
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#payment_type').change(function() {
+                var value = this.value;
+                console.log(value)
+                if(value === 'activation_code') {
+                    $('#'+value).fadeToggle();
+                }
+            })
+        })
+    </script>
+@endsection
