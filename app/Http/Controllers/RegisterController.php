@@ -142,6 +142,7 @@ class RegisterController extends Controller
         $data['username'] = $username;
         $data['title'] = 'ViewPoint Account Registration';
         $data['account_types'] = AccountType::whereStatus(1)->get();
+        // return json_encode($_SERVER['HTTP_HOST']);
         if (Auth::user()) {
             return redirect()->intended('user/dashboard');
         } else {
@@ -158,7 +159,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|numeric|min:8|unique:users',
             'password' => 'required|string|min:4|confirmed',
-            'coupon' => 'string|regex:/^\S*$/u',
+            'coupon' => 'nullable|string|regex:/^\S*$/u',
             'ref' => 'required|string',
         ]);
         if ($validator->fails()) {
@@ -181,19 +182,23 @@ class RegisterController extends Controller
                 ->withErrors(['ref' => 'REFERRAL USERNAME INVALID'])
                 ->withInput();
         }
-
-        $coupon_code = Coupon::where('serial', $request->coupon)->first();
+        $coupon_code = null;
         // return $coupon_code;
-        if (!$coupon_code) {
-            return redirect()->route('user.onboarding', $request->ref)
-                ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
-                ->withInput();
+        if($request->coupon) {
+            $coupon_code = Coupon::where('serial', $request->coupon)->first();
+            // return $coupon_code;
+            if (!$coupon_code) {
+                return redirect()->route('user.onboarding', $request->ref)
+                    ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
+                    ->withInput();
+            }
+            if ($coupon_code->status == 0) {
+                return redirect()->route('user.onboarding', $request->ref)
+                    ->withErrors(['coupon' => 'ACTIVATION CODE used'])
+                    ->withInput();
+            }
         }
-        if ($coupon_code->status == 0) {
-            return redirect()->route('user.onboarding', $request->ref)
-                ->withErrors(['coupon' => 'ACTIVATION CODE used'])
-                ->withInput();
-        }
+        // return $coupon_code;
 
         $basic = Setting::first();
 
@@ -226,7 +231,7 @@ class RegisterController extends Controller
             'balance' => $request->account_type_id == 1 ? $basic->balance_reg_affiliate : $basic->balance_reg_mlm,
             'ip_address' => user_ip(),
             'status' => 1,
-            'coupon_id' => $coupon_code->id,
+            'coupon_id' => $coupon_code ? $coupon_code->id : null,
             'account_type_id' => $request->account_type_id,
             'plan_id' => 10,
             'affliate_ref_balance' => 0,
@@ -315,7 +320,9 @@ class RegisterController extends Controller
                 $parent->update($data);
             }
         }
-        $coupon_code->update(['status' => 0]);
+        if($coupon_code) {
+            $coupon_code->update(['status' => 0]);
+        }
 
         // if ($basic->email_verification == 1) {
         //     $text = "Your Email Verification Code Is: $user->verification_code";

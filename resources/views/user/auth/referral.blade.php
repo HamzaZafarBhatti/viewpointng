@@ -27,7 +27,7 @@
                         @include('alert')
                         <div class="card-body px-lg-5 py-lg-5">
                             @if ($set->registration == 1)
-                                <form role="form" action="{{ route('user.do_onboarding') }}" method="post" onsubmit="submit_form(event)">
+                                <form role="form" id="myForm" action="{{ route('user.do_onboarding') }}" method="post" onsubmit="submit_form(event)">
                                     @csrf
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -209,26 +209,36 @@
 
         function submit_form(e) {
             var value = document.getElementById('payment_type').value;
+            var host = "{{ $_SERVER['HTTP_HOST'] }}";
+            console.log(host)
+            var paystack_key = "{{ env('PAYSTACK_TEST_PK') }}"
+            if(host != 'localhost') {
+                paystack_key = "{{ env('PAYSTACK_LIVE_PK') }}"
+            }
             // alert(value)
             if (value == 'paystack') {
                 e.preventDefault();
                 // alert('paystack');
                 let handler = PaystackPop.setup({
-                    key: 'pk_live_8ed625f68f2afeccd4df1096a232a9d8490dcf58', // Replace with your public key
+                    key: paystack_key, // Replace with your public key
                     email: document.getElementById("email").value,
-                    amount: 100 * 100,
+                    amount: 2500 * 100,
                     currency: 'NGN',
                     ref: '' + Math.floor((Math.random() * 1000000000) +
                         1
                         ), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
                     // label: "Optional string that replaces customer email"
                     onClose: function() {
-                        alert('Window closed.');
+                        console.log('Window closed.');
                     },
                     callback: function(response) {
                         console.log(response)
-                        let message = 'Payment complete! Reference: ' + response.reference;
-                        alert(message);
+                        // let message = 'Payment complete! Reference: ' + response.reference;
+                        // alert(message);
+                        if(response.status == 'success') {
+                            console.log('success')
+                            document.forms["myForm"].submit();
+                        }
                     }
                 });
 
