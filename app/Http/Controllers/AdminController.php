@@ -69,7 +69,8 @@ class AdminController extends Controller
     public function users()
     {
         $data['title'] = 'Clients';
-        $users = User::with('coupon')->latest()->get();
+        $users = User::with('coupon', 'parent')->latest()->get();
+        // return $users;
         foreach ($users as $key => $user) {
             if($user->account_type_id == 1) {
                 $user->plan = $user->get_plan();

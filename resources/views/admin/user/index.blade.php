@@ -16,6 +16,7 @@
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
+                                    <th>Upline</th>
                                     <th>Coupon</th>
                                     <th>Plan</th>
                                     <th>Status</th>
@@ -32,6 +33,7 @@
                                         <td>{{ $val->name }}</td>
                                         <td>{{ $val->username }}</td>
                                         <td>{{ $val->email }}</td>
+                                        <td>{{ count($val->parent) ? $val->parent[0]->username : 'N/A' }}</td>
                                         <td>
                                             @if ($val->coupon)
                                                 <span class="badge badge-info">{{$val->coupon->serial}}</span>
