@@ -20,8 +20,6 @@
                                     <th>Coupon</th>
                                     <th>Plan</th>
                                     <th>Status</th>
-                                    <th>Rubic Balance</th>
-                                    <th>Stake Balance</th>
                                     <th>Created</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -49,8 +47,6 @@
                                                 <span class="badge badge-danger">Blocked</span>
                                             @endif
                                         </td>
-                                        <td>{{ substr($val->rubic_wallet, 0, 9) }}</td>
-                                        <td>{{ substr($val->rubic_stake_wallet, 0, 9) }}</td>
                                         <td>{{ date('Y/m/d', strtotime($val->created_at)) }}</td>
                                         <td class="text-center">
                                             <div class="list-icons">
