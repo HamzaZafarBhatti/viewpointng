@@ -27,5 +27,7 @@ class Setting extends Model
         'upgrade_fee',
         'affiliate_yt_link',
         'referral',
+        'mlm_plan_reg_fee',
+        'video_earn_plan_reg_fee',
     ];
 }

@@ -57,6 +57,22 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">MLM Plan Registration fee <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <input type="number" name="mlm_plan_reg_fee" step="any" max-length="10"
+                                        value="{{ $set->mlm_plan_reg_fee }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Video Earning Plan fee <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <input type="number" name="video_earn_plan_reg_fee" step="any" max-length="10"
+                                        value="{{ $set->video_earn_plan_reg_fee }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Status <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">
                                     <div class="form-check form-check-inline form-check-switchery">
