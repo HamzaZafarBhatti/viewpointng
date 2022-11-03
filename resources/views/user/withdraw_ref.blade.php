@@ -11,7 +11,7 @@
                     <div class="card bg-dark">
                         <div class="card-header header-elements-inline bg-transparent">
                             <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>REF BALANCE WITHDRAWAL TO BANK</strong></span></h3>
-<p><span style="color: #ffffff;"><strong>Minimum REF WITHDRAWAL: ₦3000</strong></span></p><br>
+<p><span style="color: #ffffff;"><strong>Minimum REF WITHDRAWAL: ₦3000</strong></span></p><span style="color: #ffffff;"><strong>Service Maintenance Fee: ₦200</strong></span<br>
 <p><span style="color: #000000;"><span style="color: #ffffff;"><strong>REF EARNING Withdrawal</strong> is </span><span style="background-color: #ffcc99;"><strong>every Wednesday and Sundays at anytime.</strong></span></span></p>
                             <h3 class="mb-0 text-yellow">REF EARNING Balance: ₦{{ $user->affliate_ref_balance }}</h3>
                         </div>
