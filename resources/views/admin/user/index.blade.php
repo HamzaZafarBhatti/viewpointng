@@ -32,7 +32,7 @@
                                         <td>{{ $val->name }}</td>
                                         <td>{{ $val->username }}</td>
                                         <td>{{ $val->email }}</td>
-                                        <td>{{ $val->coupon->serial }}</td>
+                                        <td>{{ $val->coupon ? $val->coupon->serial : 'Paid with Paystack' }}</td>
                                         <td>{{ $val->plan->name }}</td>
                                         <td>
                                             @if (!$val->is_blocked)
