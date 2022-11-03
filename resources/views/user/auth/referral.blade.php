@@ -134,7 +134,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text text-dark">ACCOUNT TYPE</span>
                                             </div>
-                                            <select name="account_type_id" class="form-control" required>
+                                            <select name="account_type_id" class="form-control" id="account_type_id" required>
                                                 <option value="">Select Account Type</option>
                                                 @if ($account_types)
                                                     @foreach ($account_types as $item)
@@ -209,6 +209,7 @@
 
         function submit_form(e) {
             var value = document.getElementById('payment_type').value;
+            var account_type_id = document.getElementById('account_type_id').value;
             var host = "{{ $_SERVER['HTTP_HOST'] }}";
             console.log(host)
             var paystack_key = "{{ env('PAYSTACK_TEST_PK') }}"
@@ -219,10 +220,17 @@
             if (value == 'paystack') {
                 e.preventDefault();
                 // alert('paystack');
+                var price = 0;
+                if(account_type_id == 1) {
+                    price = "{{ $set->video_earn_plan_reg_fee }}"
+                } else {
+                    price = "{{ $set->mlm_plan_reg_fee }}"
+                }
+                console.log(price)
                 let handler = PaystackPop.setup({
                     key: paystack_key, // Replace with your public key
                     email: document.getElementById("email").value,
-                    amount: 2500 * 100,
+                    amount: price * 100,
                     currency: 'NGN',
                     ref: '' + Math.floor((Math.random() * 1000000000) +
                         1
