@@ -159,7 +159,8 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|numeric|min:8|unique:users',
             'password' => 'required|string|min:4|confirmed',
-            'coupon' => 'nullable|string|regex:/^\S*$/u',
+            'coupon' => 'required|string|regex:/^\S*$/u',
+            // 'coupon' => 'nullable|string|regex:/^\S*$/u',
             'ref' => 'required|string',
         ]);
         if ($validator->fails()) {

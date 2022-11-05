@@ -100,19 +100,20 @@
                                             <input value="{{ $username }}" type="hidden" name="ref">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="input-group input-group-merge input-group-alternative">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text text-dark">Payment TYPE</span>
-                                            </div>
-                                            <select name="payment_type" id="payment_type" class="form-control" required>
-                                                <option value="">Select Payment Type</option>
-                                                <option value="paystack">PAYSTACK</option>
-                                                <option value="activation_code">ACTIVATION CODE</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="activation_code" style="display: none">
+                                    <!--<div class="form-group">-->
+                                    <!--    <div class="input-group input-group-merge input-group-alternative">-->
+                                    <!--        <div class="input-group-prepend">-->
+                                    <!--            <span class="input-group-text text-dark">Payment TYPE</span>-->
+                                    <!--        </div>-->
+                                    <!--        <select name="payment_type" id="payment_type" class="form-control" required>-->
+                                    <!--            <option value="">Select Payment Type</option>-->
+                                    <!--            <option value="paystack">PAYSTACK</option>-->
+                                    <!--            <option value="activation_code">ACTIVATION CODE</option>-->
+                                    <!--        </select>-->
+                                    <!--    </div>-->
+                                    <!--</div>-->
+                                    <!--style="display: none"-->
+                                    <div class="activation_code">
                                         <div class="form-group">
                                             <div class="input-group input-group-merge input-group-alternative">
                                                 <div class="input-group-prepend">
