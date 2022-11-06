@@ -45,7 +45,8 @@
 
   gtag('config', 'UA-245518865-2');
 </script>
-
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4399828676243819"
+     crossorigin="anonymous"></script>
 </head>
 <!-- header begin-->
 
