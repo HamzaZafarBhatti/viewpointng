@@ -171,57 +171,8 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
             Route::put('vendors/update/{id}', 'UpdateVendors')->name('vendors.update');
             Route::delete('vendors/delete/{id}', 'DestroyVendors')->name('vendors.destroy');
             Route::get('vendors', 'vendors')->name('admin.vendors');
-            // Route::post('/createcoupons', 'WebController@CreateCoupons');
-            // Route::get('coupons/delete/{id}', 'WebController@DestroyCoupons')->name('coupons.delete');
-            // Route::post('coupons/update', 'WebController@UpdateCoupons')->name('coupons.update');
-
-
-            // Route::post('/createpage', 'WebController@CreatePage');
-            // Route::post('page/update', 'WebController@UpdatePage')->name('page.update');
-            // Route::get('page/delete/{id}', 'WebController@DestroyPage')->name('page.delete');
-            // Route::get('page', 'WebController@page')->name('admin.page');
-            // Route::get('/unpage/{id}', 'WebController@unpage')->name('page.unpublish');
-            // Route::get('/ppage/{id}', 'WebController@ppage')->name('page.publish');
-
-            // Route::get('currency', 'WebController@currency')->name('admin.currency');
-            // Route::get('pcurrency/{id}', 'WebController@pcurrency')->name('blog.publish');
-
-            // Route::get('logo', 'WebController@logo')->name('admin.logo');
-            // Route::post('updatelogo', 'WebController@UpdateLogo');
-            // Route::post('updatefavicon', 'WebController@UpdateFavicon');
-
-            // Route::get('home-page', 'WebController@homepage')->name('homepage');
-            // Route::post('home-page/update', 'WebController@Updatehomepage')->name('homepage.update');
-            // Route::post('section1/update', 'WebController@section1');
-            // Route::post('section2/update', 'WebController@section2');
-            // Route::post('section3/update', 'WebController@section3');
-            // Route::post('section4/update', 'WebController@section4');
         });
     });
-
-
-    // //Setting controller
-    // Route::get('settings', 'SettingController@Settings')->name('admin.setting');
-    // Route::post('settings', 'SettingController@SettingsUpdate')->name('admin.settings.update');
-    // Route::get('email', 'SettingController@Email')->name('admin.email');
-    // Route::post('email', 'SettingController@EmailUpdate')->name('admin.email.update');
-    // Route::get('sms', 'SettingController@Sms')->name('admin.sms');
-    // Route::post('sms', 'SettingController@SmsUpdate')->name('admin.sms.update');
-    // Route::post('account', 'SettingController@AccountUpdate')->name('admin.account.update');
-
-    // //User controller
-    // Route::get('messages', 'AdminController@Messages')->name('admin.message');
-    // Route::get('promo', 'AdminController@Promo')->name('user.promo');
-    // Route::post('promo', 'AdminController@Sendpromo')->name('user.promo.send');
-    // Route::get('message/delete/{id}', 'AdminController@Destroymessage')->name('message.delete');
-    // Route::get('ticket', 'AdminController@Ticket')->name('admin.ticket');
-    // Route::get('ticket/delete/{id}', 'AdminController@Destroyticket')->name('ticket.delete');
-    // Route::get('close-ticket/delete/{id}', 'AdminController@Closeticket')->name('ticket.close');
-    // Route::get('manage-ticket/{id}', 'AdminController@Manageticket')->name('ticket.manage');
-    // Route::post('reply-ticket', 'AdminController@Replyticket')->name('ticket.reply');
-    // Route::post('update_bank_details', 'AdminController@UpdateBankDetails');
-    // Route::get('approve-kyc/{id}', 'AdminController@Approvekyc')->name('admin.approve.kyc');
-    // Route::get('reject-kyc/{id}', 'AdminController@Rejectkyc')->name('admin.reject.kyc');
 });
 
 
@@ -256,18 +207,19 @@ Route::name('user.')->group(function () {
     Route::post('/register', [RegisterController::class, 'do_register'])->name('do_register');
     Route::get('/referral/{username}', [RegisterController::class, 'onboarding'])->name('onboarding');
     Route::post('/referral', [RegisterController::class, 'do_onboarding'])->name('do_onboarding');
+    Route::get('/verify_payment', [RegisterController::class, 'verify_payment'])->name('verify_payment');
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', [LoginController::class, 'do_login'])->name('do_login');
     Route::get('/user/verify_email', [UserController::class, 'verify_email'])->name('verify_email');
     Route::get('/user/resend_code', [UserController::class, 'resend_code'])->name('resend_code');
     Route::post('/user/verify_email', [UserController::class, 'do_verify_email'])->name('do_verify_email');
-    Route::get('/login', [LoginController::class, 'login'])->name('login');
-    Route::post('/login', [LoginController::class, 'do_login'])->name('do_login');
     Route::get('/user/account_suspended', [UserController::class, 'account_suspended'])->name('account_suspended');
 
     Route::get('user/password/reset', [HomeController::class, 'showLinkRequestForm'])->name('password.reset');
     Route::post('user/password/email', [HomeController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('user/password/reset/{token}', [HomeController::class, 'showResetForm'])->name('password.reset_token');
     Route::post('user/password/reset', [HomeController::class, 'reset'])->name('password.do_reset');
-    // , 'checkBlockStatus'
+
     Route::prefix('user')->middleware(['auth:web', 'checkStatus', 'checkBlockStatus'])->group(function () {
         Route::post('blog/earn', [BlogController::class, 'earn'])->name('blog.earn');
         Route::controller(UserController::class)->group(function () {
@@ -310,18 +262,9 @@ Route::name('user.')->group(function () {
 
         Route::post('reactivate_plan', [UserController::class, 'reactivate_plan'])->name('reactivate_plan');
 
-        //Referral
-        Route::controller(ReferralController::class)->group(function () {
-            // Route::get('/referrals/earning/history', 'earning_history')->name('referrals.earning_history');
-            // Route::get('/referrals/convert', 'convert')->name('referrals.convert');
-            // Route::post('/referrals/do_convert', 'do_convert')->name('referrals.do_convert');
-        });
         //Indirect Referral
         Route::controller(IndirectReferralController::class)->group(function () {
             Route::get('/indirect_referrals', 'index')->name('indirect_referrals.index');
-            // Route::get('/indirect_referrals/earning/history', 'earning_history')->name('indirect_referrals.earning_history');
-            // Route::get('/indirect_referrals/convert', 'convert')->name('indirect_referrals.convert');
-            // Route::post('/indirect_referrals/do_convert', 'do_convert')->name('indirect_referrals.do_convert');
         });
     });
 });

@@ -14,8 +14,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -153,16 +155,23 @@ class RegisterController extends Controller
     public function do_onboarding(Request $request)
     {
         // return $request;
-        $validator = Validator::make($request->all(), [
+
+        $fields = [
             'name' => 'required|string|max:255',
             'username' => 'required|min:5|unique:users|regex:/^\S*$/u',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|numeric|min:8|unique:users',
             'password' => 'required|string|min:4|confirmed',
-            'coupon' => 'required|string|regex:/^\S*$/u',
-            // 'coupon' => 'nullable|string|regex:/^\S*$/u',
             'ref' => 'required|string',
-        ]);
+        ];
+
+        if ($request->payment_type == 'activation_code') {
+            $fields['coupon'] = 'required|string|regex:/^\S*$/u';
+        }
+
+        // return $fields;
+
+        $validator = Validator::make($request->all(), $fields);
         if ($validator->fails()) {
             // adding an extra field 'error'...
             // $data['title'] = 'Register';
@@ -183,23 +192,8 @@ class RegisterController extends Controller
                 ->withErrors(['ref' => 'REFERRAL USERNAME INVALID'])
                 ->withInput();
         }
-        $coupon_code = null;
-        // return $coupon_code;
-        if($request->coupon) {
-            $coupon_code = Coupon::where('serial', $request->coupon)->first();
-            // return $coupon_code;
-            if (!$coupon_code) {
-                return redirect()->route('user.onboarding', $request->ref)
-                    ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
-                    ->withInput();
-            }
-            if ($coupon_code->status == 0) {
-                return redirect()->route('user.onboarding', $request->ref)
-                    ->withErrors(['coupon' => 'ACTIVATION CODE used'])
-                    ->withInput();
-            }
-        }
-        // return $coupon_code;
+
+
 
         $basic = Setting::first();
 
@@ -214,11 +208,62 @@ class RegisterController extends Controller
         } else {
             $phone_verify = 1;
         }
+
         $verification_code = rand(100000, 999999);
         $sms_code = rand(100000, 999999);
         $email_time = Carbon::parse()->addMinutes(5);
         $phone_time = Carbon::parse()->addMinutes(5);
-        $user = User::create([
+
+        if ($request->payment_type == 'paystack') {
+            session_start();
+            $_SESSION['data'] = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'username' => $request->username,
+                'email_verify' => $email_verify,
+                'verification_code' => $verification_code,
+                'sms_code' => $sms_code,
+                'email_time' => $email_time,
+                'phone_verify' => $phone_verify,
+                'phone_time' => $phone_time,
+                'balance' => $request->account_type_id == 1 ? $basic->balance_reg_affiliate : $basic->balance_reg_mlm,
+                'ip_address' => user_ip(),
+                'status' => 1,
+                'account_type_id' => $request->account_type_id,
+                'plan_id' => 10,
+                'affliate_ref_balance' => 0,
+                'activated_at' => date('Y-m-d'),
+                'password' => bcrypt($request->password),
+                'registered_with_method' => 'paystack',
+            ];
+            $_SESSION['pass'] = $request->password;
+            $_SESSION['referee_user'] = $referee_user;
+
+            $response = $this->pay_with_paystack($request->email, $request->account_type_id);
+            $response = json_decode($response);
+            $url = $response->data->authorization_url;
+            return Redirect::to($url);
+        }
+        // $coupon_code = null;
+        // return $coupon_code;
+        // if ($request->coupon) {
+        $coupon_code = Coupon::where('serial', $request->coupon)->first();
+        // return $coupon_code;
+        if (!$coupon_code) {
+            return redirect()->route('user.onboarding', $request->ref)
+                ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
+                ->withInput();
+        }
+        if ($coupon_code->status == 0) {
+            return redirect()->route('user.onboarding', $request->ref)
+                ->withErrors(['coupon' => 'ACTIVATION CODE used'])
+                ->withInput();
+        }
+        // }
+        // return $coupon_code;
+
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -232,13 +277,149 @@ class RegisterController extends Controller
             'balance' => $request->account_type_id == 1 ? $basic->balance_reg_affiliate : $basic->balance_reg_mlm,
             'ip_address' => user_ip(),
             'status' => 1,
-            'coupon_id' => $coupon_code ? $coupon_code->id : null,
+            'coupon_id' => $coupon_code->id,
             'account_type_id' => $request->account_type_id,
             'plan_id' => 10,
             'affliate_ref_balance' => 0,
             'activated_at' => date('Y-m-d'),
             'password' => bcrypt($request->password),
-        ]);
+            'registered_with_method' => 'coupon',
+        ];
+
+        $this->add_user($data, $referee_user);
+
+        $coupon_code->update(['status' => 0]);
+
+        if (Auth::attempt([
+            'username' => $request->username,
+            'password' => $request->password,
+        ])) {
+            login_log();
+            return redirect()->route('user.dashboard');
+        }
+    }
+
+    public function pay_with_paystack($email, $account_type_id)
+    {
+        $set = Setting::first();
+        if ($account_type_id == 1) {
+            $amount = $set->video_earn_plan_reg_fee;
+        } else {
+            $amount = $set->mlm_plan_reg_fee;
+        }
+        $cartid = Str::random(10);
+
+        $url = "https://api.paystack.co/transaction/initialize";
+
+        $fields = [
+            'email' => $email,
+            'amount' => $amount
+        ];
+
+        $fields_string = http_build_query($fields);
+
+        
+        $host = $_SERVER['HTTP_HOST'];
+        return $host;
+        $paystack_key = env('PAYSTACK_TEST_SK');
+        if ($host != 'localhost') {
+            $paystack_key = env('PAYSTACK_LIVE_SK');
+        }
+
+        //open connection
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            "Authorization: Bearer " . $paystack_key,
+            "Cache-Control: no-cache",
+        ));
+
+        //So that curl_exec returns the contents of the cURL; rather than echoing it
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        //execute post
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+    }
+
+    public function verify_payment(Request $request)
+    {
+        session_start();
+        $referee_user = $_SESSION['referee_user'];
+        unset($_SESSION['referee_user']);
+        $data = $_SESSION['data'];
+        unset($_SESSION['data']);
+        $pass = $_SESSION['pass'];
+        unset($_SESSION['pass']);
+        // return $_SESSION;
+        $trxref = $request->trxref;
+        $reference = $request->reference;
+
+        $response = $this->verify_paystack_payment($reference);
+        $response = json_decode($response);
+        // return $response;
+        if ($response->data->status == 'success') {
+
+            $this->add_user($data, $referee_user);
+
+            if (Auth::attempt([
+                'username' => $data['username'],
+                'password' => $pass,
+            ])) {
+                login_log();
+                return redirect()->route('user.dashboard');
+            }
+        } else {
+            return 'Something Went wrong!';
+        }
+    }
+
+    public function verify_paystack_payment($reference)
+    {
+
+        $host = $_SERVER['HTTP_HOST'];
+        $paystack_key = env('PAYSTACK_TEST_SK');
+        if ($host != 'localhost') {
+            $paystack_key = env('PAYSTACK_LIVE_SK');
+        }
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . $reference,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer " . $paystack_key,
+                "Cache-Control: no-cache",
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        if ($err) {
+            return json_encode([
+                'status' => false,
+                'message' => "cURL Error #:" . $err
+            ]);
+        } else {
+            return $response;
+        }
+    }
+
+    public function add_user($input, $referee_user)
+    {
+        $user = User::create($input);
 
         // $ref_bonus = $coupon_code->plan->upgrade * $coupon_code->plan->ref_percent / 100;
         // $ref_earning = $referee_user->ref_earning + $ref_bonus;
@@ -247,7 +428,7 @@ class RegisterController extends Controller
         $mlm_plan = MlmPlan::first();
         $plan = Plan::first();
 
-        if($referee_user->account_type_id == 1){
+        if ($referee_user->account_type_id == 1) {
             $ref_bonus = $plan->upgrade * $plan->ref_percent / 100;
             $ref_earning = $referee_user->affliate_ref_balance + $ref_bonus;
             Referral::create([
@@ -261,7 +442,7 @@ class RegisterController extends Controller
             ]);
         }
         if ($referee_user->account_type_id == 2) {
-            if($referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout){
+            if ($referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
                 Referral::create([
                     'referral_id' => $user->id,
                     'referee_id' => $referee_user->id,
@@ -284,7 +465,7 @@ class RegisterController extends Controller
             $parent = User::find($referee_user->parent[0]->id);
             // $indirect_ref_bonus = $coupon_code->plan->upgrade * $coupon_code->plan->indirect_ref_com / 100;
             // $indirect_ref_earning = $parent->indirect_ref_earning + $indirect_ref_bonus;
-            if($parent->account_type_id == 1) {
+            if ($parent->account_type_id == 1) {
                 $indirect_ref_bonus = $plan->upgrade * $plan->indirect_ref_com / 100;
                 $indirect_ref_earning = $parent->affliate_ref_balance + $indirect_ref_bonus;
                 IndirectReferral::create([
@@ -314,16 +495,14 @@ class RegisterController extends Controller
                     'cycle' => $parent->cycle + 1,
                     'is_locked' => 1,
                 ];
-                if($parent->cycle >= 1) {
+                if ($parent->cycle >= 1) {
                     $data['balance'] = $parent->balance + 10000;
                     // $data['ref_balance'] = $user->ref_balance + 10000;
                 }
                 $parent->update($data);
             }
         }
-        if($coupon_code) {
-            $coupon_code->update(['status' => 0]);
-        }
+        return true;
 
         // if ($basic->email_verification == 1) {
         //     $text = "Your Email Verification Code Is: $user->verification_code";
@@ -335,12 +514,5 @@ class RegisterController extends Controller
         //     send_sms($user->phone, strip_tags($message));
         // }
 
-        if (Auth::attempt([
-            'username' => $request->username,
-            'password' => $request->password,
-        ])) {
-            login_log();
-            return redirect()->route('user.dashboard');
-        }
     }
 }

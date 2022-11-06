@@ -62,6 +62,7 @@ class User extends Authenticatable
         'locked_referral',
         'is_locked',
         'fb_url',
+        'registered_with_method', //'coupon', 'paystack', 'flutterwave'
     ];
 
     /**

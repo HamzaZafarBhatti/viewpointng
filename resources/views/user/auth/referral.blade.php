@@ -20,6 +20,7 @@
                 </div>
             </div>
         </div>
+
         <div class="container mt--8 pb-5">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-7">
@@ -27,7 +28,8 @@
                         @include('alert')
                         <div class="card-body px-lg-5 py-lg-5">
                             @if ($set->registration == 1)
-                                <form role="form" id="myForm" action="{{ route('user.do_onboarding') }}" method="post" onsubmit="submit_form(event)">
+                                <form role="form" id="myForm" action="{{ route('user.do_onboarding') }}"
+                                    method="post">
                                     @csrf
                                     <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
@@ -100,20 +102,19 @@
                                             <input value="{{ $username }}" type="hidden" name="ref">
                                         </div>
                                     </div>
-                                    <!--<div class="form-group">-->
-                                    <!--    <div class="input-group input-group-merge input-group-alternative">-->
-                                    <!--        <div class="input-group-prepend">-->
-                                    <!--            <span class="input-group-text text-dark">Payment TYPE</span>-->
-                                    <!--        </div>-->
-                                    <!--        <select name="payment_type" id="payment_type" class="form-control" required>-->
-                                    <!--            <option value="">Select Payment Type</option>-->
-                                    <!--            <option value="paystack">PAYSTACK</option>-->
-                                    <!--            <option value="activation_code">ACTIVATION CODE</option>-->
-                                    <!--        </select>-->
-                                    <!--    </div>-->
-                                    <!--</div>-->
-                                    <!--style="display: none"-->
-                                    <div class="activation_code">
+                                    <div class="form-group">
+                                        <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text text-dark">Payment TYPE</span>
+                                            </div>
+                                            <select name="payment_type" id="payment_type" class="form-control" required>
+                                                <option value="">Select Payment Type</option>
+                                                <option value="paystack">PAYSTACK</option>
+                                                <option value="activation_code">ACTIVATION CODE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="activation_code" style="display: none">
                                         <div class="form-group">
                                             <div class="input-group input-group-merge input-group-alternative">
                                                 <div class="input-group-prepend">
@@ -135,7 +136,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text text-dark">ACCOUNT TYPE</span>
                                             </div>
-                                            <select name="account_type_id" class="form-control" id="account_type_id" required>
+                                            <select name="account_type_id" class="form-control" id="account_type_id"
+                                                required>
                                                 <option value="">Select Account Type</option>
                                                 @if ($account_types)
                                                     @foreach ($account_types as $item)
@@ -208,53 +210,53 @@
 
         })
 
-        function submit_form(e) {
-            var value = document.getElementById('payment_type').value;
-            var account_type_id = document.getElementById('account_type_id').value;
-            var host = "{{ $_SERVER['HTTP_HOST'] }}";
-            console.log(host)
-            var paystack_key = "{{ env('PAYSTACK_TEST_PK') }}"
-            if(host != 'localhost') {
-                paystack_key = "{{ env('PAYSTACK_LIVE_PK') }}"
-            }
-            // alert(value)
-            if (value == 'paystack') {
-                e.preventDefault();
-                // alert('paystack');
-                var price = 0;
-                if(account_type_id == 1) {
-                    price = "{{ $set->video_earn_plan_reg_fee }}"
-                } else {
-                    price = "{{ $set->mlm_plan_reg_fee }}"
-                }
-                console.log(price)
-                let handler = PaystackPop.setup({
-                    key: paystack_key, // Replace with your public key
-                    email: document.getElementById("email").value,
-                    amount: price * 100,
-                    currency: 'NGN',
-                    ref: '' + Math.floor((Math.random() * 1000000000) +
-                        1
-                        ), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-                    // label: "Optional string that replaces customer email"
-                    onClose: function() {
-                        console.log('Window closed.');
-                    },
-                    callback: function(response) {
-                        console.log(response)
-                        // let message = 'Payment complete! Reference: ' + response.reference;
-                        // alert(message);
-                        if(response.status == 'success') {
-                            console.log('success')
-                            document.forms["myForm"].submit();
-                        }
-                    }
-                });
+        // function submit_form(e) {
+        //     var value = document.getElementById('payment_type').value;
+        //     var account_type_id = document.getElementById('account_type_id').value;
+        //     var host = "{{ $_SERVER['HTTP_HOST'] }}";
+        //     console.log(host)
+        //     var paystack_key = "{{ env('PAYSTACK_TEST_PK') }}"
+        //     if (host != 'localhost') {
+        //         paystack_key = "{{ env('PAYSTACK_LIVE_PK') }}"
+        //     }
+        //     // alert(value)
+        //     if (value == 'paystack') {
+        //         e.preventDefault();
+        //         // alert('paystack');
+        //         var price = 0;
+        //         if (account_type_id == 1) {
+        //             price = "{{ $set->video_earn_plan_reg_fee }}"
+        //         } else {
+        //             price = "{{ $set->mlm_plan_reg_fee }}"
+        //         }
+        //         console.log(price)
+        //         let handler = PaystackPop.setup({
+        //             key: paystack_key, // Replace with your public key
+        //             email: document.getElementById("email").value,
+        //             amount: price * 100,
+        //             currency: 'NGN',
+        //             ref: '' + Math.floor((Math.random() * 1000000000) +
+        //                 1
+        //             ), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        //             // label: "Optional string that replaces customer email"
+        //             onClose: function() {
+        //                 console.log('Window closed.');
+        //             },
+        //             callback: function(response) {
+        //                 console.log(response)
+        //                 // let message = 'Payment complete! Reference: ' + response.reference;
+        //                 // alert(message);
+        //                 if (response.status == 'success') {
+        //                     console.log('success')
+        //                     document.forms["myForm"].submit();
+        //                 }
+        //             }
+        //         });
 
-                handler.openIframe();
-            } else {
-                // alert('activation code');
-            }
-        }
+        //         handler.openIframe();
+        //     } else {
+        //         // alert('activation code');
+        //     }
+        // }
     </script>
 @endsection
