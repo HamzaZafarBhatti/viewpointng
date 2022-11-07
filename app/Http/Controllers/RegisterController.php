@@ -320,7 +320,7 @@ class RegisterController extends Controller
 
         
         $host = $_SERVER['HTTP_HOST'];
-        return $host;
+        Log::info($host);
         $paystack_key = env('PAYSTACK_TEST_SK');
         if ($host != 'localhost') {
             $paystack_key = env('PAYSTACK_LIVE_SK');
