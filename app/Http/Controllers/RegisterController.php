@@ -241,7 +241,12 @@ class RegisterController extends Controller
             $_SESSION['referee_user'] = $referee_user;
 
             $response = $this->pay_with_paystack($request->email, $request->account_type_id);
+            Log::info($response);
             $response = json_decode($response);
+            if(!$response->status) {
+                return redirect()->route('user.onboarding', $request->ref)
+                ->with('error', 'Something went wrong! Please contact admin.');
+            }
             $url = $response->data->authorization_url;
             return Redirect::to($url);
         }
