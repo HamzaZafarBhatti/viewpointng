@@ -18,6 +18,7 @@ class Setting extends Model
         'address',
         'balance_reg_affiliate',
         'balance_reg_mlm',
+        'balance_reg_premium',
         'email_notify',
         'sms_notify',
         'email_verification',
@@ -29,5 +30,6 @@ class Setting extends Model
         'referral',
         'mlm_plan_reg_fee',
         'video_earn_plan_reg_fee',
+        'video_premium_plan_reg_fee',
     ];
 }

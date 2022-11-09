@@ -19,7 +19,11 @@ class CouponController extends Controller
     {
         //
         $plans = Plan::whereStatus(1)->get();
-        $coupons = Coupon::with('plan')->where('account_type_id', 1)->latest()->get();
+        $arr = [];
+        foreach($plans as $plan) {
+            array_push($arr, $plan->account_type_id);
+        }
+        $coupons = Coupon::with('plan')->whereIn('account_type_id', $arr)->latest()->get();
         $title = 'Generate Coupons';
         return view('admin.coupons.index', compact('plans', 'title', 'coupons'));
     }

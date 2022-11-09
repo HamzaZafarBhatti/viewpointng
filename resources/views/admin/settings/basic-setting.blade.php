@@ -73,6 +73,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Video Premimum Earning Plan fee <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <input type="number" name="video_premium_plan_reg_fee" step="any" max-length="10"
+                                        value="{{ $set->video_premium_plan_reg_fee }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Status <span class="text-danger">*</span></label>
                                 <div class="col-lg-10">
                                     <div class="form-check form-check-inline form-check-switchery">
@@ -173,6 +181,13 @@
                                 <div class="col-lg-10">
                                     <input type="text" name="balance_reg_affiliate"
                                         value="{{ $set->balance_reg_affiliate }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Premium User SIGNUP Balance</label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="balance_reg_premium"
+                                        value="{{ $set->balance_reg_premium }}" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group row">

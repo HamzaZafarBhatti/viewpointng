@@ -12,5 +12,8 @@ class AccountType extends Model
     protected $fillable = [
         'name',
         'status',
+        'plan_id',
     ];
+
+    
 }

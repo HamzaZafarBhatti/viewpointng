@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountType;
 use App\Models\MlmPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -62,6 +63,9 @@ class MlmPlanController extends Controller
             $image_name = $filename;
         }
 
+        $latest_account_type = AccountType::latest('id')->first();
+        $account_type_id = ++$latest_account_type->id;
+
         $res = MlmPlan::create([
             'name' => $request->name,
             'amount_balance' => $request->amount_balance,
@@ -72,9 +76,14 @@ class MlmPlanController extends Controller
             'code_prefix' => $request->code_prefix,
             'code_length' => $request->code_length,
             'image' => $image_name,
-            'account_type_id' => 2
+            'account_type_id' => $account_type_id
         ]);
         if ($res) {
+            AccountType::create([
+                'name' => $res->name,
+                'status' => 1,
+                'plan_id' => $res->id,
+            ]);
             return redirect()->route('admin.mlm-plans.index')->with('success', 'Saved Successfully!');
         } else {
             return back()->with('alert', 'Problem With Creating New Plan');

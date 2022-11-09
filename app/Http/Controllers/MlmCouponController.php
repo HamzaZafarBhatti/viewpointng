@@ -19,7 +19,11 @@ class MlmCouponController extends Controller
     {
         //
         $plans = MlmPlan::whereStatus(1)->get();
-        $coupons = Coupon::with('mlm_plan')->where('account_type_id', 2)->latest()->get();
+        $arr = [];
+        foreach($plans as $plan) {
+            array_push($arr, $plan->account_type_id);
+        }
+        $coupons = Coupon::with('mlm_plan')->whereIn('account_type_id', $arr)->latest()->get();
         $title = 'Generate Coupons';
         return view('admin.mlm-coupons.index', compact('plans', 'title', 'coupons'));
     }

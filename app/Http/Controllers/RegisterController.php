@@ -268,6 +268,14 @@ class RegisterController extends Controller
         // }
         // return $coupon_code;
 
+        if($request->account_type_id == 1) {
+            $balance = $basic->balance_reg_affiliate;
+        } else if($request->account_type_id == 2) {
+            $balance = $basic->balance_reg_mlm;
+        } else if($request->account_type_id == 3) {
+            $balance = $basic->balance_reg_premium;
+        }
+
         $data = [
             'name' => $request->name,
             'email' => $request->email,
@@ -279,7 +287,7 @@ class RegisterController extends Controller
             'email_time' => $email_time,
             'phone_verify' => $phone_verify,
             'phone_time' => $phone_time,
-            'balance' => $request->account_type_id == 1 ? $basic->balance_reg_affiliate : $basic->balance_reg_mlm,
+            'balance' => $balance,
             'ip_address' => user_ip(),
             'status' => 1,
             'coupon_id' => $coupon_code->id,
@@ -309,8 +317,10 @@ class RegisterController extends Controller
         $set = Setting::first();
         if ($account_type_id == 1) {
             $amount = $set->video_earn_plan_reg_fee;
-        } else {
+        } else if($account_type_id == 2) {
             $amount = $set->mlm_plan_reg_fee;
+        } else if($account_type_id == 3) {
+            $amount = $set->video_premium_plan_reg_fee;
         }
         $cartid = Str::random(10);
 

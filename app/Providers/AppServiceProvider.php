@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\AffliateProfit;
 use App\Models\Blog;
 use App\Models\Logo;
+use App\Models\MlmPlan;
+use App\Models\Plan;
 use App\Models\Setting;
 use App\Models\Ui;
 use App\Models\User;
@@ -61,6 +63,21 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('user', Auth::user());
             }
         });
+        
+        
+        $aff_plans = Plan::whereStatus(1)->get();
+        $aff_arr = [];
+        foreach($aff_plans as $plan) {
+            array_push($aff_arr, $plan->account_type_id);
+        }
+
+        $mlm_plans = MlmPlan::whereStatus(1)->get();
+        $mlm_arr = [];
+        foreach($mlm_plans as $plan) {
+            array_push($mlm_arr, $plan->account_type_id);
+        }
+        $data['aff_arr'] = $aff_arr;
+        $data['mlm_arr'] = $mlm_arr;
         $data['set'] = Setting::first();
         $data['ui'] = Ui::first();
         $data['logo'] = Logo::first();

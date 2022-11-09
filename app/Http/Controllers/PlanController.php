@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountType;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -62,6 +63,10 @@ class PlanController extends Controller
             $image_name = $filename;
         }
 
+        $latest_account_type = AccountType::latest('id')->first();
+        $account_type_id = ++$latest_account_type->id;
+        // return $account_type_id;
+
         $res = Plan::create([
             'name' => $request->name,
             'percent' => $request->percent,
@@ -82,9 +87,14 @@ class PlanController extends Controller
             'active_period' => $request->active_period,
             'mining_time' => $request->mining_time,
             'referral_withdraw_fee' => $request->referral_withdraw_fee,
-            'account_type_id' => 1
+            'account_type_id' => $account_type_id
         ]);
         if ($res) {
+            AccountType::create([
+                'name' => $res->name,
+                'status' => 1,
+                'plan_id' => $res->id,
+            ]);
             return redirect()->route('admin.plans.index')->with('success', 'Saved Successfully!');
         } else {
             return back()->with('alert', 'Problem With Creating New Plan');

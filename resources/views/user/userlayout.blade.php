@@ -82,51 +82,51 @@
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
-                        @if ($user->account_type->id == 1)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.mining.page') }}">
-                                <i class="ni ni-tv-2"></i>
-                                <span class="nav-link-text">Watch Video</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.withdraw') }}">
-                                <i class="ni ni-money-coins"></i>
-                                <span class="nav-link-text">Video Earnings Withdrawal</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.withdraw_ref') }}">
-                                <i class="ni ni-money-coins"></i>
-                                <span class="nav-link-text">Ref Balance Withdrawal</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.latest_sponsored_post') }}">
-                                <i class="ni ni-single-copy-04"></i>
-                                <span class="nav-link-text">Viral Video Tasks</span>
-                            </a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.digitalskillscourses') }}">
-                                <i class="ni ni-single-copy-04"></i>
-                                <span class="nav-link-text">Digital Skills & Courses</span>
-                            </a>
-                        </li>
+                        @if (in_array($user->account_type->id, $aff_arr))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.mining.page') }}">
+                                    <i class="ni ni-tv-2"></i>
+                                    <span class="nav-link-text">Watch Video</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.withdraw') }}">
+                                    <i class="ni ni-money-coins"></i>
+                                    <span class="nav-link-text">Video Earnings Withdrawal</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.withdraw_ref') }}">
+                                    <i class="ni ni-money-coins"></i>
+                                    <span class="nav-link-text">Ref Balance Withdrawal</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.latest_sponsored_post') }}">
+                                    <i class="ni ni-single-copy-04"></i>
+                                    <span class="nav-link-text">Viral Video Tasks</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.digitalskillscourses') }}">
+                                    <i class="ni ni-single-copy-04"></i>
+                                    <span class="nav-link-text">Digital Skills & Courses</span>
+                                </a>
+                            </li>
                         @endif
-                        @if ($user->account_type->id == 2)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.withdraw_mlm') }}">
-                                <i class="ni ni-money-coins"></i>
-                                <span class="nav-link-text">Bank Account Withdrawal</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.dashboard') }}">
-                                <i class="ni ni-button-power"></i>
-                                <span class="nav-link-text">Activate or Re-Activate</span>
-                            </a>
-                        </li>
+                        @if (in_array($user->account_type->id, $mlm_arr))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.withdraw_mlm') }}">
+                                    <i class="ni ni-money-coins"></i>
+                                    <span class="nav-link-text">Bank Account Withdrawal</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.dashboard') }}">
+                                    <i class="ni ni-button-power"></i>
+                                    <span class="nav-link-text">Activate or Re-Activate</span>
+                                </a>
+                            </li>
                         @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.referral') }}">
@@ -154,8 +154,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://www.youtube.com/channel/UCmL1RHK-c26F0jtJcT1RxNQ	
-">
+                            <a class="nav-link" href="https://www.youtube.com/channel/UCmL1RHK-c26F0jtJcT1RxNQ">
                                 <i class="ni ni-curved-next"></i>
                                 <span class="nav-link-text">Youtube</span>
                             </a>
@@ -222,9 +221,11 @@
     </nav>
     <div class="main-content" id="panel">
          <!-- Search form -->
-                    <div>
-                        <div style="padding-left: 48px;"><h3 class="mb-0 text-dark">Account Type: {{ auth()->user()->account_type->name }}</h3></div>
-                    </div>
+        <div>
+            <div style="padding-left: 48px;">
+                <h3 class="mb-0 text-dark">Account Type: {{ auth()->user()->account_type->name }}</h3>
+            </div>
+        </div>
         <!-- Topnav -->
         <nav class="navbar navbar-top navbar-expand navbar-light">
             <div class="container-fluid">
@@ -258,16 +259,13 @@
                     </div>
                     <ul class="navbar-nav align-items-center ml-auto ml-md-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link pr-0" href="javascript:void;" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link pr-0" href="javascript:void;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <a href="{{ route('user.profile_edit') }}"><span
                                             class="avatar avatar-sm rounded-circle">
-                                            <img alt="Image placeholder"
-                                                src="{{ $user->image ? url('/') . '/asset/profile/' . $user->image : 'https://ui-avatars.com/api/?name=' . $user->username }}"></a>
+                                            <img alt="Image placeholder" src="{{ $user->image ? url('/') . '/asset/profile/' . $user->image : 'https://ui-avatars.com/api/?name=' . $user->username }}"></a>
                                     </span>
                                 </div>
-
                             </a>
                         </li>
                     </ul>

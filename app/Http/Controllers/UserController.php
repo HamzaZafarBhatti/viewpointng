@@ -33,12 +33,13 @@ class UserController extends Controller
     public function dashboard()
     {
         $title = 'Account Dashboard';
+
         $user = User::where('id', auth()->user()->id)->first();
         $profit = AffliateProfit::with('plan')->whereUser_id($user->id)->where('status', 2)->orderBy('id', 'DESC')->limit(5)->get();
         // $referrals = ;
         $referrals = $user->get_latest_referrals();
         $shared_posts = BlogUser::where('user_id', auth()->user()->id)->count();
-        $sponsor_bal = $shared_posts * Plan::first()->fb_share_amount;
+        $sponsor_bal = $shared_posts * Plan::where('account_type_id', $user->account_type_id)->first()->fb_share_amount;
         $total_withdraws_amount = Withdraw::whereUser_id($user->id)->where('status', '1')->sum('amount');
         // return $referrals;
         return view('user.index', compact(
