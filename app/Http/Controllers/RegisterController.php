@@ -243,9 +243,9 @@ class RegisterController extends Controller
             $response = $this->pay_with_paystack($request->email, $request->account_type_id);
             Log::info($response);
             $response = json_decode($response);
-            if(!$response->status) {
+            if (!$response->status) {
                 return redirect()->route('user.onboarding', $request->ref)
-                ->with('error', 'Something went wrong! Please contact admin.');
+                    ->with('error', 'Something went wrong! Please contact admin.');
             }
             $url = $response->data->authorization_url;
             return Redirect::to($url);
@@ -264,17 +264,17 @@ class RegisterController extends Controller
                 ->with('error', 'ACTIVATION CODE used');
         }
         // return $coupon_code;
-        if($request->account_type_id != $coupon_code->account_type_id) {
+        if ($request->account_type_id != $coupon_code->account_type_id) {
             return redirect()->route('user.onboarding', $request->ref)
                 ->with('error', 'USE ACTIVATION CODE OF SELECTED ACCOUNT TYPE');
         }
         // }
 
-        if($request->account_type_id == 1) {
+        if ($request->account_type_id == 1) {
             $balance = $basic->balance_reg_affiliate;
-        } else if($request->account_type_id == 2) {
+        } else if ($request->account_type_id == 2) {
             $balance = $basic->balance_reg_mlm;
-        } else if($request->account_type_id == 3) {
+        } else if ($request->account_type_id == 3) {
             $balance = $basic->balance_reg_premium;
         }
 
@@ -319,9 +319,9 @@ class RegisterController extends Controller
         $set = Setting::first();
         if ($account_type_id == 1) {
             $amount = $set->video_earn_plan_reg_fee;
-        } else if($account_type_id == 2) {
+        } else if ($account_type_id == 2) {
             $amount = $set->mlm_plan_reg_fee;
-        } else if($account_type_id == 3) {
+        } else if ($account_type_id == 3) {
             $amount = $set->video_premium_plan_reg_fee;
         }
         $cartid = Str::random(10);
@@ -335,7 +335,7 @@ class RegisterController extends Controller
 
         $fields_string = http_build_query($fields);
 
-        
+
         $host = $_SERVER['HTTP_HOST'];
         Log::info($host);
         $paystack_key = env('PAYSTACK_TEST_SK');
@@ -444,17 +444,20 @@ class RegisterController extends Controller
 
         $aff_plans = Plan::whereStatus(1)->get();
         $aff_arr = [];
-        foreach($aff_plans as $plan) {
+        foreach ($aff_plans as $plan) {
             array_push($aff_arr, $plan->account_type_id);
         }
 
         $mlm_plans = MlmPlan::whereStatus(1)->get();
         $mlm_arr = [];
-        foreach($mlm_plans as $plan) {
+        foreach ($mlm_plans as $plan) {
             array_push($mlm_arr, $plan->account_type_id);
         }
-        $plan = Plan::where('account_type_id', $user->account_type_id)->first();
-        $mlm_plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
+        if (in_array($referee_user->account_type_id, $aff_arr)) {
+            $plan = Plan::where('account_type_id', $user->account_type_id)->first();
+        } else if (in_array($referee_user->account_type_id, $mlm_arr)) {
+            $plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
+        }
 
         if (in_array($referee_user->account_type_id, $aff_arr)) {
             $ref_bonus = $plan->upgrade * $plan->ref_percent / 100;
@@ -470,7 +473,7 @@ class RegisterController extends Controller
             ]);
         }
         if (in_array($referee_user->account_type_id, $mlm_arr)) {
-            if ($referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
+            if ($referee_user->cycle_direct_referrals < $plan->direct_ref_count_cashout) {
                 Referral::create([
                     'referral_id' => $user->id,
                     'referee_id' => $referee_user->id,
@@ -504,32 +507,30 @@ class RegisterController extends Controller
                 ]);
                 $parent->update(['affliate_ref_balance' => $indirect_ref_earning]);
             }
-            if($mlm_plan) {
-                if (in_array($parent->account_type_id, $mlm_arr) && $parent->cycle_indirect_referrals < $mlm_plan->indirect_ref_count_cashout) {
-                    IndirectReferral::create([
-                        'referral_id' => $user->id,
-                        'referee_id' => $parent->id,
-                        'referee_ref_earning' => 0,
-                        'bonus' => 0,
-                        // 'referee_ref_earning' => $parent->indirect_ref_earning,
-                        // 'bonus' => $indirect_ref_earning,
-                    ]);
-                    $cycle_indirect_referrals = $parent->cycle_indirect_referrals + 1;
-                    // $parent->update(['indirect_ref_earning' => $indirect_ref_earning]);
-                    $parent->update(['cycle_indirect_referrals' => $cycle_indirect_referrals]);
+            if (in_array($parent->account_type_id, $mlm_arr) && $parent->cycle_indirect_referrals < $plan->indirect_ref_count_cashout) {
+                IndirectReferral::create([
+                    'referral_id' => $user->id,
+                    'referee_id' => $parent->id,
+                    'referee_ref_earning' => 0,
+                    'bonus' => 0,
+                    // 'referee_ref_earning' => $parent->indirect_ref_earning,
+                    // 'bonus' => $indirect_ref_earning,
+                ]);
+                $cycle_indirect_referrals = $parent->cycle_indirect_referrals + 1;
+                // $parent->update(['indirect_ref_earning' => $indirect_ref_earning]);
+                $parent->update(['cycle_indirect_referrals' => $cycle_indirect_referrals]);
+            }
+
+            if ($parent->cycle_direct_referrals >= $plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $plan->indirect_ref_count_cashout) {
+                $data = [
+                    'cycle' => $parent->cycle + 1,
+                    'is_locked' => 1,
+                ];
+                if ($parent->cycle >= 1) {
+                    $data['balance'] = $parent->balance + 10000;
+                    // $data['ref_balance'] = $user->ref_balance + 10000;
                 }
-    
-                if ($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
-                    $data = [
-                        'cycle' => $parent->cycle + 1,
-                        'is_locked' => 1,
-                    ];
-                    if ($parent->cycle >= 1) {
-                        $data['balance'] = $parent->balance + 10000;
-                        // $data['ref_balance'] = $user->ref_balance + 10000;
-                    }
-                    $parent->update($data);
-                }
+                $parent->update($data);
             }
         }
         return true;
