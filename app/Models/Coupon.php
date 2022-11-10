@@ -31,10 +31,10 @@ class Coupon extends Model
 
     public function getAffliatePlan()
     {
-        return Plan::first();
+        return Plan::where('account_type_id', $this->account_type_id)->first();
     }
     public function getMlmPlan()
     {
-        return MlmPlan::first();
+        return MlmPlan::where('account_type_id', $this->account_type_id)->first();
     }
 }

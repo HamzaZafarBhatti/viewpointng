@@ -209,10 +209,23 @@ class FrontendController extends Controller
             Session::flash('error', 'ACTIVATION CODE INVALID');
             return redirect()->route('verify_pin');
         }
+        
+        $aff_plans = Plan::whereStatus(1)->get();
+        $aff_arr = [];
+        foreach($aff_plans as $plan) {
+            array_push($aff_arr, $plan->account_type_id);
+        }
+
+        $mlm_plans = MlmPlan::whereStatus(1)->get();
+        $mlm_arr = [];
+        foreach($mlm_plans as $plan) {
+            array_push($mlm_arr, $plan->account_type_id);
+        }
+
         if ($coupon->status == 0) {
-            if ($coupon->account_type_id == 1) {
+            if (in_array($coupon->account_type_id, $aff_arr)) {
                 $coupon->plan = $coupon->getAffliatePlan();
-            } else {
+            } else if (in_array($coupon->account_type_id, $mlm_arr)) {
                 $coupon->plan = $coupon->getMlmPlan();
             }
             // adding an extra field 'error'...
