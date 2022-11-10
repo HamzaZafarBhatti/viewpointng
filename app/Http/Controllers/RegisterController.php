@@ -453,9 +453,9 @@ class RegisterController extends Controller
         foreach ($mlm_plans as $plan) {
             array_push($mlm_arr, $plan->account_type_id);
         }
-        if (in_array($referee_user->account_type_id, $aff_arr)) {
+        if (in_array($user->account_type_id, $aff_arr)) {
             $plan = Plan::where('account_type_id', $user->account_type_id)->first();
-        } else if (in_array($referee_user->account_type_id, $mlm_arr)) {
+        } else if (in_array($user->account_type_id, $mlm_arr)) {
             $plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
         }
 

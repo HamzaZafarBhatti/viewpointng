@@ -9,7 +9,7 @@
                         <h6 class="card-title font-weight-semibold">
                             Update account information : {{ $client->account_type->name }}
                         </h6>
-                        @if ($client->account_type_id == 2)
+                        @if (in_array($client->account_type_id, $mlm_arr))
                         <h6>
                             Cycle: {{ $client->cycle }}
                         </h6>
@@ -72,7 +72,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-lg-2">{{ $client->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance:</label>
+                                @php
+                                    if(in_array($client->account_type_id, $aff_arr)) {
+                                        $name = 'Video Earning';
+                                    } else if (in_array($client->account_type_id, $mlm_arr)) {
+                                        $name = 'Account';
+                                    }
+                                @endphp
+                                <label class="col-form-label col-lg-2">{{ $name }} Balance:</label>
                                 <div class="col-lg-10">
                                     <div class="input-group">
                                         <span class="input-group-prepend">
@@ -83,7 +90,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if ($client->account_type_id == 1) 
+                            @if (in_array($client->account_type_id, $aff_arr)) 
                             <div class="form-group row">
                                 <label class="col-form-label col-lg-2">REFERRAL EARNING Balance:</label>
                                 <div class="col-lg-10">
