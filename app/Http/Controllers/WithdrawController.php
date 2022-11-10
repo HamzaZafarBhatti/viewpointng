@@ -268,22 +268,20 @@ class WithdrawController extends Controller
             $user = User::find($data->user_id);
             $user->update(['show_popup' => 1]);
             $res = $data->update(['status' => '1']);
-            // $earner = TopEarner::where('user_id', $data->user_id)->where('type', 1)->first();
-            // if (!$earner) {
-            //     $earn_data = [
-            //         'user_id' => $user->id,
-            //         'name' => $user->name,
-            //         'amount' => $data->amount,
-            //         'status' => 1,
-            //         'type' => 1
-            //     ];
-            //     // return 'if';
-            //     $earner = TopEarner::create($earn_data);
-            // } else {
-            //     // return 'hello';
-            //     $earner->amount += $data->amount;
-            //     $earner->update(['amount' => $earner->amount]);
-            // }
+            $earner = TopEarner::where('user_id', $data->user_id)->where('type', 'mlm')->first();
+            if (!$earner) {
+                $earn_data = [
+                    'user_id' => $user->id,
+                    'amount' => $data->amount,
+                    'type' => 'mlm'
+                ];
+                // return 'if';
+                $earner = TopEarner::create($earn_data);
+            } else {
+                // return 'hello';
+                $earner->amount += $data->amount;
+                $earner->update(['amount' => $earner->amount]);
+            }
             // return 'out';
             // if ($set->email_notify == 1) {
             //     $temp = Etemplate::first();
@@ -438,22 +436,20 @@ class WithdrawController extends Controller
             $user = User::find($data->user_id);
             $user->update(['show_popup' => 1]);
             $res = $data->update(['status' => '1']);
-            // $earner = TopEarner::where('user_id', $data->user_id)->where('type', 1)->first();
-            // if (!$earner) {
-            //     $earn_data = [
-            //         'user_id' => $user->id,
-            //         'name' => $user->name,
-            //         'amount' => $data->amount,
-            //         'status' => 1,
-            //         'type' => 1
-            //     ];
-            //     // return 'if';
-            //     $earner = TopEarner::create($earn_data);
-            // } else {
-            //     // return 'hello';
-            //     $earner->amount += $data->amount;
-            //     $earner->update(['amount' => $earner->amount]);
-            // }
+            $earner = TopEarner::where('user_id', $data->user_id)->where('type', 'aff_ref')->first();
+            if (!$earner) {
+                $earn_data = [
+                    'user_id' => $user->id,
+                    'amount' => $data->amount,
+                    'type' => 'aff_ref'
+                ];
+                // return 'if';
+                $earner = TopEarner::create($earn_data);
+            } else {
+                // return 'hello';
+                $earner->amount += $data->amount;
+                $earner->update(['amount' => $earner->amount]);
+            }
             // return 'out';
             // if ($set->email_notify == 1) {
             //     $temp = Etemplate::first();
