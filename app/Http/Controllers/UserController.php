@@ -108,7 +108,7 @@ class UserController extends Controller
         if ($request->pin !== $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
-        $plan = Plan::first();
+        $plan = Plan::where('account_type_id', $user->account_type_id)->first();
         // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
         $amount = $request->amount;
         if ($plan->min_deposit > $request->amount) {
@@ -191,7 +191,7 @@ class UserController extends Controller
         if ($request->pin != $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
-        $plan = Plan::first();
+        $plan = Plan::where('account_type_id', $user->account_type_id)->first();
         // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
         $amount = $request->amount - $plan->referral_withdraw_fee;
         // $amount = $request->amount;
@@ -281,7 +281,7 @@ class UserController extends Controller
         if ($request->pin !== $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
-        $plan = MlmPlan::first();
+        $plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
         // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
         $amount = $request->amount;
         if ($plan->min_withdraw_balance > $request->amount) {
