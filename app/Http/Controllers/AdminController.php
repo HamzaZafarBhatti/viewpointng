@@ -18,6 +18,7 @@ use App\Models\Reply;
 use App\Models\Review;
 use App\Models\Etemplate;
 use App\Models\IndirectReferral;
+use App\Models\MlmPlan;
 use App\Models\Plan;
 use App\Models\Referral;
 use App\Models\StakeReferral;
@@ -70,11 +71,25 @@ class AdminController extends Controller
     {
         $data['title'] = 'Clients';
         $users = User::with('coupon', 'parent')->latest()->get();
+
+        
+        $aff_plans = Plan::whereStatus(1)->get();
+        $aff_arr = [];
+        foreach($aff_plans as $plan) {
+            array_push($aff_arr, $plan->account_type_id);
+        }
+
+        $mlm_plans = MlmPlan::whereStatus(1)->get();
+        $mlm_arr = [];
+        foreach($mlm_plans as $plan) {
+            array_push($mlm_arr, $plan->account_type_id);
+        }
         // return $users;
         foreach ($users as $key => $user) {
-            if($user->account_type_id == 1) {
+            if(in_array($user->account_type_id, $aff_arr)) {
                 $user->plan = $user->get_plan();
-            } else {
+            }
+            if(in_array($user->account_type_id, $mlm_arr)) {
                 $user->plan = $user->get_mlm_plan();
             }
         }

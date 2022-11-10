@@ -257,16 +257,18 @@ class RegisterController extends Controller
         // return $coupon_code;
         if (!$coupon_code) {
             return redirect()->route('user.onboarding', $request->ref)
-                ->withErrors(['coupon' => 'ACTIVATION CODE INVALID'])
-                ->withInput();
+                ->with('error', 'ACTIVATION CODE INVALID');
         }
         if ($coupon_code->status == 0) {
             return redirect()->route('user.onboarding', $request->ref)
-                ->withErrors(['coupon' => 'ACTIVATION CODE used'])
-                ->withInput();
+                ->with('error', 'ACTIVATION CODE used');
+        }
+        // return $coupon_code;
+        if($request->account_type_id != $coupon_code->account_type_id) {
+            return redirect()->route('user.onboarding', $request->ref)
+                ->with('error', 'USE ACTIVATION CODE OF SELECTED ACCOUNT TYPE');
         }
         // }
-        // return $coupon_code;
 
         if($request->account_type_id == 1) {
             $balance = $basic->balance_reg_affiliate;

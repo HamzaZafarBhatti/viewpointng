@@ -91,7 +91,7 @@ class User extends Authenticatable
 
     public function get_plan()
     {
-        return Plan::first();
+        return Plan::where('account_type_id', $this->account_type_id)->first();
     }
 
     public function coupon()
@@ -101,7 +101,7 @@ class User extends Authenticatable
 
     public function get_mlm_plan()
     {
-        return MlmPlan::first();
+        return MlmPlan::where('account_type_id', $this->account_type_id)->first();
     }
     public function parent()
     {
