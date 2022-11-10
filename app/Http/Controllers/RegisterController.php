@@ -453,9 +453,10 @@ class RegisterController extends Controller
         foreach($mlm_plans as $plan) {
             array_push($mlm_arr, $plan->account_type_id);
         }
+        $plan = Plan::where('account_type_id', $user->account_type_id)->first();
+        $mlm_plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
 
         if (in_array($referee_user->account_type_id, $aff_arr)) {
-            $plan = Plan::where('account_type_id', $referee_user->account_type_id)->first();
             $ref_bonus = $plan->upgrade * $plan->ref_percent / 100;
             $ref_earning = $referee_user->affliate_ref_balance + $ref_bonus;
             Referral::create([
@@ -469,7 +470,6 @@ class RegisterController extends Controller
             ]);
         }
         if (in_array($referee_user->account_type_id, $mlm_arr)) {
-            $mlm_plan = MlmPlan::where('account_type_id', $referee_user->account_type_id)->first();
             if ($referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
                 Referral::create([
                     'referral_id' => $user->id,
@@ -494,7 +494,6 @@ class RegisterController extends Controller
             // $indirect_ref_bonus = $coupon_code->plan->upgrade * $coupon_code->plan->indirect_ref_com / 100;
             // $indirect_ref_earning = $parent->indirect_ref_earning + $indirect_ref_bonus;
             if (in_array($parent->account_type_id, $aff_arr)) {
-                $plan = Plan::where('account_type_id', $parent->account_type_id)->first();
                 $indirect_ref_bonus = $plan->upgrade * $plan->indirect_ref_com / 100;
                 $indirect_ref_earning = $parent->affliate_ref_balance + $indirect_ref_bonus;
                 IndirectReferral::create([
@@ -505,7 +504,6 @@ class RegisterController extends Controller
                 ]);
                 $parent->update(['affliate_ref_balance' => $indirect_ref_earning]);
             }
-            $mlm_plan = MlmPlan::where('account_type_id', $parent->account_type_id)->first();
             if($mlm_plan) {
                 if (in_array($parent->account_type_id, $mlm_arr) && $parent->cycle_indirect_referrals < $mlm_plan->indirect_ref_count_cashout) {
                     IndirectReferral::create([
