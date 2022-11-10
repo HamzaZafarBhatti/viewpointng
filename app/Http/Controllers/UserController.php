@@ -39,7 +39,15 @@ class UserController extends Controller
         // $referrals = ;
         $referrals = $user->get_latest_referrals();
         $shared_posts = BlogUser::where('user_id', auth()->user()->id)->count();
-        $sponsor_bal = $shared_posts * Plan::where('account_type_id', $user->account_type_id)->first()->fb_share_amount;
+        $sponsor_bal = 0;
+        $aff_plans = Plan::whereStatus(1)->get();
+        $aff_arr = [];
+        foreach($aff_plans as $plan) {
+            array_push($aff_arr, $plan->account_type_id);
+        }
+        if(in_array($user->account_type_id, $aff_arr)){
+            $sponsor_bal = $shared_posts * Plan::where('account_type_id', $user->account_type_id)->first()->fb_share_amount;
+        }
         $total_withdraws_amount = Withdraw::whereUser_id($user->id)->where('status', '1')->sum('amount');
         // return $referrals;
         return view('user.index', compact(
