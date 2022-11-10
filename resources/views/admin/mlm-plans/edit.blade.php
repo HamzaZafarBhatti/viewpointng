@@ -88,6 +88,38 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Upgrade:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" step="any" name="upgrade" class="form-control" value="{{$mlmPlan->upgrade}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Referral percent:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" name="ref_percent" maxlength="10" placeholder="2.5" value="{{$mlmPlan->ref_percent}}"
+                                            class="form-control" required>
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">INDIRECT REFERRAL COMMISSION:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" name="indirect_ref_com" placeholder="2.5" value="{{$mlmPlan->indirect_ref_com}}"
+                                            class="form-control" required>
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Image:</label>
                                 <div class="col-lg-10">
                                     <input type="file" name="image" class="form-input-styled" data-fouc>

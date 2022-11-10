@@ -20,5 +20,8 @@ class MlmPlan extends Model
         'code_length',
         'image',
         'account_type_id',
+        'upgrade',
+        'ref_percent',
+        'indirect_ref_com',
     ];
 }

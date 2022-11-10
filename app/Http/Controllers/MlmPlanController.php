@@ -75,6 +75,9 @@ class MlmPlanController extends Controller
             'indirect_ref_count_cashout' => $request->indirect_ref_count_cashout,
             'code_prefix' => $request->code_prefix,
             'code_length' => $request->code_length,
+            'upgrade' => $request->upgrade,
+            'ref_percent' => $request->ref_percent,
+            'indirect_ref_com' => $request->indirect_ref_com,
             'image' => $image_name,
             'account_type_id' => $account_type_id
         ]);
@@ -152,6 +155,9 @@ class MlmPlanController extends Controller
             'indirect_ref_count_cashout' => $request->indirect_ref_count_cashout,
             'code_prefix' => $request->code_prefix,
             'code_length' => $request->code_length,
+            'upgrade' => $request->upgrade,
+            'ref_percent' => $request->ref_percent,
+            'indirect_ref_com' => $request->indirect_ref_com,
             'image' => $image_name,
         ]);
         if ($res) {

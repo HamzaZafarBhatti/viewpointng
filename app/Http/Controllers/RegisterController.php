@@ -458,6 +458,7 @@ class RegisterController extends Controller
         } else if (in_array($user->account_type_id, $mlm_arr)) {
             $plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
         }
+        $mlm_plan = MlmPlan::first();
 
         if (in_array($referee_user->account_type_id, $aff_arr)) {
             $ref_bonus = $plan->upgrade * $plan->ref_percent / 100;
@@ -473,7 +474,7 @@ class RegisterController extends Controller
             ]);
         }
         if (in_array($referee_user->account_type_id, $mlm_arr)) {
-            if ($referee_user->cycle_direct_referrals < $plan->direct_ref_count_cashout) {
+            if ($referee_user->cycle_direct_referrals < $mlm_plan->direct_ref_count_cashout) {
                 Referral::create([
                     'referral_id' => $user->id,
                     'referee_id' => $referee_user->id,
@@ -507,7 +508,7 @@ class RegisterController extends Controller
                 ]);
                 $parent->update(['affliate_ref_balance' => $indirect_ref_earning]);
             }
-            if (in_array($parent->account_type_id, $mlm_arr) && $parent->cycle_indirect_referrals < $plan->indirect_ref_count_cashout) {
+            if (in_array($parent->account_type_id, $mlm_arr) && $parent->cycle_indirect_referrals < $mlm_plan->indirect_ref_count_cashout) {
                 IndirectReferral::create([
                     'referral_id' => $user->id,
                     'referee_id' => $parent->id,
@@ -521,7 +522,7 @@ class RegisterController extends Controller
                 $parent->update(['cycle_indirect_referrals' => $cycle_indirect_referrals]);
             }
 
-            if ($parent->cycle_direct_referrals >= $plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $plan->indirect_ref_count_cashout) {
+            if ($parent->cycle_direct_referrals >= $mlm_plan->direct_ref_count_cashout && $parent->cycle_indirect_referrals >= $mlm_plan->indirect_ref_count_cashout) {
                 $data = [
                     'cycle' => $parent->cycle + 1,
                     'is_locked' => 1,
