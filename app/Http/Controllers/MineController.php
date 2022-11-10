@@ -26,7 +26,7 @@ class MineController extends Controller
     public function mining_start()
     {
         $user = auth()->user();
-        $plan = Plan::first();
+        $plan = Plan::where('account_type_id', $user->account_type_id)->first();
         $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
         $random_string = substr(str_shuffle($data), 0, 16);
         $extraction = AffliateProfit::where('user_id', $user->id)->where('status', 0)->latest()->first();
