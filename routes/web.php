@@ -74,6 +74,7 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::post('profile-update', [AdminController::class, 'profile_update'])->name('users.profile-update');
         Route::post('profile-update-pin', [AdminController::class, 'Profileupdatepin'])->name('users.profile-update-pin');
         Route::post('update_bank_details', [AdminController::class, 'UpdateBankDetails'])->name('users.update_bank_details');
+        Route::get('upgrade_account/{id}', [AdminController::class, 'upgrade_account'])->name('users.upgrade_account');
 
         Route::controller(WithdrawController::class)->group(function () {
             Route::get('withdraw_delete/{id}', 'withdraw_delete')->name('withdraw_delete');

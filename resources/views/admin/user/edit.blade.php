@@ -14,6 +14,11 @@
                             Cycle: {{ $client->cycle }}
                         </h6>
                         @endif
+                        @if (in_array($client->account_type_id, $aff_arr) && $client->account_type_id == 1)
+                        <div>
+                            <a class="btn btn-primary" type="button" href="{{ route('admin.users.upgrade_account', $client->id) }}">Upgrade Account</a>
+                        </div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.users.profile-update') }}" method="post">

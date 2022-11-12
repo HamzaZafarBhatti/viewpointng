@@ -336,4 +336,17 @@ class AdminController extends Controller
             ]);
         }
     }
+
+    public function upgrade_account($id)
+    {
+        $user = User::find($id);
+        $res = $user->update([
+            'account_type_id' => 3
+        ]);
+        if($res) {
+            return back()->with('success', 'Account upgraded to Premium');
+        } else {
+            return back()->with('error', 'Error: Something went wrong.');
+        }
+    }
 }
