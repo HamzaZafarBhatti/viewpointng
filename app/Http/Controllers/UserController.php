@@ -425,7 +425,13 @@ class UserController extends Controller
         if ($coupon_code->status == 0) {
             return redirect()->route('user.dashboard')->with('alert', 'ACTIVATION PIN CODE used');
         }
-        if ($coupon_code->account_type_id == 1) {
+        
+        $aff_plans = Plan::whereStatus(1)->get();
+        $aff_arr = [];
+        foreach ($aff_plans as $plan) {
+            array_push($aff_arr, $plan->account_type_id);
+        }
+        if (in_array($coupon_code->account_type_id, $aff_arr)) {
             return redirect()->route('user.dashboard')->with('alert', 'ACTIVATION PIN CODE IS NOT MLM PLAN CODE');
         }
         $user = User::find(auth()->user()->id);
