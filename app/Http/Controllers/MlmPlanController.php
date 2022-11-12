@@ -78,6 +78,8 @@ class MlmPlanController extends Controller
             'upgrade' => $request->upgrade,
             'ref_percent' => $request->ref_percent,
             'indirect_ref_com' => $request->indirect_ref_com,
+            'amount' => $request->amount,
+            'active_period' => $request->active_period,
             'image' => $image_name,
             'account_type_id' => $account_type_id
         ]);
@@ -158,6 +160,8 @@ class MlmPlanController extends Controller
             'upgrade' => $request->upgrade,
             'ref_percent' => $request->ref_percent,
             'indirect_ref_com' => $request->indirect_ref_com,
+            'amount' => $request->amount,
+            'active_period' => $request->active_period,
             'image' => $image_name,
         ]);
         if ($res) {

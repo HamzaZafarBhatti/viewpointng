@@ -23,5 +23,7 @@ class MlmPlan extends Model
         'upgrade',
         'ref_percent',
         'indirect_ref_com',
+        'active_period',
+        'amount',
     ];
 }

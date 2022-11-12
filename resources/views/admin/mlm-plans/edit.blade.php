@@ -43,6 +43,29 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Amount:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" step="any" name="amount" class="form-control"  value="{{$mlmPlan->amount}}">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">NGN</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Plan Active Period:</label>
+                                <div class="col-lg-10">
+                                    <div class="input-group">
+                                        <input type="number" name="active_period" class="form-control" step=".1" value="{{$mlmPlan->active_period}}"
+                                            required>
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">Months</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Status:</label>
                                 <div class="col-lg-10">
                                     <select class="form-control select" name="status">
