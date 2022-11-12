@@ -110,13 +110,13 @@
                             <h5 class="pricing-title">{{ $val->name }}</h5>
                             <div class="price">
                                 <div class="price-sup-title">Price:</div>
-                                <div class="price-value">₦{{ $val->amount }}</div>
+                                <div class="price-value">₦2500</div>
                             </div>
                             <ul class="pricing-tables-position">
                                 <li class="position-item">
                                     <div class="currency-details-item">
                                         <h6 class="title">Duration:</h6>
-                                        <h6 class="value">For {{ $val->active_period }}months</h6>
+                                        <h6 class="value">For 12months</h6>
                                     </div>
                                 </li>
                                 <li class="position-item">
