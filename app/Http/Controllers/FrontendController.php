@@ -54,8 +54,9 @@ class FrontendController extends Controller
         // $data['self_cashouts'] = $self_cashouts;
         $data['service'] = Service::all();
         $plans = collect();
-        $plans->push(Plan::where('status', 1)->first());
-        $plans->push(MlmPlan::where('status', 1)->first());
+        $plans->push(Plan::where('status', 1)->get());
+        $plans->push(MlmPlan::where('status', 1)->get());
+        $plans = $plans->flatten(1);
         // return $plans;
         $data['plans'] = $plans;
         $data['faq'] = Faq::all();
