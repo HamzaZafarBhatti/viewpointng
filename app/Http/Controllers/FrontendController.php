@@ -33,9 +33,14 @@ class FrontendController extends Controller
         $users = User::latest()->take(5)->get();
         foreach ($users as $user) {
             if ($user->account_type_id == 1) {
-                $user->plan = Plan::where('account_type_id', $user->account_type_id)->first()->name;
+                $plan = Plan::where('account_type_id', $user->account_type_id)->first();
             } else {
-                $user->plan = MlmPlan::where('account_type_id', $user->account_type_id)->first()->name;
+                $plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
+            }
+            if($plan){
+                $user->plan = $plan->name;
+            } else {
+                $user->plan = 'N/A';
             }
         }
         $data['registrations'] = $users;
