@@ -31,10 +31,22 @@ class FrontendController extends Controller
     {
         $data['title'] = "Home";
         $users = User::latest()->take(5)->get();
+        
+        $aff_plans = Plan::whereStatus(1)->get();
+        $aff_arr = [];
+        foreach ($aff_plans as $plan) {
+            array_push($aff_arr, $plan->account_type_id);
+        }
+
+        $mlm_plans = MlmPlan::whereStatus(1)->get();
+        $mlm_arr = [];
+        foreach ($mlm_plans as $plan) {
+            array_push($mlm_arr, $plan->account_type_id);
+        }
         foreach ($users as $user) {
-            if ($user->account_type_id == 1) {
+            if (in_array($user->account_type_id, $aff_arr)) {
                 $plan = Plan::where('account_type_id', $user->account_type_id)->first();
-            } else {
+            } else if (in_array($user->account_type_id, $mlm_arr)) {
                 $plan = MlmPlan::where('account_type_id', $user->account_type_id)->first();
             }
             if($plan){
