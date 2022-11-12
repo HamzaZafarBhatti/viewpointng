@@ -29,7 +29,7 @@
                                         <td>{{ ++$k }}.</td>
                                         <td><img src="{{ url('/') }}/asset/images/{{ $val->image }}" style="height: auto; max-width: 40%;"></td>
                                         <td>{{ $val->name }}</td>
-                                        <td>{{ substr($val->amount_balance, 0, 9) }}BTC</td>
+                                        <td>{{ substr($val->amount, 0, 9) }}BTC</td>
                                         <td>{{ $val->active_period }}Month(s)</td>
                                         <td>
                                             @if ($val->status == 0)
