@@ -85,10 +85,14 @@ class UserController extends Controller
         // return $request;
         // return date('Y-m-d');
         $today = Carbon::now();
-        $transaction_date = Carbon::create($today->year, $today->month, 28);
+        $transaction_date = Carbon::create($today->year, $today->month, 29);
         // return json_encode($today < $transaction_date);
-        if($today < $transaction_date && ($today->hour >= 7 && $today->hour <= 9)) {
+        // return $today->hour;
+        if($today < $transaction_date || $today > $transaction_date) {
             return back()->with('alert', 'You can cashout your Video Earning Points every 28th of the Month.');
+        }
+        if($today->hour < 7 || $today->hour > 9) {
+            return back()->with('alert', 'You can cashout your Video Earning Points from 7am to 9am.');
         }
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
