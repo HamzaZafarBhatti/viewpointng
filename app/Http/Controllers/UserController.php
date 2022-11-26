@@ -70,14 +70,16 @@ class UserController extends Controller
     public function withdraw()
     {
         $user = User::with('bank')->whereId(auth()->user()->id)->first();
-        $data['title'] = 'Withdraw VIDEO EARNINGS to Bank Account';
-        $data['withdraw'] = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
+        $user_plan = Plan::where('account_type_id', $user->account_type_id)->first();
+        $title = 'Withdraw VIDEO EARNINGS to Bank Account';
+        $withdraw = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType($user->account_type_id)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
-        $data['account'] = [
+        $account = [
             'account_no' => $user->bank_account_no,
             'account' => $user->bank_account_name . ' - ' . $user->bank_account_no . ' - ' . $bank_name
         ];
-        return view('user.withdraw', $data);
+        // return $user;
+        return view('user.withdraw', compact('user', 'title', 'withdraw', 'account', 'user_plan'));
     }
 
     public function withdraw_submit(Request $request)

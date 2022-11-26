@@ -13,7 +13,7 @@
                             <h3><span style="background-color: #ffff99; color: #ff0000;"><strong>VIDEO EARNING WITHDRAWAL TO BANK</strong></span></h3>
 <p><span style="color: #ffffff;"><strong>Minimum VIDEO EARNER Request: N15,000 POINTS = ₦5000 Cashout Monthly </strong></span></p><p><span style="color: #ffffff;"><strong>Minimum VIDEO PREMIUM Request: N60,000 Points = ₦20000 Cashout Monthly </strong></span></p><br>
 <p><span style="color: #ffffff;">VIDEO EARNER & VIDEO PREMIUM Withdrawal is</span> <span style="background-color: #ffcc99;"><strong>every 28th of the Month from (7AM to 9AM)</strong></span> <span style="color: #ffffff;">(No Referrals)</span></p>
-                            <h3 class="mb-0 text-yellow">Withdraw {{ $user->account_type_id == 1 ? 'Video Earning' : 'Account' }} Balance: #{{ substr($user->balance, 0, 9) }}</h3>
+                            <h3 class="mb-0 text-yellow">Withdraw {{ in_array($user->account_type_id, $aff_arr) ? 'Video Earning' : 'Account' }} Balance: #{{ substr($user->balance, 0, 9) }}</h3>
                         </div>
 
                         <div class="card-body">
@@ -42,7 +42,7 @@
                                                 <span class="input-group-text text-white bg-dark currency">N</span>
                                             </div>
                                             <input type="number" step="any" name="amount" maxlength="10"
-                                                class="form-control bg-dark text-white" value="15000" readonly required="">
+                                                class="form-control bg-dark text-white" value="{{ $user_plan->min_deposit }}" readonly required="">
                                         </div>
                                     </div>
                                 </div>
