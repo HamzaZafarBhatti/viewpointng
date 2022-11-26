@@ -39,7 +39,7 @@
                                                 <span class="badge badge-success">Paid with Paystack</span>
                                             @endif
                                         </td>
-                                        <td>{{ $val->plan->name }}</td>
+                                        <td>{{ $val->plan ? $val->plan->name : 'N/A' }}</td>
                                         <td>
                                             @if (!$val->is_blocked)
                                                 <span class="badge badge-info">Active</span>

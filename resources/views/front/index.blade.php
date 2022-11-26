@@ -40,6 +40,8 @@
                     </header>
                     <a data-scroll href="https://viewpointng.com/referral/viewpoint"
                         class="btn btn--large btn--transparent btn--secondary">Watch Video & Earn</a>
+                        <a data-scroll href="https://viewpointng.com/payment_proof"
+                        class="btn btn--large btn--transparent btn--secondary">See Payment Proofs</a>
                 </div>
             </div>
         </div>

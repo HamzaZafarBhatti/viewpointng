@@ -89,7 +89,7 @@ class UserController extends Controller
         // return json_encode($today < $transaction_date);
         // return $today->hour;
         if($today < $transaction_date || $today > $transaction_date) {
-            return back()->with('alert', 'You can cashout your Video Earning Points every 28th of the Month.');
+            return back()->with('alert', 'You can cashout your Video Earning Balance every 28th of the Month between 7.00am to 9.00am.');
         }
         if($today->hour < 7 || $today->hour > 9) {
             return back()->with('alert', 'You can cashout your Video Earning Points from 7am to 9am.');
@@ -250,7 +250,7 @@ class UserController extends Controller
         // $transaction_date = Carbon::create($today->year, $today->month, 28);
         // // return json_encode($today < $transaction_date);
         // if($today < $transaction_date) {
-        //     return back()->with('alert', 'You can cashout your Video Earning Points every 28th of the Month.');
+        //     return back()->with('alert', 'You can cashout your Video Earning Balance every 28th of the Month between 7.00am to 9.00am.');
         // }
         $last_wd = Withdraw::whereUser_id(auth()->user()->id)->whereType(2)->latest()->first();
         // return $last_wd;

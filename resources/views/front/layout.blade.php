@@ -40,6 +40,20 @@
 
   gtag('config', 'UA-245518865-2');
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11008936663"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11008936663');
+</script>
+<!-- Event snippet for VIEWPOINT-Sign-up conversion page -->
+<script>
+  gtag('event', 'conversion', {'send_to': 'AW-11008936663/G0gOCKji74IYENeVvIEp'});
+</script>
+
 </head>
 <!-- header begin-->
 

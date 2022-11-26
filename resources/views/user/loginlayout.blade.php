@@ -47,6 +47,16 @@
 
   gtag('config', 'UA-245518865-2');
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11008936663"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11008936663');
+</script>
+
     </head>
 <!-- header begin-->
   <body class="">

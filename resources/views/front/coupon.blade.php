@@ -23,6 +23,10 @@
                     </header>
                     <p style="text-align: center;"><span style="color: #ffffff;">Get your <strong>VIDEO EARNING PLAN or MLM PLAN ACTIVATION CODE</strong> from our <span style="text-decoration: underline;">Trusted and Verified
                                 VENDORS</span> Nationwide below.</span></p>
+                                <br><h3 style="text-align: center;"><span style="color: #000000; background-color: #ffff99;">ACTIVATION CODE PRICE LIST</span></h3>
+<h4 style="text-align: center;"><span style="color: #ffffff;">VIDEO EARNER - ₦2,500</span></h4>
+<h4 style="text-align: center;"><span style="color: #ffffff;">VIDEO PREMIUM - ₦10,000</span></h4>
+
                     <p style="text-align: center;"><span style="color: #ffffff;">You can CALL, SMS, WhatsApp Chat with any
                             one of them and they'll promptly respond to you swiftly. <br>DO NOT CHAT OR PURCHASE ACTIVATION CODES from anyone whose details is not on this list.</span></p>
                     <table>
