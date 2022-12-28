@@ -85,16 +85,17 @@ class UserController extends Controller
     public function withdraw_submit(Request $request)
     {
         // return $request;
-        // return date('Y-m-d');
         $today = Carbon::now();
-        $transaction_date = Carbon::create($today->year, $today->month, 29);
-        // return json_encode($today < $transaction_date);
+        // $transaction_date = Carbon::create($today->year, $today->month, 28);
+        // return $transaction_date->day;
+        
         // return $today->hour;
-        if($today < $transaction_date || $today > $transaction_date) {
+        // return $today->hour;
+        if($today->day != 28) {
             return back()->with('alert', 'You can cashout your Video Earning Balance every 28th of the Month between 7.00am to 9.00am.');
         }
-        if($today->hour < 7 || $today->hour > 9) {
-            return back()->with('alert', 'You can cashout your Video Earning Points from 7am to 9am.');
+        if($today->hour < 7 || $today->hour >= 9) {
+            return back()->with('alert', 'You can cashout your Video Earning Balance every 28th of the Month between 7.00am to 9.00am.');
         }
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
@@ -179,6 +180,10 @@ class UserController extends Controller
             return back()->with('alert', 'You can request for your Ref Earning Balance Payout every Sundays and Wednesdays to your BANK Account only.');
         }
 
+        if($today->hour < 7 || $today->hour >= 12) {
+            return back()->with('alert', 'You can request for your Ref Earning Balance Payout every Sundays and Wednesdays between 7.00am to 12.00pm to your BANK Account only.');
+        }
+        
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
             'details' => 'required',

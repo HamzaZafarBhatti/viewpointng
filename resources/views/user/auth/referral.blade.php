@@ -109,6 +109,7 @@
                                             </div>
                                             <select name="payment_type" id="payment_type" class="form-control" required>
                                                 <option value="">Select Payment Type</option>
+                                                <option value="paystack">PAYSTACK - Online Payment</option>
                                                 <option value="activation_code">ACTIVATION CODE</option>
                                             </select>
                                         </div>

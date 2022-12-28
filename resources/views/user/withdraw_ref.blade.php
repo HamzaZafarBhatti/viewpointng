@@ -13,7 +13,7 @@
                             <h3><span style="background-color: #ffff99;"><strong>REF BALANCE WITHDRAWAL TO BANK</strong></span></h3>
 <p><span style="color: #ffffff;"><strong>Minimum REF WITHDRAWAL: VIDEO EARNER: ₦3000 | VIDEO PREMIUM: ₦5000<br /></strong></span></p>
 <p><strong><span style="color: #ffffff;">Service Maintenance Fee: VIDEO EARNER: ₦300 | VIDEO PREMIUM: ₦400</span><br /></strong></p><br>
-<p><span style="color: #000000;"><span style="color: #ffffff;"><strong>REF EARNING Withdrawal</strong> is </span><span style="background-color: #ffcc99;"><strong>every Wednesday and Sundays at anytime.</strong></span></span></p>
+<p><span style="color: #000000;"><span style="color: #ffffff;"><strong>REF EARNING Withdrawal</strong> is </span><span style="background-color: #ffcc99;"><strong>every Wednesday and Sundays between 7 am to 12 pm.</strong></span></span></p>
                             <h3 class="mb-0 text-yellow">REF EARNING Balance: ₦{{ $user->affliate_ref_balance }}</h3>
                         </div>
 
