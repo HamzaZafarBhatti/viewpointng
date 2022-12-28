@@ -38,6 +38,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Facebook profile link:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" name="name" class="form-control" value="{{ $client->fb_url }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Email:</label>
                                 <div class="col-lg-10">
                                     <input type="email" name="email" class="form-control" value="{{ $client->email }}">
