@@ -72,7 +72,7 @@ class UserController extends Controller
         $user = User::with('bank')->whereId(auth()->user()->id)->first();
         $user_plan = Plan::where('account_type_id', $user->account_type_id)->first();
         $title = 'Withdraw VIDEO EARNINGS to Bank Account';
-        $withdraw = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType($user->account_type_id)->get();
+        $withdraw = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
         $account = [
             'account_no' => $user->bank_account_no,
