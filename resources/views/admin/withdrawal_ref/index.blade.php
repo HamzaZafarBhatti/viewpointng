@@ -28,7 +28,7 @@
                                 @foreach ($withdraw as $k => $val)
                                     <tr>
                                         <td>{{ ++$k }}.</td>
-                                        <td>{{-- <a href="{{ url('admin/manage-user') }}/{{ $val->user_id }}"> --}}{{ $val->user->name }}{{-- </a> --}}
+                                        <td>{{-- <a href="{{ url('admin/manage-user') }}/{{ $val->user_id }}"> --}}{{ $val->user->name ?? 'N/A' }}{{-- </a> --}}
                                         </td>
                                         <td>{{ $val->user->fb_url ?? 'N/A' }}</td>
                                         <td>₦{{ substr($val->amount, 0, 9) }}</td>
