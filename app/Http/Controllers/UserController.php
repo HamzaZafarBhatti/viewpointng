@@ -42,10 +42,10 @@ class UserController extends Controller
         $sponsor_bal = 0;
         $aff_plans = Plan::whereStatus(1)->get();
         $aff_arr = [];
-        foreach($aff_plans as $plan) {
+        foreach ($aff_plans as $plan) {
             array_push($aff_arr, $plan->account_type_id);
         }
-        if(in_array($user->account_type_id, $aff_arr)){
+        if (in_array($user->account_type_id, $aff_arr)) {
             $sponsor_bal = $shared_posts * Plan::where('account_type_id', $user->account_type_id)->first()->fb_share_amount;
         }
         $total_withdraws_amount = Withdraw::whereUser_id($user->id)->where('status', '1')->sum('amount');
@@ -67,6 +67,36 @@ class UserController extends Controller
         return redirect()->route('user.login');
     }
 
+    public function getUserEligibility($user)
+    {
+        $latest_referral = Referral::where('referee_id', $user->id)->latest('id')->first();
+        if ($latest_referral) {
+            $day_diff = Carbon::now()->diffInDays($latest_referral->created_at);
+            if ($day_diff > 30) {
+                Log::error('Referral is older than 30 days!');
+                return false;
+            } else {
+                $referral_user = User::where('id', $latest_referral->referral_id)->first();
+                if ($referral_user) {
+                    if ($user->account_type_id == 3 && $referral_user->account_type_id == 3) {
+                        return true;
+                    } elseif ($user->account_type_id == 1 && ($referral_user->account_type_id == 1 || $referral_user->account_type_id == 3)) {
+                        return true;
+                    } else {
+                        Log::error('Referral User Account Type is not satisfied!');
+                        return false;
+                    }
+                } else {
+                    Log::error('Referral User not found!');
+                    return false;
+                }
+            }
+        } else {
+            Log::error('Referral not found!');
+            return false;
+        }
+    }
+
     public function withdraw()
     {
         $user = User::with('bank')->whereId(auth()->user()->id)->first();
@@ -74,12 +104,13 @@ class UserController extends Controller
         $title = 'Withdraw VIDEO EARNINGS to Bank Account';
         $withdraw = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
+        $user_eligibility = $this->getUserEligibility($user);
         $account = [
             'account_no' => $user->bank_account_no,
             'account' => $user->bank_account_name . ' - ' . $user->bank_account_no . ' - ' . $bank_name
         ];
         // return $user;
-        return view('user.withdraw', compact('user', 'title', 'withdraw', 'account', 'user_plan'));
+        return view('user.withdraw', compact('user', 'title', 'withdraw', 'account', 'user_plan', 'user_eligibility'));
     }
 
     public function withdraw_submit(Request $request)
@@ -88,13 +119,13 @@ class UserController extends Controller
         $today = Carbon::now();
         // $transaction_date = Carbon::create($today->year, $today->month, 28);
         // return $transaction_date->day;
-        
+
         // return $today->hour;
         // return $today->hour;
-        if($today->day != 28) {
+        if ($today->day != 28) {
             return back()->with('alert', 'You can cashout your Video Earning Balance every 28th of the Month between 7.00am to 9.00am.');
         }
-        if($today->hour < 7 || $today->hour >= 9) {
+        if ($today->hour < 7 || $today->hour >= 9) {
             return back()->with('alert', 'You can cashout your Video Earning Balance every 28th of the Month between 7.00am to 9.00am.');
         }
         $validator = Validator::make($request->all(), [
@@ -176,14 +207,14 @@ class UserController extends Controller
         // return date('Y-m-d')
         $today = Carbon::now();
         $day_of_week = $today->format('l');
-        if($day_of_week != 'Sunday' && $day_of_week != 'Wednesday') {
+        if ($day_of_week != 'Sunday' && $day_of_week != 'Wednesday') {
             return back()->with('alert', 'You can request for your Ref Earning Balance Payout every Sundays and Wednesdays to your BANK Account only.');
         }
 
-        if($today->hour < 7 || $today->hour >= 12) {
+        if ($today->hour < 7 || $today->hour >= 12) {
             return back()->with('alert', 'You can request for your Ref Earning Balance Payout every Sundays and Wednesdays between 7.00am to 12.00pm to your BANK Account only.');
         }
-        
+
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
             'details' => 'required',
@@ -436,7 +467,7 @@ class UserController extends Controller
         if ($coupon_code->status == 0) {
             return redirect()->route('user.dashboard')->with('alert', 'ACTIVATION PIN CODE used');
         }
-        
+
         $aff_plans = Plan::whereStatus(1)->get();
         $aff_arr = [];
         foreach ($aff_plans as $plan) {
@@ -506,7 +537,7 @@ class UserController extends Controller
     {
         $data['title'] = 'VIDEO VIRAL SHARE';
         $post = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
-        if($post) {
+        if ($post) {
             $post->title_slug = Str::slug($post->title);
             $post->title_slug = Str::slug($post->title);
         }
@@ -518,7 +549,7 @@ class UserController extends Controller
     {
         $data['title'] = 'Digital Skills & Courses';
         $post = Blog::where('post_date', Carbon::now()->format('Y-m-d'))->latest()->first();
-        if($post) {
+        if ($post) {
             $post->title_slug = Str::slug($post->title);
             $post->title_slug = Str::slug($post->title);
         }
@@ -568,7 +599,7 @@ class UserController extends Controller
         $indirect_referrals = IndirectReferral::with('referral')->whereRefereeId(auth()->user()->id)->get();
         return view('user.referral', compact('referrals', 'indirect_referrals', 'title'));
     }
-    
+
     public function account_suspended()
     {
         Auth::guard()->logout();

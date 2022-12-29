@@ -82,9 +82,27 @@
                                         {{ $errors->first('details') }}
                                     </span>
                                 @endif
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-secondary withdraw">Withdraw to BANK</button>
+                                <div class="row">
+                                    <label class="col-lg-2 text-white">Eligibility</label>
+                                    <div class="col-lg-10">
+                                        <h3>
+                                            @if ($user_eligibility)
+                                                <span class="text-success">
+                                                    Eligible to cashout
+                                                </span>
+                                            @else
+                                                <span class="text-danger">
+                                                    Not Eligible to cashout
+                                                </span>
+                                            @endif
+                                        </h3>
+                                    </div>
                                 </div>
+                                @if ($user_eligibility)
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-secondary withdraw">Withdraw to BANK</button>
+                                    </div>
+                                @endif
                             </form>
                         </div>
                     </div>
