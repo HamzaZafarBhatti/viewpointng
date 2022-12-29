@@ -33,7 +33,7 @@
                         @foreach ($topearners as $object)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $object->user->name }}</td>
+                                <td>{{ $object->user->name ?? 'N/A' }}</td>
                                 <td>₦{{ $object->amount }}</td>
                                 <td><strong><span style="background-color: #008000; color: #ffffff;">&nbsp;
                                             AVAILABLE&nbsp;&nbsp; <br /></span></strong></td>
