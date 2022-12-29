@@ -43,9 +43,9 @@ class AppServiceProvider extends ServiceProvider
                 $extraction = AffliateProfit::whereUserId(auth()->user()->id)->where('status', 0)->latest('id')->first();
                 if ($extraction) {
                     $end_date = Carbon::parse($extraction->end_datetime)->format("Y-m-d H:i:s");
-                    Log::info($end_date);
+                    // Log::info($end_date);
                     if (Carbon::now() > $end_date) {
-                        Log::info('end');
+                        // Log::info('end');
                         $extraction->update(['status' => 1]);
                         if ($extraction->status == 1) {
                             // Log::info('if2');
