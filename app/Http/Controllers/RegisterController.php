@@ -342,6 +342,8 @@ class RegisterController extends Controller
         if ($host != 'localhost') {
             $paystack_key = env('PAYSTACK_LIVE_SK');
         }
+        
+        Log::info($paystack_key);
 
         //open connection
         $ch = curl_init();

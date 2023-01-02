@@ -88,11 +88,11 @@
                                         <h3>
                                             @if ($user_eligibility)
                                                 <span class="text-success">
-                                                    Eligible to cashout
+                                                    You are ELIGIBLE TO CASHOUT <img src="https://viewpointng.com/asset/images/viewpointng/check0marke3-removebg-preview.png" width="37" height="37" />
                                                 </span>
                                             @else
                                                 <span class="text-danger">
-                                                    Not Eligible to cashout
+                                                    NOT ELIGIBLE TO CASHOUT <img src="https://viewpointng.com/asset/images/viewpointng/bad-mark6628-removebg-preview.png" width="38" height="38" />
                                                 </span>
                                             @endif
                                         </h3>
