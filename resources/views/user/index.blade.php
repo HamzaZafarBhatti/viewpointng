@@ -5,11 +5,21 @@
     @if (in_array(auth()->user()->account_type->id, $aff_arr))
         <div class="container-fluid mt--6">
             <div class="content-wrapper">
-                <h2 class="mb-0 text-black">Hi {{ $user->name }}!</h2><br>
-                <div class="col-md-6">
-                    <a type="button" href="https://viewpointng.com/user/withdraws_ref"
-                        class="btn btn-block btn-success">Cashout ₦{{ $user->affliate_ref_balance }} Ref Balance</a>
-                </div><br>
+                <h2 class="mb-0 text-black">Hi {{ $user->name }}!</h2>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a type="button" href="{{ route('user.withdraw_ref') }}"
+                            class="btn btn-block btn-success">Cashout ₦{{ $user->affliate_ref_balance }} Ref Balance</a>
+                    </div>
+                    @if (auth()->user()->account_type->id == 1)
+                        <div class="col-md-6">
+                            <a type="button" href="{{ route('code_dispatcher') }}"
+                                class="btn btn-block btn-info">Upgrade Account</a>
+                        </div>
+                    @endif
+                </div>
+                <br>
                 <h3 class="mb-0 text-black">My Referral Link</h3>
             </div>
             <form action="javascript:void;" method="post">
