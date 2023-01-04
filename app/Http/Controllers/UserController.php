@@ -69,32 +69,17 @@ class UserController extends Controller
 
     public function getUserEligibility($user)
     {
-        $latest_referral = Referral::where('referee_id', $user->id)->latest('id')->first();
-        if ($latest_referral) {
-            $day_diff = Carbon::now()->diffInDays($latest_referral->created_at);
-            if ($day_diff > 30) {
-                Log::error('Referral is older than 30 days!');
-                return false;
-            } else {
-                $referral_user = User::where('id', $latest_referral->referral_id)->first();
-                if ($referral_user) {
-                    if ($user->account_type_id == 3 && $referral_user->account_type_id == 3) {
-                        return true;
-                    } elseif ($user->account_type_id == 1 && ($referral_user->account_type_id == 1 || $referral_user->account_type_id == 3)) {
-                        return true;
-                    } else {
-                        Log::error('Referral User Account Type is not satisfied!');
-                        return false;
-                    }
-                } else {
-                    Log::error('Referral User not found!');
-                    return false;
-                }
-            }
-        } else {
-            Log::error('Referral not found!');
-            return false;
+        if($user->account_type_id == 3) {
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+                $q->where('account_type_id', 3);
+            })->count();
         }
+        if($user->account_type_id == 1) {
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+                $q->where('account_type_id', 3)->orWhere('account_type_id', 1);
+            })->count();
+        }
+        return $referrals > 0 ? true : false;
     }
 
     public function withdraw()
@@ -117,11 +102,6 @@ class UserController extends Controller
     {
         // return $request;
         $today = Carbon::now();
-        // $transaction_date = Carbon::create($today->year, $today->month, 28);
-        // return $transaction_date->day;
-
-        // return $today->hour;
-        // return $today->hour;
         if ($today->day != 28) {
             return back()->with('alert', 'You can cashout your Video Earning Balance every 28th of the Month between 7.00am to 9.00am.');
         }
@@ -160,15 +140,6 @@ class UserController extends Controller
         if ($plan->min_deposit > $request->amount) {
             return back()->with('alert', 'You have requested less than your plan defined payment.');
         }
-        // $last_wd = Withdraw::whereUser_id($user->id)->latest()->first();
-        // if ($last_wd) {
-        //     $end = Carbon::parse($last_wd->created_at);
-        //     $now = Carbon::now();
-        //     $length = $end->diffInDays($now);
-        //     if ($length < $plan->min_ref_earn_wd_cycle) {
-        //         return back()->with('alert', 'You have already requested this payment.');
-        //     }
-        // }
         if ($user->balance > $amount || $user->balance == $amount) {
             $sav['user_id'] = Auth::user()->id;
             $sav['amount'] = $amount;
@@ -204,7 +175,6 @@ class UserController extends Controller
     public function withdraw_ref_submit(Request $request)
     {
         // return $request;
-        // return date('Y-m-d')
         $today = Carbon::now();
         $day_of_week = $today->format('l');
         if ($day_of_week != 'Sunday' && $day_of_week != 'Wednesday') {
@@ -242,7 +212,6 @@ class UserController extends Controller
             return back()->with('alert', 'Pin is not same.');
         }
         $plan = Plan::where('account_type_id', $user->account_type_id)->first();
-        // $amount = $request->amount - ($request->amount * $set->withdraw_charge / 100);
         $amount = $request->amount - $plan->referral_withdraw_fee;
         // $amount = $request->amount;
         if ($plan->min_ref_wd > $request->amount) {
@@ -490,18 +459,6 @@ class UserController extends Controller
     public function changePassword()
     {
         $data['title'] = "Security";
-        // $g = new \Sonata\GoogleAuthenticator\GoogleAuthenticator();
-        // $set = Setting::first();
-        // $user = User::find(Auth::user()->id);
-        // if ($user->fa_status) {
-        //     $secret = $user->googlefa_secret;
-        // } else {
-        //     $secret = $g->generateSecret();
-        // }
-        // return $secret;
-        // $site = $set->site_name;
-        // $data['secret'] = $secret;
-        // $data['image'] = \Sonata\GoogleAuthenticator\GoogleQrUrl::generate($user->email, $secret, $site);
         return view('user.password', $data);
     }
 
