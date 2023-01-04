@@ -15,7 +15,7 @@
                     @if (auth()->user()->account_type->id == 1)
                         <div class="col-md-6">
                             <a type="button" href="{{ route('code_dispatcher') }}"
-                                class="btn btn-block btn-info">Upgrade Account</a>
+                                class="btn btn-block btn-info">Cashout BIG? Upgrade to VIDEO PREMIUM</a>
                         </div>
                     @endif
                 </div>
