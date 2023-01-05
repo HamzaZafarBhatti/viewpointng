@@ -14,8 +14,8 @@
                     </div>
                     @if (auth()->user()->account_type->id == 1)
                         <div class="col-md-6">
-                            <a type="button" href="{{ route('code_dispatcher') }}"
-                                class="btn btn-block btn-info">Cashout BIG? Upgrade to VIDEO PREMIUM</a>
+                            <a type="button" href="https://viewpointng.com/single/79/upgrade-to-video-premium-cashout-n20000-every-single-month-without-referrals-by-watching-video"
+                                class="btn btn-block btn-info">Cashout 60,000 Monthly? Upgrade to VIDEO PREMIUM</a>
                         </div>
                     @endif
                 </div>
