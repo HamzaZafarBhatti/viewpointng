@@ -72,16 +72,27 @@ class UserController extends Controller
     {
         if($user->account_type_id == 3) {
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
-                $q->where('account_type_id', 3)->where('account_type_id', 1);
-            })->get();
+                $q->where('account_type_id', 1);
+            })->count();
+            if($referrals > 3) {
+                return true;
+            }
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+                $q->where('account_type_id', 3);
+            })->count();
+            if($referrals > 0) {
+                return true;
+            }
         }
         if($user->account_type_id == 1) {
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
                 $q->where('account_type_id', 3)->orWhere('account_type_id', 1);
             })->count();
+            if($referrals > 0) {
+                return true;
+            }
         }
-        return $referrals;
-        // return $referrals > 0 ? true : false;
+        return false;
     }
 
     public function withdraw()
@@ -92,7 +103,6 @@ class UserController extends Controller
         $withdraw = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
         $user_eligibility = $this->getUserEligibility($user);
-        return $user_eligibility;
         $account = [
             'account_no' => $user->bank_account_no,
             'account' => $user->bank_account_name . ' - ' . $user->bank_account_no . ' - ' . $bank_name
