@@ -171,6 +171,12 @@
                                 <span class="nav-link-text">WhatsApp Chat</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://play.google.com/store/apps/details?id=com.viewpointngltd.app">
+                                <i class="ni ni-curved-next"></i>
+                                <span class="nav-link-text">Download App</span>
+                            </a>
+                        </li>
                     </ul>
                     <!-- Divider -->
                     <hr class="my-3">

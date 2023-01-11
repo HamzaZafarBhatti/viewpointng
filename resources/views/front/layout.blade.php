@@ -101,6 +101,7 @@
                                 <li><a href="{{ route('about') }}">About us</a></li>
                                 <li><a href="{{ route('blog') }}">BLOG</a></li>
                                 <li><a href="{{ route('payment_proof') }}">Payment Proof</a></li>
+                                <li><a href="https://play.google.com/store/apps/details?id=com.viewpointngltd.app">Download VIEWPOINT App</a></li>
                             </ul>
                         </li>
                        {{-- <li>

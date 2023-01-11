@@ -76,6 +76,11 @@
                 </div>
             </div>
     </section>
+      <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Download the Official VIEWPOINT App now from Google Playstore & RATE US 5-STARS ⭐⭐⭐⭐⭐</span></strong></h3>
+    <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Our Google Playstore App is LIVE and available to download.
+</span></strong><br><a data-scroll href="https://play.google.com/store/apps/details?id=com.viewpointngltd.app"
+            class="btn btn--large btn--transparent btn--secondary">Download The VIEWPOINT App!</a>
+    </h3>
     <section class="medium-padding120 responsive-align-center">
         <div class="container">
             <div class="row">
@@ -276,7 +281,11 @@
             </div>
         </section>
     @endif --}}
-
+    <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Download the Official VIEWPOINT App now from Google Playstore & RATE US 5-STARS ⭐⭐⭐⭐⭐</span></strong></h3>
+    <h3 style="text-align: center;"><strong><span style="color: #ff9900;">Our Google Playstore App is LIVE and available to download.
+</span></strong><br><a data-scroll href="https://play.google.com/store/apps/details?id=com.viewpointngltd.app"
+            class="btn btn--large btn--transparent btn--secondary">Download The VIEWPOINT App!</a>
+    </h3>
     <section class="pt-mobile-80">
         <div class="container">
             <div class="row medium-padding100">
