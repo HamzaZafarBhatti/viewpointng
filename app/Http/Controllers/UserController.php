@@ -17,6 +17,7 @@ use App\Models\Withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -71,15 +72,16 @@ class UserController extends Controller
     {
         if($user->account_type_id == 3) {
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
-                $q->where('account_type_id', 3);
-            })->count();
+                $q->where('account_type_id', 3)->where('account_type_id', 1);
+            })->get();
         }
         if($user->account_type_id == 1) {
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
                 $q->where('account_type_id', 3)->orWhere('account_type_id', 1);
             })->count();
         }
-        return $referrals > 0 ? true : false;
+        return $referrals;
+        // return $referrals > 0 ? true : false;
     }
 
     public function withdraw()
@@ -90,6 +92,7 @@ class UserController extends Controller
         $withdraw = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
         $user_eligibility = $this->getUserEligibility($user);
+        return $user_eligibility;
         $account = [
             'account_no' => $user->bank_account_no,
             'account' => $user->bank_account_name . ' - ' . $user->bank_account_no . ' - ' . $bank_name
