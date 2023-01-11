@@ -71,13 +71,13 @@ class UserController extends Controller
     public function getUserEligibility($user)
     {
         if($user->account_type_id == 3) {
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+            $referrals = Referral::where('referee_id', $user->id)->whereMonth('created_at', Carbon::now()->month)->whereHas('referral', function($q) {
                 $q->where('account_type_id', 1);
             })->count();
             if($referrals > 3) {
                 return true;
             }
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+            $referrals = Referral::where('referee_id', $user->id)->whereMonth('created_at', Carbon::now()->month)->whereHas('referral', function($q) {
                 $q->where('account_type_id', 3);
             })->count();
             if($referrals > 0) {
@@ -85,7 +85,7 @@ class UserController extends Controller
             }
         }
         if($user->account_type_id == 1) {
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+            $referrals = Referral::where('referee_id', $user->id)->whereMonth('created_at', Carbon::now()->month)->whereHas('referral', function($q) {
                 $q->where('account_type_id', 3)->orWhere('account_type_id', 1);
             })->count();
             if($referrals > 0) {
