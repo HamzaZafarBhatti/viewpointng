@@ -320,7 +320,7 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb30">
                     <div class="crumina-module crumina-testimonial-item testimonial-item--with-bg">
                         <h5 style="text-align: right;">Video Earning Withdraws</h5>
-                        <table>
+                        {{--<table>
                             <thead>
                                 <tr>
                                     <th>User</th>
@@ -343,7 +343,7 @@
                                     </tr>
                                 @endif
                             </tbody>
-                        </table>
+                        --}}</table>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 mb30">
