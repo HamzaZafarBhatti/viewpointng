@@ -74,7 +74,7 @@ class UserController extends Controller
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
                 $q->where('account_type_id', 1);
             })->count();
-            if($referrals > 3) {
+            if($referrals >= 3) {
                 return true;
             }
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
