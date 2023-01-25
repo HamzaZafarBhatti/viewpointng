@@ -198,6 +198,34 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Affiliate Referrals Required for Eligibility to Withdraw (Premium User)</label>
+                                <div class="col-lg-10">
+                                    <input type="number" name="required_affliate_refs_prem_eligibility"
+                                        value="{{ $set->required_affliate_refs_prem_eligibility }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Premium Referrals Required for Eligibility to Withdraw (Premium User)</label>
+                                <div class="col-lg-10">
+                                    <input type="number" name="required_prem_refs_prem_eligibility"
+                                        value="{{ $set->required_prem_refs_prem_eligibility }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Affiliate Referrals Required for Eligibility to Withdraw (Affiliate User)</label>
+                                <div class="col-lg-10">
+                                    <input type="number" name="required_affliate_refs_affliate_eligibility"
+                                        value="{{ $set->required_affliate_refs_affliate_eligibility }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-form-label col-lg-2">Premium Referrals Required for Eligibility to Withdraw (Affiliate User)</label>
+                                <div class="col-lg-10">
+                                    <input type="number" name="required_prem_refs_affliate_eligibility"
+                                        value="{{ $set->required_prem_refs_affliate_eligibility }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-form-label col-lg-2">Short description:</label>
                                 <div class="col-lg-10">
                                     <textarea type="text" name="site_desc" rows="4" class="form-control">{{ $set->site_desc }}</textarea>

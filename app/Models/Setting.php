@@ -31,5 +31,9 @@ class Setting extends Model
         'mlm_plan_reg_fee',
         'video_earn_plan_reg_fee',
         'video_premium_plan_reg_fee',
+        'required_affliate_refs_prem_eligibility',
+        'required_prem_refs_prem_eligibility',
+        'required_affliate_refs_affliate_eligibility',
+        'required_prem_refs_affliate_eligibility',
     ];
 }

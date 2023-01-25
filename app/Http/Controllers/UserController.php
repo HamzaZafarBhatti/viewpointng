@@ -70,25 +70,32 @@ class UserController extends Controller
 
     public function getUserEligibility($user)
     {
+        $set = Setting::first();
         if($user->account_type_id == 3) {
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
                 $q->where('account_type_id', 1);
             })->count();
-            if($referrals >= 3) {
+            if($referrals >= $set->required_affliate_refs_prem_eligibility) {
                 return true;
             }
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
                 $q->where('account_type_id', 3);
             })->count();
-            if($referrals > 0) {
+            if($referrals >= $set->required_prem_refs_prem_eligibility) {
                 return true;
             }
         }
         if($user->account_type_id == 1) {
             $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
-                $q->where('account_type_id', 3)->orWhere('account_type_id', 1);
+                $q->where('account_type_id', 1);
             })->count();
-            if($referrals > 0) {
+            if($referrals >= $set->required_affliate_refs_affliate_eligibility) {
+                return true;
+            }
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+                $q->where('account_type_id', 3);
+            })->count();
+            if($referrals >= $set->required_prem_refs_affliate_eligibility) {
                 return true;
             }
         }
