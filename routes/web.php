@@ -69,6 +69,8 @@ Route::prefix('viewpointadministration')->name('admin.')->group(function () {
         Route::get('users', [AdminController::class, 'Users'])->name('users');
         Route::get('unblock-user/{id}', [AdminController::class, 'Unblockuser'])->name('users.unblock');
         Route::get('block-user/{id}', [AdminController::class, 'Blockuser'])->name('users.block');
+        Route::get('reset_eligibility-user/{id}', [AdminController::class, 'reset_eligibility_user'])->name('users.reset_eligibility');
+        Route::get('make_eligible-user/{id}', [AdminController::class, 'make_eligible_user'])->name('users.make_eligible');
         Route::get('manage-user/{id}', [AdminController::class, 'Manageuser'])->name('users.manage');
         Route::get('user/delete/{id}', [AdminController::class, 'Destroyuser'])->name('users.delete');
         Route::post('profile-update', [AdminController::class, 'profile_update'])->name('users.profile-update');

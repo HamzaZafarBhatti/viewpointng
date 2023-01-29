@@ -68,40 +68,6 @@ class UserController extends Controller
         return redirect()->route('user.login');
     }
 
-    public function getUserEligibility($user)
-    {
-        $set = Setting::first();
-        if($user->account_type_id == 3) {
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
-                $q->where('account_type_id', 1);
-            })->count();
-            if($referrals >= $set->required_affliate_refs_prem_eligibility) {
-                return true;
-            }
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
-                $q->where('account_type_id', 3);
-            })->count();
-            if($referrals >= $set->required_prem_refs_prem_eligibility) {
-                return true;
-            }
-        }
-        if($user->account_type_id == 1) {
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
-                $q->where('account_type_id', 1);
-            })->count();
-            if($referrals >= $set->required_affliate_refs_affliate_eligibility) {
-                return true;
-            }
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
-                $q->where('account_type_id', 3);
-            })->count();
-            if($referrals >= $set->required_prem_refs_affliate_eligibility) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public function withdraw()
     {
         $user = User::with('bank')->whereId(auth()->user()->id)->first();
@@ -109,7 +75,7 @@ class UserController extends Controller
         $title = 'Withdraw VIDEO EARNINGS to Bank Account';
         $withdraw = Withdraw::whereUser_id($user->id)->orderBy('id', 'DESC')->whereType(1)->get();
         $bank_name = $user->bank !== null ? $user->bank->name : 'N/A';
-        $user_eligibility = $this->getUserEligibility($user);
+        $user_eligibility = $user->is_eligible;
         $account = [
             'account_no' => $user->bank_account_no,
             'account' => $user->bank_account_name . ' - ' . $user->bank_account_no . ' - ' . $bank_name
@@ -151,6 +117,12 @@ class UserController extends Controller
         }
         $set = $data['set'] = Setting::first();
         $user = $data['user'] = User::find(auth()->user()->id);
+        if ($user->is_eligible == 0) {
+            return back()->with('alert', 'You are not eligible to withdraw!');
+        }
+        if ($user->has_withdrawn > 0) {
+            return back()->with('alert', 'You can only withdraw once!');
+        }
         if ($request->pin !== $user->pin) {
             return back()->with('alert', 'Pin is not same.');
         }
@@ -168,6 +140,7 @@ class UserController extends Controller
             $sav['account_no'] = $request->details;
             Withdraw::create($sav);
             $user->balance = $user->balance - $amount;
+            $user->has_withdrawn = 1;
             $user->save();
             // if ($set->email_notify == 1) {
             //     $temp = Etemplate::first();

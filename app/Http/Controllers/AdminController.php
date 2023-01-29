@@ -47,30 +47,13 @@ class AdminController extends Controller
     {
         // return 'hello';
         $data['title'] = 'Dashboard';
-        // $data['totalusers'] = User::count() ?? [];
-        // $data['blockedusers'] = User::whereStatus(1)->count();
-        // $data['activeusers'] = User::whereStatus(0)->count();
-        // $data['totalticket'] = Ticket::count();
-        // $data['openticket'] = Ticket::whereStatus(0)->count();
-        // $data['closedticket'] = Ticket::whereStatus(1)->count();
-        // $data['totalreview'] = Review::count();
-        // $data['pubreview'] = Review::whereStatus(1)->count();
-        // $data['unpubreview'] = Review::whereStatus(0)->count();
-        // $data['totaldeposit'] = Deposits::count();
-        // $data['approveddep'] = Deposits::whereStatus(1)->count();
-        // $data['declineddep'] = Deposits::whereStatus(2)->count();
-        // $data['pendingdep'] = Deposits::whereStatus(0)->count();
-        // $data['totalplan'] = Plan::count();
-        // $data['appplan'] = Plan::whereStatus(1)->count();
-        // $data['penplan'] = Plan::whereStatus(0)->count();
-        // $data['messages'] = Contact::count();
         return view('admin.dashboard.index', $data);
     }
 
     public function users()
     {
         $data['title'] = 'Clients';
-        $users = User::with('coupon', 'parent')->latest()->get();
+        $users = User::with('coupon', 'parent')->whereNot('account_type_id', 2)->latest()->get();
 
         
         $aff_plans = Plan::whereStatus(1)->get();
@@ -227,6 +210,22 @@ class AdminController extends Controller
         $user->is_blocked = 0;
         $user->save();
         return back()->with('success', 'User was successfully unblocked.');
+    }
+
+    public function make_eligible_user($id)
+    {
+        $user = User::find($id);
+        $user->is_eligible = 1;
+        $user->save();
+        return back()->with('success', 'User has been made eligible.');
+    }
+
+    public function reset_eligibility_user($id)
+    {
+        $user = User::find($id);
+        $user->is_eligible = 0;
+        $user->save();
+        return back()->with('success', 'User eligibility was successfully reset.');
     }
 
     public function Approvekyc($id)

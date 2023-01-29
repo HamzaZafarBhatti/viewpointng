@@ -67,6 +67,15 @@
                                                                 href="{{ route('admin.users.unblock', $val->id) }}"><i
                                                                     class="icon-eye mr-2"></i>Unblock</a>
                                                         @endif
+                                                        @if ($val->is_eligible)
+                                                            <a class='dropdown-item'
+                                                                href="{{ route('admin.users.reset_eligibility', $val->id) }}"><i
+                                                                    class="icon-eye mr-2"></i>Reset Eligibility</a>
+                                                        @else
+                                                            <a class='dropdown-item'
+                                                                href="{{ route('admin.users.make_eligible', $val->id) }}"><i
+                                                                    class="icon-eye-blocked2 mr-2"></i>Make Eligible</a>
+                                                        @endif
                                                         {{-- <a class='dropdown-item'
                                                             href="{{ route('admin.users.email', [$val->email, $val->name]) }}"><i
                                                                 class="icon-envelope mr-2"></i>Send email</a> --}}
