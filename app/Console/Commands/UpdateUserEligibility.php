@@ -43,6 +43,7 @@ class UpdateUserEligibility extends Command
         }
         foreach ($users as $user) {
             $is_eligible = $this->getUserEligibility($user);
+            $this->info(json_encode($is_eligible));
             $user->update([
                 'is_eligible' => $is_eligible,
                 'has_withdawn' => 0
@@ -54,15 +55,21 @@ class UpdateUserEligibility extends Command
     
     public function getUserEligibility($user)
     {
+        $now = Carbon::now();
+        if($now->day > 28) {
+            $date = Carbon::create(null, null, 28, 0, 0, 0);
+        } else {
+            $date = Carbon::create(null, $now->month - 1, 28, 0, 0, 0);
+        }
         $set = Setting::first();
         if($user->account_type_id == 3) {
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', $date)->whereHas('referral', function($q) {
                 $q->where('account_type_id', 1);
             })->count();
             if($referrals >= $set->required_affliate_refs_prem_eligibility) {
                 return true;
             }
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', $date)->whereHas('referral', function($q) {
                 $q->where('account_type_id', 3);
             })->count();
             if($referrals >= $set->required_prem_refs_prem_eligibility) {
@@ -70,13 +77,13 @@ class UpdateUserEligibility extends Command
             }
         }
         if($user->account_type_id == 1) {
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', $date)->whereHas('referral', function($q) {
                 $q->where('account_type_id', 1);
             })->count();
             if($referrals >= $set->required_affliate_refs_affliate_eligibility) {
                 return true;
             }
-            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', Carbon::now()->subDays(30))->whereHas('referral', function($q) {
+            $referrals = Referral::where('referee_id', $user->id)->where('created_at', '>', $date)->whereHas('referral', function($q) {
                 $q->where('account_type_id', 3);
             })->count();
             if($referrals >= $set->required_prem_refs_affliate_eligibility) {

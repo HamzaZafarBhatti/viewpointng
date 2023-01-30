@@ -57,7 +57,7 @@ class RegisterController extends Controller
             // adding an extra field 'error'...
             // $data['title'] = 'Register';
             $errors = $validator->errors();
-            Log::info($errors);
+            // Log::info($errors);
             return redirect()->route('user.register')
                 ->withErrors($errors)
                 ->withInput();
@@ -241,7 +241,7 @@ class RegisterController extends Controller
             $_SESSION['referee_user'] = $referee_user;
 
             $response = $this->pay_with_paystack($request->email, $request->account_type_id);
-            Log::info($response);
+            // Log::info($response);
             $response = json_decode($response);
             if (!$response->status) {
                 return redirect()->route('user.onboarding', $request->ref)
@@ -337,13 +337,13 @@ class RegisterController extends Controller
 
 
         $host = $_SERVER['HTTP_HOST'];
-        Log::info($host);
+        // Log::info($host);
         $paystack_key = env('PAYSTACK_TEST_SK');
         if ($host != 'localhost') {
             $paystack_key = env('PAYSTACK_LIVE_SK');
         }
         
-        Log::info($paystack_key);
+        // Log::info($paystack_key);
 
         //open connection
         $ch = curl_init();
