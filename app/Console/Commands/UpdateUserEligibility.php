@@ -43,7 +43,6 @@ class UpdateUserEligibility extends Command
         }
         foreach ($users as $user) {
             $is_eligible = $this->getUserEligibility($user);
-            $this->info(json_encode($is_eligible));
             $user->update([
                 'is_eligible' => $is_eligible,
                 'has_withdawn' => 0
